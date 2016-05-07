@@ -1,0 +1,360 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ES/HomeController.js"></script>
+<script src="~/Scripts/ES/ClassController.js"></script>
+<script src="~/Scripts/ES/SectionController.js"></script>
+<script src="~/Scripts/ES/SubjectController.js"></script>
+<script src="~/Scripts/ES/InstitutionInfoController.js"></script>
+<script src="~/Scripts/ES/StudentInfoController.js"></script>
+<div ng-controller="HomeController">
+    <div id="container">
+        <div id="sidebar" class="sidebar-fixed">
+            <div id="sidebar-content">
+                <ul id="nav">
+                    <li class="current">
+                        <a>
+                            @*ng-click="LoadDashboard()"*@
+                        <i class="icon-dashboard"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>    
+                    <a href="javascript:void(0);">
+                        <i class="icon-edit"></i>
+                        New Requests
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="more" ng-click="LoadClass()">
+                                <i class="icon-briefcase"></i>
+                                Class
+                            </a>
+                        </li>
+                        <li>
+                            <a class="more" ng-click="LoadSection()">
+                                <i class="icon-briefcase"></i>
+                                Section
+                            </a>
+                        </li>
+                        <li>
+                            <a class="more" ng-click="LoadSubject()">
+                                <i class="icon-briefcase"></i>
+                                Subject
+                            </a>
+                        </li>
+                        <li>
+                            <a class="more" ng-click="LoadInstitute()">
+                                <i class="icon-briefcase"></i>
+                                Institute
+                            </a>
+                        </li>
+                        <li>
+                            <a class="more" ng-click="LoadStudentInfo()">
+                                <i class="icon-briefcase"></i>
+                                Student Information
+                            </a>
+                        </li>
+                        @*<li>
+                            <a class="more" ng-click="LoadStudent()">
+                                <i class="icon-briefcase"></i>
+                                Student Aitional Details
+                            </a>
+                        </li>*@
+                    </ul>
+                </li>
+                @* <li>
+                    <a class="more" ng-click="LoadBank()">
+                        <i class="icon-briefcase"></i>
+                        Bank
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadCompany()">
+                        <i class="icon-briefcase"></i>
+                        Company
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadCostCenter()">
+                        <i class="icon-briefcase"></i>
+                        Cost Center
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadHierarchy()">
+                        <i class="icon-briefcase"></i>
+                        Cost Center Hierarchy
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadCurrency()">
+                        <i class="icon-briefcase"></i>
+                        Currency
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadCustomer()">
+                        <i class="icon-briefcase"></i>
+                        Customer
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadExchangeRate()">
+                        <i class="icon-briefcase"></i>
+                        Exchange Rate
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadGeneralLedger()">
+                        <i class="icon-briefcase"></i>
+                        General Ledger
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadInternalOrder()">
+                        <i class="icon-briefcase"></i>
+                        Internal Order
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadMission()">
+                        <i class="icon-briefcase"></i>
+                        Mission
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadProfitCenter()">
+                        <i class="icon-briefcase"></i>
+                        Profit Center
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadRegion()">
+                        <i class="icon-briefcase"></i>
+                        Region
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadStatisticalKey()">
+                        <i class="icon-briefcase"></i>
+                        Statistical Key Figure
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadSubRegion()">
+                        <i class="icon-briefcase"></i>
+                        Sub Region
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadTax()">
+                        <i class="icon-briefcase"></i>
+                        Tax
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadVendor()">
+                        <i class="icon-briefcase"></i>
+                        Vendor
+                    </a>
+                </li>
+                <li>
+                    <a class="more" ng-click="LoadWHTTax()">
+                        <i class="icon-briefcase"></i>
+                        WHT Tax
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a ng-click="viewRequest()">
+                <i class="icon-bar-chart"></i>
+                View Requests
+            </a>
+        </li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li>
+                <a ng-click="LoadWorkFlowAssignment()">
+                    <i class="icon-wrench"></i>
+                    Workflow Assignments
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Configuration")" ng-click="LoadMetaTable()">
+                    <i class="icon-desktop"></i>
+                    Master Configuration
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('AS')">
+                            <i class="icon-briefcase"></i>
+                            Asset
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('BK')">
+                            <i class="icon-briefcase"></i>
+                            Bank
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('CO')">
+                            <i class="icon-briefcase"></i>
+                            Company
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('CC')">
+                            <i class="icon-briefcase"></i>
+                            Cost Center
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('CUR')">
+                            <i class="icon-briefcase"></i>
+                            Currency
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('CUS')">
+                            <i class="icon-briefcase"></i>
+                            Customer
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('GL')">
+                            <i class="icon-briefcase"></i>
+                            General Ledger
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('HR')">
+                            <i class="icon-briefcase"></i>
+                            Cost Center Hierarchy
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('IO')">
+                            <i class="icon-briefcase"></i>
+                            Internal Order
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('MS')">
+                            <i class="icon-briefcase"></i>
+                            Mission
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('PC')">
+                            <i class="icon-briefcase"></i>
+                            Profit Center
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('RG')">
+                            <i class="icon-briefcase"></i>
+                            Region
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('SKF')">
+                            <i class="icon-briefcase"></i>
+                            Statistical Key Figure
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('SRG')">
+                            <i class="icon-briefcase"></i>
+                            Sub Region
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('TX')">
+                            <i class="icon-briefcase"></i>
+                            Tax
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('VT')">
+                            <i class="icon-briefcase"></i>
+                            Vendor
+                        </a>
+                    </li>
+                    <li>
+                        <a class="more" ng-click="$scope.$root.loadFieldsByMasterCode('WHT')">
+                            <i class="icon-briefcase"></i>
+                            WHT Tax
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }*@
+            </ul>
+                <div class="sidebar-widget align-center">
+                    <div class="btn-group" data-toggle="buttons" id="theme-switcher">
+                        <label class="btn active">
+                            <input type="radio" name="theme-switcher" data-theme="bright" /><i class="icon-sun"></i> Bright
+                        </label>
+                        <label class="btn">
+                            <input type="radio" name="theme-switcher" data-theme="dark" /><i class="icon-moon"></i> Dark
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="divider" class="resizeable"></div>
+        </div>
+        <!-- /Sidebar -->
+        <div id="content">
+            <div class="container">
+                <!-- Breadcrumbs line -->
+                <div class="crumbs">
+                    <ul id="breadcrumbs" class="breadcrumb">
+                        <li>
+
+                            {{$scope.$root.Title}}
+
+                            @*<a class="more" href="@Url.Action("Details", "Category")">
+                                    <i class="icon-home"></i>
+                                   {{}}
+                                </a>*@
+                        </li>
+
+
+
+                    </ul>
+
+                </div>
+                <div id="overlay">
+                    <img src="~/Content/assets/img/loading.gif" id="spinner" />
+                </div>
+                <form name="ESForm">
+                    <modal title="" visible="showModal">
+                        <table class="table" border="1">
+                            <tr style="background-color: #0d376c;">
+                                <th style="color: #fff">Approver/Rejecter</th>
+                                <th style="color: #fff">Date</th>
+                            </tr>
+                            <tr ng-repeat="item in items">
+                                <td>{{item.approverName}}</td>
+                                <td>{{item.approvalDate}}</td>
+                            </tr>
+                        </table>
+                    </modal>
+                    <div data-ng-view class="row">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+
+}
+

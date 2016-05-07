@@ -1,0 +1,88 @@
+﻿<div id="overlay">
+    <img src="~/Content/assets/img/loading.gif" id="spinner" />
+</div>
+<div ng-controller="SubRegionDetailsController">
+    @*<div class="col-md-12 col-sm-12">*@
+    <div class="clearfix"></div>
+    <div ng-show="!SRGAccess[0].isSuppressed" class="col-sm-6" ng-class="{ 'has-error': MDMForm.RegionId.$invalid }">
+        <div class="col-md-6 col-sm-6">
+            <label class="control-label">Region<span class="error" ng-show="SRGAccess[0].isMandatory">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <select ng-model="SubRegion.regionId" ng-change="FilterWorkflow()" ng-disabled="Ctrl" class="form-control" ng-options="dropDownData.id as dropDownData.name for dropDownData in Region" ng-required="SRGAccess[0].isMandatory" name="RegionId">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    @*<div>
+        <div class="col-md-6 col-sm-6">
+            <label class="control-label">SubRegionCode</label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            {{SubRegion.regionId}}
+            {{SubRegion.subRegionCode}}
+            <span ng-bind="SubRegion.subRegionCode" />
+        </div>
+    </div>*@
+
+    <div class="clearfix"></div>
+    <div ng-show="!SRGAccess[1].isSuppressed" class="col-sm-6" ng-class="{ 'has-error': MDMForm.SubRegionCode.$invalid }">
+        <div class="col-md-6 col-sm-6">
+            <label class="control-label">Sub Region Code<span class="error" ng-show="SRGAccess[1].isMandatory">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" restrict="restrict" ng-disabled="Ctrl" ng-model="SubRegion.subRegionCode" maxlength="4" ng-required="SRGAccess[1].isMandatory" name="SubRegionCode" ng-blur='subRegionBlur()' numbers-only="numbers-only" />
+        </div>
+    </div>
+    <div ng-show="!SRGAccess[2].isSuppressed" class="col-sm-6" ng-class="{ 'has-error': MDMForm.SubRegionDescription.$invalid }">
+        <div class="col-md-6 col-sm-6">
+            <label class="control-label">Sub Region Description<span class="error" ng-show="SRGAccess[2].isMandatory">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" restrict="restrict" ng-disabled="Ctrl" ng-model="SubRegion.subRegionDescription" maxlength="30" ng-required="SRGAccess[2].isMandatory" name="SubRegionDescription" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-sm-12" ng-class="{ 'has-error': MDMForm.comments.$invalid }">
+        <div class="col-md-3 col-sm-3">
+            <label class="control-label">Comments<span class="error" ng-show="true">*</span></label>
+        </div>
+        <div class="col-md-9 col-sm-9">
+            <textarea rows="4" cols="70" class="form-control col-xs-12" ng-model="SubRegion.comments" name="comments" ng-required="true" maxlength="250" restrict="restrict" />
+        </div>
+
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
+        <div ng-show="{{!CtrlButton}}">
+            <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="Button5" type="button" ng-click="InsertSubRegion(false);">
+                <span>Save</span>
+            </button>
+            <button style="width: 100px; height: 30px; margin-right: 10px;" class="btn" id="Button4" type="button" ng-show="IsWorflowAssigned" ng-click="InsertSubRegion(true)" ng-disabled="!MDMForm.$valid">
+                <span>Submit</span>
+            </button>
+            <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack()">
+                <span>Back</span>
+            </button>
+        </div>
+        <div ng-show="{{CtrlButton}}">
+            <button style="width: 100px; height: 30px;" class="btn" id="Button4" type="button" ng-click="ApproveSubRegion(true)" ng-disabled="Validate(isAllowtoSubmit,MDMForm.$invalid)" ng-show="viewOnly" ng-disabled="!MDMForm.$valid">
+                <span>Approve</span>
+            </button>
+            <button style="width: 100px; height: 30px;" class="btn" id="Button4" type="button" ng-confirm-click confirmed-click="ApproveSubRegion(false)" ng-disabled="Validate(isAllowtoSubmit,MDMForm.comments.$invalid)" ng-show="viewOnly" ng-disabled="!MDMForm.$valid">
+                <span>Reject</span>
+            </button>
+            <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack()">
+                <span>Back</span>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

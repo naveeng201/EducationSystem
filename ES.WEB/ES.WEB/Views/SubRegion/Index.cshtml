@@ -1,0 +1,11 @@
+﻿<style>
+    .row {
+        margin-top: 0px;
+    }
+</style>
+<div ng-controller="SubRegionIndexController">
+    <button style="width: 170px; margin-top: 10px; margin-bottom: 10px; color: #fff;" class="btn" id="Button4" type="button" ng-click="LoadDetails(0)">
+        <span>New Request</span>
+    </button>
+    <div id="gridSubRegionid" ui-grid="gridSubRegionid" class="grid" external-scopes="$scope"></div>
+</div>

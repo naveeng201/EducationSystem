@@ -1,0 +1,125 @@
+﻿@model ES.WEB.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+<script src="~/Scripts/ES/LoginController.js"></script>
+@*<div class="container maincontainer">
+        <div class="row-fluid">
+            <div class="col-md-offset-4 col-md-5">
+                <div class="form-login">
+                    <h4>Welcome to MDM Application.</h4>
+                    <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+                    </br>
+                    <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+                    </br>
+
+                    <div class="wrapper">
+                        <span class="group-btn">
+
+                            <a href="Home/Index" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>*@
+<style>
+    .logincontainer {
+        width: 410px;
+        margin: 20% auto;
+        border: 1px solid #999;
+        padding: 0px 12px;
+        border-radius: 10px;
+    }
+
+    h3 {
+        background: #01325A;
+        margin: 0px;
+        padding: 10px 0px;
+        text-align: center;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-bottom: 32px;
+    }
+
+    .form-actions {
+        margin-bottom: 0px;
+    }
+</style>
+<div class="content logincontainer" ng-controller="LoginController">
+    <!-- Login Formular -->
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-vertical login-form", @autocomplete = "off" }))
+    {
+                <!-- Title -->
+        <h3 class="form-title">Sign In to your Account</h3>
+                <!-- Error Message -->
+        <div class="alert fade in alert-danger" style="display: none;">
+            <i class="icon-remove close" data-dismiss="alert"></i>
+            Enter any username and password.
+
+        </div>
+        <div class="login-container">
+            @if (Html.ValidationSummary(true) != null)
+            {
+                <div class="login-error alert fade in alert-danger">
+                    <i class="icon-remove close" data-dismiss="alert"></i>
+                    @Html.ValidationSummary(true)
+                </div>
+            }
+            <div class="login-frm-container">
+                @*@using (Html.BeginForm("Login","Account",FormMethod.Post, new {@class="form-vertical login-form",@autocomplete = "off" }))
+                    {*@
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @*<div class="login-label">
+                            @Html.LabelFor(model => model.UserName)
+                        </div>*@
+                    <div class="input-icon">
+                        <i class="icon-user"></i>
+                        <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" ng-model="UserName" ng-required="true" />
+                        @*@Html.TextBoxFor(model => model.Login.UserName, new { @class = "form-control", @placeholder = "Username", data_rule_required = "true", @id = "txtUsername" })
+                            @Html.ValidationMessageFor(model => model.Login.UserName)*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon">
+                        <i class="icon-lock"></i>
+                        <input type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="Password" ng-enter="login()" ng-required="true" />
+
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <a class=" btn btn-md" data-ng-click="login()" style="float:right;color:white">
+                        <i class="fa fa-sign-in"><img src="~/Content/assets/img/login.gif" style="height:22px;width:22px; float:left;" ng-show="loadingLogin" />LOGIN</i>
+                    </a>
+                    <p class="danger danger-icon" style="color:red;">{{error}}</p>
+
+
+
+                </div>
+                @*//}*@
+            </div>
+        </div>
+        <div class="login-footer">
+        </div>
+        @*</form>*@
+    }
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

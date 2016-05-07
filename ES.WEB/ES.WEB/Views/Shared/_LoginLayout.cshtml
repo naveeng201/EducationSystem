@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>ES- : @ViewBag.Title</title>
+
+    @Styles.Render("~/Content/assets/css/main.css")
+    @Styles.Render("~/Content/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Content/assets/css/main.css")
+    @Styles.Render("~/Content/assets/css/plugins.css")
+
+    @Styles.Render("~/Content/assets/css/responsive.css")
+    @Styles.Render("~/Content/assets/css/icons.css")
+    @Styles.Render("~/Content/assets/css/login.css")
+    @Styles.Render("~/Content/assets/css/fontawesome/font-awesome.min.css")
+    @Styles.Render("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700")
+
+    @Scripts.Render("~/Content/assets/js/libs/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Content/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Content/assets/js/libs/lodash.compat.min.js")
+    @Scripts.Render("~/Content/plugins/uniform/jquery.uniform.min.js")
+    @Scripts.Render("~/Content/plugins/validation/jquery.validate.min.js")
+    @Scripts.Render("~/Content/plugins/nprogress/nprogress.js")
+    @Scripts.Render("~/Content/assets/js/login.js")
+
+
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/respond.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-touch.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+   
+
+    <script src="~/Scripts/ES/Module.js"></script>
+   
+    <script src="~/Scripts/ES/Services.js"></script>
+  
+   
+   
+    <script>
+        $(document).ready(function () {
+
+            Login.init();
+        });
+
+    </script>
+
+</head>
+<body class="login">
+    <header class="header navbar navbar-fixed-top" role="banner">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="~/Content/Accp-Styles/images/logo.png" alt="VFS AntiCorrption Compliance Process" style="height:50px;width:145px;float:left;" />
+
+            </a>
+        </div>
+    </header> <!-- /.header -->
+    <div class="box">
+        @RenderBody()
+    </div> <!-- /.row -->
+    @RenderSection("scripts", false)
+</body>
+</html>

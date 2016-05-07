@@ -1,0 +1,42 @@
+﻿
+
+<div ng-controller="InstitutionInfoDetailsController">
+    <div class="clearfix"></div>
+
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.name.$invalid }">
+            <label class=" control-label">
+                Institute Name<span class="error">*</span>
+            </label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="InstitutionInfo.name" ng-required="true" name="name" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.shortName.$invalid }">
+            <label class="control-label">Short Name<span class="error">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="InstitutionInfo.shortName" ng-required="true" name="shortName" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.description.$invalid }">
+            <label class="control-label">City<span class="error">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="InstitutionInfo.city" ng-required="true" name="city" />
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
+        <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="btnAddInstitute" type="button" ng-disabled="!ESForm.$valid" ng-click="addInstitute()">
+            <span>Save</span>
+        </button>
+        <button style="width: 100px; height: 30px;" class="btn" id="btnGoBack" type="button" ng-click="GoBack();">
+            <span>Back</span>
+        </button>
+    </div>
+</div>

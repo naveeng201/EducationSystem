@@ -1,0 +1,43 @@
+﻿<div ng-controller="ClassDetailController">
+    <div class="clearfix"></div>
+
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.className.$invalid }">
+            <label class=" control-label">
+                Class Name<span class="error">*</span>
+            </label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="Class.className" ng-required="true" name="className" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.description.$invalid }">
+            <label class="control-label">Description<span class="error">*</span></label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="Class.description" ng-required="true" name="description" />
+        </div>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+    <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
+
+        <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="Button5" type="button" ng-disabled="!ESForm.$valid" ng-click="addClass();">
+            <span>Save</span>
+        </button>
+        <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack();">
+            <span>Back</span>
+        </button>
+
+
+
+    </div>
+</div>
+
+
+
+
+
