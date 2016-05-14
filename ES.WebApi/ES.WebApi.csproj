@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -98,6 +99,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ES.BAL\ES.BAL.csproj">
+      <Project>{aa429f95-9f75-4722-9af9-13fba9005f3f}</Project>
+      <Name>ES.BAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ES.MODELS\ES.MODELS.csproj">
+      <Project>{a2366f09-357e-4aab-80e4-50c40302fdff}</Project>
+      <Name>ES.MODELS</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
