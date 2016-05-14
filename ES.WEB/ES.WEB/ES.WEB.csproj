@@ -4533,17 +4533,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ES.dal\ES.DAL.csproj">
+    <ProjectReference Include="..\..\ES.BAL\ES.BAL.csproj">
+      <Project>{aa429f95-9f75-4722-9af9-13fba9005f3f}</Project>
+      <Name>ES.BAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ES.DAL\ES.DAL.csproj">
       <Project>{af7bbccd-ab66-4a93-a297-a7badffa82ed}</Project>
       <Name>ES.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ES.MODELS\ES.MODELS.csproj">
       <Project>{a2366f09-357e-4aab-80e4-50c40302fdff}</Project>
       <Name>ES.MODELS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ES.SERVICE\ES.SERVICE.csproj">
-      <Project>{aa429f95-9f75-4722-9af9-13fba9005f3f}</Project>
-      <Name>ES.SERVICE</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
