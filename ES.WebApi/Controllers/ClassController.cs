@@ -15,6 +15,11 @@ namespace ES.WebApi.Controllers
 
         #region //Variable Declaration
         private readonly IClassService classService;
+
+        public ClassController()
+        {
+           // classService = _classService;
+        }
         #endregion
 
         #region//Class
