@@ -28,17 +28,14 @@ namespace ES.SERVICE
         {
            return _repository.GetAll();
         }
-
         public int Insert(InstitutionInfo InstituteInfoMaster)
         {
           return  _repository.Insert(InstituteInfoMaster);
         }
-
         public void Update(InstitutionInfo InstituteInfonMaster)
         {
               _repository.Update(InstituteInfonMaster);
         }
-
         public InstitutionInfo SingleOrDefault(int ID)
         {
            return  _repository.SingleOrDefault(ID);

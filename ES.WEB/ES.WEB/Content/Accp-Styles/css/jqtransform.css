@@ -1,0 +1,53 @@
+form.jqtransformdone label { /*margin-top:4px;
+	margin-right: 8px;
+	display: block;
+	float:left;*/ }
+
+form.jqtransformdone div.rowElem { /*clear:both;
+	padding:4px 0px;*/ }
+
+/* -------------
+ * Radios
+ * ------------- */
+/*.jqTransformRadioWrapper {float: left;display:block;margin:0px 4px;	margin-top:5px;}
+.jqTransformRadio {
+	background: transparent url(img/radio.gif) no-repeat center top;
+	vertical-align: middle;
+	height: 19px;
+	width: 18px;
+	display:block;
+}*/
+
+
+/* -------------
+ * Checkboxes
+ * ------------- */
+
+span.jqTransformCheckboxWrapper {
+    display: block;
+    float: left;
+    margin-top: 0px;
+}
+
+a.jqTransformCheckbox {
+    background: transparent url(../images/checkbox.png) no-repeat center top;
+    display: block; /*display: -moz-inline-block;*/
+    float: left;
+    height: 14px;
+    margin-top: 0px;
+    vertical-align: middle;
+    width: 14px;
+}
+
+/* -------------
+ * Checked - Used for both Radio and Checkbox
+ * ------------- */
+
+a.jqTransformChecked { background-position: center bottom; }
+
+
+/* -------------
+ * Hidden - used to hide the original form elements
+ * ------------- */
+
+.jqTransformHidden { display: none; }

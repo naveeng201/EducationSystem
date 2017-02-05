@@ -14,6 +14,11 @@ namespace ES.MODELS
     
     public partial class Subject
     {
+        public Subject()
+        {
+            this.ClassSubjects = new HashSet<ClassSubject>();
+        }
+    
         public int Id { get; set; }
         public string SubjectName { get; set; }
         public string ShortName { get; set; }
@@ -21,6 +26,9 @@ namespace ES.MODELS
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> UserID { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public Nullable<bool> isDeleted { get; set; }
+        public Nullable<int> locationID { get; set; }
+    
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
     }
 }

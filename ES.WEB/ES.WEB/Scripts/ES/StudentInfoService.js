@@ -1,5 +1,5 @@
 ﻿app.service('StudentInfoService', function ($http) {
-    var urlpath = "/ESWEB/api/StudentInfo/";
+    var urlpath = "http://localhost:9810/api/StudentInfo/";
 
     this.loadStudentInfo = function (Id) {
         var request = $http({

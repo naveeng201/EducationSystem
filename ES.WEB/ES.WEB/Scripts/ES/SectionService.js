@@ -1,8 +1,9 @@
 ﻿app.service("SectionService", function ($http) {
-    var urlpath = "/ESWEB/api/Section/";
+    var urlpath = "http://localhost:9810/api/Section/";
 
       ///*Section*/
     this.getSection = function () {
+        
         var request = $http({
             method: "get",
             contentType: "application/json",

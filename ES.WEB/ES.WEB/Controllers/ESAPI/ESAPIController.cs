@@ -1,7 +1,4 @@
-﻿using ES.DAL.repositories;
-using ES.MODELS;
-using ES.SERVICE;
-using ES.WEB.Models;
+﻿using ES.WEB.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Newtonsoft.Json.Linq;
 using System;
@@ -32,25 +29,6 @@ namespace ES.WEB.Controllers
     // [Authorize]
     public class ESAPIController : ApiController
     {
-        #region //Variable Declaration
-        private readonly IClassService classService;
-        // private readonly IAspNetUserService aspnetUserService;
-
-        #endregion
-
-        #region //Public Constructor
-        public ESAPIController(IClassService _classService)
-        {
-            this.classService = _classService;
-            //this.sectionService = _classService;
-            // this.aspnetUserService = _aspnetUserService;
-        }
-        //public ESAPIController(ISectionService _sectionService)
-        //{
-        //    this.sectionService = _sectionService;
-        //}
-        #endregion
-
         #region//LoginAndLogoff
         [AllowAnonymous]
         [HttpPost]
@@ -144,8 +122,6 @@ namespace ES.WEB.Controllers
             }
             return response;
         }
-
-
         [HttpPost]
         public async Task<HttpResponseMessage> ChangePassword(ManageUserViewModel model)
         {
@@ -157,14 +133,7 @@ namespace ES.WEB.Controllers
             }
             return response;
         }
-
-
-
-
         #endregion
-
-        
-
     }
 
 }

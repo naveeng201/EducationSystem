@@ -44,7 +44,7 @@ app.directive('ngConfirmClick', [function () {
             });
         }
     };
-}])
+}]);
 app.directive('restrict', function () {
     return {
         require: 'ngModel',
@@ -249,9 +249,12 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: routeURL + 'StudentInfo/Edit',
             controler: "StudentInfoController"
         });
-    //$routeProvider.when('/Student')
-    //{
-    //    templateUrl: routeURL + 'StudentInfo/Details'
-    //}
-    
+    $routeProvider.when('/ClassSubject',
+    {
+        templateUrl: routeURL + 'ClassSubject/Index'
+    });
+    $routeProvider.when('/ClassSection',
+   {
+       templateUrl: routeURL + 'ClassSection/Index'
+   });
 }])

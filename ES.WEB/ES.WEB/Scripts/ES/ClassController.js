@@ -21,7 +21,7 @@
     }
     $scope.$scope = $scope;
     $scope.Classgrid = {
-        enableCellEdit: false,
+        enableCellEdit: true,
         enableSorting: true,
         enableFiltering: true,
         paginationPageSizes: [50, 100, 500],
@@ -76,7 +76,6 @@ app.controller('ClassDetailController', function ($scope, $location, $window, ES
     function loadClassDropdowns(Id) {
         debugger;
         $("#overlay").show();
-
         var promiseClassDropdownList = ESService.loadClassDropdowns(Id);
         promiseClassDropdownList.then(function (respons) {
             debugger;

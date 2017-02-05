@@ -1,8 +1,7 @@
 ﻿app.service('InstitutionInfoService', function ($http) {
-    var urlpath = "/ESWEB/api/InstitutionInfo/";
+    var urlpath = "http://localhost:9810/api/InstitutionInfo/";
 
     this.getInstitutionInfo = function () {
-        debugger;
         var response = $http({
             method: "get",
             contentType: "application/json",

@@ -10,7 +10,6 @@ namespace mdm.web.Controllers
     {
         public PartialViewResult Index()
         {
-
             return PartialView();
         }
         public PartialViewResult Details()
@@ -64,6 +63,22 @@ namespace mdm.web.Controllers
             return PartialView();
         }
         public PartialViewResult Edit()
+        {
+            return PartialView();
+        }
+    }
+
+    public class ClassSubjectController : Controller
+    {
+        public PartialViewResult Index()
+        {
+            return PartialView();
+        }
+    }
+
+    public class ClassSectionController : Controller
+    {
+        public PartialViewResult Index()
         {
             return PartialView();
         }

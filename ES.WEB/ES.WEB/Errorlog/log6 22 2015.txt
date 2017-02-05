@@ -1,0 +1,10 @@
+
+Log Entry : 1:13:59 PM Monday, June 22, 2015
+:
+exception isThread was being aborted.
+-------------------------------
+
+Log Entry : 2:44:25 PM Monday, June 22, 2015
+:
+exception isThe underlying provider failed on Open.
+-------------------------------

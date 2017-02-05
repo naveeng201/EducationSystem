@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>angular-ui-grid</id>
+    <version>3.0.0</version>
+    <title>angular-ui-grid</title>
+    <authors>AngularUI</authors>
+    <owners>AngularUI</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/angular-ui/ng-grid</projectUrl>
+    <iconUrl>https://avatars2.githubusercontent.com/u/1530011?v=3&amp;s=200</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>UI Grid: an Angular Data Grid</description>
+    <summary />
+    <releaseNotes>Correlates to v3.0.0-RC.18 released 2015-01-06</releaseNotes>
+  </metadata>
+</package>

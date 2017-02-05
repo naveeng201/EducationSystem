@@ -1,5 +1,5 @@
 ﻿app.service('SubjectService', function ($http) {
-    var urlpath = "/ESWEB/api/Subject/";
+    var urlpath = "http://localhost:9810/api/Subject/";
 
     ///*Subject*/
     this.getSubject = function () {

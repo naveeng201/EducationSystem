@@ -57,6 +57,12 @@
     <Compile Include="Class.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClassSection.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClassSubject.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ESModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,13 +81,11 @@
     <Compile Include="ExtendedModels\AspNetUser.cs" />
     <Compile Include="ExtendedModels\Class.cs" />
     <Compile Include="ExtendedModels\InstitutionInfo.cs" />
+    <Compile Include="ExtendedModels\Member.cs" />
     <Compile Include="ExtendedModels\Section.cs" />
     <Compile Include="ExtendedModels\StudentAditionalInfo.cs" />
     <Compile Include="ExtendedModels\Subject.cs" />
     <Compile Include="InstitutionInfo.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Member.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -92,6 +96,9 @@
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StudentAditionalInfo.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StuentClassSectionInfo.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subject.cs">

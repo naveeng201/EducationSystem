@@ -14,6 +14,12 @@ namespace ES.MODELS
     
     public partial class Section
     {
+        public Section()
+        {
+            this.ClassSections = new HashSet<ClassSection>();
+            this.StuentClassSectionInfoes = new HashSet<StuentClassSectionInfo>();
+        }
+    
         public int Id { get; set; }
         public string SectionName { get; set; }
         public string Description { get; set; }
@@ -21,5 +27,8 @@ namespace ES.MODELS
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> UserID { get; set; }
+    
+        public virtual ICollection<ClassSection> ClassSections { get; set; }
+        public virtual ICollection<StuentClassSectionInfo> StuentClassSectionInfoes { get; set; }
     }
 }

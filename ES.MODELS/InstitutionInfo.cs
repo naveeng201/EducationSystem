@@ -14,6 +14,11 @@ namespace ES.MODELS
     
     public partial class InstitutionInfo
     {
+        public InstitutionInfo()
+        {
+            this.StuentClassSectionInfoes = new HashSet<StuentClassSectionInfo>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
@@ -27,11 +32,11 @@ namespace ES.MODELS
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string Type { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<bool> isBlocked { get; set; }
+        public Nullable<bool> Blocked { get; set; }
+        public Nullable<int> UserID { get; set; }
+    
+        public virtual ICollection<StuentClassSectionInfo> StuentClassSectionInfoes { get; set; }
     }
 }

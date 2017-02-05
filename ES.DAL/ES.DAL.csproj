@@ -61,6 +61,8 @@
     <Compile Include="IRepositories\IStudentAditionalInfoRepository.cs" />
     <Compile Include="IRepositories\ISubjectRepository.cs" />
     <Compile Include="IRepositories\IUnitOfWork.cs" />
+    <Compile Include="Masters\ClassSectionRepository.cs" />
+    <Compile Include="Masters\ClassSubjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />

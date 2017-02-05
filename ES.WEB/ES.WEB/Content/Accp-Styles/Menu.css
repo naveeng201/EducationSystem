@@ -1,0 +1,302 @@
+﻿/*@import url(http://fonts.googleapis.com/css?family=Pontano+Sans|Poiret+One);
+
+/*body {
+	margin: 0;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#277d8e), to(#45a478));
+	background-image: -webkit-linear-gradient(top, #277d8e, #45a478);
+	background-image:    -moz-linear-gradient(top, #277d8e, #45a478); 
+   background-image:     -ms-linear-gradient(top, #277d8e, #45a478); 
+   background-image:      -o-linear-gradient(top, #277d8e, #45a478); 
+   background-image:         linear-gradient(to bottom, #277d8e, #45a478);
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#277d8e', endColorstr='#45a478',GradientType=0 );
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+	text-align: center;
+}
+
+#menu-wrapper {
+    position: relative;
+    display: block;
+    z-index: 2;
+    height: 38px;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#3b39d5), to(#090568));
+    background-image: -webkit-linear-gradient(top, #00305d, #05074a);
+    background-image: -moz-linear-gradient(top, #00305d, #05074a);
+    background-image: -ms-linear-gradient(top, #00305d, #05074a);
+    background-image: -o-linear-gradient(top, #00305d, #05074a);
+    background-image: linear-gradient(to bottom, #00305d, #05074a);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#535557', endColorstr='#333532',GradientType=0 );
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    margin-top:0.1em;
+
+}
+
+.menu {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    list-style-type: none;
+}
+
+    .menu li {
+        display: inline-block;
+        padding: 12px 40px 9px 9px;
+        cursor: pointer;
+        -webkit-transition: 0.3s ease-in-out;
+        -moz-transition: 0.3s ease-in-out;
+        -ms-transition: 0.3s ease-in-out;
+        -o-transition: 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
+    }
+
+        .menu li:hover, .selected {
+            background: rgba(0,48,93,0.9);
+            height: 100%;
+              background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(rgba(0,48,93,0.9)));
+    background-image: -webkit-linear-gradient(top, #000,rgba(0,48,93,0.9));
+    background-image: -moz-linear-gradient(top,#000, rgba(0,48,93,0.9));
+    background-image: -ms-linear-gradient(top,#000, rgba(0,48,93,0.9));
+    background-image: -o-linear-gradient(top,#000, rgba(0,48,93,0.9));
+    background-image: linear-gradient(to bottom,#000, rgba(0,48,93,0.9));
+             
+        }
+
+    .menu a, .menu a:visited {
+        color: #fff;
+        text-decoration: none;
+    }
+
+#submenu-wrapper {
+    position: absolute;
+    right: 0;
+    left: 3.9em;
+    display: block;
+    z-index: 1;
+    width: auto;
+    /*height: 36px;
+    margin: 0em auto 0;
+    padding: 0px 0px;    
+    font-family: "Pontano Sans";
+    font-size: 13px;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    /*box-shadow: 0px 2px 7px rgba(0,0,0,0.5);
+    overflow-x : auto;
+    overflow-y:hidden;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,48,93,0.9)), to(#000));
+    background-image: -webkit-linear-gradient(top, rgba(0,48,93,0.9), #000);
+    background-image: -moz-linear-gradient(top, rgba(0,48,93,0.9), #000);
+    background-image: -ms-linear-gradient(top, rgba(0,48,93,0.9), #000);
+    background-image: -o-linear-gradient(top, rgba(0,48,93,0.9), #000);
+    background-image: linear-gradient(to bottom, rgba(0,48,93,0.9), #000);
+}
+
+.submenu {
+    display: block;
+    padding: 0;
+    list-style-type: none;
+    width:auto;
+}
+
+    .submenu li {
+        display: inline-block;
+        width: auto;
+        height: 100px;
+        vertical-align: bottom;
+        text-align: center;
+        padding-top: 8px;
+        padding-left:25px;
+        padding-right:25px;
+        border-left: 1px;
+        border-style: inherit;
+        border-color: #00305d;
+    }
+
+        /*.submenu li img {
+            display: block;
+            margin: 0 auto 1em;
+            width: 200px;
+            border-radius: 5px;
+            border: 0;
+        }
+
+        .submenu li a, .submenu li a:visited {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .submenu li:hover {
+            /*background-color: #00305d;
+            
+    background: rgba(0,48,93,0.9);
+        }
+
+
+#title {
+    display: block;
+    margin-top: 4em;
+    font-family: "Poiret One";
+    font-size: 45px;
+    color: #fff;
+}
+
+    #title a, #title a:visited {
+        font-size: 20px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+.menu_Home {
+    
+    background: url("images/home.png") no-repeat 0px -2px transparent;
+}*/
+
+
+
+ @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+
+#wrapper {
+  margin: 10px;
+}
+
+/* BEGIN: Общие стили */
+.menu,
+.sub-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  background-color: #3E454D;
+  cursor: pointer;
+  position: relative;
+  transition: background-color .5s;
+  -moz-transition: background-color .5s;
+  -o-transition: background-color .5s;
+  -webkit-transition: background-color .5s;
+  /* IE lt 10, Chrome lt 1, Opera lt 11.6, Safari lt 3, FF lt 4, Android lt 2.1 и iOS lt 2.0 не поддерэивают transition. */
+}
+
+.menu li:hover {
+  background-color: #353B41 !important; /* .menu > li.home может иметь больше приоритета. Поэтому. */
+}
+
+.menu a {
+  color: #FFF;
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0 5px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.menu a:hover {
+  /* Защита от простого a:hover. */
+  color: #FFF;
+}
+/* END: Общие стили */
+
+/* BEGIN: Главное меню */
+.menu {
+  /* Рекомендуется задать высоту главного меню именно отсюда. */
+  height: 90px;
+}
+
+.menu > li {
+  float: left;
+  height: 100%;
+  width: 15%; /* Мудакам которые не поддерживают calc. */
+  width: calc((100% - 90px) / 5);
+  width: -moz-calc((100% - 90px) / 5);
+  width: -webkit-calc((100% - 90px) / 5);
+  /* IE lt 9, Chrome lt 19, Opera lt 15, Safari lt 6, FF lt 4, Android и iOS не поддерэивают calc. */
+}
+
+.menu > li.home {
+  background: #3E454D url(http://s26.postimg.org/qbf4q4j9h/home.png) center no-repeat;
+  width: 90px;
+}
+
+.menu > li.current {
+  background-color: #F2762E !important; /* !important VS .menu li:hover */
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  /* IE lt 9, Chrome lt 1, Opera lt 10.5, Safari lt 3, FF lt 3.5, Android lt 2.1 и iOS lt 2.0 не поддерэивают box-shadow. */
+}
+
+.menu > li:not(:first-child) {
+  box-shadow: inset 1px 0 0 0 #272B31, inset 2px 0 0 0 #434A52;
+  -moz-box-shadow: inset 1px 0 0 0 #272B31, inset 2px 0 0 0 #434A52;
+  -webkit-box-shadow: inset 1px 0 0 0 #272B31, inset 2px 0 0 0 #434A52;
+}
+
+.menu > li.home > a {
+  color: transparent !important;
+}
+
+.menu > li > a > span {
+  left: 0; /* Селектор .menu a выравнивает содержимое по центру, из-за чего span начинается от центра. Исправляем. */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  /* IE lt 9, Chrome lt 5, Opera lt 10.5, Safari lt 3.1, FF lt 3.5, Android lt 2.1 и iOS lt 2.0 не поддерэивают transform. */
+}
+/* END: Главное меню */
+
+/* BEGIN: Подменю */
+.sub-menu {
+  max-height: 0;
+  min-width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  transition: max-height .5s .2s;
+  -moz-transition: max-height .5s .2s;
+  -o-transition: max-height .5s .2s;
+  -webkit-transition: max-height .5s .2s;
+}
+
+li:hover > .sub-menu {
+  max-height: 600px;
+}
+
+.sub-menu li {
+  height: 60px;
+}
+
+.sub-menu a {
+  line-height: 60px;
+  transition: color .5s;
+  -moz-transition: color .5s;
+  -o-transition: color .5s;
+  -webkit-transition: color .5s;
+  white-space: nowrap;
+}
+
+.sub-menu li.current a,
+.sub-menu a:hover {
+  color: #F2762E !important; /* !important VS .menu a:hover */
+}

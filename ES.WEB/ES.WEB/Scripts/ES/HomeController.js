@@ -24,12 +24,16 @@
     }
     $scope.LoadStudentInfo = function () {
         $location.path("StudentInfo");
-        $scope.$root.Title = "New Request->Student Info"
+        $scope.$root.Title = "New Request->Student Info";
     }
-    //$scope.LoadStudent=function()
-    //{
-    //    $location.path("Student");
-    //    $scope.$root.Title = "New Request->Student Additional Details"
-    //}
-   
+    $scope.LoadClassSubjects=function()
+    {
+        $location.path("ClassSubject");
+        $scope.$root.Title = "New Request->Class Subject";
+    }
+    $scope.LoadClassSections = function()
+    {
+        $location.path("ClassSection");
+        $scope.$root.Title = "New Request->Class Section";
+    }
 });

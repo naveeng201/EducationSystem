@@ -103,12 +103,9 @@ app.controller('SectionDetailController', function ($scope, $location, $window, 
     }
     loadSectionDropdown(Id);
     function loadSectionDropdown(Id) {
-       
         $("#overlay").show();
-
         var promiseSectionDropdownList = SectionService.loadSectionDropdown(Id);
         promiseSectionDropdownList.then(function (respons) {
-            debugger;
             if (respons.status == 200) {
                 if (respons.data != null) {
                     $scope.Section= respons.data;

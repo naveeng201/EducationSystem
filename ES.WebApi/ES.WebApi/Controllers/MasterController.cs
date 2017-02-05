@@ -1,0 +1,820 @@
+﻿using ES.MODELS;
+using ES.SERVICE;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Transactions;
+using System.Web.Http;
+
+namespace ES.WebApi.Controllers
+{
+    public class MasterController : ApiController
+    {
+
+    }
+    #region //Class
+    public class ClassController : ApiController
+    {
+        IClassService _classService;
+
+        public ClassController(IClassService classService)
+        {
+            this._classService = classService;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage LoadClassDropdowns(int id)
+        {
+            HttpResponseMessage response = null;
+            Class objClass = null;
+            if (id == 0)
+            {
+                objClass = new Class();
+            }
+            else
+            {
+                objClass = _classService.SingleOrDefault(id);
+            }
+            response = Request.CreateResponse(HttpStatusCode.OK, objClass);
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetClass()
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var classList = _classService.GetAll().ToList();
+                response = Request.CreateResponse(HttpStatusCode.OK, classList);
+                return response;
+            }
+            catch (Exception Ex)
+            {
+                return null;
+            }
+        }
+
+        [AcceptVerbs("POST")]
+        public HttpResponseMessage AddClass([FromBody] Class objclass)
+        {
+
+            HttpResponseMessage response = null;
+            try
+            {
+                // ModelState.Remove("Class.AditionalWorkflowId");
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                ////if (objclass.ClassName != null)
+                ////{
+                ////    if (ClassService.ExistsClassName(objclass.ClassName))
+                ////    {
+                //        response = Request.CreateResponse(HttpStatusCode.Ambiguous, "ClassName is already exists.");
+                //        return response;
+                //    }
+                //}
+                objclass.Blocked = false;
+                using (var t = new TransactionScope())
+                {
+                    if (objclass.Id == 0)
+                    {
+                        objclass.CreateDate = DateTime.Now;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _classService.Insert(objclass);
+                    }
+                    else
+                    {
+                        _classService.Update(objclass);
+                    }
+
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+            }
+            //catch (Exception Ex)
+            //{
+            //    return null;
+            //}
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+        }
+    }
+    #endregion
+
+    #region //Section
+    public class SectionController : ApiController
+    {
+        //
+        // GET: /Section/
+        private readonly ISectionService _sectionService;
+        public SectionController(ISectionService sectionService)
+        {
+            this._sectionService = sectionService;
+        }
+
+        #region Section
+        [HttpGet]
+        public HttpResponseMessage LoadSectionDropdown(int Id)
+        {
+            HttpResponseMessage response = null;
+            Section objSection = null;
+            if (Id == 0)
+            {
+                objSection = new Section();
+            }
+            else
+            {
+                objSection = _sectionService.SingleOrDefault(Id);
+            }
+            response = Request.CreateResponse(HttpStatusCode.OK, objSection);
+            return response;
+        }
+        [HttpGet]
+        public HttpResponseMessage GetSection()
+        {
+            HttpResponseMessage respone = null;
+            try
+            {
+                var sectionList = _sectionService.GetAll().ToList();
+                sectionList = sectionList.Where(x => x.Blocked == false).ToList();
+                respone = Request.CreateResponse(HttpStatusCode.OK, sectionList);
+                return respone;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage AddSection(Section objSection)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objSection.Id == 0)
+                    {
+                        objSection.CreateDate = DateTime.Now;
+                        objSection.Blocked = false;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _sectionService.Insert(objSection);
+                    }
+                    else
+                    {
+                        _sectionService.Update(objSection);
+                    }
+
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
+        }
+        #endregion
+    }
+    #endregion
+
+    #region //StudentInfo
+    public class StudentInfoController : ApiController
+    {
+        private readonly IStudentAditionalInfoService _repository;
+        public StudentInfoController(IStudentAditionalInfoService repository)
+        {
+            this._repository = repository;
+        }
+        [HttpGet]
+        public HttpResponseMessage loadStudentInfo(int id)
+        {
+            HttpResponseMessage response = null;
+            StudentAditionalInfo objStudent = null;
+            try
+            {
+                if (id == 0)
+                {
+                    objStudent = new StudentAditionalInfo();
+                }
+                else
+                {
+                    objStudent = _repository.SingleOrDefault(id);
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, objStudent);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public HttpResponseMessage AddStudentInfo(StudentAditionalInfo objStuent)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objStuent.Id == 0)
+                    {
+                        objStuent.CreateDate = DateTime.Now;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _repository.Insert(objStuent);
+                    }
+                    else
+                    {
+                        _repository.Update(objStuent);
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
+        }
+    }
+    #endregion
+
+    #region //Subject
+    public class SubjectController : ApiController
+    {
+        private readonly ISubjectService _repository;
+        public SubjectController(ISubjectService repository)
+        {
+            this._repository = repository;
+        }
+        #region Subject
+        [HttpGet]
+        public HttpResponseMessage LoadSubjectDropdown(int Id)
+        {
+            HttpResponseMessage response = null;
+            Subject objSubject = null;
+            if (Id == 0)
+            {
+                objSubject = new Subject();
+            }
+            else
+            {
+                objSubject = _repository.SingleOrDefault(Id);
+            }
+            response = Request.CreateResponse(HttpStatusCode.OK, objSubject);
+            return response;
+        }
+        [HttpGet]
+        public HttpResponseMessage GetSubject()
+        {
+            HttpResponseMessage respone = null;
+            try
+            {
+                var subjectsList = _repository.GetAll().ToList();
+                subjectsList = subjectsList.ToList();//subjectsList.Where(x => x.Blocked ==false ).ToList();
+                respone = Request.CreateResponse(HttpStatusCode.OK, subjectsList);
+                return respone;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage AddSubject(Subject objSubject)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objSubject.Id == 0)
+                    {
+                        objSubject.CreateDate = DateTime.Now;
+                        //objSubject.Blocked = false;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _repository.Insert(objSubject);
+                    }
+
+                    else
+                    {
+
+                        _repository.Update(objSubject);
+                    }
+
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
+        }
+        #endregion
+    }
+    #endregion
+
+    #region //InstitutionInfo
+    public class InstitutionInfoController : ApiController
+    {
+        private readonly IInstitutionInfoService _repository;
+        public InstitutionInfoController(IInstitutionInfoService repository)
+        {
+            this._repository = repository;
+        }
+        [HttpGet]
+        public HttpResponseMessage getInstitutionInfo()
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var InstituteList = _repository.GetAll().ToList();
+                InstituteList = InstituteList.ToList();//InstituteList.Where(x => x.isBlocked == false).ToList();
+                response = Request.CreateResponse(HttpStatusCode.OK, InstituteList);
+                return response;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage LoadInstituteDropdown(int id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                InstitutionInfo objInstitute = null;
+                if (id == 0)
+                {
+                    objInstitute = new InstitutionInfo();
+                }
+                else
+                {
+                    objInstitute = _repository.SingleOrDefault(id);
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, objInstitute);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage AddInstitute(InstitutionInfo objInstitute)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objInstitute.Id == 0)
+                    {
+                        objInstitute.CreateDate = DateTime.Now;
+                        //objInstitute.isBlocked = false;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _repository.Insert(objInstitute);
+                    }
+                    else
+                    {
+                        _repository.Update(objInstitute);
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+        }
+    }
+    #endregion
+
+
+    #region //ClassSubject
+    public class ClassSubjectController : ApiController
+    {
+        public IClassSubjectService _classSubjectService;
+        public ClassSubjectController(IClassSubjectService classSubjectService)
+        {
+            _classSubjectService = classSubjectService;
+        }
+        
+        [HttpGet]
+        public HttpResponseMessage GetAllClassSubjects()
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var classSubjects = _classSubjectService.GetAll().ToList();
+                response = Request.CreateResponse(HttpStatusCode.OK, classSubjects);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetClassSubject(int id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                ClassSubject objClassSubject = null;
+                if (id == 0)
+                {
+                    objClassSubject = new ClassSubject();
+                }
+                else
+                {
+                    objClassSubject = _classSubjectService.SingleOrDefault(id);
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, objClassSubject);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [AcceptVerbs("POST")]
+        public HttpResponseMessage AddClassSubject([FromBody] ClassSubject objClassSubject)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objClassSubject.Id == 0)
+                    {
+                        objClassSubject.CreateDate = DateTime.Now;
+                        //objInstitute.isBlocked = false;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _classSubjectService.Insert(objClassSubject);
+                    }
+                    else
+                    {
+                        _classSubjectService.Update(objClassSubject);
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+        [AcceptVerbs("POST")]
+        public HttpResponseMessage AddClassSubjects([FromBody] IEnumerable<ClassSubject> objClassSubject)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    foreach (ClassSubject cs in objClassSubject)
+                    {
+                        if (cs.Id == 0) // write proper logic to insert and delete if mapping is already exist. 
+                        {
+                            cs.CreateDate = DateTime.Now;
+                            cs.Blocked = false;
+                            // This Area Need to Insert in BULK Insert Method                    
+                            _classSubjectService.Insert(cs);
+                        }
+                        else
+                        {
+                            _classSubjectService.Update(cs);
+                        }
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+    }
+    #endregion
+
+    #region //ClassSection
+    public class ClassSectionController : ApiController
+    {
+        private IClassSectionService _classSectionService;
+        public ClassSectionController(IClassSectionService classSectionService)
+        {
+            _classSectionService = classSectionService;
+        }
+        [HttpGet]
+        public HttpResponseMessage GetAllClassSections()
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var classSections = _classSectionService.GetAll();
+                response = Request.CreateResponse(HttpStatusCode.OK, classSections);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError,ex.Message);
+                return response;
+            }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetClassSection(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                ClassSection objClassSection = null;
+                if (Id == 0)
+                    objClassSection = new ClassSection();
+                else
+                    objClassSection = _classSectionService.SingleOrDefault(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, objClassSection);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response; 
+            }
+        }
+
+        [AcceptVerbs("POST")]
+        public HttpResponseMessage AddClassSection([FromBody]ClassSection objClassSection)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objClassSection.Id == 0)
+                    {
+                        objClassSection.CreateDate = DateTime.Now;
+                        _classSectionService.Insert(objClassSection);
+                    }
+                    else
+                    {
+                        _classSectionService.Update(objClassSection);
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted/Updated");
+                return response;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                return response;
+            }
+        }
+
+        [AcceptVerbs("POST")]
+        public HttpResponseMessage AddClassSections([FromBody] IEnumerable<ClassSection> objClassSections)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                if(!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    foreach(var cs in objClassSections)
+                    {
+                        if(cs.Id ==0)
+                        {
+                            cs.CreateDate = DateTime.Now;
+                            cs.Blocked = false;
+                            _classSectionService.Insert(cs);
+                        }
+                        else
+                        {
+                            _classSectionService.Update(cs);
+                        }
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted/Updated");
+                return response;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+    }
+    #endregion
+
+}

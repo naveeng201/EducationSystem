@@ -14,6 +14,13 @@ namespace ES.MODELS
     
     public partial class Class
     {
+        public Class()
+        {
+            this.ClassSubjects = new HashSet<ClassSubject>();
+            this.ClassSections = new HashSet<ClassSection>();
+            this.StuentClassSectionInfoes = new HashSet<StuentClassSectionInfo>();
+        }
+    
         public int Id { get; set; }
         public string ClassName { get; set; }
         public string Description { get; set; }
@@ -22,5 +29,9 @@ namespace ES.MODELS
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<int> InstitutionID { get; set; }
+    
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        public virtual ICollection<ClassSection> ClassSections { get; set; }
+        public virtual ICollection<StuentClassSectionInfo> StuentClassSectionInfoes { get; set; }
     }
 }

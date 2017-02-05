@@ -1,0 +1,15 @@
+
+Log Entry : 6:54:46 PM Thursday, July 02, 2015
+:
+exception isThe underlying provider failed on Open.
+-------------------------------
+
+Log Entry : 6:56:36 PM Thursday, July 02, 2015
+:
+exception isThe underlying provider failed on Open.
+-------------------------------
+
+Log Entry : 6:58:36 PM Thursday, July 02, 2015
+:
+exception isThe underlying provider failed on Open.
+-------------------------------
