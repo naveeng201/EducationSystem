@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace ES.DAL.repositories
 {
+
+    public interface IClassRepository : IRepository<Class>
+    {
+    }
+
     public class ClassRepository : BaseRepository<Class>, IClassRepository
     {
         public ClassRepository(IRepository<Class> repository, IUnitOfWork unitOfWork)

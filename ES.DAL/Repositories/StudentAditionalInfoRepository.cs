@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using ES.MODELS;
 namespace ES.DAL.repositories
 {
+    public interface IStudentAditionalInfoRepository : IRepository<StudentAditionalInfo>
+    {
+    }
     public class StudentAditionalInfoRepository : BaseRepository<StudentAditionalInfo>, IStudentAditionalInfoRepository
     {
         public StudentAditionalInfoRepository(IRepository<StudentAditionalInfo> repository, IUnitOfWork uniteofWork)

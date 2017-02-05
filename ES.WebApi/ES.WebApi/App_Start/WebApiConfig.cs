@@ -20,7 +20,7 @@ namespace ES.WebApi
         {
             // Web API configuration and services
             var container = new UnityContainer();
-            container.RegisterType<ITestService, TestService>(new HierarchicalLifetimeManager())
+            container 
                 //.RegisterType<IClassService, ClassService>(new HierarchicalLifetimeManager())
                 .RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager())
                 .RegisterType<IRepository<Class>, BaseRepository<Class>>()

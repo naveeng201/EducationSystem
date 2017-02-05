@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace ES.DAL.repositories
 {
+    public interface IAccountRepository : IRepository<AspNetUser>
+    {
+
+    }
     public class AccountRepository : BaseRepository<AspNetUser>, IAccountRepository
     {
         public AccountRepository(IRepository<AspNetUser> repository, IUnitOfWork unitOfWork)

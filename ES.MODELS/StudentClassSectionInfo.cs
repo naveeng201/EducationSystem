@@ -12,7 +12,7 @@ namespace ES.MODELS
     using System;
     using System.Collections.Generic;
     
-    public partial class StuentClassSectionInfo
+    public partial class StudentClassSectionInfo
     {
         public int Id { get; set; }
         public int StuentID { get; set; }

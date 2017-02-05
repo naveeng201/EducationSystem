@@ -7,6 +7,9 @@ using ES.MODELS;
 
 namespace ES.DAL.repositories
 {
+    public interface ISectionRepository : IRepository<Section>
+    {
+    }
     public class SectionRepository : BaseRepository<Section>,ISectionRepository
     {
         public SectionRepository(IRepository<Section> repository, IUnitOfWork unitOfWork): base(unitOfWork) { }

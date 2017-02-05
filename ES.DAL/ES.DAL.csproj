@@ -53,25 +53,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRepositories\IAccountRepository.cs" />
-    <Compile Include="IRepositories\IClassRepository.cs" />
-    <Compile Include="IRepositories\IInstitutionInfoRepository.cs" />
     <Compile Include="IRepositories\IRepository.cs" />
-    <Compile Include="IRepositories\ISectionRepository.cs" />
-    <Compile Include="IRepositories\IStudentAditionalInfoRepository.cs" />
-    <Compile Include="IRepositories\ISubjectRepository.cs" />
     <Compile Include="IRepositories\IUnitOfWork.cs" />
-    <Compile Include="Masters\ClassSectionRepository.cs" />
-    <Compile Include="Masters\ClassSubjectRepository.cs" />
+    <Compile Include="repositories\ClassSectionRepository.cs" />
+    <Compile Include="repositories\ClassSubjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AccountRepository.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="Repositories\ClassRepository.cs" />
-    <Compile Include="Repositories\InstitutionInfoRepository.cs" />
-    <Compile Include="Repositories\SectionRepository.cs" />
-    <Compile Include="Repositories\StudentAditionalInfoRepository.cs" />
-    <Compile Include="Repositories\SubjectRepository.cs" />
-    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="repositories\AccountRepository.cs" />
+    <Compile Include="repositories\BaseRepository.cs" />
+    <Compile Include="repositories\ClassRepository.cs" />
+    <Compile Include="repositories\InstitutionInfoRepository.cs" />
+    <Compile Include="repositories\SectionRepository.cs" />
+    <Compile Include="repositories\StudentAditionalInfoRepository.cs" />
+    <Compile Include="repositories\StudentClassSectionInfoRepository.cs" />
+    <Compile Include="repositories\StudentRepository.cs" />
+    <Compile Include="repositories\SubjectRepository.cs" />
+    <Compile Include="repositories\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

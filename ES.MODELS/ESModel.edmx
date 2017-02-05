@@ -76,6 +76,20 @@
           <Property Name="EndDate" Type="datetime" />
           <Property Name="UserID" Type="int" />
         </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Blocked" Type="bit" />
+        </EntityType>
         <EntityType Name="StudentAditionalInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -106,7 +120,7 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="HasPaidFee" Type="bit" />
         </EntityType>
-        <EntityType Name="StuentClassSectionInfo">
+        <EntityType Name="StudentClassSectionInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -183,38 +197,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StuentClassSectionInfo_Classes">
+        <Association Name="FK_StudentClassSectionInfo_Classes">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
-          <End Role="StuentClassSectionInfo" Type="Self.StuentClassSectionInfo" Multiplicity="*" />
+          <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Classes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StuentClassSectionInfo">
+            <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="ClassID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
+        <Association Name="FK_StudentClassSectionInfo_InstitutionInfo">
           <End Role="InstitutionInfo" Type="Self.InstitutionInfo" Multiplicity="1" />
-          <End Role="StuentClassSectionInfo" Type="Self.StuentClassSectionInfo" Multiplicity="*" />
+          <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InstitutionInfo">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StuentClassSectionInfo">
+            <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="InstitutionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StuentClassSectionInfo_Sections">
+        <Association Name="FK_StudentClassSectionInfo_Sections">
           <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
-          <End Role="StuentClassSectionInfo" Type="Self.StuentClassSectionInfo" Multiplicity="*" />
+          <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sections">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StuentClassSectionInfo">
+            <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="SectionID" />
             </Dependent>
           </ReferentialConstraint>
@@ -225,8 +239,9 @@
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StuentClassSectionInfo" EntityType="Self.StuentClassSectionInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentClassSectionInfo" EntityType="Self.StudentClassSectionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">
             <End Role="Classes" EntitySet="Classes" />
@@ -244,17 +259,17 @@
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="ClassSubjects" EntitySet="ClassSubjects" />
           </AssociationSet>
-          <AssociationSet Name="FK_StuentClassSectionInfo_Classes" Association="Self.FK_StuentClassSectionInfo_Classes">
+          <AssociationSet Name="FK_StudentClassSectionInfo_Classes" Association="Self.FK_StudentClassSectionInfo_Classes">
             <End Role="Classes" EntitySet="Classes" />
-            <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfo" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="Self.FK_StuentClassSectionInfo_InstitutionInfo">
+          <AssociationSet Name="FK_StudentClassSectionInfo_InstitutionInfo" Association="Self.FK_StudentClassSectionInfo_InstitutionInfo">
             <End Role="InstitutionInfo" EntitySet="InstitutionInfo" />
-            <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfo" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="Self.FK_StuentClassSectionInfo_Sections">
+          <AssociationSet Name="FK_StudentClassSectionInfo_Sections" Association="Self.FK_StudentClassSectionInfo_Sections">
             <End Role="Sections" EntitySet="Sections" />
-            <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfo" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -285,18 +300,19 @@
             <End Role="ClassSection" EntitySet="ClassSections" />
           </AssociationSet>
           <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
-          <EntitySet Name="StuentClassSectionInfoes" EntityType="ESDBModel.StuentClassSectionInfo" />
-          <AssociationSet Name="FK_StuentClassSectionInfo_Classes" Association="ESDBModel.FK_StuentClassSectionInfo_Classes">
+          <EntitySet Name="Students" EntityType="ESDBModel.Student" />
+          <EntitySet Name="StudentClassSectionInfoes" EntityType="ESDBModel.StudentClassSectionInfo" />
+          <AssociationSet Name="FK_StudentClassSectionInfo_Classes" Association="ESDBModel.FK_StudentClassSectionInfo_Classes">
             <End Role="Class" EntitySet="Classes" />
-            <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfoes" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo">
+          <AssociationSet Name="FK_StudentClassSectionInfo_InstitutionInfo" Association="ESDBModel.FK_StudentClassSectionInfo_InstitutionInfo">
             <End Role="InstitutionInfo" EntitySet="InstitutionInfoes" />
-            <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfoes" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="ESDBModel.FK_StuentClassSectionInfo_Sections">
+          <AssociationSet Name="FK_StudentClassSectionInfo_Sections" Association="ESDBModel.FK_StudentClassSectionInfo_Sections">
             <End Role="Section" EntitySet="Sections" />
-            <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfoes" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Class">
@@ -313,7 +329,7 @@
           <Property Name="InstitutionID" Type="Int32" />
           <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="Class" ToRole="ClassSubject" />
           <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="Class" ToRole="ClassSection" />
-          <NavigationProperty Name="StuentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="Class" ToRole="StuentClassSectionInfo" />
+          <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Classes" FromRole="Class" ToRole="StudentClassSectionInfo" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -351,7 +367,7 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Blocked" Type="Boolean" />
           <Property Name="UserID" Type="Int32" />
-          <NavigationProperty Name="StuentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo" FromRole="InstitutionInfo" ToRole="StuentClassSectionInfo" />
+          <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_InstitutionInfo" FromRole="InstitutionInfo" ToRole="StudentClassSectionInfo" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -365,7 +381,7 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="UserID" Type="Int32" />
           <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="Section" ToRole="ClassSection" />
-          <NavigationProperty Name="StuentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Sections" FromRole="Section" ToRole="StuentClassSectionInfo" />
+          <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Sections" FromRole="Section" ToRole="StudentClassSectionInfo" />
         </EntityType>
         <EntityType Name="ClassSubject">
           <Key>
@@ -473,7 +489,21 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="HasPaidFee" Type="Boolean" />
         </EntityType>
-        <EntityType Name="StuentClassSectionInfo">
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="StudentClassSectionInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -487,42 +517,42 @@
           <Property Name="InstitutionID" Type="Int32" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Blocked" Type="Boolean" />
-          <NavigationProperty Name="Class" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="StuentClassSectionInfo" ToRole="Class" />
-          <NavigationProperty Name="InstitutionInfo" Relationship="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo" FromRole="StuentClassSectionInfo" ToRole="InstitutionInfo" />
-          <NavigationProperty Name="Section" Relationship="ESDBModel.FK_StuentClassSectionInfo_Sections" FromRole="StuentClassSectionInfo" ToRole="Section" />
+          <NavigationProperty Name="Class" Relationship="ESDBModel.FK_StudentClassSectionInfo_Classes" FromRole="StudentClassSectionInfo" ToRole="Class" />
+          <NavigationProperty Name="InstitutionInfo" Relationship="ESDBModel.FK_StudentClassSectionInfo_InstitutionInfo" FromRole="StudentClassSectionInfo" ToRole="InstitutionInfo" />
+          <NavigationProperty Name="Section" Relationship="ESDBModel.FK_StudentClassSectionInfo_Sections" FromRole="StudentClassSectionInfo" ToRole="Section" />
         </EntityType>
-        <Association Name="FK_StuentClassSectionInfo_Classes">
+        <Association Name="FK_StudentClassSectionInfo_Classes">
           <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
-          <End Type="ESDBModel.StuentClassSectionInfo" Role="StuentClassSectionInfo" Multiplicity="*" />
+          <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StuentClassSectionInfo">
+            <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="ClassID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
+        <Association Name="FK_StudentClassSectionInfo_InstitutionInfo">
           <End Type="ESDBModel.InstitutionInfo" Role="InstitutionInfo" Multiplicity="1" />
-          <End Type="ESDBModel.StuentClassSectionInfo" Role="StuentClassSectionInfo" Multiplicity="*" />
+          <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InstitutionInfo">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StuentClassSectionInfo">
+            <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="InstitutionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StuentClassSectionInfo_Sections">
+        <Association Name="FK_StudentClassSectionInfo_Sections">
           <End Type="ESDBModel.Section" Role="Section" Multiplicity="1" />
-          <End Type="ESDBModel.StuentClassSectionInfo" Role="StuentClassSectionInfo" Multiplicity="*" />
+          <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Section">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StuentClassSectionInfo">
+            <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="SectionID" />
             </Dependent>
           </ReferentialConstraint>
@@ -655,9 +685,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StuentClassSectionInfoes">
-            <EntityTypeMapping TypeName="ESDBModel.StuentClassSectionInfo">
-              <MappingFragment StoreEntitySet="StuentClassSectionInfo">
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="ESDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentClassSectionInfoes">
+            <EntityTypeMapping TypeName="ESDBModel.StudentClassSectionInfo">
+              <MappingFragment StoreEntitySet="StudentClassSectionInfo">
                 <ScalarProperty Name="Blocked" ColumnName="Blocked" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="InstitutionID" ColumnName="InstitutionID" />

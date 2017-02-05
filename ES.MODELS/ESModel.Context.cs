@@ -32,6 +32,7 @@ namespace ES.MODELS
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSection> ClassSections { get; set; }
         public virtual DbSet<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
-        public virtual DbSet<StuentClassSectionInfo> StuentClassSectionInfoes { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
     }
 }

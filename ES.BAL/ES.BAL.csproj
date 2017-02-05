@@ -53,6 +53,8 @@
     <Compile Include="Masters\IService.cs" />
     <Compile Include="Masters\SectionService.cs" />
     <Compile Include="Masters\StudentAditionalInfoService.cs" />
+    <Compile Include="Masters\StudentClassSectionInfoService.cs" />
+    <Compile Include="Masters\StudentService.cs" />
     <Compile Include="Masters\SubjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -95,10 +95,13 @@
     <Compile Include="Section.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Student.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StudentAditionalInfo.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="StuentClassSectionInfo.cs">
+    <Compile Include="StudentClassSectionInfo.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subject.cs">

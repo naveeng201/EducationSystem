@@ -17,7 +17,7 @@ namespace ES.MODELS
         public Section()
         {
             this.ClassSections = new HashSet<ClassSection>();
-            this.StuentClassSectionInfoes = new HashSet<StuentClassSectionInfo>();
+            this.StudentClassSectionInfoes = new HashSet<StudentClassSectionInfo>();
         }
     
         public int Id { get; set; }
@@ -29,6 +29,6 @@ namespace ES.MODELS
         public Nullable<int> UserID { get; set; }
     
         public virtual ICollection<ClassSection> ClassSections { get; set; }
-        public virtual ICollection<StuentClassSectionInfo> StuentClassSectionInfoes { get; set; }
+        public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
     }
 }

@@ -6,9 +6,6 @@ namespace ES.DAL.repositories
     public interface IUnitOfWork : IDisposable
     {
 
-        
-
-
         /// <summary>
         /// Call this to commit the unit of work
         /// </summary>
