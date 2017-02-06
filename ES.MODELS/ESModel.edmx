@@ -64,6 +64,31 @@
           <Property Name="Blocked" Type="bit" />
           <Property Name="UserID" Type="int" />
         </EntityType>
+        <EntityType Name="Parents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Relation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="OfficePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResidentialPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Income" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eucation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentType" Type="nchar" MaxLength="10" />
+          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedAt" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Sections">
           <Key>
             <PropertyRef Name="Id" />
@@ -197,7 +222,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClassSectionInfo_Classes">
+        <Association Name="FK_Guardian_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAditionalInfo_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentAditionalInfo" Type="Self.StudentAditionalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAditionalInfo">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClassSectionInfo_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentClassSectionInfo">
+              <PropertyRef Name="StuentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StuentClassSectionInfo_Classes">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
           <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -209,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClassSectionInfo_InstitutionInfo">
+        <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
           <End Role="InstitutionInfo" Type="Self.InstitutionInfo" Multiplicity="1" />
           <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -221,7 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClassSectionInfo_Sections">
+        <Association Name="FK_StuentClassSectionInfo_Sections">
           <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
           <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,6 +299,7 @@
           <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
@@ -259,15 +321,27 @@
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="ClassSubjects" EntitySet="ClassSubjects" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSectionInfo_Classes" Association="Self.FK_StudentClassSectionInfo_Classes">
+          <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="Self.FK_StudentAditionalInfo_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClassSectionInfo_Student" Association="Self.FK_StudentClassSectionInfo_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StuentClassSectionInfo_Classes" Association="Self.FK_StuentClassSectionInfo_Classes">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSectionInfo_InstitutionInfo" Association="Self.FK_StudentClassSectionInfo_InstitutionInfo">
+          <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="Self.FK_StuentClassSectionInfo_InstitutionInfo">
             <End Role="InstitutionInfo" EntitySet="InstitutionInfo" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClassSectionInfo_Sections" Association="Self.FK_StudentClassSectionInfo_Sections">
+          <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="Self.FK_StuentClassSectionInfo_Sections">
             <End Role="Sections" EntitySet="Sections" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
@@ -313,6 +387,19 @@
           <AssociationSet Name="FK_StudentClassSectionInfo_Sections" Association="ESDBModel.FK_StudentClassSectionInfo_Sections">
             <End Role="Section" EntitySet="Sections" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentClassSectionInfo_Student" Association="ESDBModel.FK_StudentClassSectionInfo_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
+          </AssociationSet>
+          <EntitySet Name="Parents" EntityType="ESDBModel.Parent" />
+          <AssociationSet Name="FK_Guardian_Student" Association="ESDBModel.FK_Guardian_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Parent" EntitySet="Parents" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Class">
@@ -488,6 +575,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="HasPaidFee" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -502,6 +590,9 @@
           <Property Name="CreatDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Blocked" Type="Boolean" />
+          <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
+          <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
+          <NavigationProperty Name="Parents" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Student" ToRole="Parent" />
         </EntityType>
         <EntityType Name="StudentClassSectionInfo">
           <Key>
@@ -520,6 +611,7 @@
           <NavigationProperty Name="Class" Relationship="ESDBModel.FK_StudentClassSectionInfo_Classes" FromRole="StudentClassSectionInfo" ToRole="Class" />
           <NavigationProperty Name="InstitutionInfo" Relationship="ESDBModel.FK_StudentClassSectionInfo_InstitutionInfo" FromRole="StudentClassSectionInfo" ToRole="InstitutionInfo" />
           <NavigationProperty Name="Section" Relationship="ESDBModel.FK_StudentClassSectionInfo_Sections" FromRole="StudentClassSectionInfo" ToRole="Section" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="StudentClassSectionInfo" ToRole="Student" />
         </EntityType>
         <Association Name="FK_StudentClassSectionInfo_Classes">
           <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
@@ -554,6 +646,68 @@
             </Principal>
             <Dependent Role="StudentClassSectionInfo">
               <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAditionalInfo_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAditionalInfo">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentClassSectionInfo_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentClassSectionInfo">
+              <PropertyRef Name="StuentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Relation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentialPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Income" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eucation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Parent" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Guardian_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="ESDBModel.Parent" Role="Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -712,6 +866,32 @@
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
                 <ScalarProperty Name="StudentNo" ColumnName="StudentNo" />
                 <ScalarProperty Name="StuentID" ColumnName="StuentID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="ESDBModel.Parent">
+              <MappingFragment StoreEntitySet="Parents">
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ParentType" ColumnName="ParentType" />
+                <ScalarProperty Name="Eucation" ColumnName="Eucation" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ResidentialPhone" ColumnName="ResidentialPhone" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

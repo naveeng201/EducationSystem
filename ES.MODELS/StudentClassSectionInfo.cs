@@ -28,5 +28,6 @@ namespace ES.MODELS
         public virtual Class Class { get; set; }
         public virtual InstitutionInfo InstitutionInfo { get; set; }
         public virtual Section Section { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

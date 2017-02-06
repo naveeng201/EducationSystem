@@ -43,7 +43,16 @@ namespace ES.WebApi
                 .RegisterType<IClassSubjectService, ClassSubjectService>()
                 .RegisterType<IRepository<ClassSection>, BaseRepository<ClassSection>>()
                 .RegisterType<IClassSectionRepository, ClassSectionRepository>()
-                .RegisterType<IClassSectionService, ClassSectionService>();
+                .RegisterType<IClassSectionService, ClassSectionService>()
+                .RegisterType<IRepository<Parent>, BaseRepository<Parent>>()
+                .RegisterType<IParentRepository, ParentRepository>()
+                .RegisterType<IParentService, ParentService>()
+                .RegisterType<IRepository<Student>, BaseRepository<Student>>()
+                .RegisterType<IStudentRepository, StudentRepository>()
+                .RegisterType<IStudentService, IStudentService>()
+                .RegisterType<IRepository<StudentClassSectionInfo>, BaseRepository<StudentClassSectionInfo>>()
+                .RegisterType<IStudentClassSectionInfoRepository, StudentClassSectionInfoRepository>()
+                .RegisterType<IStudentClassSectionInfoService, StudentClassSectionInfoService>();
 
             config.DependencyResolver = new UnityResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

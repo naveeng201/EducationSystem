@@ -34,5 +34,6 @@ namespace ES.MODELS
         public virtual DbSet<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
+        public virtual DbSet<Parent> Parents { get; set; }
     }
 }

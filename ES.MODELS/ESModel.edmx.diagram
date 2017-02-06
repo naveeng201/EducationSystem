@@ -16,11 +16,15 @@
         <AssociationConnector Association="ESDBModel.FK_ClassSections_Classes" />
         <AssociationConnector Association="ESDBModel.FK_ClassSections_Sections" />
         <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="ESDBModel.Student" Width="1.5" PointX="9.25" PointY="5.5" />
+        <EntityTypeShape EntityType="ESDBModel.Student" Width="1.5" PointX="8.75" PointY="5.375" />
         <EntityTypeShape EntityType="ESDBModel.StudentClassSectionInfo" Width="2.375" PointX="10.625" PointY="1.25" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Classes" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_InstitutionInfo" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Sections" />
+        <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
+        <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Student" />
+        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="11.125" PointY="6" />
+        <AssociationConnector Association="ESDBModel.FK_Guardian_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

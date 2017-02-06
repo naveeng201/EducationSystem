@@ -39,5 +39,7 @@ namespace ES.MODELS
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> HasPaidFee { get; set; }
+    
+        public virtual Student Student { get; set; }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Masters\ClassSubjectService.cs" />
     <Compile Include="Masters\InstitutionInfoService.cs" />
     <Compile Include="Masters\IService.cs" />
+    <Compile Include="Masters\ParentService.cs" />
     <Compile Include="Masters\SectionService.cs" />
     <Compile Include="Masters\StudentAditionalInfoService.cs" />
     <Compile Include="Masters\StudentClassSectionInfoService.cs" />

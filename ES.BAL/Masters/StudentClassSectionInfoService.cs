@@ -15,7 +15,7 @@ namespace ES.SERVICE
         void Delete(StudentClassSectionInfo objSCSI);
         StudentClassSectionInfo SingleOrDefault(int Id);
     }
-    class StudentClassSectionInfoService : IStudentClassSectionInfoService
+    public class StudentClassSectionInfoService : IStudentClassSectionInfoService
     {
         IStudentClassSectionInfoRepository _repository;
         IUnitOfWork _unitOfWork;

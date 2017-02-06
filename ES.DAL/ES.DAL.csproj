@@ -62,6 +62,7 @@
     <Compile Include="repositories\BaseRepository.cs" />
     <Compile Include="repositories\ClassRepository.cs" />
     <Compile Include="repositories\InstitutionInfoRepository.cs" />
+    <Compile Include="repositories\ParentsRepository.cs" />
     <Compile Include="repositories\SectionRepository.cs" />
     <Compile Include="repositories\StudentAditionalInfoRepository.cs" />
     <Compile Include="repositories\StudentClassSectionInfoRepository.cs" />
