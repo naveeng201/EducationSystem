@@ -14,6 +14,7 @@ namespace ES.SERVICE
         int Insert(StudentClassSectionInfo objSCSI);
         void Delete(StudentClassSectionInfo objSCSI);
         StudentClassSectionInfo SingleOrDefault(int Id);
+        void Update(StudentClassSectionInfo objSCSI);
     }
     public class StudentClassSectionInfoService : IStudentClassSectionInfoService
     {
@@ -43,6 +44,11 @@ namespace ES.SERVICE
         public StudentClassSectionInfo SingleOrDefault(int Id)
         {
            return _repository.SingleOrDefault(Id);
+        }
+
+        public void Update(StudentClassSectionInfo objSCSI)
+        {
+            _repository.Update(objSCSI);
         }
     }
 }

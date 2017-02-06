@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using ES.MODELS;
 using ES.SERVICE;
+using System.Transactions;
 
 namespace ES.WebApi.Controllers
 {
@@ -18,12 +19,13 @@ namespace ES.WebApi.Controllers
         }
             
         [HttpGet]
-        public HttpResponseMessage GetAllStudentClassSectionInfo()
+        public HttpResponseMessage GetAll()
         {
             HttpResponseMessage response = null;
             try
             {
                 var scsiList = _objSCSIS.GetAll();
+                scsiList = scsiList.Where(x => x.Blocked == false).ToList();
                 response = Request.CreateResponse(HttpStatusCode.OK, scsiList);
                 return response;
             }
@@ -35,16 +37,47 @@ namespace ES.WebApi.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage InsertStudentClassSectionInfo([FromBody] StudentClassSectionInfo _objSCSI)
+        public HttpResponseMessage Insert([FromBody] StudentClassSectionInfo objSCSI)
         {
             HttpResponseMessage response = null;
             try
             {
-                _objSCSIS.Insert(_objSCSI);
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted/Updated.");
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using (var t = new TransactionScope())
+                {
+                    if (objSCSI.Id == 0)
+                    {
+                        objSCSI.CreateDate = DateTime.Now;
+                        objSCSI.Blocked = false;
+                        int ID =_objSCSIS.Insert(objSCSI);
+                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated");
+                    }
+                    t.Complete();
+                }
                 return response;
             }
-            catch(Exception ex)
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+            catch (Exception ex)
             {
                 response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
                 return response;
@@ -52,13 +85,21 @@ namespace ES.WebApi.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage GetStudentClassSectionInfo(int Id)
+        public HttpResponseMessage SingleOrDefault(int Id)
         {
             HttpResponseMessage response = null;
             try
             {
-               var studentClassSectionInfo  = _objSCSIS.SingleOrDefault(Id);
-                response = Request.CreateResponse(HttpStatusCode.OK, studentClassSectionInfo);
+                StudentClassSectionInfo objSCSI = null;
+                if (Id == 0)
+                {
+                    objSCSI = new StudentClassSectionInfo();
+                }
+                else
+                {
+                    objSCSI = _objSCSIS.SingleOrDefault(Id);
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, objSCSI);
                 return response;
             }
             catch(Exception ex)
@@ -69,7 +110,7 @@ namespace ES.WebApi.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage Delete(StudentClassSectionInfo objSCSI)
+        public HttpResponseMessage Delete([FromBody] StudentClassSectionInfo objSCSI)
         {
             HttpResponseMessage response = null;
             try

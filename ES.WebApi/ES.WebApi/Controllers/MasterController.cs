@@ -156,7 +156,7 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage respone = null;
             try
             {
-                var sectionList = _sectionService.GetAll().ToList();
+                var sectionList = _sectionService.GetAll();
                 sectionList = sectionList.Where(x => x.Blocked == false).ToList();
                 respone = Request.CreateResponse(HttpStatusCode.OK, sectionList);
                 return respone;
@@ -185,16 +185,18 @@ namespace ES.WebApi.Controllers
                         objSection.CreateDate = DateTime.Now;
                         objSection.Blocked = false;
                         // This Area Need to Insert in BULK Insert Method                    
-                        _sectionService.Insert(objSection);
+                        int ID =_sectionService.Insert(objSection);
+                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
                     }
                     else
                     {
                         _sectionService.Update(objSection);
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated");
                     }
 
                     t.Complete();
                 }
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+               
                 return response;
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -545,7 +547,8 @@ namespace ES.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return null;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
 
@@ -724,11 +727,14 @@ namespace ES.WebApi.Controllers
                     if (objClassSection.Id == 0)
                     {
                         objClassSection.CreateDate = DateTime.Now;
-                        _classSectionService.Insert(objClassSection);
+                        objClassSection.Blocked = false;
+                       int ID = _classSectionService.Insert(objClassSection);
+                       response = Request.CreateResponse(HttpStatusCode.OK, ID);
                     }
                     else
                     {
                         _classSectionService.Update(objClassSection);
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
                     }
                     t.Complete();
                 }
@@ -742,11 +748,7 @@ namespace ES.WebApi.Controllers
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
+                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
                         raise = new InvalidOperationException(message, raise);
                     }
                 }
@@ -772,22 +774,24 @@ namespace ES.WebApi.Controllers
                 }
                 using (var t = new TransactionScope())
                 {
-                    foreach(var cs in objClassSections)
+                    foreach(var cs in objClassSections) // update this logic in better way. 
                     {
                         if(cs.Id ==0)
                         {
                             cs.CreateDate = DateTime.Now;
                             cs.Blocked = false;
-                            _classSectionService.Insert(cs);
+                            int ID = _classSectionService.Insert(cs);
+                            response = Request.CreateResponse(HttpStatusCode.OK, ID);
                         }
                         else
                         {
                             _classSectionService.Update(cs);
+                            response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated");
                         }
                     }
                     t.Complete();
                 }
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted/Updated");
+               
                 return response;
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -797,11 +801,7 @@ namespace ES.WebApi.Controllers
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
+                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
                         raise = new InvalidOperationException(message, raise);
                     }
                 }

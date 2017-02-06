@@ -23,7 +23,7 @@
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Sections" />
         <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Student" />
-        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="11.125" PointY="6" />
+        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="11" PointY="6.375" />
         <AssociationConnector Association="ESDBModel.FK_Guardian_Student" />
       </Diagram>
     </edmx:Diagrams>

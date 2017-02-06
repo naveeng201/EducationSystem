@@ -68,7 +68,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentID" Type="int" />
           <Property Name="UserID" Type="int" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
@@ -86,8 +86,9 @@
           <Property Name="Income" Type="nvarchar" MaxLength="50" />
           <Property Name="Eucation" Type="nvarchar" MaxLength="50" />
           <Property Name="ParentType" Type="nchar" MaxLength="10" />
-          <Property Name="CreatedAt" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedAt" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDatte" Type="date" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="Blocked" Type="bit" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -105,7 +106,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
@@ -119,7 +120,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="AdmissionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -695,8 +696,9 @@
           <Property Name="Income" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Eucation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CreatedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedAt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDatte" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="Blocked" Type="Boolean" />
           <NavigationProperty Name="Student" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Parent" ToRole="Student" />
         </EntityType>
         <Association Name="FK_Guardian_Student">
@@ -873,8 +875,9 @@
           <EntitySetMapping Name="Parents">
             <EntityTypeMapping TypeName="ESDBModel.Parent">
               <MappingFragment StoreEntitySet="Parents">
-                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDatte" ColumnName="CreatedDatte" />
                 <ScalarProperty Name="ParentType" ColumnName="ParentType" />
                 <ScalarProperty Name="Eucation" ColumnName="Eucation" />
                 <ScalarProperty Name="Income" ColumnName="Income" />

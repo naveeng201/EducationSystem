@@ -14,6 +14,7 @@ namespace ES.SERVICE
         int Insert(Student student);
         void Delete(Student student);
         Student SingleOrDefault(int Id);
+        void Update(Student student);
     }
     public class StudentService : IStudentService
     {
@@ -41,6 +42,11 @@ namespace ES.SERVICE
         public Student SingleOrDefault(int Id)
         {
             return _studentRepository.SingleOrDefault(Id);
+        }
+
+        public void Update(Student student)
+        {
+            _studentRepository.Update(student);
         }
     }
 }

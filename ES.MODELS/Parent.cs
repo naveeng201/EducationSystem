@@ -32,8 +32,9 @@ namespace ES.MODELS
         public string Income { get; set; }
         public string Eucation { get; set; }
         public string ParentType { get; set; }
-        public string CreatedAt { get; set; }
-        public string ModifiedAt { get; set; }
+        public Nullable<System.DateTime> CreatedDatte { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<bool> Blocked { get; set; }
     
         public virtual Student Student { get; set; }
     }

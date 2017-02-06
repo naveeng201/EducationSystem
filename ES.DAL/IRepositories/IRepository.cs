@@ -8,19 +8,20 @@ namespace ES.DAL.repositories
 {
     public interface IRepository<T> where T : class
     {
-        
-           /// <summary>
+        /// <summary>
         /// Retrieve a single item using it's primary key, exception if not found
         /// </summary>
         /// <param name="primaryKey">The primary key of the record</param>
         /// <returns>T</returns>
         T Single(object primaryKey);
+
         /// <summary>
         /// Retrieve created by and modified by id's FullName
         /// </summary>
         /// <param name="dynamicObject">The primary key of the record</param>
         /// <returns>T</returns>
         Dictionary<string, string> GetAuditNames(dynamic dynamicObject);
+
         /// <summary>
         /// Retrieve a single item by it's primary key or return null if not found
         /// </summary>
@@ -68,8 +69,5 @@ namespace ES.DAL.repositories
         int Delete(T entity);
 
         IUnitOfWork UnitOfWork { get; }
-
     }
-
-
 }

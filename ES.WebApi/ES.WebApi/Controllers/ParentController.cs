@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using ES.MODELS;
 using ES.SERVICE;
+using System.Transactions;
 
 namespace ES.WebApi.Controllers
 {
@@ -22,7 +23,7 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                var parentsList = _service.GetAll();
+                var parentsList = _service.GetAll().ToList(); // filter based on blocked condition
                 response = Request.CreateResponse(HttpStatusCode.OK, parentsList);
                 return response;
             }
@@ -39,8 +40,16 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                var parent = _service.SingleOrDefault(Id);
-                response = Request.CreateResponse(HttpStatusCode.OK, parent);
+                Parent objParent = null;
+                if (Id == 0)
+                {
+                    objParent = new Parent();
+                }
+                else
+                {
+                    objParent = _service.SingleOrDefault(Id);
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, objParent);
                 return response;
             }
             catch(Exception ex)
@@ -55,11 +64,44 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                _service.Insert(parent);
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted/Updated.");
+                if (!ModelState.IsValid)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
+                    return response;
+                }
+                using(var t = new TransactionScope())
+                {
+                    if (parent.Id == 0)
+                    {
+                        parent.CreatedDatte = DateTime.Now;
+                        parent.Blocked = false;
+                        int ID = _service.Insert(parent);
+                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
+                    }
+                    else
+                    {
+                        parent.ModifiedDate = DateTime.Now;
+                        _service.Update(parent);
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
+                    }
+                    t.Complete();
+                }
                 return response;
             }
-            catch(Exception ex)
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+            catch (Exception ex)
             {
                 response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
                 return response;

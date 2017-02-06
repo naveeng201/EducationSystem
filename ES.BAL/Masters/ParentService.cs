@@ -14,6 +14,7 @@ namespace ES.SERVICE
         Parent SingleOrDefault(int Id);
         int Insert(Parent parent);
         void Delete(Parent parent);
+        void Update(Parent parent);
     }
     public class ParentService : IParentService
     {
@@ -40,6 +41,11 @@ namespace ES.SERVICE
         public void Delete(Parent parent)
         {
             _repository.Delete(parent);
+        }
+
+        public void Update(Parent parent)
+        {
+            _repository.Update(parent);
         }
     }
 }
