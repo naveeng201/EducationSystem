@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ESDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Adress2" Type="nvarchar" MaxLength="100" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="PinCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CommunicationType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Classes">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,6 +58,37 @@
           <Property Name="Blocked" Type="bit" />
           <Property Name="EndDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nchar" MaxLength="10" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="AddressID1" Type="int" />
+          <Property Name="AddressID2" Type="nchar" MaxLength="10" />
+          <Property Name="DeptID" Type="int" />
+          <Property Name="JoiningDate" Type="date" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Exams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ExamShotName" Type="nchar" MaxLength="200" />
+          <Property Name="ExamCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Blocked" Type="bit" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
         <EntityType Name="InstitutionInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -78,13 +125,12 @@
           <Property Name="OfficePhone" Type="nvarchar" MaxLength="50" />
           <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
           <Property Name="ResidentialPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="City" Type="nvarchar" MaxLength="50" />
-          <Property Name="State" Type="nvarchar" MaxLength="50" />
-          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressID1" Type="int" />
+          <Property Name="AddressID2" Type="int" />
           <Property Name="DOB" Type="datetime" />
           <Property Name="Occupation" Type="nvarchar" MaxLength="50" />
           <Property Name="Income" Type="nvarchar" MaxLength="50" />
-          <Property Name="Eucation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Education" Type="nvarchar" MaxLength="50" />
           <Property Name="ParentType" Type="nchar" MaxLength="10" />
           <Property Name="CreatedDatte" Type="date" />
           <Property Name="ModifiedDate" Type="date" />
@@ -122,7 +168,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
-          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="AddressID1" Type="int" />
+          <Property Name="AddressID2" Type="nchar" MaxLength="10" />
           <Property Name="AdmissionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ClassRollNo" Type="nvarchar" MaxLength="50" />
           <Property Name="AddmissionDate" Type="datetime" />
@@ -141,10 +188,7 @@
           <Property Name="PhotoData" Type="binary" MaxLength="5000" />
           <Property Name="StatusDescription" Type="nvarchar" MaxLength="100" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="Blocked" Type="bit" />
-          <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="HasPaidFee" Type="bit" />
         </EntityType>
         <EntityType Name="StudentClassSectionInfo">
           <Key>
@@ -174,6 +218,17 @@
           <Property Name="UserID" Type="int" />
           <Property Name="isDeleted" Type="bit" />
           <Property Name="locationID" Type="int" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="ModifiedDatte" Type="date" />
+          <Property Name="Blocked" Type="bit" />
+          <Property Name="EndDate" Type="date" />
         </EntityType>
         <Association Name="FK_ClassSections_Classes">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
@@ -236,14 +291,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAditionalInfo_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="StudentAditionalInfo" Type="Self.StudentAditionalInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StudentAditionalInfo">
-              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="AddressID1" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -295,10 +350,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Teacher_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ESDBModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
@@ -306,6 +376,7 @@
           <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentClassSectionInfo" EntityType="Self.StudentClassSectionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="ClassSections" EntitySet="ClassSections" />
@@ -346,6 +417,10 @@
             <End Role="Sections" EntitySet="Sections" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Employee" Association="Self.FK_Teacher_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -374,7 +449,6 @@
             <End Role="Section" EntitySet="Sections" />
             <End Role="ClassSection" EntitySet="ClassSections" />
           </AssociationSet>
-          <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
           <EntitySet Name="Students" EntityType="ESDBModel.Student" />
           <EntitySet Name="StudentClassSectionInfoes" EntityType="ESDBModel.StudentClassSectionInfo" />
           <AssociationSet Name="FK_StudentClassSectionInfo_Classes" Association="ESDBModel.FK_StudentClassSectionInfo_Classes">
@@ -389,10 +463,6 @@
             <End Role="Section" EntitySet="Sections" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentClassSectionInfo_Student" Association="ESDBModel.FK_StudentClassSectionInfo_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
@@ -402,7 +472,20 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="Parent" EntitySet="Parents" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
+          <EntitySet Name="Teachers" EntityType="ESDBModel.Teacher" />
+          <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
+          <EntitySet Name="Employees" EntityType="ESDBModel.Employee" />
+          <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
+          <AssociationSet Name="FK_Teacher_Employee" Association="ESDBModel.FK_Teacher_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -547,37 +630,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="StudentAditionalInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="AdmissionNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ClassRollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddmissionDate" Type="DateTime" Precision="3" />
-          <Property Name="BatchID" Type="Int32" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StudentCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="IsSMSEnabled" Type="Boolean" />
-          <Property Name="PhotoFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhotoContentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="PhotoData" Type="Binary" MaxLength="5000" FixedLength="true" />
-          <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="Blocked" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="HasPaidFee" Type="Boolean" />
-          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
-        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
@@ -591,10 +643,10 @@
           <Property Name="CreatDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Blocked" Type="Boolean" />
-          <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
           <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
           <NavigationProperty Name="Parents" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Student" ToRole="Parent" />
-        </EntityType>
+          <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
+          </EntityType>
         <EntityType Name="StudentClassSectionInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -650,18 +702,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentAditionalInfo_Student">
-          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentAditionalInfo">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentClassSectionInfo_Student">
           <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
           <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
@@ -678,7 +718,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentID" Type="Int32" />
           <Property Name="UserID" Type="Int32" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -688,13 +728,12 @@
           <Property Name="OfficePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ResidentialPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressID1" Type="Int32" />
+          <Property Name="AddressID2" Type="Int32" />
           <Property Name="DOB" Type="DateTime" Precision="3" />
           <Property Name="Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Income" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Eucation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="CreatedDatte" Type="DateTime" Precision="0" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
@@ -713,7 +752,120 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ExamShotName" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="ExamCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDatte" Type="DateTime" Precision="0" />
+          <Property Name="Blocked" Type="Boolean" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Teacher" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CommunicationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="AddressID1" Type="Int32" />
+          <Property Name="AddressID2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DeptID" Type="Int32" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teachers" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Employee" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="StudentAditionalInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="AddressID1" Type="Int32" />
+          <Property Name="AddressID2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AdmissionNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassRollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddmissionDate" Type="DateTime" Precision="3" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudentCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsSMSEnabled" Type="Boolean" />
+          <Property Name="PhotoFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoContentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PhotoData" Type="Binary" MaxLength="5000" FixedLength="true" />
+          <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Teacher_Employee">
+          <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAditionalInfo_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAditionalInfo">
+              <PropertyRef Name="AddressID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -810,37 +962,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentAditionalInfoes">
-            <EntityTypeMapping TypeName="ESDBModel.StudentAditionalInfo">
-              <MappingFragment StoreEntitySet="StudentAditionalInfo">
-                <ScalarProperty Name="HasPaidFee" ColumnName="HasPaidFee" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
-                <ScalarProperty Name="PhotoData" ColumnName="PhotoData" />
-                <ScalarProperty Name="PhotoContentType" ColumnName="PhotoContentType" />
-                <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
-                <ScalarProperty Name="IsSMSEnabled" ColumnName="IsSMSEnabled" />
-                <ScalarProperty Name="StudentCategory" ColumnName="StudentCategory" />
-                <ScalarProperty Name="Religion" ColumnName="Religion" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="Nationalty" ColumnName="Nationalty" />
-                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
-                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-                <ScalarProperty Name="AddmissionDate" ColumnName="AddmissionDate" />
-                <ScalarProperty Name="ClassRollNo" ColumnName="ClassRollNo" />
-                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="ESDBModel.Student">
               <MappingFragment StoreEntitySet="Student">
@@ -879,13 +1000,12 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDatte" ColumnName="CreatedDatte" />
                 <ScalarProperty Name="ParentType" ColumnName="ParentType" />
-                <ScalarProperty Name="Eucation" ColumnName="Eucation" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
                 <ScalarProperty Name="Income" ColumnName="Income" />
                 <ScalarProperty Name="Occupation" ColumnName="Occupation" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressID2" ColumnName="AddressID2" />
+                <ScalarProperty Name="AddressID1" ColumnName="AddressID1" />
                 <ScalarProperty Name="ResidentialPhone" ColumnName="ResidentialPhone" />
                 <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
                 <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
@@ -895,6 +1015,97 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="ESDBModel.Exam">
+              <MappingFragment StoreEntitySet="Exams">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="ExamShotName" ColumnName="ExamShotName" />
+                <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="ESDBModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDatte" ColumnName="ModifiedDatte" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="ESDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="CommunicationType" ColumnName="CommunicationType" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Adress2" ColumnName="Adress2" />
+                <ScalarProperty Name="Adress1" ColumnName="Adress1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ESDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="AddressID2" ColumnName="AddressID2" />
+                <ScalarProperty Name="AddressID1" ColumnName="AddressID1" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentAditionalInfoes">
+            <EntityTypeMapping TypeName="ESDBModel.StudentAditionalInfo">
+              <MappingFragment StoreEntitySet="StudentAditionalInfo">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+                <ScalarProperty Name="PhotoData" ColumnName="PhotoData" />
+                <ScalarProperty Name="PhotoContentType" ColumnName="PhotoContentType" />
+                <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
+                <ScalarProperty Name="IsSMSEnabled" ColumnName="IsSMSEnabled" />
+                <ScalarProperty Name="StudentCategory" ColumnName="StudentCategory" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Nationalty" ColumnName="Nationalty" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="AddmissionDate" ColumnName="AddmissionDate" />
+                <ScalarProperty Name="ClassRollNo" ColumnName="ClassRollNo" />
+                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
+                <ScalarProperty Name="AddressID2" ColumnName="AddressID2" />
+                <ScalarProperty Name="AddressID1" ColumnName="AddressID1" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

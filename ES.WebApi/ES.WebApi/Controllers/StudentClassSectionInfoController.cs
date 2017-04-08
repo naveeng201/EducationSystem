@@ -42,11 +42,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objSCSI.Id == 0)
@@ -63,19 +58,6 @@ namespace ES.WebApi.Controllers
                     t.Complete();
                 }
                 return response;
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
             }
             catch (Exception ex)
             {

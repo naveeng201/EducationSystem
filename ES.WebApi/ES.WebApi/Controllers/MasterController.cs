@@ -64,20 +64,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                // ModelState.Remove("Class.AditionalWorkflowId");
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
-                ////if (objclass.ClassName != null)
-                ////{
-                ////    if (ClassService.ExistsClassName(objclass.ClassName))
-                ////    {
-                //        response = Request.CreateResponse(HttpStatusCode.Ambiguous, "ClassName is already exists.");
-                //        return response;
-                //    }
-                //}
                 objclass.Blocked = false;
                 using (var t = new TransactionScope())
                 {
@@ -97,26 +83,10 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
                 return response;
             }
-            //catch (Exception Ex)
-            //{
-            //    return null;
-            //}
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (Exception ex)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
     }
@@ -173,11 +143,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objSection.Id == 0)
@@ -199,30 +164,17 @@ namespace ES.WebApi.Controllers
                
                 return response;
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (Exception ex)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
-
         }
         #endregion
     }
     #endregion
 
-    #region //StudentInfo
+    #region //StudentAdditionalInfo
     public class StudentInfoController : ApiController
     {
         private readonly IStudentAditionalInfoService _repository;
@@ -250,7 +202,8 @@ namespace ES.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return null;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
 
@@ -259,16 +212,11 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objStuent.Id == 0)
                     {
-                        objStuent.CreateDate = DateTime.Now;
+                       // objStuent.CreatedDate = DateTime.Now;
                         // This Area Need to Insert in BULK Insert Method                    
                         _repository.Insert(objStuent);
                     }
@@ -281,24 +229,11 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
                 return response;
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (Exception ex)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
-
         }
     }
     #endregion
@@ -331,17 +266,18 @@ namespace ES.WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetSubject()
         {
-            HttpResponseMessage respone = null;
+            HttpResponseMessage response = null;
             try
             {
                 var subjectsList = _repository.GetAll().ToList();
                 subjectsList = subjectsList.ToList();//subjectsList.Where(x => x.Blocked ==false ).ToList();
-                respone = Request.CreateResponse(HttpStatusCode.OK, subjectsList);
-                return respone;
+                response = Request.CreateResponse(HttpStatusCode.OK, subjectsList);
+                return response;
             }
             catch (Exception ex)
             {
-                return null;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
 
@@ -351,11 +287,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objSubject.Id == 0)
@@ -368,7 +299,6 @@ namespace ES.WebApi.Controllers
 
                     else
                     {
-
                         _repository.Update(objSubject);
                     }
 
@@ -377,24 +307,11 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
                 return response;
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (Exception ex)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
-
         }
         #endregion
     }
@@ -419,9 +336,10 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, InstituteList);
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
 
@@ -445,7 +363,8 @@ namespace ES.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return null;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
 
@@ -455,11 +374,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objInstitute.Id == 0)
@@ -479,27 +393,14 @@ namespace ES.WebApi.Controllers
                 return response;
 
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (Exception ex)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
     }
     #endregion
-
 
     #region //ClassSubject
     public class ClassSubjectController : ApiController
@@ -558,11 +459,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objClassSubject.Id == 0)
@@ -582,23 +478,6 @@ namespace ES.WebApi.Controllers
                 return response;
 
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
-            }
             catch(Exception ex)
             {
                 response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
@@ -612,11 +491,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     foreach (ClassSubject cs in objClassSubject)
@@ -638,23 +512,6 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
                 return response;
 
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
             }
             catch (Exception ex)
             {
@@ -717,11 +574,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (objClassSection.Id == 0)
@@ -740,19 +592,6 @@ namespace ES.WebApi.Controllers
                 }
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted/Updated");
                 return response;
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
             }
             catch (Exception ex)
             {
@@ -791,21 +630,7 @@ namespace ES.WebApi.Controllers
                     }
                     t.Complete();
                 }
-               
                 return response;
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
             }
             catch (Exception ex)
             {
@@ -813,7 +638,6 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-
     }
     #endregion
 

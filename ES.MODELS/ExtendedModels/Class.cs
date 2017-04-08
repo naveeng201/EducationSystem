@@ -17,7 +17,6 @@ namespace ES.MODELS
     {
         [Required]
         public string ClassName { get; set; }
-
         [Required]
         public string Description { get; set; }
     }

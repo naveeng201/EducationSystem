@@ -16,7 +16,8 @@ namespace ES.MODELS
     {
         public int Id { get; set; }
         public Nullable<int> UserID { get; set; }
-        public int StudentID { get; set; }
+        public Nullable<int> AddressID1 { get; set; }
+        public string AddressID2 { get; set; }
         public string AdmissionNo { get; set; }
         public string ClassRollNo { get; set; }
         public Nullable<System.DateTime> AddmissionDate { get; set; }
@@ -35,10 +36,7 @@ namespace ES.MODELS
         public byte[] PhotoData { get; set; }
         public string StatusDescription { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public Nullable<bool> Blocked { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<bool> HasPaidFee { get; set; }
     
         public virtual Student Student { get; set; }
     }

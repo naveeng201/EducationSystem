@@ -24,13 +24,12 @@ namespace ES.MODELS
         public string OfficePhone { get; set; }
         public string MobilePhone { get; set; }
         public string ResidentialPhone { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
+        public Nullable<int> AddressID1 { get; set; }
+        public Nullable<int> AddressID2 { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string Occupation { get; set; }
         public string Income { get; set; }
-        public string Eucation { get; set; }
+        public string Education { get; set; }
         public string ParentType { get; set; }
         public Nullable<System.DateTime> CreatedDatte { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }

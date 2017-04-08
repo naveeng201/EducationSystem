@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34a02e3607b5485ca70f2a88e41c49c5" Name="Diagram1" ZoomLevel="73">
+      <Diagram DiagramId="34a02e3607b5485ca70f2a88e41c49c5" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="ESDBModel.Class" Width="1.5" PointX="1" PointY="0.75" />
         <EntityTypeShape EntityType="ESDBModel.Subject" Width="1.5" PointX="4" PointY="6.125" />
         <EntityTypeShape EntityType="ESDBModel.InstitutionInfo" Width="1.5" PointX="3.375" PointY="0.75" />
@@ -15,16 +15,21 @@
         <EntityTypeShape EntityType="ESDBModel.ClassSection" Width="1.5" PointX="7.625" PointY="1" />
         <AssociationConnector Association="ESDBModel.FK_ClassSections_Classes" />
         <AssociationConnector Association="ESDBModel.FK_ClassSections_Sections" />
-        <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="ESDBModel.Student" Width="1.5" PointX="8.75" PointY="5.375" />
         <EntityTypeShape EntityType="ESDBModel.StudentClassSectionInfo" Width="2.375" PointX="10.625" PointY="1.25" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Classes" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_InstitutionInfo" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Sections" />
-        <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Student" />
-        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="11" PointY="6.375" />
+        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="11" PointY="6.25" />
         <AssociationConnector Association="ESDBModel.FK_Guardian_Student" />
+        <EntityTypeShape EntityType="ESDBModel.Exam" Width="1.5" PointX="10.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ESDBModel.Teacher" Width="1.5" PointX="5.625" PointY="11.625" />
+        <EntityTypeShape EntityType="ESDBModel.Address" Width="1.5" PointX="12.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ESDBModel.Employee" Width="1.5" PointX="0.5" PointY="3.375" />
+        <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="8.125" PointY="9.625" />
+        <AssociationConnector Association="ESDBModel.FK_Teacher_Employee" />
+        <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

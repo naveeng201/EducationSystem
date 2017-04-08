@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -61,6 +64,9 @@
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClassSubject.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ESModel.Context.cs">
@@ -78,10 +84,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ESModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Exam.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedModels\Address.cs" />
     <Compile Include="ExtendedModels\AspNetUser.cs" />
     <Compile Include="ExtendedModels\Class.cs" />
     <Compile Include="ExtendedModels\InstitutionInfo.cs" />
     <Compile Include="ExtendedModels\Member.cs" />
+    <Compile Include="ExtendedModels\Parent.cs" />
     <Compile Include="ExtendedModels\Section.cs" />
     <Compile Include="ExtendedModels\StudentAditionalInfo.cs" />
     <Compile Include="ExtendedModels\Subject.cs" />
@@ -108,6 +119,9 @@
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subject.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

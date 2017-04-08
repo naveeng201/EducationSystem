@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ES.MODELS;
+using ES.SERVICE;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using ES.MODELS;
-using ES.SERVICE;
 using System.Transactions;
+using System.Web.Http;
 
 namespace ES.WebApi.Controllers
 {
@@ -17,7 +17,16 @@ namespace ES.WebApi.Controllers
         {
             _studentService = studentService;
         }
-        
+        public StudentController()
+        {
+            //_studentService = studentService;
+        }
+        [HttpGet]
+        public HttpResponseMessage Get()
+        {
+            HttpResponseMessage resp = Request.CreateResponse(HttpStatusCode.OK, "Successfully called");
+            return resp;
+        }
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
@@ -29,7 +38,7 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, studentsList);
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
                 return response;
@@ -42,11 +51,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     if (student.Id == 0)
@@ -64,19 +68,6 @@ namespace ES.WebApi.Controllers
                     t.Complete();
                 }
                 return response;
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}", validationErrors.Entry.Entity.ToString(), validationError.ErrorMessage);
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
             }
             catch (Exception ex)
             {
@@ -103,12 +94,13 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, objStudent);
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
                 return response;
             }
         }
+
         [HttpPut]
         public HttpResponseMessage Delete([FromBody] Student student)
         {

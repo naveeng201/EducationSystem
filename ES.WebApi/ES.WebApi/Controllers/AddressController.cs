@@ -10,12 +10,12 @@ using System.Transactions;
 
 namespace ES.WebApi.Controllers
 {
-    public class ParentController : ApiController
+    public class AddressController : ApiController
     {
-        private IParentService _service;
-        public ParentController(IParentService service)
+        IAddressService _addressService;
+        public AddressController(IAddressService addressService)
         {
-            _service = service;
+            _addressService = addressService;
         }
         [HttpGet]
         public HttpResponseMessage GetAll()
@@ -23,8 +23,8 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                var parentsList = _service.GetAll().ToList(); // filter based on blocked condition
-                response = Request.CreateResponse(HttpStatusCode.OK, parentsList);
+                var objAddresses = _addressService.GetAll();
+                response = Request.CreateResponse(HttpStatusCode.OK, objAddresses);
                 return response;
             }
             catch(Exception ex)
@@ -33,50 +33,49 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-
         [HttpGet]
         public HttpResponseMessage SingleOrDefault(int Id)
         {
             HttpResponseMessage response = null;
             try
             {
-                Parent objParent = null;
+                Address objAddress = null;
                 if (Id == 0)
                 {
-                    objParent = new Parent();
+                    objAddress = new Address();
                 }
                 else
                 {
-                    objParent = _service.SingleOrDefault(Id);
+                    objAddress = _addressService.SingleOrDefault(Id);
                 }
-                response = Request.CreateResponse(HttpStatusCode.OK, objParent);
+                response = Request.CreateResponse(HttpStatusCode.OK, objAddress);
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
                 return response;
             }
         }
         [HttpPost]
-        public HttpResponseMessage Insert([FromBody] Parent parent)
+        public HttpResponseMessage Insert([FromBody] Address objAddress)
         {
             HttpResponseMessage response = null;
             try
             {
-                using(var t = new TransactionScope())
+                using (var t = new TransactionScope())
                 {
-                    if (parent.Id == 0)
+                    if (objAddress.Id == 0)
                     {
-                        parent.CreatedDatte = DateTime.Now;
-                        parent.Blocked = false;
-                        int ID = _service.Insert(parent);
+                        //objAddress.CreatedDatte = DateTime.Now;
+                        //objAddress.Blocked = false;
+                        int ID = _addressService.Insert(objAddress);
                         response = Request.CreateResponse(HttpStatusCode.OK, ID);
                     }
                     else
                     {
-                        parent.ModifiedDate = DateTime.Now;
-                        _service.Update(parent);
+                        // objAddress.ModifiedDate = DateTime.Now;
+                        _addressService.Update(objAddress);
                         response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
                     }
                     t.Complete();
@@ -89,17 +88,18 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
         [HttpPut]
-        public HttpResponseMessage Delete([FromBody] Parent parent)
+        public HttpResponseMessage Delete([FromBody] Address objAddress)
         {
             HttpResponseMessage response = null;
             try
             {
-                _service.Delete(parent);
+                _addressService.Delete(objAddress);
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
                 return response;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
                 return response;

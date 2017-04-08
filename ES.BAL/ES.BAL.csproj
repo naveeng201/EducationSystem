@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
+    <Compile Include="Masters\AddressService.cs" />
     <Compile Include="Masters\BaseService.cs" />
     <Compile Include="Masters\ClassSectionService.cs" />
     <Compile Include="Masters\ClassService.cs" />

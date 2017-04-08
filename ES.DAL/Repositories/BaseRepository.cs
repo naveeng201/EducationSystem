@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using ES.MODELS;
+using System.Data.Entity.Validation;
+
 namespace ES.DAL.repositories
 {
     public class BaseRepository<T> : IRepository<T> where T : class
@@ -44,9 +46,18 @@ namespace ES.DAL.repositories
 
         public virtual int Insert(T entity)
         {
-            dynamic obj = dbSet.Add(entity);
-            this._unitOfWork.Db.SaveChanges();
-            return obj.Id;
+            try
+            {
+                dynamic obj = dbSet.Add(entity);
+                this._unitOfWork.Db.SaveChanges();
+                return obj.Id;
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var errorMessages = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
+                var exceptionMessage = string.Concat(/*ex.Message*/"Validation failed for one or more entities. ", " The validation errors are : ", string.Join("  ", errorMessages));
+                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+            }
         }
 
         public virtual void Update(T entity)
@@ -57,22 +68,11 @@ namespace ES.DAL.repositories
                 _unitOfWork.Db.Entry(entity).State = EntityState.Modified;
                 this._unitOfWork.Db.SaveChanges();
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            catch (DbEntityValidationException ex)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                var errorMessages = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
+                var exceptionMessage = string.Concat(/*ex.Message*/"Validation failed for one or more entities. ", " The validation errors are : ", string.Join("  ", errorMessages));
+                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
             }
         }
 

@@ -20,7 +20,7 @@ namespace ES.WebApi
         {
             // Web API configuration and services
             var container = new UnityContainer();
-            container 
+            container
                 //.RegisterType<IClassService, ClassService>(new HierarchicalLifetimeManager())
                 .RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager())
                 .RegisterType<IRepository<Class>, BaseRepository<Class>>()
@@ -49,15 +49,21 @@ namespace ES.WebApi
                 .RegisterType<IParentService, ParentService>()
                 .RegisterType<IRepository<Student>, BaseRepository<Student>>()
                 .RegisterType<IStudentRepository, StudentRepository>()
-                .RegisterType<IStudentService, IStudentService>()
+                .RegisterType<IStudentService, StudentService>()
                 .RegisterType<IRepository<StudentClassSectionInfo>, BaseRepository<StudentClassSectionInfo>>()
                 .RegisterType<IStudentClassSectionInfoRepository, StudentClassSectionInfoRepository>()
-                .RegisterType<IStudentClassSectionInfoService, StudentClassSectionInfoService>();
+                .RegisterType<IStudentClassSectionInfoService, StudentClassSectionInfoService>()
+                .RegisterType<IRepository<Address>, BaseRepository<Address>>()
+                .RegisterType<IAddressRepository, AddressRepository>()
+                .RegisterType<IAddressService, AddressService>();
+
 
             config.DependencyResolver = new UnityResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Filters.Add(new WebApi.Filters.ValidateModelAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
