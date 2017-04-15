@@ -267,6 +267,7 @@
     <Compile Include="Controllers\ESAPI\ESAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -3704,6 +3705,7 @@
     <Content Include="Scripts\ES\SectionController.js" />
     <Content Include="Scripts\ES\SectionService.js" />
     <Content Include="Scripts\ES\Services.js" />
+    <Content Include="Scripts\ES\Student.js" />
     <Content Include="Scripts\ES\StudentInfoController.js" />
     <Content Include="Scripts\ES\StudentInfoService.js" />
     <Content Include="Scripts\ES\SubjectController.js" />
@@ -4520,6 +4522,8 @@
     <Content Include="Views\StudentInfo\Edit.cshtml" />
     <Content Include="Views\ClassSubject\Index.cshtml" />
     <Content Include="Views\ClassSection\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\" />

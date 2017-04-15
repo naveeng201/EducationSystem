@@ -17,6 +17,7 @@ namespace ES.MODELS
         public Subject()
         {
             this.ClassSubjects = new HashSet<ClassSubject>();
+            this.TeacherSubjects = new HashSet<TeacherSubject>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,6 @@ namespace ES.MODELS
         public Nullable<int> locationID { get; set; }
     
         public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

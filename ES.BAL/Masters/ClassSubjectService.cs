@@ -14,7 +14,7 @@ namespace ES.SERVICE
         int Insert(ClassSubject ClassMaster);
         void Update(ClassSubject ClassMaster);
         ClassSubject SingleOrDefault(int ID);
-
+        IEnumerable<ClassSubjectViewModel> GetMappedClassSubjects();
     }
     public class ClassSubjectService : IClassSubjectService
     {
@@ -44,6 +44,10 @@ namespace ES.SERVICE
         public void Update(ClassSubject classSubjectMaster)
         {
              _classSubjectRepository.Update(classSubjectMaster);
+        }
+        public IEnumerable<ClassSubjectViewModel> GetMappedClassSubjects()
+        {
+           return _classSubjectRepository.GetMappedClassSubjects();
         }
     }
 }

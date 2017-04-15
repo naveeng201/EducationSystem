@@ -15,6 +15,7 @@ namespace ES.SERVICE
         void Delete(Student student);
         Student SingleOrDefault(int Id);
         void Update(Student student);
+        StudentAditionalInfo GetStudentAdditionalInfo(int Id);
     }
     public class StudentService : IStudentService
     {
@@ -47,6 +48,10 @@ namespace ES.SERVICE
         public void Update(Student student)
         {
             _studentRepository.Update(student);
+        }
+        public StudentAditionalInfo GetStudentAdditionalInfo(int Id)
+        {
+            return _studentRepository.GetStudentAdditionalInfo(Id);
         }
     }
 }

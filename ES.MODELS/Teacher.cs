@@ -14,13 +14,20 @@ namespace ES.MODELS
     
     public partial class Teacher
     {
+        public Teacher()
+        {
+            this.TeacherSubjects = new HashSet<TeacherSubject>();
+        }
+    
         public int Id { get; set; }
         public int EmployeeId { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> ModifiedDatte { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> Blocked { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<System.DateTime> BlockedDate { get; set; }
+        public string ModifiedBy { get; set; }
     
         public virtual Employee Employee { get; set; }
+        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using ES.MODELS;
 
 namespace ES.DAL.repositories
 {
-     public interface IEmployeeRepository : IRepository<Employee>
+    public interface IEmployeeRepository : IRepository<Employee>
     {
     }
     public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository

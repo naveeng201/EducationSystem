@@ -10,10 +10,11 @@
 <script src="~/Scripts/ES/StudentInfoController.js"></script>
 <script src="~/Scripts/ES/ClassSubject.js"></script>
 <script src="~/Scripts/ES/ClassSection.js"></script>
+<script src="~/Scripts/ES/Student.js"></script>
 <div ng-controller="HomeController">
     <div id="container">
         <div id="sidebar" class="sidebar-fixed">
-            <div id="sidebar-content">b bbbbbbb   
+            <div id="sidebar-content"> 
                 <ul id="nav">
                     <li class="current">
                         <a>
@@ -68,6 +69,12 @@
                             <a class="more" ng-click="LoadClassSections()">
                                 <i class="icon-briefcase"></i>
                                 Class Section Mapping
+                            </a>
+                        </li>
+                        <li>
+                            <a class="more" ng-click="LoadStudents()">
+                                <i class="icon-briefcase"></i>
+                                Student Details
                             </a>
                         </li>
                     </ul>

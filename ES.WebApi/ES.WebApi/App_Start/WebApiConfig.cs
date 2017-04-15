@@ -55,7 +55,16 @@ namespace ES.WebApi
                 .RegisterType<IStudentClassSectionInfoService, StudentClassSectionInfoService>()
                 .RegisterType<IRepository<Address>, BaseRepository<Address>>()
                 .RegisterType<IAddressRepository, AddressRepository>()
-                .RegisterType<IAddressService, AddressService>();
+                .RegisterType<IAddressService, AddressService>()
+                .RegisterType<IRepository<Employee>, BaseRepository<Employee>>()
+                .RegisterType<IEmployeeRepository, EmployeeRepository>()
+                .RegisterType<IEmployeeService, EmployeeService>()
+                .RegisterType<IRepository<Teacher>, BaseRepository<Teacher>>()
+                .RegisterType<ITeacherRepository, TeacherRepository>()
+                .RegisterType<ITeacherService, TeacherService>()
+                .RegisterType<IRepository<TeacherSubject>, BaseRepository<TeacherSubject>>()
+                .RegisterType<ITeacherSubjectRepository, TeacherSubjectRepository>()
+                .RegisterType<ITeacherSubjectService, TeacherSubjectService>();
 
 
             config.DependencyResolver = new UnityResolver(container);

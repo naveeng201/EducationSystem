@@ -18,7 +18,5 @@ namespace ES.MODELS
         public string BirthPlace { get; set; }
         [Required]
         public string Nationalty { get; set; }
-        public string Languages { get; set; }
-        public string Religion { get; set; }
     }
 }

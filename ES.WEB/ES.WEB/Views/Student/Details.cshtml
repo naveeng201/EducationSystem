@@ -1,0 +1,52 @@
+﻿<div ng-controller="StudentDetailsController">
+    <div class="clearfix"></div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.firstName.$invalid }">
+            <label class="control-label">
+               First Name<span class="error">*</span>
+            </label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="Student.firstName" ng-required="false" name="firstName" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.middleName.$invalid }">
+            <label class="control-label">
+                Middle Name<span class="error">*</span>
+            </label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="Student.middleName" ng-required="false" name="middleName" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.lastName.$invalid }">
+            <label class="control-label">
+                Last Name<span class="error">*</span>
+            </label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="Student.lastName" ng-required="false" name="lastName" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.phoneNo.$invalid }">
+            <label class="control-label">
+                Phone No.<span class="error">*</span>
+            </label>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input type="text" class="form-control" ng-model="Student.phoneNo" ng-required="false" name="phoneNo" />
+        </div>
+    </div>
+
+    <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
+        <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="Button5" type="button" ng-disabled="!ESForm.$valid" ng-click="InsertStudent();">
+            <span>Save</span>
+        </button>
+        <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack();">
+            <span>Back</span>
+        </button>
+    </div>
+</div>

@@ -36,4 +36,10 @@
         $location.path("ClassSection");
         $scope.$root.Title = "New Request->Class Section";
     }
+    $scope.LoadStudents = function()
+    {
+        $location.path("Student");
+        $scope.$root.Title = "New Request->Student";
+    }
+
 });

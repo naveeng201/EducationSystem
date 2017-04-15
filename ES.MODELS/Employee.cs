@@ -16,6 +16,7 @@ namespace ES.MODELS
     {
         public Employee()
         {
+            this.Departments = new HashSet<Department>();
             this.Teachers = new HashSet<Teacher>();
         }
     
@@ -27,11 +28,19 @@ namespace ES.MODELS
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> AddressID1 { get; set; }
         public string AddressID2 { get; set; }
-        public Nullable<int> DeptID { get; set; }
+        public Nullable<int> DepartmentID { get; set; }
         public Nullable<System.DateTime> JoiningDate { get; set; }
         public Nullable<int> ManagerID { get; set; }
         public string Designation { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<bool> Blocked { get; set; }
+        public Nullable<System.DateTime> BlockedDate { get; set; }
+        public string BlockedBy { get; set; }
     
+        public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }
     }
 }

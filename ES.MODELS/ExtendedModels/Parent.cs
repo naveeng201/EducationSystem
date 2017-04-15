@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ES.MODELS
 {
     [MetadataType(typeof(ParentMetadata))]
-    public partial class Parent
+    public partial class Parent1
     {
     }
     public class ParentMetadata
@@ -26,16 +26,5 @@ namespace ES.MODELS
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string Email { get; set; }
-        public string OfficePhone { get; set; }
-        [Required]
-        [Phone]
-        public string MobilePhone { get; set; }
-        public string ResidentialPhone { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
-        public string Occupation { get; set; }
-        public string Income { get; set; }
     }
 }

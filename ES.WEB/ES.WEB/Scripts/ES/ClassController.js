@@ -74,7 +74,6 @@ app.controller('ClassDetailController', function ($scope, $location, $window, ES
     }
     loadClassDropdowns(Id);
     function loadClassDropdowns(Id) {
-        debugger;
         $("#overlay").show();
         var promiseClassDropdownList = ESService.loadClassDropdowns(Id);
         promiseClassDropdownList.then(function (respons) {
@@ -98,7 +97,6 @@ app.controller('ClassDetailController', function ($scope, $location, $window, ES
         $window.history.back();
     }
     $scope.addClass = function () {
-        debugger;
         $("#overlay").show();
         //$scope.$broadcast('show-errors-check-validity');
         // $scope.submitted = true;

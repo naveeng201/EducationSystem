@@ -7,7 +7,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetAllClassSubjects",
+            url: urlpath + "GetAll",
         });
         return request;
     };
@@ -15,7 +15,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetClassSubject/" + Id
+            url: urlpath + "SingleOrDefault/" + Id
         });
         return request;
     };
@@ -24,7 +24,7 @@
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "AddClassSubject",
+            url: urlpath + "Insert",
             data: JSON.stringify(objClassSubject)
         });
         return request;
@@ -41,6 +41,15 @@
         return request;
     };
 
+    this.getMappedClassSubjects = function () {
+        var request = $http({
+            method: "get",
+            contentType: "application/json",
+            url: urlpath + "GetMappedClassSubjects"
+        });
+        return request;
+    };
+
 });
 
 app.controller("ClassSubjectIndexController", function ($scope, $location, ClassSubjectService, ESService, SubjectService) {
@@ -52,6 +61,7 @@ app.controller("ClassSubjectIndexController", function ($scope, $location, Class
     GetAllClasses();
     GetAllSubjects();
     getClassSubject(0);
+    getMappedClassSubjects();
     function getClassSubject(id) {
         $("#overlay").show();
         var promiseClassSubject = ClassSubjectService.getClassSubject(id);
@@ -99,8 +109,20 @@ app.controller("ClassSubjectIndexController", function ($scope, $location, Class
         });
     }
 
+    function getMappedClassSubjects() {
+        $("#overlay").show();
+        var promiseAllClassSubjects = ClassSubjectService.getMappedClassSubjects();
+        promiseAllClassSubjects.then(function (response) {
+            if (response.status == 200) {
+                $scope.ClassSubjectsGrid.data = response.data;
+                $("#overlay").hide();
+            }
+        }, function (errorc) {
+            $scope.error = errorc;
+            $("#overlay").hide();
+        });
+    }
     $scope.SaveClassSubjects = function(classid, subjectids) {
-        
         $("#overlay").show();
         var arrClassSubject = [];
         
@@ -124,4 +146,20 @@ app.controller("ClassSubjectIndexController", function ($scope, $location, Class
         });
         $("#overlay").hide();
     }
+
+    $scope.ClassSubjectsGrid = {
+        enableCellEdit: true,
+        enableSorting: true,
+        enableFiltering: true,
+        paginationPageSizes: [50, 100, 500],
+        paginationPageSize: 50,
+        enablePaginationControls: true,
+        enableGridMenu: true,
+        enableColumnResizing: true,
+        columnDefs: [
+        { name: 'id', displayName: 'Sr.No', headerCellClass: 'gridheader', width: '5%', enableCellEdit: false },
+        { name: 'className', displayName: 'Class Name', headerCellClass: 'gridheader', width: '15%' },
+        { name: 'subjectName', displayName: 'Subject Name', headerCellClass: 'gridheader', width: '15%' },
+        ],
+    };
 });

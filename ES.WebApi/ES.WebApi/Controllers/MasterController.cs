@@ -412,7 +412,7 @@ namespace ES.WebApi.Controllers
         }
         
         [HttpGet]
-        public HttpResponseMessage GetAllClassSubjects()
+        public HttpResponseMessage GetAll()
         {
             HttpResponseMessage response = null;
             try
@@ -429,7 +429,7 @@ namespace ES.WebApi.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage GetClassSubject(int id)
+        public HttpResponseMessage SingleOrDefault(int id)
         {
             HttpResponseMessage response = null;
             try
@@ -454,7 +454,7 @@ namespace ES.WebApi.Controllers
         }
 
         [AcceptVerbs("POST")]
-        public HttpResponseMessage AddClassSubject([FromBody] ClassSubject objClassSubject)
+        public HttpResponseMessage Insert([FromBody] ClassSubject objClassSubject)
         {
             HttpResponseMessage response = null;
             try
@@ -512,6 +512,23 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
                 return response;
 
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetMappedClassSubjects()
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var classSubjects = _classSubjectService.GetMappedClassSubjects();
+                response = Request.CreateResponse(HttpStatusCode.OK, classSubjects);
+                return response;
             }
             catch (Exception ex)
             {

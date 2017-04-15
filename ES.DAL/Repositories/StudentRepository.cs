@@ -9,7 +9,7 @@ namespace ES.DAL.repositories
 {
     public interface IStudentRepository : IRepository<Student>
     {
-
+        StudentAditionalInfo GetStudentAdditionalInfo(int Id);
     }
    public class StudentRepository : BaseRepository<Student> ,IStudentRepository  
     {
@@ -17,6 +17,12 @@ namespace ES.DAL.repositories
             :base(unitofwork)
         {
 
+        }
+        public StudentAditionalInfo GetStudentAdditionalInfo(int Id)
+        {
+            Student student = dbSet.Find(Id);
+            var objSAI = student.StudentAditionalInfoes.SingleOrDefault();
+            return objSAI;
         }
     }
 }

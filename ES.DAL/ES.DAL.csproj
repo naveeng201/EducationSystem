@@ -70,6 +70,8 @@
     <Compile Include="repositories\StudentClassSectionInfoRepository.cs" />
     <Compile Include="repositories\StudentRepository.cs" />
     <Compile Include="repositories\SubjectRepository.cs" />
+    <Compile Include="repositories\TeacherRepository.cs" />
+    <Compile Include="repositories\TeacherSubjectRepository.cs" />
     <Compile Include="repositories\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

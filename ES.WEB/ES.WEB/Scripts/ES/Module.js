@@ -254,7 +254,15 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         templateUrl: routeURL + 'ClassSubject/Index'
     });
     $routeProvider.when('/ClassSection',
-   {
+    {
        templateUrl: routeURL + 'ClassSection/Index'
-   });
+    });
+    $routeProvider.when('/Student',
+    {
+        templateUrl: routeURL + 'Student/Index'
+    });
+    $routeProvider.when('/StudentDetails',
+    {
+        templateUrl: routeURL + 'Student/Details'
+    });
 }])

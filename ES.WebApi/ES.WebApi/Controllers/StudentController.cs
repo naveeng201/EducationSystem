@@ -17,16 +17,6 @@ namespace ES.WebApi.Controllers
         {
             _studentService = studentService;
         }
-        public StudentController()
-        {
-            //_studentService = studentService;
-        }
-        [HttpGet]
-        public HttpResponseMessage Get()
-        {
-            HttpResponseMessage resp = Request.CreateResponse(HttpStatusCode.OK, "Successfully called");
-            return resp;
-        }
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
@@ -117,5 +107,23 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [HttpGet]
+        public HttpResponseMessage GetStudentAdditionalInfo(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var objSAI = _studentService.GetStudentAdditionalInfo(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, objSAI);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+        //GetAllStudentsbyclass
     }
 }

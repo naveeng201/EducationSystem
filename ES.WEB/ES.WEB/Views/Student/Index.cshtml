@@ -1,0 +1,12 @@
+﻿
+<style>
+    .row {
+        margin-top: 0px;
+    }
+</style>
+<div ng-controller="StudentController">
+    <button style="width: 170px; margin-top: 10px; margin-bottom: 10px;" class="btn" id="Button4" type="button" ng-click="LoadStudnetDetails(0)">
+        <span>Add New Student</span>
+    </button>
+    <div id="Studentgrid" ui-grid="Studentgrid" class="grid" external-scopes="$scope"></div>
+</div>

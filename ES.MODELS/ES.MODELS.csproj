@@ -66,6 +66,9 @@
     <Compile Include="ClassSubject.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Department.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -90,12 +93,15 @@
     <Compile Include="ExtendedModels\Address.cs" />
     <Compile Include="ExtendedModels\AspNetUser.cs" />
     <Compile Include="ExtendedModels\Class.cs" />
+    <Compile Include="ExtendedModels\Employee.cs" />
     <Compile Include="ExtendedModels\InstitutionInfo.cs" />
     <Compile Include="ExtendedModels\Member.cs" />
     <Compile Include="ExtendedModels\Parent.cs" />
     <Compile Include="ExtendedModels\Section.cs" />
     <Compile Include="ExtendedModels\StudentAditionalInfo.cs" />
     <Compile Include="ExtendedModels\Subject.cs" />
+    <Compile Include="ExtendedModels\Teacher.cs" />
+    <Compile Include="ExtendedModels\TeacherSubject.cs" />
     <Compile Include="InstitutionInfo.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -124,6 +130,10 @@
     <Compile Include="Teacher.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TeacherSubject.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ClassSubjectViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
