@@ -1,0 +1,7 @@
+C:\Naveen\EducationSystem\ES.MODELS\bin\Release\ES.MODELS.dll.config
+C:\Naveen\EducationSystem\ES.MODELS\bin\Release\ES.MODELS.dll
+C:\Naveen\EducationSystem\ES.MODELS\bin\Release\ES.MODELS.pdb
+C:\Naveen\EducationSystem\ES.MODELS\bin\Release\EntityFramework.dll
+C:\Naveen\EducationSystem\ES.MODELS\bin\Release\EntityFramework.SqlServer.dll
+C:\Naveen\EducationSystem\ES.MODELS\obj\Release\ES.MODELS.dll
+C:\Naveen\EducationSystem\ES.MODELS\obj\Release\ES.MODELS.pdb

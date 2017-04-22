@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ESDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="InstitutionID" Type="int" />
+  </EntityType>
+  <EntityType Name="ClassSections">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="SectionID" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="ClassSubjects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="SubjectID" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Blocked" Type="bit" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InstitutionInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="200" />
+    <Property Name="RegName" Type="nvarchar" MaxLength="200" />
+    <Property Name="RegNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RegDate" Type="datetime" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pin" Type="nchar" MaxLength="10" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="200" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Blocked" Type="bit" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="Sections">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="StudentAditionalInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="AdmissionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassRollNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddmissionDate" Type="datetime" />
+    <Property Name="BatchID" Type="int" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Gender" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="BloodGroup" Type="nchar" MaxLength="10" />
+    <Property Name="BirthPlace" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nationalty" Type="nvarchar" MaxLength="50" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" />
+    <Property Name="Religion" Type="nvarchar" MaxLength="50" />
+    <Property Name="StudentCategory" Type="nchar" MaxLength="10" />
+    <Property Name="IsSMSEnabled" Type="bit" />
+    <Property Name="PhotoFileName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhotoContentType" Type="nchar" MaxLength="10" />
+    <Property Name="PhotoData" Type="binary" MaxLength="5000" />
+    <Property Name="StatusDescription" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="HasPaidFee" Type="bit" />
+  </EntityType>
+  <EntityType Name="StuentClassSectionInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuentID" Type="int" Nullable="false" />
+    <Property Name="StudentNo" Type="int" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="SectionID" Type="int" Nullable="false" />
+    <Property Name="RollNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Meadium" Type="nchar" MaxLength="10" />
+    <Property Name="InstitutionID" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Blocked" Type="bit" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShortName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="isDeleted" Type="bit" />
+    <Property Name="locationID" Type="int" />
+  </EntityType>
+  <Association Name="FK_ClassSections_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="ClassSections" Type="Self.ClassSections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSections">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSections_Sections">
+    <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+    <End Role="ClassSections" Type="Self.ClassSections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSections">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSubjects_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="ClassSubjects" Type="Self.ClassSubjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSubjects">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSubjects_Subjects">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="ClassSubjects" Type="Self.ClassSubjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSubjects">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StuentClassSectionInfo_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="StuentClassSectionInfo" Type="Self.StuentClassSectionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StuentClassSectionInfo">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
+    <End Role="InstitutionInfo" Type="Self.InstitutionInfo" Multiplicity="1" />
+    <End Role="StuentClassSectionInfo" Type="Self.StuentClassSectionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InstitutionInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StuentClassSectionInfo">
+        <PropertyRef Name="InstitutionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StuentClassSectionInfo_Sections">
+    <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+    <End Role="StuentClassSectionInfo" Type="Self.StuentClassSectionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StuentClassSectionInfo">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ESDBModelStoreContainer">
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StuentClassSectionInfo" EntityType="Self.StuentClassSectionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="ClassSections" EntitySet="ClassSections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSections_Sections" Association="Self.FK_ClassSections_Sections">
+      <End Role="Sections" EntitySet="Sections" />
+      <End Role="ClassSections" EntitySet="ClassSections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSubjects_Classes" Association="Self.FK_ClassSubjects_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="ClassSubjects" EntitySet="ClassSubjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSubjects_Subjects" Association="Self.FK_ClassSubjects_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="ClassSubjects" EntitySet="ClassSubjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StuentClassSectionInfo_Classes" Association="Self.FK_StuentClassSectionInfo_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="Self.FK_StuentClassSectionInfo_InstitutionInfo">
+      <End Role="InstitutionInfo" EntitySet="InstitutionInfo" />
+      <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="Self.FK_StuentClassSectionInfo_Sections">
+      <End Role="Sections" EntitySet="Sections" />
+      <End Role="StuentClassSectionInfo" EntitySet="StuentClassSectionInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

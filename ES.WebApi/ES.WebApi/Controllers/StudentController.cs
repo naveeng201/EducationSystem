@@ -131,7 +131,7 @@ namespace ES.WebApi.Controllers
         //GetAllStudentsbyclass
 
         
-    }
+    } 
     #region //StudentAdditionalInfo
     public class StudentInfoController : ApiController
     {

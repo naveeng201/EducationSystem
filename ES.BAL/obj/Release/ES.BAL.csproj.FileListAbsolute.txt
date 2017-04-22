@@ -1,0 +1,12 @@
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.SERVICE.dll.config
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.SERVICE.dll
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.SERVICE.pdb
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.DAL.dll
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.MODELS.dll
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\EntityFramework.dll
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.DAL.pdb
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\ES.MODELS.pdb
+C:\Naveen\EducationSystem\ES.BAL\bin\Release\EntityFramework.xml
+C:\Naveen\EducationSystem\ES.BAL\obj\Release\ES.BAL.csprojResolveAssemblyReference.cache
+C:\Naveen\EducationSystem\ES.BAL\obj\Release\ES.SERVICE.dll
+C:\Naveen\EducationSystem\ES.BAL\obj\Release\ES.SERVICE.pdb

@@ -1,0 +1,11 @@
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\ES.DAL.dll
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\ES.DAL.pdb
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\EntityFramework.dll
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\ES.MODELS.dll
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\ES.MODELS.pdb
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\EntityFramework.xml
+C:\Naveen\EducationSystem\ES.DAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Naveen\EducationSystem\ES.DAL\obj\Release\ES.DAL.csprojResolveAssemblyReference.cache
+C:\Naveen\EducationSystem\ES.DAL\obj\Release\ES.DAL.dll
+C:\Naveen\EducationSystem\ES.DAL\obj\Release\ES.DAL.pdb
