@@ -1,17 +1,13 @@
 ﻿app.controller('InstitutionInfoIndexController', function ($scope, $location, InstitutionInfoService) {
-    debugger;
    // $scope.$root.isEdit = false;        
     $scope.LoadInstituteDetails = function (Id) {
-        debugger;
         $scope.$root.InstituteId = Id;
         $location.path("InstitutionInfoDetails");
     }
     loadAllInstitutes();
     function loadAllInstitutes() {
-        debugger;
         $("#overlay").show();
         var institutecenter = InstitutionInfoService.getInstitutionInfo();
-        debugger;
         institutecenter.then(function(response){
             if(response.status==200)
             {
@@ -109,12 +105,10 @@ app.controller('InstitutionInfoDetailsController', function ($scope, $location, 
     }
     loadInstitutionInfoDropdown(Id);
     function loadInstitutionInfoDropdown(Id) {
-        debugger;
         $("#overlay").show();
 
         var promiseInstitutionInfoDropdownList = InstitutionInfoService.loadInstitutionInfoDropown(Id);
         promiseInstitutionInfoDropdownList.then(function (respons) {
-            debugger;
             if (respons.status == 200) {
                 if (respons.data != null) {
                     $scope.InstitutionInfo = respons.data;
@@ -134,7 +128,6 @@ app.controller('InstitutionInfoDetailsController', function ($scope, $location, 
         $window.history.back();
     }
     $scope.addInstitute = function () {
-        debugger;
         $("#overlay").show();
         //$scope.$broadcast('show-errors-check-validity');
         // $scope.submitted = true;

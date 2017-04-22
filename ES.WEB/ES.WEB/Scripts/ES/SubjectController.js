@@ -109,7 +109,6 @@ app.controller('SubjectDetailsController', function ($scope, $location, $window,
 
         var promiseSubjectDropdownList = SubjectService.loadSubjectDropdown(Id);
         promiseSubjectDropdownList.then(function (respons) {
-            debugger;
             if (respons.status == 200) {
                 if (respons.data != null) {
                     $scope.Subject = respons.data;

@@ -21,7 +21,6 @@
         return request;
     };
     this.loadClassDropdowns = function (Id) {
-        debugger;
         var request = $http({
             method: "get",
             contentType: "Application/json",
@@ -31,7 +30,6 @@
         return request;
     };
     this.AddClass = function (objclass) {
-        debugger;
         var request = $http({
             method: "post",
             contentType: "Application/json",

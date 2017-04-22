@@ -77,7 +77,6 @@ app.controller('ClassDetailController', function ($scope, $location, $window, ES
         $("#overlay").show();
         var promiseClassDropdownList = ESService.loadClassDropdowns(Id);
         promiseClassDropdownList.then(function (respons) {
-            debugger;
             if (respons.status == 200) {
                 if (respons.data != null) {
                     $scope.Class = respons.data;

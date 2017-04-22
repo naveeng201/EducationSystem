@@ -20,9 +20,16 @@ namespace ES.DAL.repositories
         }
         public StudentAditionalInfo GetStudentAdditionalInfo(int Id)
         {
-            Student student = dbSet.Find(Id);
-            var objSAI = student.StudentAditionalInfoes.SingleOrDefault();
-            return objSAI;
+            var context = new ESDataContext();
+            var student = (from s in context.Students.Include("StudentAditionalInfoes").Where(s => s.Id == Id) select s).AsQueryable();
+            IEnumerable<StudentAditionalInfo> sai = null;
+            foreach(Student s1 in student)
+            {
+                 sai = s1.StudentAditionalInfoes.AsEnumerable();
+                break;
+            }
+            
+            return sai.FirstOrDefault();
         }
     }
 }

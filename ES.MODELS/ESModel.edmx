@@ -183,15 +183,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" />
-          <Property Name="AddressID1" Type="int" />
-          <Property Name="AddressID2" Type="nchar" MaxLength="10" />
-          <Property Name="AdmissionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Address1Id" Type="int" />
+          <Property Name="Address2Id" Type="int" />
+          <Property Name="AdmissionNo" Type="nvarchar" MaxLength="50" />
           <Property Name="ClassRollNo" Type="nvarchar" MaxLength="50" />
           <Property Name="AddmissionDate" Type="datetime" />
-          <Property Name="BatchID" Type="int" Nullable="false" />
-          <Property Name="DOB" Type="datetime" Nullable="false" />
-          <Property Name="Gender" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="BatchID" Type="int" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" />
           <Property Name="BloodGroup" Type="nchar" MaxLength="10" />
           <Property Name="BirthPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="Nationalty" Type="nvarchar" MaxLength="50" />
@@ -331,14 +331,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAditionalInfo_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="StudentAditionalInfo" Type="Self.StudentAditionalInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StudentAditionalInfo">
-              <PropertyRef Name="AddressID1" />
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -552,11 +552,6 @@
           </AssociationSet>
           <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
           <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
-          <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
-          <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
-          </AssociationSet>
           <EntitySet Name="Departments" EntityType="ESDBModel.Department" />
           <EntitySet Name="Employees" EntityType="ESDBModel.Employee" />
           <EntitySet Name="Teachers" EntityType="ESDBModel.Teacher" />
@@ -576,6 +571,11 @@
           <AssociationSet Name="FK_TeacherSubject_Teacher" Association="ESDBModel.FK_TeacherSubject_Teacher">
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+          </AssociationSet>
+          <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
+          <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Class">
@@ -875,47 +875,6 @@
           <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="CommunicationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="StudentAditionalInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="AddressID1" Type="Int32" />
-          <Property Name="AddressID2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AdmissionNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ClassRollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddmissionDate" Type="DateTime" Precision="3" />
-          <Property Name="BatchID" Type="Int32" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StudentCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="IsSMSEnabled" Type="Boolean" />
-          <Property Name="PhotoFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhotoContentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="PhotoData" Type="Binary" MaxLength="5000" FixedLength="true" />
-          <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
-        </EntityType>
-        <Association Name="FK_StudentAditionalInfo_Student">
-          <End Type="ESDBModel.Student" Role="Student" Multiplicity="0..1" />
-          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentAditionalInfo">
-              <PropertyRef Name="AddressID1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Id" />
@@ -1024,6 +983,47 @@
             </Principal>
             <Dependent Role="TeacherSubject">
               <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentAditionalInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Address1Id" Type="Int32" />
+          <Property Name="Address2Id" Type="Int32" />
+          <Property Name="AdmissionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassRollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddmissionDate" Type="DateTime" Precision="3" />
+          <Property Name="BatchID" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudentCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsSMSEnabled" Type="Boolean" />
+          <Property Name="PhotoFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoContentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PhotoData" Type="Binary" MaxLength="5000" FixedLength="true" />
+          <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_StudentAditionalInfo_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAditionalInfo">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1213,35 +1213,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentAditionalInfoes">
-            <EntityTypeMapping TypeName="ESDBModel.StudentAditionalInfo">
-              <MappingFragment StoreEntitySet="StudentAditionalInfo">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
-                <ScalarProperty Name="PhotoData" ColumnName="PhotoData" />
-                <ScalarProperty Name="PhotoContentType" ColumnName="PhotoContentType" />
-                <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
-                <ScalarProperty Name="IsSMSEnabled" ColumnName="IsSMSEnabled" />
-                <ScalarProperty Name="StudentCategory" ColumnName="StudentCategory" />
-                <ScalarProperty Name="Religion" ColumnName="Religion" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="Nationalty" ColumnName="Nationalty" />
-                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
-                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-                <ScalarProperty Name="AddmissionDate" ColumnName="AddmissionDate" />
-                <ScalarProperty Name="ClassRollNo" ColumnName="ClassRollNo" />
-                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
-                <ScalarProperty Name="AddressID2" ColumnName="AddressID2" />
-                <ScalarProperty Name="AddressID1" ColumnName="AddressID1" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="ESDBModel.Department">
               <MappingFragment StoreEntitySet="Department">
@@ -1298,6 +1269,35 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentAditionalInfoes">
+            <EntityTypeMapping TypeName="ESDBModel.StudentAditionalInfo">
+              <MappingFragment StoreEntitySet="StudentAditionalInfo">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+                <ScalarProperty Name="PhotoData" ColumnName="PhotoData" />
+                <ScalarProperty Name="PhotoContentType" ColumnName="PhotoContentType" />
+                <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
+                <ScalarProperty Name="IsSMSEnabled" ColumnName="IsSMSEnabled" />
+                <ScalarProperty Name="StudentCategory" ColumnName="StudentCategory" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Nationalty" ColumnName="Nationalty" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="AddmissionDate" ColumnName="AddmissionDate" />
+                <ScalarProperty Name="ClassRollNo" ColumnName="ClassRollNo" />
+                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
+                <ScalarProperty Name="Address2Id" ColumnName="Address2Id" />
+                <ScalarProperty Name="Address1Id" ColumnName="Address1Id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

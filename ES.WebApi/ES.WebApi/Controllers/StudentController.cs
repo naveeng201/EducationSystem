@@ -115,6 +115,10 @@ namespace ES.WebApi.Controllers
             try
             {
                 var objSAI = _studentService.GetStudentAdditionalInfo(Id);
+                if (objSAI == null)
+                {
+                    objSAI = new StudentAditionalInfo();
+                }
                 response = Request.CreateResponse(HttpStatusCode.OK, objSAI);
                 return response;
             }
@@ -125,5 +129,70 @@ namespace ES.WebApi.Controllers
             }
         }
         //GetAllStudentsbyclass
+
+        
     }
+    #region //StudentAdditionalInfo
+    public class StudentInfoController : ApiController
+    {
+        private readonly IStudentAditionalInfoService _repository;
+        public StudentInfoController(IStudentAditionalInfoService repository)
+        {
+            this._repository = repository;
+        }
+        [HttpGet]
+        public HttpResponseMessage loadStudentInfo(int id)
+        {
+            HttpResponseMessage response = null;
+            StudentAditionalInfo objStudent = null;
+            try
+            {
+                if (id == 0)
+                {
+                    objStudent = new StudentAditionalInfo();
+                }
+                else
+                {
+                    objStudent = _repository.SingleOrDefault(id);
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, objStudent);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+        public HttpResponseMessage AddStudentInfo(StudentAditionalInfo objStuent)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                using (var t = new TransactionScope())
+                {
+                    if (objStuent.Id == 0)
+                    {
+                        // objStuent.CreatedDate = DateTime.Now;
+                        // This Area Need to Insert in BULK Insert Method                    
+                        _repository.Insert(objStuent);
+                    }
+                    else
+                    {
+                        _repository.Update(objStuent);
+                    }
+                    t.Complete();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+    }
+    #endregion
 }

@@ -1,52 +1,145 @@
-﻿<div ng-controller="StudentDetailsController">
-    <div class="clearfix"></div>
-    <div class="col-sm-6">
-        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.firstName.$invalid }">
-            <label class="control-label">
-               First Name<span class="error">*</span>
-            </label>
+﻿
+ 
+
+
+<div ng-controller="StudentDetailsController">
+    <div id="firsttab" ng-show="firsttabshow">
+        <button style="width: 170px; margin-top: 10px; margin-bottom: 10px;" class="btn" id="Button4" type="button" ng-click="LoadStudnetAdditionalDetails()">
+            <span>Additional Details</span>
+        </button>
+
+        <div class="clearfix"></div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.firstName.$invalid }">
+                <label class="control-label">
+                    First Name<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="Student.firstName" ng-required="false" name="firstName" />
+            </div>
         </div>
-        <div class="col-md-6 col-sm-6">
-            <input type="text" class="form-control" ng-model="Student.firstName" ng-required="false" name="firstName" />
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.middleName.$invalid }">
+                <label class="control-label">
+                    Middle Name<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="Student.middleName" ng-required="false" name="middleName" />
+            </div>
         </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.middleName.$invalid }">
-            <label class="control-label">
-                Middle Name<span class="error">*</span>
-            </label>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.lastName.$invalid }">
+                <label class="control-label">
+                    Last Name<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="Student.lastName" ng-required="false" name="lastName" />
+            </div>
         </div>
-        <div class="col-md-6 col-sm-6">
-            <input type="text" class="form-control" ng-model="Student.middleName" ng-required="false" name="middleName" />
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.phoneNo.$invalid }">
+                <label class="control-label">
+                    Phone No.<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="Student.phoneNo" ng-required="false" name="phoneNo" />
+            </div>
         </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.lastName.$invalid }">
-            <label class="control-label">
-                Last Name<span class="error">*</span>
-            </label>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <input type="text" class="form-control" ng-model="Student.lastName" ng-required="false" name="lastName" />
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.phoneNo.$invalid }">
-            <label class="control-label">
-                Phone No.<span class="error">*</span>
-            </label>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <input type="text" class="form-control" ng-model="Student.phoneNo" ng-required="false" name="phoneNo" />
+
+        <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
+            <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="Button5" type="button" ng-disabled="!ESForm.$valid" ng-click="InsertStudent();">
+                <span>Save</span>
+            </button>
+            <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack();">
+                <span>Back</span>
+            </button>
         </div>
     </div>
 
-    <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
-        <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="Button5" type="button" ng-disabled="!ESForm.$valid" ng-click="InsertStudent();">
-            <span>Save</span>
-        </button>
-        <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack();">
-            <span>Back</span>
-        </button>
+
+    <div id="secondtab" ng-show="secondtabshow">
+        <div class="clearfix"></div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.dob.$invalid }">
+                <label class="control-label">
+                    Date Of Birth<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.dob | date:'MM/dd/yyyy'" ng-required="false" name="dob" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.gender.$invalid }">
+                <label class="control-label">
+                    Gender<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.gender" ng-required="false" name="gender" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.bloodGroup.$invalid }">
+                <label class="control-label">
+                    Blood Group<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.bloodGroup" ng-required="false" name="bloodgroup" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.birthPlace.$invalid }">
+                <label class="control-label">
+                    Birth Place<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.birthPlace" ng-required="false" name="birthplace" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.nationalty.$invalid }">
+                <label class="control-label">
+                    Nationalty<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.nationalty" ng-required="false" name="nationalty" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.religion.$invalid }">
+                <label class="control-label">
+                    Religion<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.religion" ng-required="false" name="religion" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm2.language.$invalid }">
+                <label class="control-label">
+                    Languages<span class="error">*</span>
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control" ng-model="StudentAdditionalInfo.language" ng-required="false" name="language" />
+            </div>
+        </div>
+        <div class="col-sm-8 col-sm-offset-4" style="margin-top:20px;">
+            <button style="width: 100px; height: 30px; margin-right:10px;" class="btn" id="Button5" type="button" ng-disabled="!ESForm.$valid" ng-click="InsertStudentAdditionalInfo();">
+                <span>Save</span>
+            </button>
+            <button style="width: 100px; height: 30px;" class="btn" id="Button6" type="button" ng-click="GoBack();">
+                <span>Back</span>
+            </button>
+        </div>
     </div>
 </div>

@@ -27,6 +27,26 @@
         });
         return request;
     }
+    this.GetStudentAdditionalInfo = function(Id)
+    {
+        var request = $http({
+            method: "get",
+            contentType: "application/json",
+            url: urlpath + "GetStudentAdditionalInfo/"+Id
+        });
+        return request;
+    }
+    this.InsertStudentAdditionalInfo = function(objStudentAdditionalInfo)
+    {
+        var urlp = "http://localhost:9810/api/StudentInfo/";
+        var request = $http({
+            method: "post",
+            contentType: "application/json",
+            url: urlp + "AddStudentInfo",
+            data: JSON.stringify(objStudentAdditionalInfo)
+        });
+        return request;
+    }
 });
 
 
@@ -63,9 +83,7 @@ app.controller('StudentController', function ($scope, $location,$window, Student
         });
     }
 
-   
-
-
+    $scope.$scope = $scope;
     $scope.Studentgrid = {
         enableCellEdit: true,
         enableSorting: true,
@@ -94,22 +112,39 @@ app.controller('StudentController', function ($scope, $location,$window, Student
             },
             width: '20%'
         },
-        { name: ' ', displayName: 'Edit', enableFiltering: false, width: '25%', cellTemplate: '<span style="text-align:center"><a class="gridButton" ng-click="getExternalScopes().ClassEditDetail()">Edit</a></span>', headerCellClass: 'gridheader' }
+        { name: ' ', displayName: 'Edit', enableFiltering: false, width: '25%', cellTemplate: '<span style="text-align:center"><a class="gridButton" ng-click="getExternalScopes().StudentEditDetail(row.entity)">Edit</a></span>', headerCellClass: 'gridheader' }
         ],
     };
 
-    $scope.ClassEditDetail = function () {
-        alert("Called..");
-        //$scope.$root.gridData = row;
-        //$scope.$root.ClassId = row.id;
-        //$location.path("ClassDetails");
+    $scope.StudentEditDetail = function (row) {
+        $scope.$root.gridData = row;
+        $scope.$root.StudentId = row.id;
+        $location.path("StudentDetails");
     };
 });
 
-app.controller('StudentDetailsController', function ($scope, $location,$window, StudentService) {
+ 
+
+
+app.controller('StudentDetailsController', function ($scope, $location, $window, StudentService) {
+    $scope.data = {
+        selectedIndex: 0,
+        secondLocked: true,
+        secondLabel: "Item Two",
+        bottom: false
+    };
+    $scope.next = function () {
+        $scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2);
+    };
+    $scope.previous = function () {
+        $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
+    };
+
     var Id = $scope.$root.StudentId;
     LoadStudentDetails(Id);
     function LoadStudentDetails(Id) {
+        $scope.firsttabshow = true;
+        $scope.secondtabshow = false;
         $("#overlay").show();
         var studentdetailPromise = StudentService.SingleOrDefault(Id);
         studentdetailPromise.then(function (response) {
@@ -132,20 +167,62 @@ app.controller('StudentDetailsController', function ($scope, $location,$window, 
         $window.history.back();
     }
 
+    $scope.LoadStudnetAdditionalDetails = function()
+    {
+        $scope.secondtabshow = true;
+        $scope.firsttabshow = false;
+        var Id = $scope.$root.StudentId;
+        $("#overlay").show();
+        var studentpromise = StudentService.GetStudentAdditionalInfo(Id);
+        studentpromise.then(function (response) {
+            if(response.status == 200)
+            {
+                $scope.StudentAdditionalInfo = response.data;
+                $("#overlay").hide();
+            }
+        },
+        function(error)
+        {
+            $scope.error = error;
+            $("#overlay").hide();
+        });
+    }
     $scope.InsertStudent = function()
     {
         $("#overlay").show();
-        var objStudent = $scope.Student
+        var objStudent = $scope.Student;
         var studentPromise = StudentService.InsertStudent(objStudent);
         studentPromise.then(function (response) {
             if (response.status == 200)
             {
-                alert("Student Successfully inserted..");
+                $scope.$root.StudentId = response.data;
+                alert("Student Successfully Inserted/Updated..");
                 $("#overlay").hide();
-                $location.path("Student");
+                $scope.secondtabshow = true;
+                $scope.firsttabshow = false;
+                LoadStudnetAdditionalDetails();
+                //$location.path("Student");
             }
         }, function (error) {
             $scope.error = 'failure saving student', error;
+            $("#overlay").hide();
+        });
+    }
+    $scope.InsertStudentAdditionalInfo = function () {
+        $("#overlay").show();
+        var objStudent = $scope.Student;
+        var objStudentAdditionalInfo = $scope.StudentAdditionalInfo;
+        objStudentAdditionalInfo.studentId = $scope.$root.StudentId;
+        objStudentAdditionalInfo.dob = new Date();
+        var studentPromise = StudentService.InsertStudentAdditionalInfo(objStudentAdditionalInfo);
+        studentPromise.then(function (response) {
+            if(response.status == 200)
+            {
+                alert("Student Successfully Inserted/Updated..");
+                $("#overlay").hide();
+            }
+        }, function (error) {
+            $scope.error = error;
             $("#overlay").hide();
         });
     }

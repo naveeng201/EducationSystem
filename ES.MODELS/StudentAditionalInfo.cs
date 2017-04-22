@@ -15,14 +15,14 @@ namespace ES.MODELS
     public partial class StudentAditionalInfo
     {
         public int Id { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<int> AddressID1 { get; set; }
-        public string AddressID2 { get; set; }
+        public int StudentId { get; set; }
+        public Nullable<int> Address1Id { get; set; }
+        public Nullable<int> Address2Id { get; set; }
         public string AdmissionNo { get; set; }
         public string ClassRollNo { get; set; }
         public Nullable<System.DateTime> AddmissionDate { get; set; }
-        public int BatchID { get; set; }
-        public System.DateTime DOB { get; set; }
+        public Nullable<int> BatchID { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
         public string Gender { get; set; }
         public string BloodGroup { get; set; }
         public string BirthPlace { get; set; }

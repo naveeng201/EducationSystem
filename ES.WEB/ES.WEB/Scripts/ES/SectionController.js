@@ -65,7 +65,6 @@
     };
     //Delete Function
     $scope.deleteSection = function (row) {
-        debugger;
         $("#overlay").show();
         //$scope.$broadcast('show-errors-check-validity');
         // $scope.submitted = true;

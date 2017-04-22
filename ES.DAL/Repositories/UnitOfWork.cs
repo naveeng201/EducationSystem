@@ -18,17 +18,12 @@ namespace ES.DAL.repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-
-       
-
         private TransactionScope _transaction;
         private readonly ESDataContext _db;
 
-
         public UnitOfWork()
         {
-
-            _db = new ESDataContext();
+           _db = new ESDataContext();
            _db.Configuration.LazyLoadingEnabled = true;
            _db.Configuration.ProxyCreationEnabled = false;
 
@@ -38,7 +33,6 @@ namespace ES.DAL.repositories
         {
 
         }
-
         public void StartTransaction()
         {
 
@@ -57,7 +51,6 @@ namespace ES.DAL.repositories
             get { return _db; }
         }
 
-       
         public IDbSet<T> Set<T>() where T : class
         {
             return Set<T>();
