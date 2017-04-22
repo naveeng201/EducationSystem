@@ -23,8 +23,7 @@
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Student" />
         <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="11" PointY="6.25" />
         <AssociationConnector Association="ESDBModel.FK_Guardian_Student" />
-        <EntityTypeShape EntityType="ESDBModel.Exam" Width="1.5" PointX="10.375" PointY="12.75" />
-        <EntityTypeShape EntityType="ESDBModel.Address" Width="1.5" PointX="12.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ESDBModel.Exam" Width="1.5" PointX="17.25" PointY="12.25" />
         <EntityTypeShape EntityType="ESDBModel.Department" Width="1.5" PointX="15.625" PointY="9.625" />
         <EntityTypeShape EntityType="ESDBModel.Employee" Width="1.5" PointX="13.375" PointY="6.25" />
         <EntityTypeShape EntityType="ESDBModel.Teacher" Width="1.5" PointX="15.625" PointY="6.125" />
@@ -33,8 +32,20 @@
         <AssociationConnector Association="ESDBModel.FK_Teacher_Employee" />
         <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Subjects" />
         <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Teacher" />
-        <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="11" PointY="17.25" />
+        <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="11" PointY="12.25" />
         <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
+        <EntityTypeShape EntityType="ESDBModel.Address" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="ESDBModel.Country" Width="1.5" PointX="0.625" PointY="8.375" />
+        <EntityTypeShape EntityType="ESDBModel.District" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="ESDBModel.State" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="ESDBModel.StudentAddress" Width="1.5" PointX="16.25" PointY="2.875" />
+        <AssociationConnector Association="ESDBModel.FK_Address_Countries" />
+        <AssociationConnector Association="ESDBModel.FK_Address_Districts" />
+        <AssociationConnector Association="ESDBModel.FK_Address_States" />
+        <AssociationConnector Association="ESDBModel.FK_StudentAddress_Address" />
+        <AssociationConnector Association="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" />
+        <AssociationConnector Association="ESDBModel.FK_dbo_Districts_dbo_States_StateId" />
+        <AssociationConnector Association="ESDBModel.FK_StudentAddress_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

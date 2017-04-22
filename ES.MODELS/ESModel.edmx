@@ -10,8 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
           <Property Name="Adress1" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Adress2" Type="nvarchar" MaxLength="100" />
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
@@ -58,6 +57,13 @@
           <Property Name="Blocked" Type="bit" />
           <Property Name="EndDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Id" />
@@ -66,6 +72,14 @@
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ManagerEmployeeId" Type="int" />
           <Property Name="Location" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Districts">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictName" Type="nvarchar(max)" />
+          <Property Name="StateId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -164,6 +178,14 @@
           <Property Name="EndDate" Type="datetime" />
           <Property Name="UserID" Type="int" />
         </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
@@ -177,6 +199,18 @@
           <Property Name="CreatDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Blocked" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="StudentAditionalInfo">
           <Key>
@@ -258,6 +292,42 @@
           <Property Name="ModifiedDate" Type="date" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <Association Name="FK_Address_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Districts">
+          <End Role="Districts" Type="Self.Districts" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_States">
+          <End Role="States" Type="Self.States" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClassSections_Classes">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
           <End Role="ClassSections" Type="Self.ClassSections" Multiplicity="*" />
@@ -306,6 +376,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Districts_dbo_States_StateId">
+          <End Role="States" Type="Self.States" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="States" Type="Self.States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Department_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -327,6 +425,30 @@
             </Principal>
             <Dependent Role="Parents">
               <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAddress_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="StudentAddress" Type="Self.StudentAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAddress">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAddress_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentAddress" Type="Self.StudentAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAddress">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -431,18 +553,40 @@
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentClassSectionInfo" EntityType="Self.StudentClassSectionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentAddress].[Id] AS [Id], 
+    [StudentAddress].[StudentId] AS [StudentId], 
+    [StudentAddress].[AddressId] AS [AddressId]
+    FROM [dbo].[StudentAddress] AS [StudentAddress]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Districts" Association="Self.FK_Address_Districts">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_States" Association="Self.FK_Address_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="ClassSections" EntitySet="ClassSections" />
@@ -459,6 +603,14 @@
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="ClassSubjects" EntitySet="ClassSubjects" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="Self.FK_dbo_Districts_dbo_States_StateId">
+            <End Role="States" EntitySet="States" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="Self.FK_dbo_States_dbo_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="States" EntitySet="States" />
+          </AssociationSet>
           <AssociationSet Name="FK_Department_Employee" Association="Self.FK_Department_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Department" EntitySet="Department" />
@@ -466,6 +618,14 @@
           <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAddress_Address" Association="Self.FK_StudentAddress_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="StudentAddress" EntitySet="StudentAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAddress_Student" Association="Self.FK_StudentAddress_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentAddress" EntitySet="StudentAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="Self.FK_StudentAditionalInfo_Student">
             <End Role="Student" EntitySet="Student" />
@@ -551,7 +711,6 @@
             <End Role="Parent" EntitySet="Parents" />
           </AssociationSet>
           <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
-          <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
           <EntitySet Name="Departments" EntityType="ESDBModel.Department" />
           <EntitySet Name="Employees" EntityType="ESDBModel.Employee" />
           <EntitySet Name="Teachers" EntityType="ESDBModel.Teacher" />
@@ -576,6 +735,39 @@
           <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+          </AssociationSet>
+          <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
+          <EntitySet Name="Countries" EntityType="ESDBModel.Country" />
+          <EntitySet Name="Districts" EntityType="ESDBModel.District" />
+          <EntitySet Name="States" EntityType="ESDBModel.State" />
+          <EntitySet Name="StudentAddresses" EntityType="ESDBModel.StudentAddress" />
+          <AssociationSet Name="FK_Address_Countries" Association="ESDBModel.FK_Address_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Districts" Association="ESDBModel.FK_Address_Districts">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_States" Association="ESDBModel.FK_Address_States">
+            <End Role="State" EntitySet="States" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAddress_Address" Association="ESDBModel.FK_StudentAddress_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="StudentAddress" EntitySet="StudentAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="ESDBModel.FK_dbo_States_dbo_Countries_CountryId">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="ESDBModel.FK_dbo_Districts_dbo_States_StateId">
+            <End Role="State" EntitySet="States" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAddress_Student" Association="ESDBModel.FK_StudentAddress_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAddress" EntitySet="StudentAddresses" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Class">
@@ -739,6 +931,7 @@
           <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
           <NavigationProperty Name="Parents" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Student" ToRole="Parent" />
           <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
+          <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
           </EntityType>
         <EntityType Name="StudentClassSectionInfo">
           <Key>
@@ -858,22 +1051,6 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Blocked" Type="Boolean" />
           <Property Name="UserID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Address">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Adress1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Adress2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CityId" Type="Int32" />
-          <Property Name="StateId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CommunicationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -1023,6 +1200,155 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StudentAditionalInfo">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Adress1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adress2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="PinCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CommunicationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Country" Relationship="ESDBModel.FK_Address_Countries" FromRole="Address" ToRole="Country" />
+          <NavigationProperty Name="District" Relationship="ESDBModel.FK_Address_Districts" FromRole="Address" ToRole="District" />
+          <NavigationProperty Name="State" Relationship="ESDBModel.FK_Address_States" FromRole="Address" ToRole="State" />
+          <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="Address" ToRole="StudentAddress" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Countries" FromRole="Country" ToRole="Address" />
+          <NavigationProperty Name="States" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Districts" FromRole="District" ToRole="Address" />
+          <NavigationProperty Name="State" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="District" ToRole="State" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_States" FromRole="State" ToRole="Address" />
+          <NavigationProperty Name="Country" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="State" ToRole="Country" />
+          <NavigationProperty Name="Districts" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="State" ToRole="District" />
+        </EntityType>
+        <EntityType Name="StudentAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="StudentAddress" ToRole="Address" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="StudentAddress" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Address_Countries">
+          <End Type="ESDBModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="ESDBModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Districts">
+          <End Type="ESDBModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="ESDBModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_States">
+          <End Type="ESDBModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="ESDBModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAddress_Address">
+          <End Type="ESDBModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="ESDBModel.StudentAddress" Role="StudentAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAddress">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+          <End Type="ESDBModel.Country" Role="Country" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ESDBModel.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Districts_dbo_States_StateId">
+          <End Type="ESDBModel.State" Role="State" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ESDBModel.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAddress_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ESDBModel.StudentAddress" Role="StudentAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAddress">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1196,23 +1522,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Addresses">
-            <EntityTypeMapping TypeName="ESDBModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="CommunicationType" ColumnName="CommunicationType" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Adress2" ColumnName="Adress2" />
-                <ScalarProperty Name="Adress1" ColumnName="Adress1" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="ESDBModel.Department">
               <MappingFragment StoreEntitySet="Department">
@@ -1297,6 +1606,57 @@
                 <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
                 <ScalarProperty Name="Address2Id" ColumnName="Address2Id" />
                 <ScalarProperty Name="Address1Id" ColumnName="Address1Id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="ESDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="CommunicationType" ColumnName="CommunicationType" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Adress2" ColumnName="Adress2" />
+                <ScalarProperty Name="Adress1" ColumnName="Adress1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ESDBModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="ESDBModel.District">
+              <MappingFragment StoreEntitySet="Districts">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="ESDBModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentAddresses">
+            <EntityTypeMapping TypeName="ESDBModel.StudentAddress">
+              <MappingFragment StoreEntitySet="StudentAddress">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

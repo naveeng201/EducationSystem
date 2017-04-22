@@ -14,8 +14,12 @@ namespace ES.MODELS
     
     public partial class Address
     {
+        public Address()
+        {
+            this.StudentAddresses = new HashSet<StudentAddress>();
+        }
+    
         public int Id { get; set; }
-        public string Title { get; set; }
         public string Name { get; set; }
         public string Adress1 { get; set; }
         public string Adress2 { get; set; }
@@ -25,5 +29,10 @@ namespace ES.MODELS
         public Nullable<int> CountryId { get; set; }
         public string PinCode { get; set; }
         public string CommunicationType { get; set; }
+    
+        public virtual Country Country { get; set; }
+        public virtual District District { get; set; }
+        public virtual State State { get; set; }
+        public virtual ICollection<StudentAddress> StudentAddresses { get; set; }
     }
 }
