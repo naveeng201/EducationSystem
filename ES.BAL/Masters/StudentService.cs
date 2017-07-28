@@ -16,6 +16,11 @@ namespace ES.SERVICE
         Student SingleOrDefault(int Id);
         void Update(Student student);
         StudentAditionalInfo GetStudentAdditionalInfo(int Id);
+        Address GetStudentAddress(int Id);
+        IEnumerable<Address> GetStudentAddresses(int Id);
+        int InsertStudentAddress(StudentAddress objSA);
+        Parent GetParent(int id);
+        IEnumerable<Parent> GetParents(int Id);
     }
     public class StudentService : IStudentService
     {
@@ -52,6 +57,31 @@ namespace ES.SERVICE
         public StudentAditionalInfo GetStudentAdditionalInfo(int Id)
         {
             return _studentRepository.GetStudentAdditionalInfo(Id);
+        }
+
+        public Address GetStudentAddress(int Id)
+        {
+            return _studentRepository.GetStudentAddress(Id);
+        }
+
+        public IEnumerable<Address> GetStudentAddresses(int Id)
+        {
+            return _studentRepository.GetStudentAddresses(Id);
+        }
+
+        public int InsertStudentAddress(StudentAddress objSA)
+        {
+            return _studentRepository.InsertStudentAddress(objSA);
+        }
+
+        public Parent GetParent(int Id)
+        {
+            return _studentRepository.GetParent(Id);
+        }
+
+        public IEnumerable<Parent> GetParents(int Id)
+        {
+            return _studentRepository.GetParents(Id);
         }
     }
 }

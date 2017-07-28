@@ -32,18 +32,19 @@ namespace ES.MODELS
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassSection> ClassSections { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; }
-        public virtual DbSet<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<StudentAddress> StudentAddresses { get; set; }
+        public virtual DbSet<EmergencyContactDetail> EmergencyContactDetails { get; set; }
+        public virtual DbSet<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
+        public virtual DbSet<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
     }
 }

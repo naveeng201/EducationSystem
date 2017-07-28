@@ -839,17 +839,11 @@ C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\Owin.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Net.Http.Formatting.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Spatial.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Cors.dll
-C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Helpers.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Http.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Http.OData.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Http.Owin.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Http.WebHost.dll
-C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Mvc.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Optimization.dll
-C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.Razor.dll
-C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.WebPages.Deployment.dll
-C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.WebPages.dll
-C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\System.Web.WebPages.Razor.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\WebActivatorEx.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\WebGrease.dll
 C:\Naveen\EducationSystem\ES.WEB\ES.WEB\bin\ES.MODELS.pdb

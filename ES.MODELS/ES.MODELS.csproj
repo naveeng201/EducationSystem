@@ -75,6 +75,9 @@
     <Compile Include="District.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmergencyContactDetail.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>

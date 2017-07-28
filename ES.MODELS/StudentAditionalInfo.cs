@@ -35,9 +35,11 @@ namespace ES.MODELS
         public string PhotoContentType { get; set; }
         public byte[] PhotoData { get; set; }
         public string StatusDescription { get; set; }
+        public Nullable<int> EmergencyContactDetailsID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
+        public virtual EmergencyContactDetail EmergencyContactDetail { get; set; }
         public virtual Student Student { get; set; }
     }
 }

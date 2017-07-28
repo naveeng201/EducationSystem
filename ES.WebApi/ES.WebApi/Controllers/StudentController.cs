@@ -130,7 +130,88 @@ namespace ES.WebApi.Controllers
         }
         //GetAllStudentsbyclass
 
+        [HttpGet]
+        public HttpResponseMessage GetStudentAddress(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var address = _studentService.GetStudentAddress(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, address);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
         
+        [HttpGet]
+        public HttpResponseMessage GetStudentAddresses(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var listAddress = _studentService.GetStudentAddresses(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, listAddress);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage InsertStudentAddress([FromBody]StudentAddress objSA)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+               var id = _studentService.InsertStudentAddress(objSA);
+                response = Request.CreateResponse(HttpStatusCode.OK, id);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetParent(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var objParent = _studentService.GetParent(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, objParent);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+        [HttpGet]
+        public HttpResponseMessage GetParents(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var listParents = _studentService.GetParents(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, listParents);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, ex.Message);
+                return response;
+            }
+        }
     } 
     #region //StudentAdditionalInfo
     public class StudentInfoController : ApiController
@@ -164,7 +245,7 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-
+       
         public HttpResponseMessage AddStudentInfo(StudentAditionalInfo objStuent)
         {
             HttpResponseMessage response = null;

@@ -28,7 +28,7 @@ namespace ES.MODELS
         public Nullable<int> StateId { get; set; }
         public Nullable<int> CountryId { get; set; }
         public string PinCode { get; set; }
-        public string CommunicationType { get; set; }
+        public string MobilePhone { get; set; }
     
         public virtual Country Country { get; set; }
         public virtual District District { get; set; }

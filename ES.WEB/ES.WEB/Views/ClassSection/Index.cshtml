@@ -1,4 +1,7 @@
 ﻿
+<link href="~/Content/assets/css/plugins/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Content/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+
 <div ng-controller="ClassSectionIndexController">
     <div class="clearfix"></div>
     
@@ -15,11 +18,11 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="col-md-6 col-sm-6" ng-class="{ 'has-error': ESForm.sectionmodel.$invalid }">
+        <div class="col-md-6 col-sm-6">
             <label class="control-label">Select Sections<span class="error">*</span></label>
         </div>
         <div class="col-md-6 col-sm-6">
-            <select name="sectionSelect" id="section" ng-model="data.sectionmodel" multiple>
+            <select class="selectpicker" multiple title="-Select Class-">
                 <option ng-repeat="option in sections2" value="{{option.id}}">{{option.sectionName}}</option>
             </select>
         </div>

@@ -14,6 +14,10 @@ namespace ES.DAL.repositories
 
         private readonly IUnitOfWork _unitOfWork;
         internal DbSet<T> dbSet;
+
+        public IUnitOfWork UnitOfWork { get { return _unitOfWork; } }
+        internal DbContext Database { get { return _unitOfWork.Db; } }
+
         public BaseRepository(IUnitOfWork unitOfWork)
         {
             if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
@@ -87,8 +91,6 @@ namespace ES.DAL.repositories
             return obj.Id;
         }
 
-        public IUnitOfWork UnitOfWork { get { return _unitOfWork; } }
-        internal DbContext Database { get { return _unitOfWork.Db; } }
 
         public Dictionary<string, string> GetAuditNames(dynamic dynamicObject)
         {

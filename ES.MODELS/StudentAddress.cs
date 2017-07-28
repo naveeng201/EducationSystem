@@ -17,6 +17,8 @@ namespace ES.MODELS
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int AddressId { get; set; }
+        public int Type { get; set; }
+        public Nullable<bool> Blocked { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Student Student { get; set; }

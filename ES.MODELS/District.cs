@@ -23,7 +23,7 @@ namespace ES.MODELS
         public string DistrictName { get; set; }
         public int StateId { get; set; }
     
-        public virtual ICollection<Address> Addresses { get; set; }
         public virtual State State { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

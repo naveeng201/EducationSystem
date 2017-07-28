@@ -62,6 +62,7 @@
     <Compile Include="repositories\AccountRepository.cs" />
     <Compile Include="repositories\BaseRepository.cs" />
     <Compile Include="repositories\ClassRepository.cs" />
+    <Compile Include="repositories\EmergencyContactDetailsRepository.cs" />
     <Compile Include="repositories\EmployeeRepository.cs" />
     <Compile Include="repositories\InstitutionInfoRepository.cs" />
     <Compile Include="repositories\ParentsRepository.cs" />

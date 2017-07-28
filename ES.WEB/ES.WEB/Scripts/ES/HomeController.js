@@ -1,6 +1,8 @@
 ﻿app.controller('HomeController', function ($scope, $location ) {
     $scope.$scope = $scope;
-    var rootURL = "ESWEB"
+
+    $scope.$root.rootURL = "http://localhost:9810/api/";
+
     $scope.LoadDashboard = function () {
         $location.path("DashBoard");
         $scope.$root.Title = "DashBoard";

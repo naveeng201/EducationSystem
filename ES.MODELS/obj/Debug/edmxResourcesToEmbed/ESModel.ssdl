@@ -13,7 +13,7 @@
     <Property Name="StateId" Type="int" />
     <Property Name="CountryId" Type="int" />
     <Property Name="PinCode" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="CommunicationType" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Classes">
     <Key>
@@ -75,6 +75,20 @@
     <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DistrictName" Type="nvarchar(max)" />
     <Property Name="StateId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmergencyContactDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactPersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Relationship" Type="int" />
+    <Property Name="CreatetDate" Type="date" />
+    <Property Name="ModifiedDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="Blocked" Type="bit" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -202,10 +216,13 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       <PropertyRef Name="Id" />
       <PropertyRef Name="StudentId" />
       <PropertyRef Name="AddressId" />
+      <PropertyRef Name="Type" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StudentId" Type="int" Nullable="false" />
     <Property Name="AddressId" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" />
   </EntityType>
   <EntityType Name="StudentAditionalInfo">
     <Key>
@@ -232,6 +249,7 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <Property Name="PhotoContentType" Type="nchar" MaxLength="10" />
     <Property Name="PhotoData" Type="binary" MaxLength="5000" />
     <Property Name="StatusDescription" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmergencyContactDetailsID" Type="int" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
@@ -447,6 +465,18 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentAditionalInfo_EmergencyContactDetails">
+    <End Role="EmergencyContactDetails" Type="Self.EmergencyContactDetails" Multiplicity="0..1" />
+    <End Role="StudentAditionalInfo" Type="Self.StudentAditionalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmergencyContactDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentAditionalInfo">
+        <PropertyRef Name="EmergencyContactDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentAditionalInfo_Student">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
     <End Role="StudentAditionalInfo" Type="Self.StudentAditionalInfo" Multiplicity="*" />
@@ -551,6 +581,7 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmergencyContactDetails" EntityType="Self.EmergencyContactDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
@@ -567,7 +598,9 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       <DefiningQuery>SELECT 
     [StudentAddress].[Id] AS [Id], 
     [StudentAddress].[StudentId] AS [StudentId], 
-    [StudentAddress].[AddressId] AS [AddressId]
+    [StudentAddress].[AddressId] AS [AddressId], 
+    [StudentAddress].[Type] AS [Type], 
+    [StudentAddress].[Blocked] AS [Blocked]
     FROM [dbo].[StudentAddress] AS [StudentAddress]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
@@ -621,6 +654,10 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <AssociationSet Name="FK_StudentAddress_Student" Association="Self.FK_StudentAddress_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="StudentAddress" EntitySet="StudentAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAditionalInfo_EmergencyContactDetails" Association="Self.FK_StudentAditionalInfo_EmergencyContactDetails">
+      <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
+      <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="Self.FK_StudentAditionalInfo_Student">
       <End Role="Student" EntitySet="Student" />
