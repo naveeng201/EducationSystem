@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ES.DAL.repositories;
+using ES.DAL;
 using ES.MODELS;
 using System.Threading.Tasks;
 

@@ -14,7 +14,7 @@ using ES.MODELS;
 
 #endregion
 
-namespace ES.DAL.repositories
+namespace ES.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -110,6 +110,34 @@
       <End Role="Student" EntitySet="Students" />
       <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
     </AssociationSet>
+    <EntitySet Name="DailyAttendances" EntityType="ESDBModel.DailyAttendance" />
+    <EntitySet Name="HourlyAttendances" EntityType="ESDBModel.HourlyAttendance" />
+    <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
+    <AssociationSet Name="FK_DailyAttendance_Student" Association="ESDBModel.FK_DailyAttendance_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="DailyAttendance" EntitySet="DailyAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="ESDBModel.FK_HourlyAttendance_DailyAttendance">
+      <End Role="DailyAttendance" EntitySet="DailyAttendances" />
+      <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="ESDBModel.FK_HourlyAttendance_HourTransaction">
+      <End Role="HourTransaction" EntitySet="HourTransactions" />
+      <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourTransaction_Subjects" Association="ESDBModel.FK_HourTransaction_Subjects">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="HourTransaction" EntitySet="HourTransactions" />
+    </AssociationSet>
+    <EntitySet Name="Hours" EntityType="ESDBModel.Hour" />
+    <AssociationSet Name="FK_Hour_Classes" Association="ESDBModel.FK_Hour_Classes">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="Hour" EntitySet="Hours" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
+      <End Role="Hour" EntitySet="Hours" />
+      <End Role="HourTransaction" EntitySet="HourTransactions" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Class">
     <Key>
@@ -126,6 +154,7 @@
     <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="Class" ToRole="ClassSubject" />
     <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="Class" ToRole="ClassSection" />
     <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="Class" ToRole="StudentClassSectionInfo" />
+    <NavigationProperty Name="Hours" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Class" ToRole="Hour" />
   </EntityType>
   <EntityType Name="Subject">
     <Key>
@@ -142,6 +171,7 @@
     <Property Name="locationID" Type="Int32" />
     <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="Subject" ToRole="ClassSubject" />
     <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="Subject" ToRole="TeacherSubject" />
+    <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
   </EntityType>
   <EntityType Name="InstitutionInfo">
     <Key>
@@ -273,6 +303,7 @@
     <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
     <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
     <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
+    <NavigationProperty Name="DailyAttendances" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="Student" ToRole="DailyAttendance" />
   </EntityType>
   <EntityType Name="Parent">
     <Key>
@@ -723,6 +754,136 @@
       </Principal>
       <Dependent Role="StudentAditionalInfo">
         <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DailyAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="Remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="DailyAttendance" ToRole="Student" />
+    <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="DailyAttendance" ToRole="HourlyAttendance" />
+  </EntityType>
+  <EntityType Name="HourlyAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DA_Id" Type="Int32" Nullable="false" />
+    <Property Name="HT_Id" Type="Int32" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="DailyAttendance" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="HourlyAttendance" ToRole="DailyAttendance" />
+    <NavigationProperty Name="HourTransaction" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourlyAttendance" ToRole="HourTransaction" />
+  </EntityType>
+  <EntityType Name="HourTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HourId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
+    <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
+    <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
+  </EntityType>
+  <Association Name="FK_DailyAttendance_Student">
+    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DailyAttendance">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourlyAttendance_DailyAttendance">
+    <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="1" />
+    <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DailyAttendance">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourlyAttendance">
+        <PropertyRef Name="DA_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourlyAttendance_HourTransaction">
+    <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="0..1" />
+    <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HourTransaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourlyAttendance">
+        <PropertyRef Name="HT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourTransaction_Subjects">
+    <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourTransaction">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Hour">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Hour" ToRole="Class" />
+    <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
+  </EntityType>
+  <Association Name="FK_Hour_Classes">
+    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
+    <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hour">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourTransaction_Hour">
+    <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
+    <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourTransaction">
+        <PropertyRef Name="HourId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

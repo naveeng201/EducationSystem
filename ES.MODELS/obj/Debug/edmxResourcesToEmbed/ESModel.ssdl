@@ -59,6 +59,18 @@
     <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="DailyAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="AttendanceDate" Type="date" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="400" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
   <EntityType Name="Department">
     <Key>
       <PropertyRef Name="Id" />
@@ -127,6 +139,43 @@
     <Property Name="EndDate" Type="datetime" />
     <Property Name="Blocked" Type="bit" />
     <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="Hour">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Blocked" Type="bit" />
+  </EntityType>
+  <EntityType Name="HourlyAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DA_Id" Type="int" Nullable="false" />
+    <Property Name="HT_Id" Type="int" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="HourTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HourId" Type="int" Nullable="false" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="HourDescription" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="InstitutionInfo">
     <Key>
@@ -389,6 +438,18 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DailyAttendance_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="DailyAttendance" Type="Self.DailyAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DailyAttendance">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_Districts_dbo_States_StateId">
     <End Role="States" Type="Self.States" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -438,6 +499,66 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Principal>
       <Dependent Role="Parents">
         <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hour_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="Hour" Type="Self.Hour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hour">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourlyAttendance_DailyAttendance">
+    <End Role="DailyAttendance" Type="Self.DailyAttendance" Multiplicity="1" />
+    <End Role="HourlyAttendance" Type="Self.HourlyAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DailyAttendance">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourlyAttendance">
+        <PropertyRef Name="DA_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourlyAttendance_HourTransaction">
+    <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="0..1" />
+    <End Role="HourlyAttendance" Type="Self.HourlyAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HourTransaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourlyAttendance">
+        <PropertyRef Name="HT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourTransaction_Hour">
+    <End Role="Hour" Type="Self.Hour" Multiplicity="1" />
+    <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourTransaction">
+        <PropertyRef Name="HourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourTransaction_Subjects">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourTransaction">
+        <PropertyRef Name="SubjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -579,11 +700,15 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DailyAttendance" EntityType="Self.DailyAttendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmergencyContactDetails" EntityType="Self.EmergencyContactDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hour" EntityType="Self.Hour" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HourlyAttendance" EntityType="Self.HourlyAttendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HourTransaction" EntityType="Self.HourTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
@@ -631,6 +756,10 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       <End Role="Subjects" EntitySet="Subjects" />
       <End Role="ClassSubjects" EntitySet="ClassSubjects" />
     </AssociationSet>
+    <AssociationSet Name="FK_DailyAttendance_Student" Association="Self.FK_DailyAttendance_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="DailyAttendance" EntitySet="DailyAttendance" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="Self.FK_dbo_Districts_dbo_States_StateId">
       <End Role="States" EntitySet="States" />
       <End Role="Districts" EntitySet="Districts" />
@@ -646,6 +775,26 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hour_Classes" Association="Self.FK_Hour_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Hour" EntitySet="Hour" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="Self.FK_HourlyAttendance_DailyAttendance">
+      <End Role="DailyAttendance" EntitySet="DailyAttendance" />
+      <End Role="HourlyAttendance" EntitySet="HourlyAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="Self.FK_HourlyAttendance_HourTransaction">
+      <End Role="HourTransaction" EntitySet="HourTransaction" />
+      <End Role="HourlyAttendance" EntitySet="HourlyAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourTransaction_Hour" Association="Self.FK_HourTransaction_Hour">
+      <End Role="Hour" EntitySet="Hour" />
+      <End Role="HourTransaction" EntitySet="HourTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourTransaction_Subjects" Association="Self.FK_HourTransaction_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="HourTransaction" EntitySet="HourTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentAddress_Address" Association="Self.FK_StudentAddress_Address">
       <End Role="Address" EntitySet="Address" />

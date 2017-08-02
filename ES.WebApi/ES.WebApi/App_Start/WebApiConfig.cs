@@ -1,4 +1,4 @@
-﻿using ES.DAL.repositories;
+﻿using ES.DAL;
 using ES.MODELS;
 using ES.SERVICE;
 using ES.WebApi.App_Start;
@@ -64,7 +64,20 @@ namespace ES.WebApi
                 .RegisterType<ITeacherService, TeacherService>()
                 .RegisterType<IRepository<TeacherSubject>, BaseRepository<TeacherSubject>>()
                 .RegisterType<ITeacherSubjectRepository, TeacherSubjectRepository>()
-                .RegisterType<ITeacherSubjectService, TeacherSubjectService>();
+                .RegisterType<ITeacherSubjectService, TeacherSubjectService>()
+                .RegisterType<IRepository<Hour>, BaseRepository<Hour>>()
+                .RegisterType<IHourRepository, HourRepository>()
+                .RegisterType<IHourService, HourService>()
+                .RegisterType<IRepository<HourTransaction>, BaseRepository<HourTransaction>>()
+                .RegisterType<IHourTransactionRepository, HourTransactionRepository>()
+                .RegisterType<IHourTransactionService, HourTransactionService>()
+                .RegisterType<IRepository<DailyAttendance>, BaseRepository<DailyAttendance>>()
+                .RegisterType<IDailyAttendanceRepository, DailyAttendanceRepository>()
+                .RegisterType<IDailyAttendanceService, DailyAttendanceService>()
+                .RegisterType<IRepository<HourlyAttendance>, BaseRepository<HourlyAttendance>>()
+                .RegisterType<IHourlyAttendanceRepository, HourlyAttendanceRepository>()
+                .RegisterType<IHourlyAttendanceService, HourlyAttendanceService>();
+            
 
 
             config.DependencyResolver = new UnityResolver(container);

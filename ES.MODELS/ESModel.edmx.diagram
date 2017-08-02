@@ -39,7 +39,7 @@
         <AssociationConnector Association="ESDBModel.FK_Address_States" />
         <AssociationConnector Association="ESDBModel.FK_StudentAddress_Address" />
         <AssociationConnector Association="ESDBModel.FK_StudentAddress_Student" />
-        <EntityTypeShape EntityType="ESDBModel.EmergencyContactDetail" Width="1.5" PointX="8.75" PointY="13.75" />
+        <EntityTypeShape EntityType="ESDBModel.EmergencyContactDetail" Width="1.5" PointX="9" PointY="16.25" />
         <EntityTypeShape EntityType="ESDBModel.StudentClassSectionInfo" Width="1.5" PointX="11" PointY="1" />
         <AssociationConnector Association="ESDBModel.FK_StuentClassSectionInfo_Classes" />
         <AssociationConnector Association="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo" />
@@ -48,6 +48,16 @@
         <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="11" PointY="12" />
         <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" />
         <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
+        <EntityTypeShape EntityType="ESDBModel.DailyAttendance" Width="1.5" PointX="8.25" PointY="12.75" />
+        <EntityTypeShape EntityType="ESDBModel.HourlyAttendance" Width="1.5" PointX="6.375" PointY="13" />
+        <EntityTypeShape EntityType="ESDBModel.HourTransaction" Width="1.5" PointX="4.375" PointY="13.125" />
+        <AssociationConnector Association="ESDBModel.FK_DailyAttendance_Student" />
+        <AssociationConnector Association="ESDBModel.FK_HourlyAttendance_DailyAttendance" />
+        <AssociationConnector Association="ESDBModel.FK_HourlyAttendance_HourTransaction" />
+        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Subjects" />
+        <EntityTypeShape EntityType="ESDBModel.Hour" Width="1.5" PointX="2.375" PointY="13.625" />
+        <AssociationConnector Association="ESDBModel.FK_Hour_Classes" />
+        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Hour" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

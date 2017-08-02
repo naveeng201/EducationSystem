@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ES.MODELS;
-using ES.DAL.repositories;
 using System.Data.Entity;
 
-namespace ES.DAL.repositories
+namespace ES.DAL
 {
     public interface IClassSubjectRepository : IRepository<ClassSubject>
     {

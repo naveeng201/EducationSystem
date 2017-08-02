@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
-namespace ES.DAL.repositories
+namespace ES.DAL
 {
     public interface IUnitOfWork : IDisposable
     {

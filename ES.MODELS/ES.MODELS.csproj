@@ -69,6 +69,9 @@
     <Compile Include="Country.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DailyAttendance.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -111,6 +114,15 @@
     <Compile Include="ExtendedModels\Subject.cs" />
     <Compile Include="ExtendedModels\Teacher.cs" />
     <Compile Include="ExtendedModels\TeacherSubject.cs" />
+    <Compile Include="Hour.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HourlyAttendance.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HourTransaction.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="InstitutionInfo.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>

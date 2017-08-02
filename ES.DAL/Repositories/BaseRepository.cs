@@ -7,7 +7,7 @@ using System.Data.Entity;
 using ES.MODELS;
 using System.Data.Entity.Validation;
 
-namespace ES.DAL.repositories
+namespace ES.DAL
 {
     public class BaseRepository<T> : IRepository<T> where T : class
     {

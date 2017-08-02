@@ -55,25 +55,29 @@
   <ItemGroup>
     <Compile Include="IRepositories\IRepository.cs" />
     <Compile Include="IRepositories\IUnitOfWork.cs" />
-    <Compile Include="repositories\AddressRepository.cs" />
-    <Compile Include="repositories\ClassSectionRepository.cs" />
-    <Compile Include="repositories\ClassSubjectRepository.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\Attendance\DailyAttendanceRepository.cs" />
+    <Compile Include="Repositories\Attendance\HourlyAttendanceRepository.cs" />
+    <Compile Include="Repositories\ClassSectionRepository.cs" />
+    <Compile Include="Repositories\ClassSubjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="repositories\AccountRepository.cs" />
-    <Compile Include="repositories\BaseRepository.cs" />
-    <Compile Include="repositories\ClassRepository.cs" />
-    <Compile Include="repositories\EmergencyContactDetailsRepository.cs" />
-    <Compile Include="repositories\EmployeeRepository.cs" />
-    <Compile Include="repositories\InstitutionInfoRepository.cs" />
-    <Compile Include="repositories\ParentsRepository.cs" />
-    <Compile Include="repositories\SectionRepository.cs" />
-    <Compile Include="repositories\StudentAditionalInfoRepository.cs" />
-    <Compile Include="repositories\StudentClassSectionInfoRepository.cs" />
-    <Compile Include="repositories\StudentRepository.cs" />
-    <Compile Include="repositories\SubjectRepository.cs" />
-    <Compile Include="repositories\TeacherRepository.cs" />
-    <Compile Include="repositories\TeacherSubjectRepository.cs" />
-    <Compile Include="repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\AccountRepository.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\ClassRepository.cs" />
+    <Compile Include="Repositories\EmergencyContactDetailsRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepository.cs" />
+    <Compile Include="Repositories\HourRepository.cs" />
+    <Compile Include="Repositories\Attendance\HourTransactionRepository.cs" />
+    <Compile Include="Repositories\InstitutionInfoRepository.cs" />
+    <Compile Include="Repositories\ParentsRepository.cs" />
+    <Compile Include="Repositories\SectionRepository.cs" />
+    <Compile Include="Repositories\StudentAditionalInfoRepository.cs" />
+    <Compile Include="Repositories\StudentClassSectionInfoRepository.cs" />
+    <Compile Include="Repositories\StudentRepository.cs" />
+    <Compile Include="Repositories\SubjectRepository.cs" />
+    <Compile Include="Repositories\TeacherRepository.cs" />
+    <Compile Include="Repositories\TeacherSubjectRepository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

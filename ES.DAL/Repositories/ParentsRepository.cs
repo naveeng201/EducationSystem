@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ES.MODELS;
-namespace ES.DAL.repositories
+namespace ES.DAL
 {
     public interface IParentRepository : IRepository<Parent>
     {

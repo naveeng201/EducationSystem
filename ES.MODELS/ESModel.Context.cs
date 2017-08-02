@@ -46,5 +46,9 @@ namespace ES.MODELS
         public virtual DbSet<EmergencyContactDetail> EmergencyContactDetails { get; set; }
         public virtual DbSet<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
         public virtual DbSet<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
+        public virtual DbSet<DailyAttendance> DailyAttendances { get; set; }
+        public virtual DbSet<HourlyAttendance> HourlyAttendances { get; set; }
+        public virtual DbSet<HourTransaction> HourTransactions { get; set; }
+        public virtual DbSet<Hour> Hours { get; set; }
     }
 }

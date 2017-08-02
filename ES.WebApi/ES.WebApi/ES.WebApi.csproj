@@ -160,9 +160,14 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\Controllers\DailyAttendanceController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\HourlyAttendanceController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\HourTransactionController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\EmergencyContactDetailsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HourController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\StudentClassSectionInfoController.cs" />
@@ -177,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Areas\Attendance\Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -186,6 +192,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Attendance\Models\" />
+    <Folder Include="Areas\Attendance\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
