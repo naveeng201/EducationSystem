@@ -1,11 +1,11 @@
 ﻿app.service('StudentInfoService', function ($http) {
-    var urlpath = "http://localhost:9810/api/StudentInfo/";
+    var urlpath = "http://localhost:9810/api/StudentAdditionalInfo/";
 
     this.loadStudentInfo = function (Id) {
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "loadStudentInfo/" + Id
+            url: urlpath + Id
         });
         return request;
     };
@@ -14,9 +14,9 @@
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "AddStudentInfo",
+            url: urlpath,
             data: JSON.stringify(objStudent)
         });
         return request;
-    };
+    };  
 });

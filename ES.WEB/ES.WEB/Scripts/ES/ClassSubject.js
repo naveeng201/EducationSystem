@@ -7,7 +7,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetAll",
+            url: urlpath,
         });
         return request;
     };
@@ -15,7 +15,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "SingleOrDefault/" + Id
+            url: urlpath + Id
         });
         return request;
     };
@@ -24,7 +24,7 @@
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "Insert",
+            url: urlpath,
             data: JSON.stringify(objClassSubject)
         });
         return request;

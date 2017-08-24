@@ -7,7 +7,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetSection",
+            url: urlpath,
         });
         return request;
     };
@@ -16,7 +16,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "LoadSectionDropdown/" + Id
+            url: urlpath + Id
         });
         return request;
     };
@@ -24,7 +24,7 @@
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "AddSection",
+            url: urlpath,
             data: JSON.stringify(objSection)
         });
         return request;

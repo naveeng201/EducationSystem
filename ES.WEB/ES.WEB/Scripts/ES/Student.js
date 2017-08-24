@@ -6,7 +6,7 @@ app.service('StudentService', function ($http) {
         var request = $http({
             method : "get",
             contentType : "Application/json",
-            url : urlpath+"GetAll"
+            url : urlpath
         })
         return request;
     };
@@ -14,7 +14,7 @@ app.service('StudentService', function ($http) {
         var request = $http({
             method: "get",
             contentType: "Application/json",
-            url: urlpath + "SingleOrDefault/"+Id
+            url: urlpath + Id
         })
         return request;
     };
@@ -23,17 +23,18 @@ app.service('StudentService', function ($http) {
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "Insert",
+            url: urlpath,
             data: JSON.stringify(objStudent)
         });
         return request;
     }
     this.GetStudentAdditionalInfo = function(Id)
     {
+        var urlpath = "http://localhost:9810/api/StudentAdditionalInfo/";
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetStudentAdditionalInfo/"+Id
+            url: urlpath + Id
         });
         return request;
     }
@@ -43,7 +44,7 @@ app.service('StudentService', function ($http) {
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlp + "AddStudentInfo",
+            url: urlp,
             data: JSON.stringify(objStudentAdditionalInfo)
         });
         return request;
@@ -51,11 +52,11 @@ app.service('StudentService', function ($http) {
 
     this.GetParent = function(Id)
     {
-        var urlp = "http://localhost:9810/api/Student/";
+        var urlp = "http://localhost:9810/api/Parent/";
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlp+"GetParent/" + Id,
+            url: urlp + Id,
         });
         return request;
     }
@@ -64,7 +65,7 @@ app.service('StudentService', function ($http) {
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url:  urlp + "Insert",
+            url:  urlp,
             data: JSON.stringify(objParent)
         });
         return request;

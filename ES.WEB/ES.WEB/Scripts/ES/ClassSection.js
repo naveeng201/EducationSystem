@@ -7,7 +7,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetAllClassSections",
+            url: urlpath,
         });
         return request;
     };
@@ -16,7 +16,7 @@
         var request = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "GetClassSection/" + Id
+            url: urlpath + Id
         });
         return request;
     };
@@ -25,7 +25,7 @@
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "AddClassSection",
+            url: urlpath,
             data: JSON.stringify(objClassSection)
         });
         return request;

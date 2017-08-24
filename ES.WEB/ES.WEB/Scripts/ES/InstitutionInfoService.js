@@ -1,11 +1,11 @@
 ﻿app.service('InstitutionInfoService', function ($http) {
-    var urlpath = "http://localhost:9810/api/InstitutionInfo/";
+    var urlpath = "http://localhost:9810/api/Institution/";
 
     this.getInstitutionInfo = function () {
         var response = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "getInstitutionInfo"
+            url: urlpath
         });
         return response;
     };
@@ -14,7 +14,7 @@
         var response = $http({
             method: "get",
             contentType: "application/json",
-            url: urlpath + "LoadInstituteDropdown/"+id
+            url: urlpath + id
         });
         return response;
     };
@@ -24,7 +24,7 @@
         var request = $http({
             method: "post",
             contentType: "application/json",
-            url: urlpath + "AddInstitute",
+            url: urlpath,
             data: JSON.stringify(objInstitute)
         });
         return request;
