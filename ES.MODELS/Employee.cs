@@ -33,12 +33,10 @@ namespace ES.MODELS
         public Nullable<int> ManagerID { get; set; }
         public string Designation { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
         public Nullable<bool> Blocked { get; set; }
-        public Nullable<System.DateTime> BlockedDate { get; set; }
-        public string BlockedBy { get; set; }
     
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }

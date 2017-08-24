@@ -14,6 +14,7 @@ namespace ES.SERVICE
         int Insert(Subject SectionMaster);
         void Update(Subject SectionMaster);
         Subject SingleOrDefault(int ID);
+        IEnumerable<Subject> GetSubjectsByClassId(int classId);
     }
     public class SubjectService : ISubjectService
     {
@@ -43,6 +44,10 @@ namespace ES.SERVICE
         public Subject SingleOrDefault(int ID)
         {
             return _repository.SingleOrDefault(ID);
+        }
+        public IEnumerable<Subject> GetSubjectsByClassId(int classId)
+        {
+            return _repository.GetSubjectsByClassId(classId);
         }
     }
 }

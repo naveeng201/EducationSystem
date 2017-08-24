@@ -14,6 +14,7 @@ namespace ES.SERVICE
         int Insert(Section SectionMaster);
         void Update(Section SectionMaster);
         Section SingleOrDefault(int ID);
+        IEnumerable<Section> GetSectionsByClassId(int classId);
     }
     public class SectionService : ISectionService
     {
@@ -43,6 +44,11 @@ namespace ES.SERVICE
         public Section SingleOrDefault(int ID)
         {
             return _repository.SingleOrDefault(ID);
+        }
+
+        public IEnumerable<Section> GetSectionsByClassId(int classId)
+        {
+            return _repository.GetSectionsByClassId(classId);
         }
     }
 }

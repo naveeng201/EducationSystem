@@ -99,9 +99,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ESModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Exam.cs">
+    <Compile Include="Institution.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MasterTable.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Relationship.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubDistrict.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AttendanceVM.cs" />
     <Compile Include="ExtendedModels\Address.cs" />
     <Compile Include="ExtendedModels\AspNetUser.cs" />
     <Compile Include="ExtendedModels\Class.cs" />
@@ -121,9 +131,6 @@
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HourTransaction.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InstitutionInfo.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />

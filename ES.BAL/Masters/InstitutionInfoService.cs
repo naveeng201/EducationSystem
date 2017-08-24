@@ -8,35 +8,35 @@ using ES.DAL;
 
 namespace ES.SERVICE
 {
-    public interface IInstitutionInfoService
+    public interface IInstitutionService
     {
-        IEnumerable<InstitutionInfo> GetAll();
-        int Insert(InstitutionInfo InstituteInfoMaster);
-        void Update(InstitutionInfo InstituteInfonMaster);
-        InstitutionInfo SingleOrDefault(int ID);
+        IEnumerable<Institution> GetAll();
+        int Insert(Institution InstituteInfoMaster);
+        void Update(Institution InstituteInfonMaster);
+        Institution SingleOrDefault(int ID);
     }
-   public class InstitutionInfoService:IInstitutionInfoService
+   public class InstitutionService:IInstitutionService
     {
-        IInstitutionInfoRepository _repository;
+        IInstitutionRepository _repository;
         IUnitOfWork _uniteOfWork;
-        public InstitutionInfoService(IUnitOfWork uniteOfWork, IInstitutionInfoRepository repository)
+        public InstitutionService(IUnitOfWork uniteOfWork, IInstitutionRepository repository)
        {
            _repository = repository;
            _uniteOfWork = uniteOfWork;
        }
-        public IEnumerable<InstitutionInfo> GetAll()
+        public IEnumerable<Institution> GetAll()
         {
            return _repository.GetAll();
         }
-        public int Insert(InstitutionInfo InstituteInfoMaster)
+        public int Insert(Institution InstituteInfoMaster)
         {
           return  _repository.Insert(InstituteInfoMaster);
         }
-        public void Update(InstitutionInfo InstituteInfonMaster)
+        public void Update(Institution InstituteInfonMaster)
         {
               _repository.Update(InstituteInfonMaster);
         }
-        public InstitutionInfo SingleOrDefault(int ID)
+        public Institution SingleOrDefault(int ID)
         {
            return  _repository.SingleOrDefault(ID);
         }

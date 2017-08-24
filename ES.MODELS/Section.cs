@@ -23,10 +23,10 @@ namespace ES.MODELS
         public int Id { get; set; }
         public string SectionName { get; set; }
         public string Description { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> Blocked { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<int> UserID { get; set; }
     
         public virtual ICollection<ClassSection> ClassSections { get; set; }
         public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }

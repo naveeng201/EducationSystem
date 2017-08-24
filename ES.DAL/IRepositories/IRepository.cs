@@ -60,13 +60,20 @@ namespace ES.DAL
         int SaveChanges();
 
         /// <summary>
-        /// Deletes this entry fro the database
+        /// Deletes this entry from the database
         /// ** WARNING - Most items should be marked inactive and Updated, not deleted
         /// </summary>
         /// <param name="entity">The entity to delete</param>
         /// <param name="userId">The user Id who deleted the entity</param>
         /// <returns></returns>
         int Delete(T entity);
+
+        /// <summary>
+        /// Delete entity from table based on id.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        int Delete(int Id);
 
         IUnitOfWork UnitOfWork { get; }
     }

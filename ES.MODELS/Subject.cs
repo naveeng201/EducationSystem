@@ -17,22 +17,22 @@ namespace ES.MODELS
         public Subject()
         {
             this.ClassSubjects = new HashSet<ClassSubject>();
-            this.TeacherSubjects = new HashSet<TeacherSubject>();
             this.HourTransactions = new HashSet<HourTransaction>();
+            this.TeacherSubjects = new HashSet<TeacherSubject>();
         }
     
         public int Id { get; set; }
         public string SubjectName { get; set; }
         public string ShortName { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<bool> isDeleted { get; set; }
-        public Nullable<int> locationID { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<bool> Blocked { get; set; }
     
         public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
-        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
         public virtual ICollection<HourTransaction> HourTransactions { get; set; }
+        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

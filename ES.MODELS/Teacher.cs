@@ -22,10 +22,10 @@ namespace ES.MODELS
         public int Id { get; set; }
         public int EmployeeId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
         public Nullable<bool> Blocked { get; set; }
-        public Nullable<System.DateTime> BlockedDate { get; set; }
-        public string ModifiedBy { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }

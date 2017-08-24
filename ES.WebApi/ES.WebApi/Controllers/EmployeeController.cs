@@ -10,6 +10,7 @@ using ES.MODELS;
 
 namespace ES.WebApi.Controllers
 {
+    [RoutePrefix("api/Employee")]
     public class EmployeeController : ApiController
     {
         private IEmployeeService _service;
@@ -17,8 +18,10 @@ namespace ES.WebApi.Controllers
         {
             _service = service;
         }
+
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -33,8 +36,10 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage SingleOrDefault(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             try
@@ -57,6 +62,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("")]
         [HttpPost]
         public HttpResponseMessage Insert([FromBody] Employee objEmployee)
         {
@@ -88,7 +95,9 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-        [HttpPut]
+
+        [Route("")]
+        [HttpDelete]
         public HttpResponseMessage Delete([FromBody] Employee objEmployee)
         {
             HttpResponseMessage response = null;

@@ -56,6 +56,7 @@
     <Compile Include="IRepositories\IRepository.cs" />
     <Compile Include="IRepositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\Attendance\AttendanceRepository.cs" />
     <Compile Include="Repositories\Attendance\DailyAttendanceRepository.cs" />
     <Compile Include="Repositories\Attendance\HourlyAttendanceRepository.cs" />
     <Compile Include="Repositories\ClassSectionRepository.cs" />

@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace ES.WebApi.Controllers
 {
+    [RoutePrefix("api/Student")]
     public class StudentController : ApiController
     {
         private IStudentService _studentService = null;
@@ -17,8 +18,10 @@ namespace ES.WebApi.Controllers
         {
             _studentService = studentService;
         }
+
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -35,39 +38,9 @@ namespace ES.WebApi.Controllers
             }
         }
 
-        [HttpPost]
-        public HttpResponseMessage Insert([FromBody] Student student)
-        {
-            HttpResponseMessage response = null;
-            try
-            {
-                using (var t = new TransactionScope())
-                {
-                    if (student.Id == 0)
-                    {
-                        student.CreatDate = DateTime.Now;
-                        student.Blocked = false;
-                        int ID = _studentService.Insert(student);
-                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
-                    }
-                    else
-                    {
-                        _studentService.Update(student);
-                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated");
-                    }
-                    t.Complete();
-                }
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
-        }
-
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage SingleOrDefault(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             try
@@ -91,7 +64,40 @@ namespace ES.WebApi.Controllers
             }
         }
 
-        [HttpPut]
+        [Route("")]
+        [HttpPost]
+        public HttpResponseMessage Insert([FromBody] Student student)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                using (var t = new TransactionScope())
+                {
+                    if (student.Id == 0)
+                    {
+                        student.CreatdDate = DateTime.Now;
+                        student.Blocked = false;
+                        int ID = _studentService.Insert(student);
+                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
+                    }
+                    else
+                    {
+                        _studentService.Update(student);
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated");
+                    }
+                    t.Complete();
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+        [Route("")]
+        [HttpDelete]
         public HttpResponseMessage Delete([FromBody] Student student)
         {
             HttpResponseMessage response = null;
@@ -108,6 +114,7 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage GetStudentAdditionalInfo(int Id)
         {
@@ -128,8 +135,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-        //GetAllStudentsbyclass
 
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage GetStudentAddress(int Id)
         {
@@ -146,7 +153,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-        
+
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage GetStudentAddresses(int Id)
         {
@@ -164,6 +172,7 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("")]
         [HttpPost]
         public HttpResponseMessage InsertStudentAddress([FromBody]StudentAddress objSA)
         {
@@ -180,6 +189,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage GetParent(int Id)
         {
@@ -196,6 +207,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage GetParents(int Id)
         {
@@ -213,67 +226,6 @@ namespace ES.WebApi.Controllers
             }
         }
     } 
-    #region //StudentAdditionalInfo
-    public class StudentInfoController : ApiController
-    {
-        private readonly IStudentAditionalInfoService _repository;
-        public StudentInfoController(IStudentAditionalInfoService repository)
-        {
-            this._repository = repository;
-        }
-        [HttpGet]
-        public HttpResponseMessage loadStudentInfo(int id)
-        {
-            HttpResponseMessage response = null;
-            StudentAditionalInfo objStudent = null;
-            try
-            {
-                if (id == 0)
-                {
-                    objStudent = new StudentAditionalInfo();
-                }
-                else
-                {
-                    objStudent = _repository.SingleOrDefault(id);
-                }
-                response = Request.CreateResponse(HttpStatusCode.OK, objStudent);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
-        }
-       
-        public HttpResponseMessage AddStudentInfo(StudentAditionalInfo objStuent)
-        {
-            HttpResponseMessage response = null;
-            try
-            {
-                using (var t = new TransactionScope())
-                {
-                    if (objStuent.Id == 0)
-                    {
-                        // objStuent.CreatedDate = DateTime.Now;
-                        // This Area Need to Insert in BULK Insert Method                    
-                        _repository.Insert(objStuent);
-                    }
-                    else
-                    {
-                        _repository.Update(objStuent);
-                    }
-                    t.Complete();
-                }
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Inserted");
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
-        }
-    }
-    #endregion
+
+     
 }

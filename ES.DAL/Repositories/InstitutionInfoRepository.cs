@@ -7,12 +7,12 @@ using ES.MODELS;
 
 namespace ES.DAL
 {
-    public interface IInstitutionInfoRepository : IRepository<InstitutionInfo>
+    public interface IInstitutionRepository : IRepository<Institution>
     {
     }
-    public class InstitutionInfoRepository: BaseRepository<InstitutionInfo>, IInstitutionInfoRepository
+    public class InstitutionRepository: BaseRepository<Institution>, IInstitutionRepository
     {
-        public InstitutionInfoRepository(IRepository<InstitutionInfo> repository, IUnitOfWork uniteOfWork)
+        public InstitutionRepository(IRepository<Institution> repository, IUnitOfWork uniteOfWork)
             : base(uniteOfWork)
         {
 

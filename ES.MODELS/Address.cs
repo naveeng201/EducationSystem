@@ -29,6 +29,11 @@ namespace ES.MODELS
         public Nullable<int> CountryId { get; set; }
         public string PinCode { get; set; }
         public string MobilePhone { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<bool> Blocked { get; set; }
     
         public virtual Country Country { get; set; }
         public virtual District District { get; set; }

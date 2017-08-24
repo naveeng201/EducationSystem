@@ -18,9 +18,10 @@ namespace ES.MODELS
         public int ClassID { get; set; }
         public int SubjectID { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
         public Nullable<bool> Blocked { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Subject Subject { get; set; }

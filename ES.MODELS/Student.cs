@@ -16,11 +16,11 @@ namespace ES.MODELS
     {
         public Student()
         {
+            this.DailyAttendances = new HashSet<DailyAttendance>();
             this.Parents = new HashSet<Parent>();
             this.StudentAddresses = new HashSet<StudentAddress>();
-            this.StudentClassSectionInfoes = new HashSet<StudentClassSectionInfo>();
             this.StudentAditionalInfoes = new HashSet<StudentAditionalInfo>();
-            this.DailyAttendances = new HashSet<DailyAttendance>();
+            this.StudentClassSectionInfoes = new HashSet<StudentClassSectionInfo>();
         }
     
         public int Id { get; set; }
@@ -29,14 +29,16 @@ namespace ES.MODELS
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string PhoneNo { get; set; }
-        public Nullable<System.DateTime> CreatDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatdDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> Blocked { get; set; }
     
+        public virtual ICollection<DailyAttendance> DailyAttendances { get; set; }
         public virtual ICollection<Parent> Parents { get; set; }
         public virtual ICollection<StudentAddress> StudentAddresses { get; set; }
-        public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
         public virtual ICollection<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
-        public virtual ICollection<DailyAttendance> DailyAttendances { get; set; }
+        public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
     }
 }

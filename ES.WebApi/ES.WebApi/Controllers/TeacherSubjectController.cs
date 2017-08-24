@@ -10,6 +10,7 @@ using System.Transactions;
 
 namespace ES.WebApi.Controllers
 {
+    [RoutePrefix("api/TeacherSubject")]
     public class TeacherSubjectController : ApiController
     {
         private ITeacherSubjectService _service;
@@ -18,6 +19,8 @@ namespace ES.WebApi.Controllers
         {
             _service = service;
         }
+
+        [Route("")]
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
@@ -34,6 +37,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("{Id")]
         [HttpGet]
         public HttpResponseMessage SingleOrDefault(int Id)
         {
@@ -58,6 +63,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("")]
         [HttpPost]
         public HttpResponseMessage Insert([FromBody] TeacherSubject objTeacherSubject)
         {
@@ -89,6 +96,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("")]
         [HttpPut]
         public HttpResponseMessage Delete([FromBody] TeacherSubject objTeacherSubject)
         {

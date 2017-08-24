@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
+    <Compile Include="Attendance\AttendanceService.cs" />
     <Compile Include="Attendance\DailyAttendanceService.cs" />
     <Compile Include="Attendance\HourlyAttendanceService.cs" />
     <Compile Include="Attendance\HourTransactionService.cs" />

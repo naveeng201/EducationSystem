@@ -161,6 +161,7 @@
     <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\Controllers\AttendanceController.cs" />
     <Compile Include="Areas\Attendance\Controllers\DailyAttendanceController.cs" />
     <Compile Include="Areas\Attendance\Controllers\HourlyAttendanceController.cs" />
     <Compile Include="Areas\Attendance\Controllers\HourTransactionController.cs" />
@@ -170,10 +171,12 @@
     <Compile Include="Controllers\HourController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\StudentAdditionalInfoController.cs" />
     <Compile Include="Controllers\StudentClassSectionInfoController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\TeacherSubjectController.cs" />
+    <Compile Include="Filters\CustomExceptionFilter.cs" />
     <Compile Include="Filters\ValidateModelAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

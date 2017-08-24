@@ -10,6 +10,7 @@ using System.Transactions;
 
 namespace ES.WebApi.Controllers
 {
+    [RoutePrefix("api/Parent")]
     public class ParentController : ApiController
     {
         private IParentService _service;
@@ -17,8 +18,10 @@ namespace ES.WebApi.Controllers
         {
             _service = service;
         }
+
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -34,8 +37,9 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage SingleOrDefault(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             try
@@ -58,6 +62,8 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("")]
         [HttpPost]
         public HttpResponseMessage Insert([FromBody] Parent parent)
         {
@@ -89,7 +95,9 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
-        [HttpPut]
+
+        [Route("")]
+        [HttpDelete]
         public HttpResponseMessage Delete([FromBody] Parent parent)
         {
             HttpResponseMessage response = null;

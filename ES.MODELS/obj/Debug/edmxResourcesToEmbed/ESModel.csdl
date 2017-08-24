@@ -1,68 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ESDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="ESDataContext" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="spi_InsertAttendance" ReturnType="Collection(Int32)">
+      <Parameter Name="StudentIDs" Mode="In" Type="String" />
+      <Parameter Name="ClassId" Mode="In" Type="Int32" />
+      <Parameter Name="SectionId" Mode="In" Type="Int32" />
+      <Parameter Name="HourId" Mode="In" Type="Int32" />
+      <Parameter Name="SubjectId" Mode="In" Type="Int32" />
+      <Parameter Name="AttendanceDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="StartTime" Mode="In" Type="Time" />
+      <Parameter Name="EndTime" Mode="In" Type="Time" />
+      <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
     <EntitySet Name="Classes" EntityType="ESDBModel.Class" />
-    <EntitySet Name="Subjects" EntityType="ESDBModel.Subject" />
-    <EntitySet Name="InstitutionInfoes" EntityType="ESDBModel.InstitutionInfo" />
-    <EntitySet Name="Sections" EntityType="ESDBModel.Section" />
-    <EntitySet Name="ClassSubjects" EntityType="ESDBModel.ClassSubject" />
-    <AssociationSet Name="FK_ClassSubjects_Classes" Association="ESDBModel.FK_ClassSubjects_Classes">
-      <End Role="Class" EntitySet="Classes" />
-      <End Role="ClassSubject" EntitySet="ClassSubjects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClassSubjects_Subjects" Association="ESDBModel.FK_ClassSubjects_Subjects">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="ClassSubject" EntitySet="ClassSubjects" />
-    </AssociationSet>
     <EntitySet Name="ClassSections" EntityType="ESDBModel.ClassSection" />
-    <AssociationSet Name="FK_ClassSections_Classes" Association="ESDBModel.FK_ClassSections_Classes">
-      <End Role="Class" EntitySet="Classes" />
-      <End Role="ClassSection" EntitySet="ClassSections" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClassSections_Sections" Association="ESDBModel.FK_ClassSections_Sections">
-      <End Role="Section" EntitySet="Sections" />
-      <End Role="ClassSection" EntitySet="ClassSections" />
-    </AssociationSet>
-    <EntitySet Name="Students" EntityType="ESDBModel.Student" />
-    <EntitySet Name="Parents" EntityType="ESDBModel.Parent" />
-    <AssociationSet Name="FK_Guardian_Student" Association="ESDBModel.FK_Guardian_Student">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="Parent" EntitySet="Parents" />
-    </AssociationSet>
-    <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
+    <EntitySet Name="ClassSubjects" EntityType="ESDBModel.ClassSubject" />
+    <EntitySet Name="Countries" EntityType="ESDBModel.Country" />
+    <EntitySet Name="DailyAttendances" EntityType="ESDBModel.DailyAttendance" />
     <EntitySet Name="Departments" EntityType="ESDBModel.Department" />
+    <EntitySet Name="Districts" EntityType="ESDBModel.District" />
+    <EntitySet Name="EmergencyContactDetails" EntityType="ESDBModel.EmergencyContactDetail" />
     <EntitySet Name="Employees" EntityType="ESDBModel.Employee" />
+    <EntitySet Name="Hours" EntityType="ESDBModel.Hour" />
+    <EntitySet Name="HourlyAttendances" EntityType="ESDBModel.HourlyAttendance" />
+    <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
+    <EntitySet Name="Institutions" EntityType="ESDBModel.Institution" />
+    <EntitySet Name="MasterTables" EntityType="ESDBModel.MasterTable" />
+    <EntitySet Name="Parents" EntityType="ESDBModel.Parent" />
+    <EntitySet Name="Relationships" EntityType="ESDBModel.Relationship" />
+    <EntitySet Name="Sections" EntityType="ESDBModel.Section" />
+    <EntitySet Name="States" EntityType="ESDBModel.State" />
+    <EntitySet Name="Students" EntityType="ESDBModel.Student" />
+    <EntitySet Name="StudentAddresses" EntityType="ESDBModel.StudentAddress" />
+    <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
+    <EntitySet Name="StudentClassSectionInfoes" EntityType="ESDBModel.StudentClassSectionInfo" />
+    <EntitySet Name="SubDistricts" EntityType="ESDBModel.SubDistrict" />
+    <EntitySet Name="Subjects" EntityType="ESDBModel.Subject" />
     <EntitySet Name="Teachers" EntityType="ESDBModel.Teacher" />
     <EntitySet Name="TeacherSubjects" EntityType="ESDBModel.TeacherSubject" />
-    <AssociationSet Name="FK_Department_Employee" Association="ESDBModel.FK_Department_Employee">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="Department" EntitySet="Departments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Teacher_Employee" Association="ESDBModel.FK_Teacher_Employee">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="Teacher" EntitySet="Teachers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TeacherSubject_Subjects" Association="ESDBModel.FK_TeacherSubject_Subjects">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TeacherSubject_Teacher" Association="ESDBModel.FK_TeacherSubject_Teacher">
-      <End Role="Teacher" EntitySet="Teachers" />
-      <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
-    </AssociationSet>
-    <EntitySet Name="Countries" EntityType="ESDBModel.Country" />
-    <EntitySet Name="Districts" EntityType="ESDBModel.District" />
-    <EntitySet Name="States" EntityType="ESDBModel.State" />
-    <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="ESDBModel.FK_dbo_States_dbo_Countries_CountryId">
-      <End Role="Country" EntitySet="Countries" />
-      <End Role="State" EntitySet="States" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="ESDBModel.FK_dbo_Districts_dbo_States_StateId">
-      <End Role="State" EntitySet="States" />
-      <End Role="District" EntitySet="Districts" />
-    </AssociationSet>
-    <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
-    <EntitySet Name="StudentAddresses" EntityType="ESDBModel.StudentAddress" />
     <AssociationSet Name="FK_Address_Countries" Association="ESDBModel.FK_Address_Countries">
       <End Role="Country" EntitySet="Countries" />
       <End Role="Address" EntitySet="Addresses" />
@@ -79,40 +59,34 @@
       <End Role="Address" EntitySet="Addresses" />
       <End Role="StudentAddress" EntitySet="StudentAddresses" />
     </AssociationSet>
-    <AssociationSet Name="FK_StudentAddress_Student" Association="ESDBModel.FK_StudentAddress_Student">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentAddress" EntitySet="StudentAddresses" />
+    <AssociationSet Name="FK_ClassSections_Classes" Association="ESDBModel.FK_ClassSections_Classes">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="ClassSection" EntitySet="ClassSections" />
     </AssociationSet>
-    <EntitySet Name="EmergencyContactDetails" EntityType="ESDBModel.EmergencyContactDetail" />
-    <EntitySet Name="StudentClassSectionInfoes" EntityType="ESDBModel.StudentClassSectionInfo" />
+    <AssociationSet Name="FK_ClassSubjects_Classes" Association="ESDBModel.FK_ClassSubjects_Classes">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="ClassSubject" EntitySet="ClassSubjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hour_Classes" Association="ESDBModel.FK_Hour_Classes">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="Hour" EntitySet="Hours" />
+    </AssociationSet>
     <AssociationSet Name="FK_StuentClassSectionInfo_Classes" Association="ESDBModel.FK_StuentClassSectionInfo_Classes">
       <End Role="Class" EntitySet="Classes" />
       <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
     </AssociationSet>
-    <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo">
-      <End Role="InstitutionInfo" EntitySet="InstitutionInfoes" />
-      <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="ESDBModel.FK_StuentClassSectionInfo_Sections">
+    <AssociationSet Name="FK_ClassSections_Sections" Association="ESDBModel.FK_ClassSections_Sections">
       <End Role="Section" EntitySet="Sections" />
-      <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
+      <End Role="ClassSection" EntitySet="ClassSections" />
     </AssociationSet>
-    <AssociationSet Name="FK_StudentClassSectionInfo_Student" Association="ESDBModel.FK_StudentClassSectionInfo_Student">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
+    <AssociationSet Name="FK_ClassSubjects_Subjects" Association="ESDBModel.FK_ClassSubjects_Subjects">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="ClassSubject" EntitySet="ClassSubjects" />
     </AssociationSet>
-    <EntitySet Name="StudentAditionalInfoes" EntityType="ESDBModel.StudentAditionalInfo" />
-    <AssociationSet Name="FK_StudentAditionalInfo_EmergencyContactDetails" Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails">
-      <End Role="EmergencyContactDetail" EntitySet="EmergencyContactDetails" />
-      <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+    <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="ESDBModel.FK_dbo_States_dbo_Countries_CountryId">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="State" EntitySet="States" />
     </AssociationSet>
-    <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
-    </AssociationSet>
-    <EntitySet Name="DailyAttendances" EntityType="ESDBModel.DailyAttendance" />
-    <EntitySet Name="HourlyAttendances" EntityType="ESDBModel.HourlyAttendance" />
-    <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
     <AssociationSet Name="FK_DailyAttendance_Student" Association="ESDBModel.FK_DailyAttendance_Student">
       <End Role="Student" EntitySet="Students" />
       <End Role="DailyAttendance" EntitySet="DailyAttendances" />
@@ -120,6 +94,34 @@
     <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="ESDBModel.FK_HourlyAttendance_DailyAttendance">
       <End Role="DailyAttendance" EntitySet="DailyAttendances" />
       <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_Employee" Association="ESDBModel.FK_Department_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="ESDBModel.FK_dbo_Districts_dbo_States_StateId">
+      <End Role="State" EntitySet="States" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId" Association="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="SubDistrict" EntitySet="SubDistricts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmergencyContactDetails_Relationships" Association="ESDBModel.FK_EmergencyContactDetails_Relationships">
+      <End Role="Relationship" EntitySet="Relationships" />
+      <End Role="EmergencyContactDetail" EntitySet="EmergencyContactDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAditionalInfo_EmergencyContactDetails" Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails">
+      <End Role="EmergencyContactDetail" EntitySet="EmergencyContactDetails" />
+      <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_Employee" Association="ESDBModel.FK_Teacher_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
+      <End Role="Hour" EntitySet="Hours" />
+      <End Role="HourTransaction" EntitySet="HourTransactions" />
     </AssociationSet>
     <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="ESDBModel.FK_HourlyAttendance_HourTransaction">
       <End Role="HourTransaction" EntitySet="HourTransactions" />
@@ -129,16 +131,63 @@
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="HourTransaction" EntitySet="HourTransactions" />
     </AssociationSet>
-    <EntitySet Name="Hours" EntityType="ESDBModel.Hour" />
-    <AssociationSet Name="FK_Hour_Classes" Association="ESDBModel.FK_Hour_Classes">
-      <End Role="Class" EntitySet="Classes" />
-      <End Role="Hour" EntitySet="Hours" />
+    <AssociationSet Name="FK_StuentClassSectionInfo_Institution" Association="ESDBModel.FK_StuentClassSectionInfo_Institution">
+      <End Role="Institution" EntitySet="Institutions" />
+      <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
     </AssociationSet>
-    <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
-      <End Role="Hour" EntitySet="Hours" />
-      <End Role="HourTransaction" EntitySet="HourTransactions" />
+    <AssociationSet Name="FK_Guardian_Student" Association="ESDBModel.FK_Guardian_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Parent" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="ESDBModel.FK_StuentClassSectionInfo_Sections">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAddress_Student" Association="ESDBModel.FK_StudentAddress_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentAddress" EntitySet="StudentAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAditionalInfo_Student" Association="ESDBModel.FK_StudentAditionalInfo_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentClassSectionInfo_Student" Association="ESDBModel.FK_StudentClassSectionInfo_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherSubject_Subjects" Association="ESDBModel.FK_TeacherSubject_Subjects">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherSubject_Teacher" Association="ESDBModel.FK_TeacherSubject_Teacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Adress1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Adress2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="PinCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Country" Relationship="ESDBModel.FK_Address_Countries" FromRole="Address" ToRole="Country" />
+    <NavigationProperty Name="District" Relationship="ESDBModel.FK_Address_Districts" FromRole="Address" ToRole="District" />
+    <NavigationProperty Name="State" Relationship="ESDBModel.FK_Address_States" FromRole="Address" ToRole="State" />
+    <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="Address" ToRole="StudentAddress" />
+  </EntityType>
   <EntityType Name="Class">
     <Key>
       <PropertyRef Name="Id" />
@@ -146,34 +195,177 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="InstitutionId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="Blocked" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="InstitutionID" Type="Int32" />
-    <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="Class" ToRole="ClassSubject" />
     <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="Class" ToRole="ClassSection" />
-    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="Class" ToRole="StudentClassSectionInfo" />
+    <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="Class" ToRole="ClassSubject" />
     <NavigationProperty Name="Hours" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Class" ToRole="Hour" />
+    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="Class" ToRole="StudentClassSectionInfo" />
   </EntityType>
-  <EntityType Name="Subject">
+  <EntityType Name="ClassSection">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SubjectName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="ShortName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="isDeleted" Type="Boolean" />
-    <Property Name="locationID" Type="Int32" />
-    <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="Subject" ToRole="ClassSubject" />
-    <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="Subject" ToRole="TeacherSubject" />
-    <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="SectionID" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="ClassSection" ToRole="Class" />
+    <NavigationProperty Name="Section" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="ClassSection" ToRole="Section" />
   </EntityType>
-  <EntityType Name="InstitutionInfo">
+  <EntityType Name="ClassSubject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectID" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="ClassSubject" ToRole="Class" />
+    <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="ClassSubject" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Countries" FromRole="Country" ToRole="Address" />
+    <NavigationProperty Name="States" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="Country" ToRole="State" />
+  </EntityType>
+  <EntityType Name="DailyAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="Remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="DailyAttendance" ToRole="Student" />
+    <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="DailyAttendance" ToRole="HourlyAttendance" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerEmployeeId" Type="Int32" />
+    <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employee" Relationship="ESDBModel.FK_Department_Employee" FromRole="Department" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Districts" FromRole="District" ToRole="Address" />
+    <NavigationProperty Name="State" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="District" ToRole="State" />
+    <NavigationProperty Name="SubDistricts" Relationship="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId" FromRole="District" ToRole="SubDistrict" />
+  </EntityType>
+  <EntityType Name="EmergencyContactDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactPersonName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MobilePhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Relationship" Type="Int32" />
+    <Property Name="CreatetDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Relationship1" Relationship="ESDBModel.FK_EmergencyContactDetails_Relationships" FromRole="EmergencyContactDetail" ToRole="Relationship" />
+    <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="EmergencyContactDetail" ToRole="StudentAditionalInfo" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="AddressID1" Type="Int32" />
+    <Property Name="AddressID2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+    <Property Name="ManagerID" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Departments" Relationship="ESDBModel.FK_Department_Employee" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Teachers" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Employee" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Hour">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Hour" ToRole="Class" />
+    <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
+  </EntityType>
+  <EntityType Name="HourlyAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DA_Id" Type="Int32" Nullable="false" />
+    <Property Name="HT_Id" Type="Int32" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="DailyAttendance" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="HourlyAttendance" ToRole="DailyAttendance" />
+    <NavigationProperty Name="HourTransaction" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourlyAttendance" ToRole="HourTransaction" />
+  </EntityType>
+  <EntityType Name="HourTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HourId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HourDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
+    <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
+    <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Institution">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -190,120 +382,22 @@
     <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="Blocked" Type="Boolean" />
-    <Property Name="UserID" Type="Int32" />
-    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo" FromRole="InstitutionInfo" ToRole="StudentClassSectionInfo" />
+    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Institution" FromRole="Institution" ToRole="StudentClassSectionInfo" />
   </EntityType>
-  <EntityType Name="Section">
+  <EntityType Name="MasterTable">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="TableID" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SectionName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Blocked" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="UserID" Type="Int32" />
-    <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="Section" ToRole="ClassSection" />
-    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Sections" FromRole="Section" ToRole="StudentClassSectionInfo" />
-  </EntityType>
-  <EntityType Name="ClassSubject">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClassID" Type="Int32" Nullable="false" />
-    <Property Name="SubjectID" Type="Int32" Nullable="false" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="Blocked" Type="Boolean" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="ClassSubject" ToRole="Class" />
-    <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="ClassSubject" ToRole="Subject" />
-  </EntityType>
-  <Association Name="FK_ClassSubjects_Classes">
-    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
-    <End Type="ESDBModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Class">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClassSubject">
-        <PropertyRef Name="ClassID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ClassSubjects_Subjects">
-    <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
-    <End Type="ESDBModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClassSubject">
-        <PropertyRef Name="SubjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="ClassSection">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClassID" Type="Int32" Nullable="false" />
-    <Property Name="SectionID" Type="Int32" Nullable="false" />
-    <Property Name="Blocked" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="UserID" Type="Int32" />
-    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="ClassSection" ToRole="Class" />
-    <NavigationProperty Name="Section" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="ClassSection" ToRole="Section" />
-  </EntityType>
-  <Association Name="FK_ClassSections_Classes">
-    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
-    <End Type="ESDBModel.ClassSection" Role="ClassSection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Class">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClassSection">
-        <PropertyRef Name="ClassID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ClassSections_Sections">
-    <End Type="ESDBModel.Section" Role="Section" Multiplicity="1" />
-    <End Type="ESDBModel.ClassSection" Role="ClassSection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Section">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClassSection">
-        <PropertyRef Name="SectionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Student">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="Blocked" Type="Boolean" />
-    <NavigationProperty Name="Parents" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Student" ToRole="Parent" />
-    <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
-    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
-    <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
-    <NavigationProperty Name="DailyAttendances" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="Student" ToRole="DailyAttendance" />
+    <Property Name="TableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Descrription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RelationWith" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Parent">
     <Key>
@@ -326,72 +420,157 @@
     <Property Name="Income" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ParentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="CreatedDatte" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedDatte" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="Blocked" Type="Boolean" />
     <NavigationProperty Name="Student" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Parent" ToRole="Student" />
   </EntityType>
-  <Association Name="FK_Guardian_Student">
-    <End Type="ESDBModel.Student" Role="Student" Multiplicity="0..1" />
-    <End Type="ESDBModel.Parent" Role="Parent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Parent">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Exam">
+  <EntityType Name="Relationship">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ExamName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="ExamShotName" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-    <Property Name="ExamCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EmergencyContactDetails" Relationship="ESDBModel.FK_EmergencyContactDetails_Relationships" FromRole="Relationship" ToRole="EmergencyContactDetail" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SectionName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="Section" ToRole="ClassSection" />
+    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Sections" FromRole="Section" ToRole="StudentClassSectionInfo" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_States" FromRole="State" ToRole="Address" />
+    <NavigationProperty Name="Country" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="State" ToRole="Country" />
+    <NavigationProperty Name="Districts" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="State" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserID" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Department">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="ManagerEmployeeId" Type="Int32" />
-    <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Employee" Relationship="ESDBModel.FK_Department_Employee" FromRole="Department" ToRole="Employee" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="DOB" Type="DateTime" Precision="0" />
-    <Property Name="AddressID1" Type="Int32" />
-    <Property Name="AddressID2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="DepartmentID" Type="Int32" />
-    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
-    <Property Name="ManagerID" Type="Int32" />
-    <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
-    <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatdDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="Blocked" Type="Boolean" />
-    <Property Name="BlockedDate" Type="DateTime" Precision="0" />
-    <Property Name="BlockedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Departments" Relationship="ESDBModel.FK_Department_Employee" FromRole="Employee" ToRole="Department" />
-    <NavigationProperty Name="Teachers" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Employee" ToRole="Teacher" />
+    <NavigationProperty Name="DailyAttendances" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="Student" ToRole="DailyAttendance" />
+    <NavigationProperty Name="Parents" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Student" ToRole="Parent" />
+    <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
+    <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
+    <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
+  </EntityType>
+  <EntityType Name="StudentAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="AddressId" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Address" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="StudentAddress" ToRole="Address" />
+    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="StudentAddress" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="StudentAditionalInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="Address1Id" Type="Int32" />
+    <Property Name="Address2Id" Type="Int32" />
+    <Property Name="AdmissionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ClassRollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddmissionDate" Type="DateTime" Precision="3" />
+    <Property Name="BatchID" Type="Int32" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StudentCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IsSMSEnabled" Type="Boolean" />
+    <Property Name="PhotoFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhotoContentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PhotoData" Type="Binary" MaxLength="5000" FixedLength="true" />
+    <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyContactDetailsID" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="EmergencyContactDetail" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="StudentAditionalInfo" ToRole="EmergencyContactDetail" />
+    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="StudentClassSectionInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="StudentNo" Type="Int32" />
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="SectionID" Type="Int32" Nullable="false" />
+    <Property Name="RollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Meadium" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="InstitutionID" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="StudentClassSectionInfo" ToRole="Class" />
+    <NavigationProperty Name="Institution" Relationship="ESDBModel.FK_StuentClassSectionInfo_Institution" FromRole="StudentClassSectionInfo" ToRole="Institution" />
+    <NavigationProperty Name="Section" Relationship="ESDBModel.FK_StuentClassSectionInfo_Sections" FromRole="StudentClassSectionInfo" ToRole="Section" />
+    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="StudentClassSectionInfo" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="SubDistrict">
+    <Key>
+      <PropertyRef Name="SubDistrictsId" />
+    </Key>
+    <Property Name="SubDistrictsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubDistrictsName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="District" Relationship="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId" FromRole="SubDistrict" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="Subject" ToRole="ClassSubject" />
+    <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
+    <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="Subject" ToRole="TeacherSubject" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -399,11 +578,11 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="Blocked" Type="Boolean" />
-    <Property Name="BlockedDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Employee" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Teacher" ToRole="Employee" />
     <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Teacher" FromRole="Teacher" ToRole="TeacherSubject" />
   </EntityType>
@@ -414,151 +593,13 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TeacherId" Type="Int32" Nullable="false" />
     <Property Name="SubjectId" Type="Int32" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
     <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="TeacherSubject" ToRole="Subject" />
     <NavigationProperty Name="Teacher" Relationship="ESDBModel.FK_TeacherSubject_Teacher" FromRole="TeacherSubject" ToRole="Teacher" />
-  </EntityType>
-  <Association Name="FK_Department_Employee">
-    <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="0..1" />
-    <End Type="ESDBModel.Department" Role="Department" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Department">
-        <PropertyRef Name="ManagerEmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Teacher_Employee">
-    <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="1" />
-    <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Teacher">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TeacherSubject_Subjects">
-    <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
-    <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TeacherSubject">
-        <PropertyRef Name="SubjectId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TeacherSubject_Teacher">
-    <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
-    <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Teacher">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TeacherSubject">
-        <PropertyRef Name="TeacherId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Country">
-    <Key>
-      <PropertyRef Name="CountryId" />
-    </Key>
-    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="States" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="Country" ToRole="State" />
-    <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Countries" FromRole="Country" ToRole="Address" />
-  </EntityType>
-  <EntityType Name="District">
-    <Key>
-      <PropertyRef Name="DistrictId" />
-    </Key>
-    <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StateId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="State" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="District" ToRole="State" />
-    <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Districts" FromRole="District" ToRole="Address" />
-  </EntityType>
-  <EntityType Name="State">
-    <Key>
-      <PropertyRef Name="StateId" />
-    </Key>
-    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StateName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CountryId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Country" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="State" ToRole="Country" />
-    <NavigationProperty Name="Districts" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="State" ToRole="District" />
-    <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_States" FromRole="State" ToRole="Address" />
-  </EntityType>
-  <Association Name="FK_dbo_States_dbo_Countries_CountryId">
-    <End Type="ESDBModel.Country" Role="Country" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="ESDBModel.State" Role="State" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Country">
-        <PropertyRef Name="CountryId" />
-      </Principal>
-      <Dependent Role="State">
-        <PropertyRef Name="CountryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Districts_dbo_States_StateId">
-    <End Type="ESDBModel.State" Role="State" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="ESDBModel.District" Role="District" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="State">
-        <PropertyRef Name="StateId" />
-      </Principal>
-      <Dependent Role="District">
-        <PropertyRef Name="StateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Address">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Adress1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Adress2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CityId" Type="Int32" />
-    <Property Name="StateId" Type="Int32" />
-    <Property Name="CountryId" Type="Int32" />
-    <Property Name="PinCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Country" Relationship="ESDBModel.FK_Address_Countries" FromRole="Address" ToRole="Country" />
-    <NavigationProperty Name="District" Relationship="ESDBModel.FK_Address_Districts" FromRole="Address" ToRole="District" />
-    <NavigationProperty Name="State" Relationship="ESDBModel.FK_Address_States" FromRole="Address" ToRole="State" />
-    <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="Address" ToRole="StudentAddress" />
-  </EntityType>
-  <EntityType Name="StudentAddress">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="StudentId" />
-      <PropertyRef Name="AddressId" />
-      <PropertyRef Name="Type" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StudentId" Type="Int32" Nullable="false" />
-    <Property Name="AddressId" Type="Int32" Nullable="false" />
-    <Property Name="Type" Type="Int32" Nullable="false" />
-    <Property Name="Blocked" Type="Boolean" />
-    <NavigationProperty Name="Address" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="StudentAddress" ToRole="Address" />
-    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="StudentAddress" ToRole="Student" />
   </EntityType>
   <Association Name="FK_Address_Countries">
     <End Type="ESDBModel.Country" Role="Country" Multiplicity="0..1" />
@@ -608,52 +649,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StudentAddress_Student">
-    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="ESDBModel.StudentAddress" Role="StudentAddress" Multiplicity="*" />
+  <Association Name="FK_ClassSections_Classes">
+    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
+    <End Type="ESDBModel.ClassSection" Role="ClassSection" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Student">
+      <Principal Role="Class">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="StudentAddress">
-        <PropertyRef Name="StudentId" />
+      <Dependent Role="ClassSection">
+        <PropertyRef Name="ClassID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="EmergencyContactDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ContactPersonName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="MobilePhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Relationship" Type="Int32" />
-    <Property Name="CreatetDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="EndDate" Type="DateTime" Precision="0" />
-    <Property Name="Blocked" Type="Boolean" />
-    <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="EmergencyContactDetail" ToRole="StudentAditionalInfo" />
-  </EntityType>
-  <EntityType Name="StudentClassSectionInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StuentID" Type="Int32" Nullable="false" />
-    <Property Name="StudentNo" Type="Int32" />
-    <Property Name="ClassID" Type="Int32" Nullable="false" />
-    <Property Name="SectionID" Type="Int32" Nullable="false" />
-    <Property Name="RollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Meadium" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="InstitutionID" Type="Int32" Nullable="false" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="Blocked" Type="Boolean" />
-    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="StudentClassSectionInfo" ToRole="Class" />
-    <NavigationProperty Name="InstitutionInfo" Relationship="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo" FromRole="StudentClassSectionInfo" ToRole="InstitutionInfo" />
-    <NavigationProperty Name="Section" Relationship="ESDBModel.FK_StuentClassSectionInfo_Sections" FromRole="StudentClassSectionInfo" ToRole="Section" />
-    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="StudentClassSectionInfo" ToRole="Student" />
-  </EntityType>
+  <Association Name="FK_ClassSubjects_Classes">
+    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
+    <End Type="ESDBModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSubject">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hour_Classes">
+    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
+    <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hour">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StuentClassSectionInfo_Classes">
     <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
     <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
@@ -666,137 +697,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
-    <End Type="ESDBModel.InstitutionInfo" Role="InstitutionInfo" Multiplicity="1" />
-    <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InstitutionInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StudentClassSectionInfo">
-        <PropertyRef Name="InstitutionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StuentClassSectionInfo_Sections">
+  <Association Name="FK_ClassSections_Sections">
     <End Type="ESDBModel.Section" Role="Section" Multiplicity="1" />
-    <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
+    <End Type="ESDBModel.ClassSection" Role="ClassSection" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Section">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="StudentClassSectionInfo">
+      <Dependent Role="ClassSection">
         <PropertyRef Name="SectionID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StudentClassSectionInfo_Student">
-    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
+  <Association Name="FK_ClassSubjects_Subjects">
+    <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="ESDBModel.ClassSubject" Role="ClassSubject" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Student">
+      <Principal Role="Subject">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="StudentClassSectionInfo">
-        <PropertyRef Name="StuentID" />
+      <Dependent Role="ClassSubject">
+        <PropertyRef Name="SubjectID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="StudentAditionalInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StudentId" Type="Int32" Nullable="false" />
-    <Property Name="Address1Id" Type="Int32" />
-    <Property Name="Address2Id" Type="Int32" />
-    <Property Name="AdmissionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ClassRollNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AddmissionDate" Type="DateTime" Precision="3" />
-    <Property Name="BatchID" Type="Int32" />
-    <Property Name="DOB" Type="DateTime" Precision="3" />
-    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Nationalty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="StudentCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="IsSMSEnabled" Type="Boolean" />
-    <Property Name="PhotoFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="PhotoContentType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="PhotoData" Type="Binary" MaxLength="5000" FixedLength="true" />
-    <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="EmergencyContactDetailsID" Type="Int32" />
-    <Property Name="IsActive" Type="Boolean" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="EmergencyContactDetail" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="StudentAditionalInfo" ToRole="EmergencyContactDetail" />
-    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
-  </EntityType>
-  <Association Name="FK_StudentAditionalInfo_EmergencyContactDetails">
-    <End Type="ESDBModel.EmergencyContactDetail" Role="EmergencyContactDetail" Multiplicity="0..1" />
-    <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+  <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+    <End Type="ESDBModel.Country" Role="Country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ESDBModel.State" Role="State" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="EmergencyContactDetail">
-        <PropertyRef Name="Id" />
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
       </Principal>
-      <Dependent Role="StudentAditionalInfo">
-        <PropertyRef Name="EmergencyContactDetailsID" />
+      <Dependent Role="State">
+        <PropertyRef Name="CountryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StudentAditionalInfo_Student">
-    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StudentAditionalInfo">
-        <PropertyRef Name="StudentId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="DailyAttendance">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StudentId" Type="Int32" Nullable="false" />
-    <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="StartTime" Type="Time" Precision="7" />
-    <Property Name="EndTime" Type="Time" Precision="7" />
-    <Property Name="Remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedBy" Type="Int32" />
-    <NavigationProperty Name="Student" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="DailyAttendance" ToRole="Student" />
-    <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="DailyAttendance" ToRole="HourlyAttendance" />
-  </EntityType>
-  <EntityType Name="HourlyAttendance">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DA_Id" Type="Int32" Nullable="false" />
-    <Property Name="HT_Id" Type="Int32" />
-    <Property Name="StartTime" Type="Time" Precision="7" />
-    <Property Name="EndTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="DailyAttendance" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="HourlyAttendance" ToRole="DailyAttendance" />
-    <NavigationProperty Name="HourTransaction" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourlyAttendance" ToRole="HourTransaction" />
-  </EntityType>
-  <EntityType Name="HourTransaction">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="HourId" Type="Int32" Nullable="false" />
-    <Property Name="SubjectId" Type="Int32" Nullable="false" />
-    <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedBy" Type="Int32" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
-    <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
-    <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
-  </EntityType>
   <Association Name="FK_DailyAttendance_Student">
     <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
     <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="*" />
@@ -818,6 +756,94 @@
       </Principal>
       <Dependent Role="HourlyAttendance">
         <PropertyRef Name="DA_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_Employee">
+    <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="ESDBModel.Department" Role="Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="ManagerEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Districts_dbo_States_StateId">
+    <End Type="ESDBModel.State" Role="State" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ESDBModel.District" Role="District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId">
+    <End Type="ESDBModel.District" Role="District" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ESDBModel.SubDistrict" Role="SubDistrict" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="SubDistrict">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmergencyContactDetails_Relationships">
+    <End Type="ESDBModel.Relationship" Role="Relationship" Multiplicity="0..1" />
+    <End Type="ESDBModel.EmergencyContactDetail" Role="EmergencyContactDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relationship">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmergencyContactDetail">
+        <PropertyRef Name="Relationship" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAditionalInfo_EmergencyContactDetails">
+    <End Type="ESDBModel.EmergencyContactDetail" Role="EmergencyContactDetail" Multiplicity="0..1" />
+    <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmergencyContactDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentAditionalInfo">
+        <PropertyRef Name="EmergencyContactDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_Employee">
+    <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourTransaction_Hour">
+    <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
+    <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourTransaction">
+        <PropertyRef Name="HourId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -845,45 +871,99 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Hour">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClassId" Type="Int32" Nullable="false" />
-    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StartTime" Type="Time" Precision="7" />
-    <Property Name="EndTime" Type="Time" Precision="7" />
-    <Property Name="CreatedBy" Type="Int32" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="Int32" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="Blocked" Type="Boolean" />
-    <NavigationProperty Name="Class" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Hour" ToRole="Class" />
-    <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
-  </EntityType>
-  <Association Name="FK_Hour_Classes">
-    <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
-    <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="*" />
+  <Association Name="FK_StuentClassSectionInfo_Institution">
+    <End Type="ESDBModel.Institution" Role="Institution" Multiplicity="1" />
+    <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Class">
+      <Principal Role="Institution">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Hour">
-        <PropertyRef Name="ClassId" />
+      <Dependent Role="StudentClassSectionInfo">
+        <PropertyRef Name="InstitutionID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_HourTransaction_Hour">
-    <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
-    <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+  <Association Name="FK_Guardian_Student">
+    <End Type="ESDBModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="ESDBModel.Parent" Role="Parent" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Hour">
+      <Principal Role="Student">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="HourTransaction">
-        <PropertyRef Name="HourId" />
+      <Dependent Role="Parent">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StuentClassSectionInfo_Sections">
+    <End Type="ESDBModel.Section" Role="Section" Multiplicity="1" />
+    <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentClassSectionInfo">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAddress_Student">
+    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="ESDBModel.StudentAddress" Role="StudentAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentAddress">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAditionalInfo_Student">
+    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentAditionalInfo">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentClassSectionInfo_Student">
+    <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentClassSectionInfo">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherSubject_Subjects">
+    <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherSubject">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherSubject_Teacher">
+    <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
+    <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherSubject">
+        <PropertyRef Name="TeacherId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

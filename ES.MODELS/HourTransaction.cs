@@ -23,11 +23,12 @@ namespace ES.MODELS
         public int HourId { get; set; }
         public int SubjectId { get; set; }
         public string HourDescription { get; set; }
+        public System.DateTime HourDate { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
+        public virtual Hour Hour { get; set; }
         public virtual ICollection<HourlyAttendance> HourlyAttendances { get; set; }
         public virtual Subject Subject { get; set; }
-        public virtual Hour Hour { get; set; }
     }
 }

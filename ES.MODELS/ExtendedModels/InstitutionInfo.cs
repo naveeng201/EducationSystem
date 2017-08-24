@@ -7,13 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ES.MODELS.ExtendedModels
 {
-    [MetadataType(typeof(InstitutionInfoMetadata))]
-    public partial class InstitutionInfo
+    [MetadataType(typeof(InstitutionMetadata))]
+    public partial class Institution
     {
 
     }
 
-    public class InstitutionInfoMetadata
+    public class InstitutionMetadata
     {
         [Required]
         public String Name { get; set; }

@@ -32,9 +32,9 @@ namespace ES.WebApi
                 .RegisterType<IRepository<Subject>, BaseRepository<Subject>>()
                 .RegisterType<ISubjectRepository, SubjectRepository>()
                 .RegisterType<ISubjectService, SubjectService>()
-                .RegisterType<IRepository<InstitutionInfo>, BaseRepository<InstitutionInfo>>()
-                .RegisterType<IInstitutionInfoRepository, InstitutionInfoRepository>()
-                .RegisterType<IInstitutionInfoService, InstitutionInfoService>()
+                .RegisterType<IRepository<Institution>, BaseRepository<Institution>>()
+                .RegisterType<IInstitutionRepository, InstitutionRepository>()
+                .RegisterType<IInstitutionService, InstitutionService>()
                 .RegisterType<IRepository<StudentAditionalInfo>, BaseRepository<StudentAditionalInfo>>()
                 .RegisterType<IStudentAditionalInfoRepository, StudentAditionalInfoRepository>()
                 .RegisterType<IStudentAditionalInfoService, StudentAditionalInfoService>()
@@ -76,7 +76,10 @@ namespace ES.WebApi
                 .RegisterType<IDailyAttendanceService, DailyAttendanceService>()
                 .RegisterType<IRepository<HourlyAttendance>, BaseRepository<HourlyAttendance>>()
                 .RegisterType<IHourlyAttendanceRepository, HourlyAttendanceRepository>()
-                .RegisterType<IHourlyAttendanceService, HourlyAttendanceService>();
+                .RegisterType<IHourlyAttendanceService, HourlyAttendanceService>()
+                .RegisterType<IRepository<AttendanceVM>, BaseRepository<AttendanceVM>>()
+                .RegisterType<IAttendanceService, AttendanceService>()
+                .RegisterType<IAttendanceRepository, AttendanceRepository>();
             
 
 
@@ -85,7 +88,8 @@ namespace ES.WebApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Filters.Add(new WebApi.Filters.ValidateModelAttribute());
+            config.Filters.Add(new Filters.ValidateModelAttribute());
+            config.Filters.Add(new Filters.CustomExceptionFilter());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

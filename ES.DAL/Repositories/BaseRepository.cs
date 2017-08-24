@@ -107,21 +107,16 @@ namespace ES.DAL
             return this._unitOfWork.Db.SaveChanges();
         }
 
-        //public int DeleteById(int Id)
-        //{
-        //    var dbResult = dbSet.Find(Id);
-        //    //if (_unitOfWork.Db.Entry(dbResult).State == EntityState.Detached)
-        //    //{
-        //    //    dbSet.Attach(dbResult);
-        //    //}
-        //    //dynamic obj = dbSet.Remove(dbResult);
-        //    //dbResult.is
-        //    dbSet.Attach(dbResult);
-        //    _unitOfWork.Db.Entry(dbResult).State = EntityState.Modified;
-        //    this._unitOfWork.Db.SaveChanges();
-
-        //  //  this._unitOfWork.Db.SaveChanges();
-        //    return obj.Id;
-        //}
+        public int Delete(int Id)
+        {
+            var dbResult = dbSet.Find(Id);
+            if (_unitOfWork.Db.Entry(dbResult).State == EntityState.Detached)
+            {
+                dbSet.Attach(dbResult);
+            }
+            dynamic obj = dbSet.Remove(dbResult);
+            this._unitOfWork.Db.SaveChanges();
+            return obj.Id;
+        }
     }
 }

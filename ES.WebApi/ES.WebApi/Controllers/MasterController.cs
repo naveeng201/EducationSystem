@@ -15,6 +15,7 @@ namespace ES.WebApi.Controllers
 
     }
     #region //Class
+    [RoutePrefix("api/class")]
     public class ClassController : ApiController
     {
         IClassService _classService;
@@ -24,25 +25,27 @@ namespace ES.WebApi.Controllers
             this._classService = classService;
         }
 
+        [Route("{id}")]
         [HttpGet]
-        public HttpResponseMessage LoadClassDropdowns(int id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             Class objClass = null;
-            if (id == 0)
+            if (Id == 0)
             {
                 objClass = new Class();
             }
             else
             {
-                objClass = _classService.SingleOrDefault(id);
+                objClass = _classService.SingleOrDefault(Id);
             }
             response = Request.CreateResponse(HttpStatusCode.OK, objClass);
             return response;
         }
 
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetClass()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -51,14 +54,16 @@ namespace ES.WebApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, classList);
                 return response;
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                return null;
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
             }
         }
 
-        [AcceptVerbs("POST")]
-        public HttpResponseMessage AddClass([FromBody] Class objclass)
+        [Route("")]
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody] Class objclass)
         {
 
             HttpResponseMessage response = null;
@@ -69,7 +74,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (objclass.Id == 0)
                     {
-                        objclass.CreateDate = DateTime.Now;
+                        objclass.CreatedDate = DateTime.Now;
                         // This Area Need to Insert in BULK Insert Method                    
                         _classService.Insert(objclass);
                     }
@@ -93,6 +98,7 @@ namespace ES.WebApi.Controllers
     #endregion
 
     #region //Section
+    [RoutePrefix("api/section")]
     public class SectionController : ApiController
     {
         //
@@ -104,8 +110,9 @@ namespace ES.WebApi.Controllers
         }
 
         #region Section
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage LoadSectionDropdown(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             Section objSection = null;
@@ -120,8 +127,10 @@ namespace ES.WebApi.Controllers
             response = Request.CreateResponse(HttpStatusCode.OK, objSection);
             return response;
         }
+
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetSection()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage respone = null;
             try
@@ -133,12 +142,14 @@ namespace ES.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return null;
+                respone = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return respone;
             }
         }
 
+        [Route("")]
         [HttpPost]
-        public HttpResponseMessage AddSection(Section objSection)
+        public HttpResponseMessage Post(Section objSection)
         {
             HttpResponseMessage response = null;
             try
@@ -147,7 +158,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (objSection.Id == 0)
                     {
-                        objSection.CreateDate = DateTime.Now;
+                        objSection.CreatedDate = DateTime.Now;
                         objSection.Blocked = false;
                         // This Area Need to Insert in BULK Insert Method                    
                         int ID =_sectionService.Insert(objSection);
@@ -170,13 +181,30 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("GetSectionsByClassId/{Id}")]
+        [HttpGet]
+        public HttpResponseMessage GetSectionsByClassId(int Id)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                var listSections = _sectionService.GetSectionsByClassId(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, listSections);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
         #endregion
     }
     #endregion
 
-    
-
     #region //Subject
+    [RoutePrefix("api/subject")]
     public class SubjectController : ApiController
     {
         private readonly ISubjectService _repository;
@@ -185,8 +213,9 @@ namespace ES.WebApi.Controllers
             this._repository = repository;
         }
         #region Subject
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage LoadSubjectDropdown(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             Subject objSubject = null;
@@ -201,8 +230,10 @@ namespace ES.WebApi.Controllers
             response = Request.CreateResponse(HttpStatusCode.OK, objSubject);
             return response;
         }
+
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetSubject()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -219,8 +250,9 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("")]
         [HttpPost]
-        public HttpResponseMessage AddSubject(Subject objSubject)
+        public HttpResponseMessage Post(Subject objSubject)
         {
             HttpResponseMessage response = null;
             try
@@ -229,7 +261,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (objSubject.Id == 0)
                     {
-                        objSubject.CreateDate = DateTime.Now;
+                        objSubject.CreatedDate = DateTime.Now;
                         //objSubject.Blocked = false;
                         // This Area Need to Insert in BULK Insert Method                    
                         _repository.Insert(objSubject);
@@ -251,20 +283,40 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("GetSubjectsByClassId/{Id}")]
+        [HttpGet]
+        public HttpResponseMessage GetSubjectsByClassId(int Id)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var listSubjects = _repository.GetSubjectsByClassId(Id);
+                response = Request.CreateResponse(HttpStatusCode.OK, listSubjects);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
         #endregion
     }
     #endregion
 
-    #region //InstitutionInfo
-    public class InstitutionInfoController : ApiController
+    #region //Institution
+    [RoutePrefix("api/Institution")]
+    public class InstitutionController : ApiController
     {
-        private readonly IInstitutionInfoService _repository;
-        public InstitutionInfoController(IInstitutionInfoService repository)
+        private readonly IInstitutionService _repository;
+        public InstitutionController(IInstitutionService repository)
         {
             this._repository = repository;
         }
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage getInstitutionInfo()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -281,20 +333,21 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage LoadInstituteDropdown(int id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             try
             {
-                InstitutionInfo objInstitute = null;
-                if (id == 0)
+                Institution objInstitute = null;
+                if (Id == 0)
                 {
-                    objInstitute = new InstitutionInfo();
+                    objInstitute = new Institution();
                 }
                 else
                 {
-                    objInstitute = _repository.SingleOrDefault(id);
+                    objInstitute = _repository.SingleOrDefault(Id);
                 }
                 response = Request.CreateResponse(HttpStatusCode.OK, objInstitute);
                 return response;
@@ -306,8 +359,9 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("")]
         [HttpPost]
-        public HttpResponseMessage AddInstitute(InstitutionInfo objInstitute)
+        public HttpResponseMessage Post(Institution objInstitute)
         {
             HttpResponseMessage response = null;
             try
@@ -316,7 +370,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (objInstitute.Id == 0)
                     {
-                        objInstitute.CreateDate = DateTime.Now;
+                        objInstitute.CreatedDate = DateTime.Now;
                         //objInstitute.isBlocked = false;
                         // This Area Need to Insert in BULK Insert Method                    
                         _repository.Insert(objInstitute);
@@ -341,6 +395,7 @@ namespace ES.WebApi.Controllers
     #endregion
 
     #region //ClassSubject
+    [RoutePrefix("api/ClassSubject")]
     public class ClassSubjectController : ApiController
     {
         public IClassSubjectService _classSubjectService;
@@ -349,8 +404,9 @@ namespace ES.WebApi.Controllers
             _classSubjectService = classSubjectService;
         }
         
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -366,20 +422,21 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage SingleOrDefault(int id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             try
             {
                 ClassSubject objClassSubject = null;
-                if (id == 0)
+                if (Id == 0)
                 {
                     objClassSubject = new ClassSubject();
                 }
                 else
                 {
-                    objClassSubject = _classSubjectService.SingleOrDefault(id);
+                    objClassSubject = _classSubjectService.SingleOrDefault(Id);
                 }
                 response = Request.CreateResponse(HttpStatusCode.OK, objClassSubject);
                 return response;
@@ -391,7 +448,8 @@ namespace ES.WebApi.Controllers
             }
         }
 
-        [AcceptVerbs("POST")]
+        [Route("")]
+        [HttpPost]
         public HttpResponseMessage Insert([FromBody] ClassSubject objClassSubject)
         {
             HttpResponseMessage response = null;
@@ -423,7 +481,8 @@ namespace ES.WebApi.Controllers
             }
         }
 
-        [AcceptVerbs("POST")]
+        [Route("AddClassSubjects")]
+        [HttpPost]
         public HttpResponseMessage AddClassSubjects([FromBody] IEnumerable<ClassSubject> objClassSubject)
         {
             HttpResponseMessage response = null;
@@ -458,6 +517,7 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("GetMappedClassSubjects")]
         [HttpGet]
         public HttpResponseMessage GetMappedClassSubjects()
         {
@@ -478,6 +538,7 @@ namespace ES.WebApi.Controllers
     #endregion
 
     #region //ClassSection
+    [RoutePrefix("api/ClassSection")]
     public class ClassSectionController : ApiController
     {
         private IClassSectionService _classSectionService;
@@ -485,8 +546,10 @@ namespace ES.WebApi.Controllers
         {
             _classSectionService = classSectionService;
         }
+
+        [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetAllClassSections()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
             try
@@ -502,8 +565,9 @@ namespace ES.WebApi.Controllers
             }
         }
 
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage GetClassSection(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
             try
@@ -523,8 +587,9 @@ namespace ES.WebApi.Controllers
             }
         }
 
-        [AcceptVerbs("POST")]
-        public HttpResponseMessage AddClassSection([FromBody]ClassSection objClassSection)
+        [Route("")]
+        [HttpPost]
+        public HttpResponseMessage Insert([FromBody]ClassSection objClassSection)
         {
             HttpResponseMessage response = null;
             try
@@ -533,7 +598,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (objClassSection.Id == 0)
                     {
-                        objClassSection.CreateDate = DateTime.Now;
+                        objClassSection.CreatedDate = DateTime.Now;
                         objClassSection.Blocked = false;
                        int ID = _classSectionService.Insert(objClassSection);
                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
@@ -555,7 +620,8 @@ namespace ES.WebApi.Controllers
             }
         }
 
-        [AcceptVerbs("POST")]
+        [Route("AddClassSections")]
+        [HttpPost]
         public HttpResponseMessage AddClassSections([FromBody] IEnumerable<ClassSection> objClassSections)
         {
             HttpResponseMessage response = null;
@@ -572,7 +638,7 @@ namespace ES.WebApi.Controllers
                     {
                         if(cs.Id ==0)
                         {
-                            cs.CreateDate = DateTime.Now;
+                            cs.CreatedDate = DateTime.Now;
                             cs.Blocked = false;
                             int ID = _classSectionService.Insert(cs);
                             response = Request.CreateResponse(HttpStatusCode.OK, ID);

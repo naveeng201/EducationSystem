@@ -15,6 +15,7 @@ namespace ES.SERVICE
         void Update(Hour hourMaster);
         Hour SingleOrDefault(int ID);
         void Delete(Hour hour);
+        IEnumerable<Hour> GetHoursByClassId(int classID);
     }
     public class HourService : IHourService
     {
@@ -47,6 +48,11 @@ namespace ES.SERVICE
         public void Update(Hour hourMaster)
         {
             _repository.Update(hourMaster);
+        }
+
+        public IEnumerable<Hour> GetHoursByClassId(int classid)
+        {
+            return _repository.GetHoursByClassId(classid);
         }
     }
 }

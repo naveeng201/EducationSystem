@@ -29,6 +29,7 @@ namespace ES.MODELS
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<bool> Blocked { get; set; }
     
+        public virtual Relationship Relationship1 { get; set; }
         public virtual ICollection<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
     }
 }

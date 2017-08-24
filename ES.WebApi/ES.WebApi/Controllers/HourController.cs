@@ -147,5 +147,23 @@ namespace ES.WebApi.Controllers
                 return response;
             }
         }
+
+        [Route("GetHoursByClassID/{classId}")]
+        [HttpGet]
+        public HttpResponseMessage GetHoursByClassID(int classId)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var listHours = _hourService.GetHoursByClassId(classId);
+                response = Request.CreateResponse(HttpStatusCode.OK, listHours);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
     }
 }

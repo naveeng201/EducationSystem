@@ -14,6 +14,11 @@
     <Property Name="CountryId" Type="int" />
     <Property Name="PinCode" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="Blocked" Type="bit" />
   </EntityType>
   <EntityType Name="Classes">
     <Key>
@@ -22,11 +27,12 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="InstitutionId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
-    <Property Name="UserID" Type="int" />
-    <Property Name="InstitutionID" Type="int" />
   </EntityType>
   <EntityType Name="ClassSections">
     <Key>
@@ -35,10 +41,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="SectionID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
-    <Property Name="UserID" Type="int" />
   </EntityType>
   <EntityType Name="ClassSubjects">
     <Key>
@@ -48,10 +55,13 @@
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="SubjectID" Type="int" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="UserID" Type="int" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="EndDate" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Countries">
     <Key>
       <PropertyRef Name="CountryId" />
@@ -118,27 +128,11 @@
     <Property Name="JoiningDate" Type="date" />
     <Property Name="ManagerID" Type="int" />
     <Property Name="Designation" Type="nvarchar" MaxLength="200" />
-    <Property Name="CreatedDate" Type="date" />
-    <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
-    <Property Name="ModifiedDate" Type="date" />
-    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="BlockedDate" Type="date" />
-    <Property Name="BlockedBy" Type="nvarchar" MaxLength="128" />
-  </EntityType>
-  <EntityType Name="Exams">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ExamName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="ExamShotName" Type="nchar" MaxLength="200" />
-    <Property Name="ExamCode" Type="nvarchar" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" MaxLength="500" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
-    <Property Name="Blocked" Type="bit" />
-    <Property Name="UserID" Type="int" />
   </EntityType>
   <EntityType Name="Hour">
     <Key>
@@ -174,10 +168,11 @@
     <Property Name="HourId" Type="int" Nullable="false" />
     <Property Name="SubjectId" Type="int" Nullable="false" />
     <Property Name="HourDescription" Type="nvarchar(max)" />
+    <Property Name="HourDate" Type="date" Nullable="false" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedDate" Type="datetime" />
   </EntityType>
-  <EntityType Name="InstitutionInfo">
+  <EntityType Name="Institution">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -194,10 +189,21 @@
     <Property Name="Address1" Type="nvarchar" MaxLength="200" />
     <Property Name="Address2" Type="nvarchar" MaxLength="200" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="MasterTables">
+    <Key>
+      <PropertyRef Name="TableID" />
+    </Key>
+    <Property Name="TableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descrription" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="RelationWith" Type="nvarchar" MaxLength="400" />
   </EntityType>
   <EntityType Name="Parents">
     <Key>
@@ -220,9 +226,19 @@
     <Property Name="Income" Type="nvarchar" MaxLength="50" />
     <Property Name="Education" Type="nvarchar" MaxLength="50" />
     <Property Name="ParentType" Type="nchar" MaxLength="10" />
-    <Property Name="CreatedDatte" Type="date" />
-    <Property Name="ModifiedDate" Type="date" />
+    <Property Name="CreatedDatte" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
+  </EntityType>
+  <EntityType Name="Relationships">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Sections">
     <Key>
@@ -231,10 +247,10 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
-    <Property Name="UserID" Type="int" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -254,18 +270,15 @@
     <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
     <Property Name="LastName" Type="nvarchar" MaxLength="50" />
     <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatdDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="Blocked" Type="bit" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="StudentAddress">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="StudentId" />
-      <PropertyRef Name="AddressId" />
-      <PropertyRef Name="Type" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StudentId" Type="int" Nullable="false" />
@@ -300,22 +313,32 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <Property Name="StatusDescription" Type="nvarchar" MaxLength="100" />
     <Property Name="EmergencyContactDetailsID" Type="int" />
     <Property Name="IsActive" Type="bit" />
-    <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="StudentClassSectionInfo">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StuentID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
     <Property Name="StudentNo" Type="int" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="SectionID" Type="int" Nullable="false" />
     <Property Name="RollNo" Type="nvarchar" MaxLength="50" />
     <Property Name="Meadium" Type="nchar" MaxLength="10" />
     <Property Name="InstitutionID" Type="int" Nullable="false" />
-    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
+  </EntityType>
+  <EntityType Name="SubDistricts">
+    <Key>
+      <PropertyRef Name="SubDistrictsId" />
+    </Key>
+    <Property Name="SubDistrictsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubDistrictsName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Subjects">
     <Key>
@@ -325,11 +348,11 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <Property Name="SubjectName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="ShortName" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="EndDate" Type="datetime" />
-    <Property Name="UserID" Type="int" />
-    <Property Name="isDeleted" Type="bit" />
-    <Property Name="locationID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="Blocked" Type="bit" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -337,11 +360,11 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EmployeeId" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="date" />
-    <Property Name="ModifiedDate" Type="date" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
-    <Property Name="BlockedDate" Type="date" />
-    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="TeacherSubject">
     <Key>
@@ -350,9 +373,11 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TeacherId" Type="int" Nullable="false" />
     <Property Name="SubjectId" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="date" />
-    <Property Name="ModifiedDate" Type="date" />
-    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="Blocked" Type="bit" />
   </EntityType>
   <Association Name="FK_Address_Countries">
     <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
@@ -478,6 +503,20 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId">
+    <End Role="Districts" Type="Self.Districts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SubDistricts" Type="Self.SubDistricts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Districts">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="SubDistricts">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Department_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
     <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -487,6 +526,18 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Principal>
       <Dependent Role="Department">
         <PropertyRef Name="ManagerEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmergencyContactDetails_Relationships">
+    <End Role="Relationships" Type="Self.Relationships" Multiplicity="0..1" />
+    <End Role="EmergencyContactDetails" Type="Self.EmergencyContactDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relationships">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmergencyContactDetails">
+        <PropertyRef Name="Relationship" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -618,7 +669,7 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StudentClassSectionInfo">
-        <PropertyRef Name="StuentID" />
+        <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -634,11 +685,11 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
-    <End Role="InstitutionInfo" Type="Self.InstitutionInfo" Multiplicity="1" />
+  <Association Name="FK_StuentClassSectionInfo_Institution">
+    <End Role="Institution" Type="Self.Institution" Multiplicity="1" />
     <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="InstitutionInfo">
+      <Principal Role="Institution">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StudentClassSectionInfo">
@@ -694,6 +745,21 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spi_InsertAttendance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudentIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ClassId" Type="int" Mode="In" />
+    <Parameter Name="SectionId" Type="int" Mode="In" />
+    <Parameter Name="HourId" Type="int" Mode="In" />
+    <Parameter Name="SubjectId" Type="int" Mode="In" />
+    <Parameter Name="AttendanceDate" Type="date" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StartTime" Type="time" Mode="In" />
+    <Parameter Name="EndTime" Type="time" Mode="In" />
+    <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedBy" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="ESDBModelStoreContainer">
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
@@ -705,29 +771,23 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
     <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmergencyContactDetails" EntityType="Self.EmergencyContactDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hour" EntityType="Self.Hour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HourlyAttendance" EntityType="Self.HourlyAttendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HourTransaction" EntityType="Self.HourTransaction" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="InstitutionInfo" EntityType="Self.InstitutionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MasterTables" EntityType="Self.MasterTables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relationships" EntityType="Self.Relationships" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentClassSectionInfo" EntityType="Self.StudentClassSectionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubDistricts" EntityType="Self.SubDistricts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [StudentAddress].[Id] AS [Id], 
-    [StudentAddress].[StudentId] AS [StudentId], 
-    [StudentAddress].[AddressId] AS [AddressId], 
-    [StudentAddress].[Type] AS [Type], 
-    [StudentAddress].[Blocked] AS [Blocked]
-    FROM [dbo].[StudentAddress] AS [StudentAddress]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
       <End Role="Countries" EntitySet="Countries" />
       <End Role="Address" EntitySet="Address" />
@@ -768,9 +828,17 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       <End Role="Countries" EntitySet="Countries" />
       <End Role="States" EntitySet="States" />
     </AssociationSet>
+    <AssociationSet Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId" Association="Self.FK_dbo_SubDistricts_dbo_Districts_DistrictId">
+      <End Role="Districts" EntitySet="Districts" />
+      <End Role="SubDistricts" EntitySet="SubDistricts" />
+    </AssociationSet>
     <AssociationSet Name="FK_Department_Employee" Association="Self.FK_Department_Employee">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmergencyContactDetails_Relationships" Association="Self.FK_EmergencyContactDetails_Relationships">
+      <End Role="Relationships" EntitySet="Relationships" />
+      <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
       <End Role="Student" EntitySet="Student" />
@@ -820,8 +888,8 @@ warning 6002: The table/view 'ESDB.dbo.StudentAddress' does not have a primary k
       <End Role="Classes" EntitySet="Classes" />
       <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="Self.FK_StuentClassSectionInfo_InstitutionInfo">
-      <End Role="InstitutionInfo" EntitySet="InstitutionInfo" />
+    <AssociationSet Name="FK_StuentClassSectionInfo_Institution" Association="Self.FK_StuentClassSectionInfo_Institution">
+      <End Role="Institution" EntitySet="Institution" />
       <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_StuentClassSectionInfo_Sections" Association="Self.FK_StuentClassSectionInfo_Sections">

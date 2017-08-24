@@ -32,7 +32,9 @@ namespace ES.MODELS
         public string Education { get; set; }
         public string ParentType { get; set; }
         public Nullable<System.DateTime> CreatedDatte { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
         public Nullable<bool> Blocked { get; set; }
     
         public virtual Student Student { get; set; }

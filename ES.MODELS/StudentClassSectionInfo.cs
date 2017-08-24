@@ -15,18 +15,21 @@ namespace ES.MODELS
     public partial class StudentClassSectionInfo
     {
         public int Id { get; set; }
-        public int StuentID { get; set; }
+        public int StudentID { get; set; }
         public Nullable<int> StudentNo { get; set; }
         public int ClassID { get; set; }
         public int SectionID { get; set; }
         public string RollNo { get; set; }
         public string Meadium { get; set; }
         public int InstitutionID { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
         public Nullable<bool> Blocked { get; set; }
     
         public virtual Class Class { get; set; }
-        public virtual InstitutionInfo InstitutionInfo { get; set; }
+        public virtual Institution Institution { get; set; }
         public virtual Section Section { get; set; }
         public virtual Student Student { get; set; }
     }
