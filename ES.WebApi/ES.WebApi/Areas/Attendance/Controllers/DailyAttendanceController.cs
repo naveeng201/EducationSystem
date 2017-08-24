@@ -9,7 +9,7 @@ using ES.SERVICE;
 using System.Transactions;
 
 namespace ES.WebApi.Areas.Attendance.Controllers
-{
+{  
     /// <summary>
     ///  Each student will have one record in daily attendance. 
     ///  If student has record for that day then do not insert record again on that day
