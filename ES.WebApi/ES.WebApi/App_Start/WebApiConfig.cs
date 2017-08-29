@@ -79,9 +79,22 @@ namespace ES.WebApi
                 .RegisterType<IHourlyAttendanceService, HourlyAttendanceService>()
                 .RegisterType<IRepository<AttendanceVM>, BaseRepository<AttendanceVM>>()
                 .RegisterType<IAttendanceService, AttendanceService>()
-                .RegisterType<IAttendanceRepository, AttendanceRepository>();
-            
-
+                .RegisterType<IAttendanceRepository, AttendanceRepository>()
+                .RegisterType<IRepository<Exam>, BaseRepository<Exam>>()
+                .RegisterType<IExamService, ExamService>()
+                .RegisterType<IExamRepository, ExamRepository>()
+                .RegisterType<IRepository<ExamSchedule>, BaseRepository<ExamSchedule>>()
+                .RegisterType<IExamScheduleService, ExamScheduleService>()
+                .RegisterType<IExamScheduleRepository, ExamScheduleRepository>()
+                .RegisterType<IRepository<ExamSubjectSchedule>, BaseRepository<ExamSubjectSchedule>>()
+                .RegisterType<IExamSubjectScheduleService, ExamSubjectScheduleService>()
+                .RegisterType<IExamSubjectScheduleRepository, ExamSubjectScheduleRepository>()
+                .RegisterType<IRepository<ExamMarks>, BaseRepository<ExamMarks>>()
+                .RegisterType<IExamMarksService, ExamMarksService>()
+                .RegisterType<IExamMarksRepository, ExamMarksRepository>()
+                .RegisterType<IRepository<ExamGrade>, BaseRepository<ExamGrade>>()
+                .RegisterType<IExamGradeService, ExamGradeService>()
+                .RegisterType<IExamGradeRepository, ExamGradeRepository>();
 
             config.DependencyResolver = new UnityResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

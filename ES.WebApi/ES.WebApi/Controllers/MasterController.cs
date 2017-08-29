@@ -627,11 +627,6 @@ namespace ES.WebApi.Controllers
             HttpResponseMessage response = null;
             try
             {
-                if(!ModelState.IsValid)
-                {
-                    response = Request.CreateResponse(HttpStatusCode.InternalServerError, BadRequest(ModelState));
-                    return response;
-                }
                 using (var t = new TransactionScope())
                 {
                     foreach(var cs in objClassSections) // update this logic in better way. 

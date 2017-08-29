@@ -165,6 +165,12 @@
     <Compile Include="Areas\Attendance\Controllers\DailyAttendanceController.cs" />
     <Compile Include="Areas\Attendance\Controllers\HourlyAttendanceController.cs" />
     <Compile Include="Areas\Attendance\Controllers\HourTransactionController.cs" />
+    <Compile Include="Areas\Exam\Controllers\ExamController.cs" />
+    <Compile Include="Areas\Exam\Controllers\ExamGradeController.cs" />
+    <Compile Include="Areas\Exam\Controllers\ExamMarksController.cs" />
+    <Compile Include="Areas\Exam\Controllers\ScheduleExamController.cs" />
+    <Compile Include="Areas\Exam\Controllers\ScheduleSubjectExamController.cs" />
+    <Compile Include="Areas\Exam\ExamAreaRegistration.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\EmergencyContactDetailsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -186,6 +192,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Areas\Attendance\Views\web.config" />
+    <Content Include="Areas\Exam\Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -197,6 +204,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Attendance\Models\" />
     <Folder Include="Areas\Attendance\Views\Shared\" />
+    <Folder Include="Areas\Exam\Models\" />
+    <Folder Include="Areas\Exam\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

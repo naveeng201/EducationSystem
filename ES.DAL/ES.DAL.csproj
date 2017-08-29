@@ -67,6 +67,11 @@
     <Compile Include="Repositories\ClassRepository.cs" />
     <Compile Include="Repositories\EmergencyContactDetailsRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
+    <Compile Include="Repositories\Exam\ExamGradeRepository.cs" />
+    <Compile Include="Repositories\Exam\ExamMarksRepository.cs" />
+    <Compile Include="Repositories\Exam\ExamRepository.cs" />
+    <Compile Include="Repositories\Exam\ExamSubjectScheduleRepository.cs" />
+    <Compile Include="Repositories\Exam\ScheduleExamRepository.cs" />
     <Compile Include="Repositories\HourRepository.cs" />
     <Compile Include="Repositories\Attendance\HourTransactionRepository.cs" />
     <Compile Include="Repositories\InstitutionInfoRepository.cs" />

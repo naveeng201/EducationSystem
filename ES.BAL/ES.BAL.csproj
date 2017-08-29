@@ -50,6 +50,11 @@
     <Compile Include="Attendance\DailyAttendanceService.cs" />
     <Compile Include="Attendance\HourlyAttendanceService.cs" />
     <Compile Include="Attendance\HourTransactionService.cs" />
+    <Compile Include="Exam\ExamGradeService.cs" />
+    <Compile Include="Exam\ExamMarksService.cs" />
+    <Compile Include="Exam\ExamScheduleService.cs" />
+    <Compile Include="Exam\ExamService.cs" />
+    <Compile Include="Exam\ExamSubjectScheduleService.cs" />
     <Compile Include="Masters\AddressService.cs" />
     <Compile Include="Masters\BaseService.cs" />
     <Compile Include="Masters\ClassSectionService.cs" />

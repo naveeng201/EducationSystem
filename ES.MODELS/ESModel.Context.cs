@@ -54,6 +54,11 @@ namespace ES.MODELS
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; }
+        public virtual DbSet<Exam> Exams { get; set; }
+        public virtual DbSet<ExamMarks> ExamMarks { get; set; }
+        public virtual DbSet<ExamSchedule> ExamSchedules { get; set; }
+        public virtual DbSet<ExamSubjectSchedule> ExamSubjectSchedules { get; set; }
+        public virtual DbSet<ExamGrade> ExamGrades { get; set; }
     
         public virtual ObjectResult<Nullable<int>> spi_InsertAttendance(string studentIDs, Nullable<int> classId, Nullable<int> sectionId, Nullable<int> hourId, Nullable<int> subjectId, Nullable<System.DateTime> attendanceDate, string description, Nullable<System.TimeSpan> startTime, Nullable<System.TimeSpan> endTime, Nullable<System.DateTime> createdDate, Nullable<int> createdBy, Nullable<System.DateTime> modifiedDate, Nullable<int> modifiedBy)
         {

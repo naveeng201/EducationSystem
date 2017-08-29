@@ -163,6 +163,23 @@
       <End Role="Teacher" EntitySet="Teachers" />
       <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
     </AssociationSet>
+    <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
+    <EntitySet Name="ExamMarks" EntityType="ESDBModel.ExamMark" />
+    <EntitySet Name="ExamSchedules" EntityType="ESDBModel.ExamSchedule" />
+    <EntitySet Name="ExamSubjectSchedules" EntityType="ESDBModel.ExamSubjectSchedule" />
+    <AssociationSet Name="FK_ExamSchedule_Exam" Association="ESDBModel.FK_ExamSchedule_Exam">
+      <End Role="Exam" EntitySet="Exams" />
+      <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamSubjectSchedule_ExamMarks" Association="ESDBModel.FK_ExamSubjectSchedule_ExamMarks">
+      <End Role="ExamMark" EntitySet="ExamMarks" />
+      <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamSubjectSchedule_ExamSchedule" Association="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule">
+      <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+      <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
+    </AssociationSet>
+    <EntitySet Name="ExamGrades" EntityType="ESDBModel.ExamGrade" />
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
@@ -967,4 +984,125 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ExamShotName" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="ExamCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="Blocked" Type="Boolean" />
+    <NavigationProperty Name="ExamSchedules" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="Exam" ToRole="ExamSchedule" />
+  </EntityType>
+  <EntityType Name="ExamMark">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamSubjectScheduleId" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Marks" Type="Int32" Nullable="false" />
+    <Property Name="Remarks" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Blocked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ExamSubjectSchedule" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" FromRole="ExamMark" ToRole="ExamSubjectSchedule" />
+  </EntityType>
+  <EntityType Name="ExamSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamID" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TotalMarks" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Blocked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Exam" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="ExamSchedule" ToRole="Exam" />
+    <NavigationProperty Name="ExamSubjectSchedules" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSchedule" ToRole="ExamSubjectSchedule" />
+  </EntityType>
+  <EntityType Name="ExamSubjectSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamScheduleId" Type="Int32" Nullable="false" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="ExamDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="MinMarks" Type="Int32" Nullable="false" />
+    <Property Name="MaxMarks" Type="Int32" Nullable="false" />
+    <Property Name="PassMarks" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Blocked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ExamMark" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" FromRole="ExamSubjectSchedule" ToRole="ExamMark" />
+    <NavigationProperty Name="ExamSchedule" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSubjectSchedule" ToRole="ExamSchedule" />
+  </EntityType>
+  <Association Name="FK_ExamSchedule_Exam">
+    <End Type="ESDBModel.Exam" Role="Exam" Multiplicity="1" />
+    <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamSchedule">
+        <PropertyRef Name="ExamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamSubjectSchedule_ExamMarks">
+    <End Type="ESDBModel.ExamMark" Role="ExamMark" Multiplicity="1" />
+    <End Type="ESDBModel.ExamSubjectSchedule" Role="ExamSubjectSchedule" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ExamMark">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamSubjectSchedule">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamSubjectSchedule_ExamSchedule">
+    <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="1" />
+    <End Type="ESDBModel.ExamSubjectSchedule" Role="ExamSubjectSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamSchedule">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamSubjectSchedule">
+        <PropertyRef Name="ExamScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ExamGrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GradeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MinMarksPercentage" Type="Int32" Nullable="false" />
+    <Property Name="MaxMarksPercentage" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Blocked" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

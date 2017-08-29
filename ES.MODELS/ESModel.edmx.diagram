@@ -7,7 +7,7 @@
       <Diagram DiagramId="34a02e3607b5485ca70f2a88e41c49c5" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="ESDBModel.Address" Width="1.5" PointX="3.75" PointY="34.5" />
         <EntityTypeShape EntityType="ESDBModel.Class" Width="1.5" PointX="3.75" PointY="6.5" />
-        <EntityTypeShape EntityType="ESDBModel.ClassSection" Width="1.5" PointX="6" PointY="2.875" />
+        <EntityTypeShape EntityType="ESDBModel.ClassSection" Width="1.5" PointX="6.125" PointY="2.625" />
         <EntityTypeShape EntityType="ESDBModel.ClassSubject" Width="1.5" PointX="8" PointY="25.25" />
         <EntityTypeShape EntityType="ESDBModel.Country" Width="1.5" PointX="1.5" PointY="40.375" />
         <EntityTypeShape EntityType="ESDBModel.DailyAttendance" Width="1.5" PointX="3" PointY="24.125" />
@@ -21,8 +21,8 @@
         <EntityTypeShape EntityType="ESDBModel.Institution" Width="1.5" PointX="3.75" PointY="18.125" />
         <EntityTypeShape EntityType="ESDBModel.MasterTable" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="3" PointY="27.625" />
-        <EntityTypeShape EntityType="ESDBModel.Relationship" Width="1.5" PointX="1.5" PointY="4" />
-        <EntityTypeShape EntityType="ESDBModel.Section" Width="1.5" PointX="3.75" PointY="2.625" />
+        <EntityTypeShape EntityType="ESDBModel.Relationship" Width="1.5" PointX="0.625" PointY="4.5" />
+        <EntityTypeShape EntityType="ESDBModel.Section" Width="1.5" PointX="3.125" PointY="2.875" />
         <EntityTypeShape EntityType="ESDBModel.State" Width="1.5" PointX="1.5" PointY="37.5" />
         <EntityTypeShape EntityType="ESDBModel.Student" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="ESDBModel.StudentAddress" Width="1.5" PointX="6" PointY="12.625" />
@@ -62,6 +62,14 @@
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Student" />
         <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Subjects" />
         <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Teacher" />
+        <EntityTypeShape EntityType="ESDBModel.Exam" Width="1.5" PointX="8.375" PointY="1.375" />
+        <EntityTypeShape EntityType="ESDBModel.ExamMark" Width="1.5" PointX="14.75" PointY="1.375" />
+        <EntityTypeShape EntityType="ESDBModel.ExamSchedule" Width="1.5" PointX="10.625" PointY="1.375" />
+        <EntityTypeShape EntityType="ESDBModel.ExamSubjectSchedule" Width="1.5" PointX="12.75" PointY="1.375" />
+        <AssociationConnector Association="ESDBModel.FK_ExamSchedule_Exam" />
+        <AssociationConnector Association="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" />
+        <AssociationConnector Association="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" />
+        <EntityTypeShape EntityType="ESDBModel.ExamGrade" Width="1.5" PointX="16.75" PointY="1.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

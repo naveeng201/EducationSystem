@@ -65,8 +65,6 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="Blocked" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -138,6 +136,85 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="Blocked" Type="bit" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ExamShotName" Type="nchar" MaxLength="200" />
+          <Property Name="ExamCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="Blocked" Type="bit" />
+        </EntityType>
+        <EntityType Name="ExamGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GradeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MinMarksPercentage" Type="int" Nullable="false" />
+          <Property Name="MaxMarksPercentage" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamMarks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamSubjectScheduleId" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Marks" Type="int" Nullable="false" />
+          <Property Name="Remarks" Type="int" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="TotalMarks" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamSubjectSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamScheduleId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="ExamDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="MinMarks" Type="int" Nullable="false" />
+          <Property Name="MaxMarks" Type="int" Nullable="false" />
+          <Property Name="PassMarks" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Hour">
           <Key>
@@ -546,6 +623,42 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ExamSchedule_Exam">
+          <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+          <End Role="ExamSchedule" Type="Self.ExamSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSchedule">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamSubjectSchedule_ExamMarks">
+          <End Role="ExamMarks" Type="Self.ExamMarks" Multiplicity="1" />
+          <End Role="ExamSubjectSchedule" Type="Self.ExamSubjectSchedule" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExamMarks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSubjectSchedule">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamSubjectSchedule_ExamSchedule">
+          <End Role="ExamSchedule" Type="Self.ExamSchedule" Multiplicity="1" />
+          <End Role="ExamSubjectSchedule" Type="Self.ExamSubjectSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExamSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSubjectSchedule">
+              <PropertyRef Name="ExamScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Guardian_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
@@ -690,7 +803,7 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StuentClassSectionInfo_Institution">
+        <Association Name="FK_StuentClassSectionInfo_InstitutionInfo">
           <End Role="Institution" Type="Self.Institution" Multiplicity="1" />
           <End Role="StudentClassSectionInfo" Type="Self.StudentClassSectionInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -776,6 +889,11 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
           <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmergencyContactDetails" EntityType="Self.EmergencyContactDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamGrade" EntityType="Self.ExamGrade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamMarks" EntityType="Self.ExamMarks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamSchedule" EntityType="Self.ExamSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamSubjectSchedule" EntityType="Self.ExamSubjectSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hour" EntityType="Self.Hour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HourlyAttendance" EntityType="Self.HourlyAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HourTransaction" EntityType="Self.HourTransaction" Schema="dbo" store:Type="Tables" />
@@ -845,6 +963,18 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
             <End Role="Relationships" EntitySet="Relationships" />
             <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_ExamSchedule_Exam" Association="Self.FK_ExamSchedule_Exam">
+            <End Role="Exam" EntitySet="Exam" />
+            <End Role="ExamSchedule" EntitySet="ExamSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamSubjectSchedule_ExamMarks" Association="Self.FK_ExamSubjectSchedule_ExamMarks">
+            <End Role="ExamMarks" EntitySet="ExamMarks" />
+            <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamSubjectSchedule_ExamSchedule" Association="Self.FK_ExamSubjectSchedule_ExamSchedule">
+            <End Role="ExamSchedule" EntitySet="ExamSchedule" />
+            <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
+          </AssociationSet>
           <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Parents" EntitySet="Parents" />
@@ -893,7 +1023,7 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
             <End Role="Classes" EntitySet="Classes" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_StuentClassSectionInfo_Institution" Association="Self.FK_StuentClassSectionInfo_Institution">
+          <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="Self.FK_StuentClassSectionInfo_InstitutionInfo">
             <End Role="Institution" EntitySet="Institution" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
@@ -1081,6 +1211,23 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
           </AssociationSet>
+          <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
+          <EntitySet Name="ExamMarks" EntityType="ESDBModel.ExamMark" />
+          <EntitySet Name="ExamSchedules" EntityType="ESDBModel.ExamSchedule" />
+          <EntitySet Name="ExamSubjectSchedules" EntityType="ESDBModel.ExamSubjectSchedule" />
+          <AssociationSet Name="FK_ExamSchedule_Exam" Association="ESDBModel.FK_ExamSchedule_Exam">
+            <End Role="Exam" EntitySet="Exams" />
+            <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamSubjectSchedule_ExamMarks" Association="ESDBModel.FK_ExamSubjectSchedule_ExamMarks">
+            <End Role="ExamMark" EntitySet="ExamMarks" />
+            <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamSubjectSchedule_ExamSchedule" Association="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule">
+            <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+            <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
+          </AssociationSet>
+          <EntitySet Name="ExamGrades" EntityType="ESDBModel.ExamGrade" />
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1885,6 +2032,127 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ExamShotName" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="ExamCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="Blocked" Type="Boolean" />
+          <NavigationProperty Name="ExamSchedules" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="Exam" ToRole="ExamSchedule" />
+        </EntityType>
+        <EntityType Name="ExamMark">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamSubjectScheduleId" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Marks" Type="Int32" Nullable="false" />
+          <Property Name="Remarks" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ExamSubjectSchedule" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" FromRole="ExamMark" ToRole="ExamSubjectSchedule" />
+        </EntityType>
+        <EntityType Name="ExamSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TotalMarks" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Exam" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="ExamSchedule" ToRole="Exam" />
+          <NavigationProperty Name="ExamSubjectSchedules" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSchedule" ToRole="ExamSubjectSchedule" />
+        </EntityType>
+        <EntityType Name="ExamSubjectSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamScheduleId" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="ExamDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="MinMarks" Type="Int32" Nullable="false" />
+          <Property Name="MaxMarks" Type="Int32" Nullable="false" />
+          <Property Name="PassMarks" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ExamMark" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" FromRole="ExamSubjectSchedule" ToRole="ExamMark" />
+          <NavigationProperty Name="ExamSchedule" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSubjectSchedule" ToRole="ExamSchedule" />
+        </EntityType>
+        <Association Name="FK_ExamSchedule_Exam">
+          <End Type="ESDBModel.Exam" Role="Exam" Multiplicity="1" />
+          <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSchedule">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamSubjectSchedule_ExamMarks">
+          <End Type="ESDBModel.ExamMark" Role="ExamMark" Multiplicity="1" />
+          <End Type="ESDBModel.ExamSubjectSchedule" Role="ExamSubjectSchedule" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExamMark">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSubjectSchedule">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExamSubjectSchedule_ExamSchedule">
+          <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="1" />
+          <End Type="ESDBModel.ExamSubjectSchedule" Role="ExamSubjectSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExamSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSubjectSchedule">
+              <PropertyRef Name="ExamScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ExamGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="MaxMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2292,6 +2560,90 @@ warning 6002: The table/view 'ESDB.dbo.Constants' does not have a primary key de
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="ESDBModel.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="ExamShotName" ColumnName="ExamShotName" />
+                <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamMarks">
+            <EntityTypeMapping TypeName="ESDBModel.ExamMark">
+              <MappingFragment StoreEntitySet="ExamMarks">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Marks" ColumnName="Marks" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ExamSubjectScheduleId" ColumnName="ExamSubjectScheduleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamSchedules">
+            <EntityTypeMapping TypeName="ESDBModel.ExamSchedule">
+              <MappingFragment StoreEntitySet="ExamSchedule">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamSubjectSchedules">
+            <EntityTypeMapping TypeName="ESDBModel.ExamSubjectSchedule">
+              <MappingFragment StoreEntitySet="ExamSubjectSchedule">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PassMarks" ColumnName="PassMarks" />
+                <ScalarProperty Name="MaxMarks" ColumnName="MaxMarks" />
+                <ScalarProperty Name="MinMarks" ColumnName="MinMarks" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="ExamDateTime" ColumnName="ExamDateTime" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ExamScheduleId" ColumnName="ExamScheduleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamGrades">
+            <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
+              <MappingFragment StoreEntitySet="ExamGrade">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
+                <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

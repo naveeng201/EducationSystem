@@ -99,6 +99,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ESModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Exam.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamGrade.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamMark.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamSchedule.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamSubjectSchedule.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedModels\ExamMarks.cs" />
     <Compile Include="Institution.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
