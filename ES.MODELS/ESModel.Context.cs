@@ -37,9 +37,7 @@ namespace ES.MODELS
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<EmergencyContactDetail> EmergencyContactDetails { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Hour> Hours { get; set; }
         public virtual DbSet<HourlyAttendance> HourlyAttendances { get; set; }
-        public virtual DbSet<HourTransaction> HourTransactions { get; set; }
         public virtual DbSet<Institution> Institutions { get; set; }
         public virtual DbSet<MasterTable> MasterTables { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
@@ -55,10 +53,14 @@ namespace ES.MODELS
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
-        public virtual DbSet<ExamMarks> ExamMarks { get; set; }
         public virtual DbSet<ExamSchedule> ExamSchedules { get; set; }
-        public virtual DbSet<ExamSubjectSchedule> ExamSubjectSchedules { get; set; }
         public virtual DbSet<ExamGrade> ExamGrades { get; set; }
+        public virtual DbSet<ExamMark> ExamMarks { get; set; }
+        public virtual DbSet<ExamSubjectSchedule> ExamSubjectSchedules { get; set; }
+        public virtual DbSet<Hour> Hours { get; set; }
+        public virtual DbSet<HourTransaction> HourTransactions { get; set; }
+        public virtual DbSet<ClassSectionHour> ClassSectionHours { get; set; }
+        public virtual DbSet<TimeTable> TimeTables { get; set; }
     
         public virtual ObjectResult<Nullable<int>> spi_InsertAttendance(string studentIDs, Nullable<int> classId, Nullable<int> sectionId, Nullable<int> hourId, Nullable<int> subjectId, Nullable<System.DateTime> attendanceDate, string description, Nullable<System.TimeSpan> startTime, Nullable<System.TimeSpan> endTime, Nullable<System.DateTime> createdDate, Nullable<int> createdBy, Nullable<System.DateTime> modifiedDate, Nullable<int> modifiedBy)
         {

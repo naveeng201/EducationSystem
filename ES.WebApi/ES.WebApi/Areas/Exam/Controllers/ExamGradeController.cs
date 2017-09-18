@@ -11,7 +11,6 @@ using System.Transactions;
 namespace ES.WebApi.Areas.Exam.Controllers
 {
     [RoutePrefix("api/ExamGrade")]
-    [Route("api/ExamGrade")]
     public class ExamGradeController : ApiController
     { 
         private readonly IExamGradeService _service;
@@ -109,13 +108,14 @@ namespace ES.WebApi.Areas.Exam.Controllers
             return response;
         }
 
-        [HttpDelete]
-        public HttpResponseMessage Delete(int Id)
-        {
-            HttpResponseMessage response;
-            _service.Delete(Id);
-            response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
-            return response;
-        }
+        //[Route("")]
+        //[HttpDelete]
+        //public HttpResponseMessage Delete(int Id)
+        //{
+        //    HttpResponseMessage response;
+        //    _service.Delete(Id);
+        //    response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
+        //    return response;
+        //}
     }
 }

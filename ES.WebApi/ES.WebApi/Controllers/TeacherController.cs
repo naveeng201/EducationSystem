@@ -24,76 +24,73 @@ namespace ES.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
-            try
-            {
-                var objTeacheres = _service.GetAll();
-                response = Request.CreateResponse(HttpStatusCode.OK, objTeacheres);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
+           
+            var objTeacheres = _service.GetAll();
+            response = Request.CreateResponse(HttpStatusCode.OK, objTeacheres);
+            return response;
         }
 
-        [Route("{Id")]
+        [Route("{Id}")]
         [HttpGet]
         public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
-            try
+            Teacher objTeacher = null;
+            if (Id == 0)
             {
-                Teacher objTeacher = null;
-                if (Id == 0)
-                {
-                    objTeacher = new Teacher();
-                }
-                else
-                {
-                    objTeacher = _service.SingleOrDefault(Id);
-                }
-                response = Request.CreateResponse(HttpStatusCode.OK, objTeacher);
-                return response;
+                objTeacher = new Teacher();
             }
-            catch (Exception ex)
+            else
             {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
+                objTeacher = _service.SingleOrDefault(Id);
             }
+            response = Request.CreateResponse(HttpStatusCode.OK, objTeacher);
+            return response;
         }
 
         [Route("")]
         [HttpPost]
-        public HttpResponseMessage Insert([FromBody] Teacher objTeacher)
+        public HttpResponseMessage Post([FromBody] Teacher objTeacher)
         {
             HttpResponseMessage response = null;
-            try
+            using (var t = new TransactionScope())
             {
-                using (var t = new TransactionScope())
+                if (objTeacher.Id == 0)
                 {
-                    if (objTeacher.Id == 0)
-                    {
-                        //objTeacher.CreatedDatte = DateTime.Now;
-                        //objTeacher.Blocked = false;
-                        int ID = _service.Insert(objTeacher);
-                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
-                    }
-                    else
-                    {
-                        // objTeacher.ModifiedDate = DateTime.Now;
-                        _service.Update(objTeacher);
-                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
-                    }
-                    t.Complete();
+                    //objTeacher.CreatedDatte = DateTime.Now;
+                    //objTeacher.Blocked = false;
+                    int ID = _service.Insert(objTeacher);
+                    response = Request.CreateResponse(HttpStatusCode.OK, ID);
                 }
-                return response;
+                else
+                {
+                    // objTeacher.ModifiedDate = DateTime.Now;
+                    _service.Update(objTeacher);
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
+                }
+                t.Complete();
             }
-            catch (Exception ex)
+            return response;
+            
+        }
+
+        [Route("")]
+        [HttpPut]
+        public HttpResponseMessage Put([FromBody] Teacher objTeacher)
+        {
+            HttpResponseMessage response = null;
+            using (var t = new TransactionScope())
             {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
+                if (objTeacher.Id != 0)
+                {
+                    //objTeacher.CreatedDatte = DateTime.Now;
+                    //objTeacher.Blocked = false;
+                    _service.Update(objTeacher);
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
+                }
+                t.Complete();
             }
+            return response;
         }
 
         [Route("")]
@@ -101,17 +98,10 @@ namespace ES.WebApi.Controllers
         public HttpResponseMessage Delete([FromBody] Teacher objTeacher)
         {
             HttpResponseMessage response = null;
-            try
-            {
-                _service.Delete(objTeacher);
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
+            _service.Delete(objTeacher);
+            response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
+            return response;
+             
         }
     }
 }

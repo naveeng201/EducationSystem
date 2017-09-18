@@ -39,6 +39,20 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="Blocked" Type="bit" />
         </EntityType>
+        <EntityType Name="ClassSectionHour">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="SectionId" Type="int" Nullable="false" />
+          <Property Name="HourId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="ClassSections">
           <Key>
             <PropertyRef Name="Id" />
@@ -221,16 +235,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClassId" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="StartTime" Type="time" Precision="7" />
-          <Property Name="EndTime" Type="time" Precision="7" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="int" />
-          <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="Blocked" Type="bit" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="HourlyAttendance">
           <Key>
@@ -249,6 +264,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HourId" Type="int" Nullable="false" />
           <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" Nullable="false" />
           <Property Name="HourDescription" Type="nvarchar(max)" />
           <Property Name="HourDate" Type="date" Nullable="false" />
           <Property Name="CreatedBy" Type="int" />
@@ -259,7 +275,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="ShortName" Type="nvarchar" MaxLength="200" />
           <Property Name="RegName" Type="nvarchar" MaxLength="200" />
           <Property Name="RegNo" Type="nvarchar" MaxLength="50" />
@@ -328,7 +344,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -461,6 +477,22 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="Blocked" Type="bit" />
         </EntityType>
+        <EntityType Name="TimeTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassSectionHourId" Type="int" Nullable="false" />
+          <Property Name="DayId" Type="int" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="400" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="Blocked" Type="bit" />
+        </EntityType>
         <Association Name="FK_Address_Countries">
           <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
@@ -494,6 +526,18 @@
             </Principal>
             <Dependent Role="Address">
               <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassHour_ClassSections">
+          <End Role="ClassSections" Type="Self.ClassSections" Multiplicity="1" />
+          <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassSectionHour">
+              <PropertyRef Name="ClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -623,6 +667,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ExamMarks_ExamSubjectSchedule">
+          <End Role="ExamSubjectSchedule" Type="Self.ExamSubjectSchedule" Multiplicity="1" />
+          <End Role="ExamMarks" Type="Self.ExamMarks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExamSubjectSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamMarks">
+              <PropertyRef Name="ExamSubjectScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ExamSchedule_Exam">
           <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
           <End Role="ExamSchedule" Type="Self.ExamSchedule" Multiplicity="*" />
@@ -632,18 +688,6 @@
             </Principal>
             <Dependent Role="ExamSchedule">
               <PropertyRef Name="ExamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamSubjectSchedule_ExamMarks">
-          <End Role="ExamMarks" Type="Self.ExamMarks" Multiplicity="1" />
-          <End Role="ExamSubjectSchedule" Type="Self.ExamSubjectSchedule" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ExamMarks">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamSubjectSchedule">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -668,18 +712,6 @@
             </Principal>
             <Dependent Role="Parents">
               <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Hour_Classes">
-          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
-          <End Role="Hour" Type="Self.Hour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Classes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Hour">
-              <PropertyRef Name="ClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -728,6 +760,18 @@
             </Principal>
             <Dependent Role="HourTransaction">
               <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourTransaction_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -839,6 +883,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Teacher_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TeacherSubject_Subjects">
           <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
           <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
@@ -881,6 +937,7 @@
         <EntityContainer Name="ESDBModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassSectionHour" EntityType="Self.ClassSectionHour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
@@ -911,6 +968,7 @@
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Address" EntitySet="Address" />
@@ -922,6 +980,10 @@
           <AssociationSet Name="FK_Address_States" Association="Self.FK_Address_States">
             <End Role="States" EntitySet="States" />
             <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassHour_ClassSections" Association="Self.FK_ClassHour_ClassSections">
+            <End Role="ClassSections" EntitySet="ClassSections" />
+            <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
           </AssociationSet>
           <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">
             <End Role="Classes" EntitySet="Classes" />
@@ -963,13 +1025,13 @@
             <End Role="Relationships" EntitySet="Relationships" />
             <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_ExamMarks_ExamSubjectSchedule" Association="Self.FK_ExamMarks_ExamSubjectSchedule">
+            <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
+            <End Role="ExamMarks" EntitySet="ExamMarks" />
+          </AssociationSet>
           <AssociationSet Name="FK_ExamSchedule_Exam" Association="Self.FK_ExamSchedule_Exam">
             <End Role="Exam" EntitySet="Exam" />
             <End Role="ExamSchedule" EntitySet="ExamSchedule" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamSubjectSchedule_ExamMarks" Association="Self.FK_ExamSubjectSchedule_ExamMarks">
-            <End Role="ExamMarks" EntitySet="ExamMarks" />
-            <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamSubjectSchedule_ExamSchedule" Association="Self.FK_ExamSubjectSchedule_ExamSchedule">
             <End Role="ExamSchedule" EntitySet="ExamSchedule" />
@@ -978,10 +1040,6 @@
           <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Parents" EntitySet="Parents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Hour_Classes" Association="Self.FK_Hour_Classes">
-            <End Role="Classes" EntitySet="Classes" />
-            <End Role="Hour" EntitySet="Hour" />
           </AssociationSet>
           <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="Self.FK_HourlyAttendance_DailyAttendance">
             <End Role="DailyAttendance" EntitySet="DailyAttendance" />
@@ -997,6 +1055,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_HourTransaction_Subjects" Association="Self.FK_HourTransaction_Subjects">
             <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="HourTransaction" EntitySet="HourTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourTransaction_Teacher" Association="Self.FK_HourTransaction_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
             <End Role="HourTransaction" EntitySet="HourTransaction" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentAddress_Address" Association="Self.FK_StudentAddress_Address">
@@ -1032,6 +1094,10 @@
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_Teacher_Employee" Association="Self.FK_Teacher_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Employee1" Association="Self.FK_Teacher_Employee1">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
@@ -1074,9 +1140,7 @@
           <EntitySet Name="Districts" EntityType="ESDBModel.District" />
           <EntitySet Name="EmergencyContactDetails" EntityType="ESDBModel.EmergencyContactDetail" />
           <EntitySet Name="Employees" EntityType="ESDBModel.Employee" />
-          <EntitySet Name="Hours" EntityType="ESDBModel.Hour" />
           <EntitySet Name="HourlyAttendances" EntityType="ESDBModel.HourlyAttendance" />
-          <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
           <EntitySet Name="Institutions" EntityType="ESDBModel.Institution" />
           <EntitySet Name="MasterTables" EntityType="ESDBModel.MasterTable" />
           <EntitySet Name="Parents" EntityType="ESDBModel.Parent" />
@@ -1114,10 +1178,6 @@
           <AssociationSet Name="FK_ClassSubjects_Classes" Association="ESDBModel.FK_ClassSubjects_Classes">
             <End Role="Class" EntitySet="Classes" />
             <End Role="ClassSubject" EntitySet="ClassSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Hour_Classes" Association="ESDBModel.FK_Hour_Classes">
-            <End Role="Class" EntitySet="Classes" />
-            <End Role="Hour" EntitySet="Hours" />
           </AssociationSet>
           <AssociationSet Name="FK_StuentClassSectionInfo_Classes" Association="ESDBModel.FK_StuentClassSectionInfo_Classes">
             <End Role="Class" EntitySet="Classes" />
@@ -1167,18 +1227,6 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
-          <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
-            <End Role="Hour" EntitySet="Hours" />
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="ESDBModel.FK_HourlyAttendance_HourTransaction">
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
-            <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HourTransaction_Subjects" Association="ESDBModel.FK_HourTransaction_Subjects">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
-          </AssociationSet>
           <AssociationSet Name="FK_StuentClassSectionInfo_Institution" Association="ESDBModel.FK_StuentClassSectionInfo_Institution">
             <End Role="Institution" EntitySet="Institutions" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
@@ -1212,22 +1260,46 @@
             <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
           </AssociationSet>
           <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
-          <EntitySet Name="ExamMarks" EntityType="ESDBModel.ExamMark" />
           <EntitySet Name="ExamSchedules" EntityType="ESDBModel.ExamSchedule" />
-          <EntitySet Name="ExamSubjectSchedules" EntityType="ESDBModel.ExamSubjectSchedule" />
           <AssociationSet Name="FK_ExamSchedule_Exam" Association="ESDBModel.FK_ExamSchedule_Exam">
             <End Role="Exam" EntitySet="Exams" />
             <End Role="ExamSchedule" EntitySet="ExamSchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK_ExamSubjectSchedule_ExamMarks" Association="ESDBModel.FK_ExamSubjectSchedule_ExamMarks">
-            <End Role="ExamMark" EntitySet="ExamMarks" />
+          <EntitySet Name="ExamGrades" EntityType="ESDBModel.ExamGrade" />
+          <EntitySet Name="ExamMarks" EntityType="ESDBModel.ExamMark" />
+          <EntitySet Name="ExamSubjectSchedules" EntityType="ESDBModel.ExamSubjectSchedule" />
+          <AssociationSet Name="FK_ExamMarks_ExamSubjectSchedule" Association="ESDBModel.FK_ExamMarks_ExamSubjectSchedule">
             <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
+            <End Role="ExamMark" EntitySet="ExamMarks" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamSubjectSchedule_ExamSchedule" Association="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule">
             <End Role="ExamSchedule" EntitySet="ExamSchedules" />
             <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
           </AssociationSet>
-          <EntitySet Name="ExamGrades" EntityType="ESDBModel.ExamGrade" />
+          <EntitySet Name="Hours" EntityType="ESDBModel.Hour" />
+          <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
+          <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
+            <End Role="Hour" EntitySet="Hours" />
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="ESDBModel.FK_HourlyAttendance_HourTransaction">
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+            <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourTransaction_Subjects" Association="ESDBModel.FK_HourTransaction_Subjects">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourTransaction_Teacher" Association="ESDBModel.FK_HourTransaction_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+          </AssociationSet>
+          <EntitySet Name="ClassSectionHours" EntityType="ESDBModel.ClassSectionHour" />
+          <AssociationSet Name="FK_ClassHour_ClassSections" Association="ESDBModel.FK_ClassHour_ClassSections">
+            <End Role="ClassSection" EntitySet="ClassSections" />
+            <End Role="ClassSectionHour" EntitySet="ClassSectionHours" />
+          </AssociationSet>
+          <EntitySet Name="TimeTables" EntityType="ESDBModel.TimeTable" />
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1268,7 +1340,6 @@
           <Property Name="Blocked" Type="Boolean" />
           <NavigationProperty Name="ClassSections" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="Class" ToRole="ClassSection" />
           <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Classes" FromRole="Class" ToRole="ClassSubject" />
-          <NavigationProperty Name="Hours" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Class" ToRole="Hour" />
           <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StuentClassSectionInfo_Classes" FromRole="Class" ToRole="StudentClassSectionInfo" />
         </EntityType>
         <EntityType Name="ClassSection">
@@ -1285,6 +1356,7 @@
           <Property Name="Blocked" Type="Boolean" />
           <NavigationProperty Name="Class" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="ClassSection" ToRole="Class" />
           <NavigationProperty Name="Section" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="ClassSection" ToRole="Section" />
+          <NavigationProperty Name="ClassSectionHours" Relationship="ESDBModel.FK_ClassHour_ClassSections" FromRole="ClassSection" ToRole="ClassSectionHour" />
         </EntityType>
         <EntityType Name="ClassSubject">
           <Key>
@@ -1385,24 +1457,6 @@
           <NavigationProperty Name="Departments" Relationship="ESDBModel.FK_Department_Employee" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Teachers" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Employee" ToRole="Teacher" />
         </EntityType>
-        <EntityType Name="Hour">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="Blocked" Type="Boolean" />
-          <NavigationProperty Name="Class" Relationship="ESDBModel.FK_Hour_Classes" FromRole="Hour" ToRole="Class" />
-          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
-        </EntityType>
         <EntityType Name="HourlyAttendance">
           <Key>
             <PropertyRef Name="Id" />
@@ -1415,27 +1469,12 @@
           <NavigationProperty Name="DailyAttendance" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="HourlyAttendance" ToRole="DailyAttendance" />
           <NavigationProperty Name="HourTransaction" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourlyAttendance" ToRole="HourTransaction" />
         </EntityType>
-        <EntityType Name="HourTransaction">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HourId" Type="Int32" Nullable="false" />
-          <Property Name="SubjectId" Type="Int32" Nullable="false" />
-          <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HourDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
-          <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
-          <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
-        </EntityType>
         <EntityType Name="Institution">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ShortName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="RegName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1507,7 +1546,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SectionName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
@@ -1634,8 +1673,8 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="Blocked" Type="Boolean" />
           <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="Subject" ToRole="ClassSubject" />
-          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
           <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="Subject" ToRole="TeacherSubject" />
+          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -1650,6 +1689,7 @@
           <Property Name="Blocked" Type="Boolean" />
           <NavigationProperty Name="Employee" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Teacher" ToRole="Employee" />
           <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Teacher" FromRole="Teacher" ToRole="TeacherSubject" />
+          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Teacher" FromRole="Teacher" ToRole="HourTransaction" />
         </EntityType>
         <EntityType Name="TeacherSubject">
           <Key>
@@ -1735,18 +1775,6 @@
             </Principal>
             <Dependent Role="ClassSubject">
               <PropertyRef Name="ClassID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Hour_Classes">
-          <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
-          <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Class">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Hour">
-              <PropertyRef Name="ClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1900,42 +1928,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HourTransaction_Hour">
-          <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hour">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourTransaction">
-              <PropertyRef Name="HourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HourlyAttendance_HourTransaction">
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="0..1" />
-          <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HourTransaction">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourlyAttendance">
-              <PropertyRef Name="HT_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HourTransaction_Subjects">
-          <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourTransaction">
-              <PropertyRef Name="SubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StuentClassSectionInfo_Institution">
           <End Type="ESDBModel.Institution" Role="Institution" Multiplicity="1" />
           <End Type="ESDBModel.StudentClassSectionInfo" Role="StudentClassSectionInfo" Multiplicity="*" />
@@ -2048,22 +2040,6 @@
           <Property Name="Blocked" Type="Boolean" />
           <NavigationProperty Name="ExamSchedules" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="Exam" ToRole="ExamSchedule" />
         </EntityType>
-        <EntityType Name="ExamMark">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ExamSubjectScheduleId" Type="Int32" Nullable="false" />
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="Marks" Type="Int32" Nullable="false" />
-          <Property Name="Remarks" Type="Int32" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ExamSubjectSchedule" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" FromRole="ExamMark" ToRole="ExamSubjectSchedule" />
-        </EntityType>
         <EntityType Name="ExamSchedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -2080,6 +2056,49 @@
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Exam" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="ExamSchedule" ToRole="Exam" />
           <NavigationProperty Name="ExamSubjectSchedules" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSchedule" ToRole="ExamSubjectSchedule" />
+        </EntityType>
+        <Association Name="FK_ExamSchedule_Exam">
+          <End Type="ESDBModel.Exam" Role="Exam" Multiplicity="1" />
+          <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSchedule">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ExamGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="MaxMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamMark">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamSubjectScheduleId" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Marks" Type="Int32" Nullable="false" />
+          <Property Name="Remarks" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ExamSubjectSchedule" Relationship="ESDBModel.FK_ExamMarks_ExamSubjectSchedule" FromRole="ExamMark" ToRole="ExamSubjectSchedule" />
         </EntityType>
         <EntityType Name="ExamSubjectSchedule">
           <Key>
@@ -2099,30 +2118,18 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ExamMark" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamMarks" FromRole="ExamSubjectSchedule" ToRole="ExamMark" />
+          <NavigationProperty Name="ExamMarks" Relationship="ESDBModel.FK_ExamMarks_ExamSubjectSchedule" FromRole="ExamSubjectSchedule" ToRole="ExamMark" />
           <NavigationProperty Name="ExamSchedule" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSubjectSchedule" ToRole="ExamSchedule" />
         </EntityType>
-        <Association Name="FK_ExamSchedule_Exam">
-          <End Type="ESDBModel.Exam" Role="Exam" Multiplicity="1" />
-          <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="*" />
+        <Association Name="FK_ExamMarks_ExamSubjectSchedule">
+          <End Type="ESDBModel.ExamSubjectSchedule" Role="ExamSubjectSchedule" Multiplicity="1" />
+          <End Type="ESDBModel.ExamMark" Role="ExamMark" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Exam">
+            <Principal Role="ExamSubjectSchedule">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ExamSchedule">
-              <PropertyRef Name="ExamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamSubjectSchedule_ExamMarks">
-          <End Type="ESDBModel.ExamMark" Role="ExamMark" Multiplicity="1" />
-          <End Type="ESDBModel.ExamSubjectSchedule" Role="ExamSubjectSchedule" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ExamMark">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamSubjectSchedule">
-              <PropertyRef Name="Id" />
+            <Dependent Role="ExamMark">
+              <PropertyRef Name="ExamSubjectScheduleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2138,20 +2145,131 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ExamGrade">
+        <EntityType Name="Hour">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GradeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MinMarksPercentage" Type="Int32" Nullable="false" />
-          <Property Name="MaxMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
+        </EntityType>
+        <EntityType Name="HourTransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HourId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HourDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
+          <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
+          <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="ESDBModel.FK_HourTransaction_Teacher" FromRole="HourTransaction" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_HourTransaction_Hour">
+          <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="HourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourlyAttendance_HourTransaction">
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="0..1" />
+          <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HourTransaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourlyAttendance">
+              <PropertyRef Name="HT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourTransaction_Subjects">
+          <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourTransaction_Teacher">
+          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClassSectionHour">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="SectionId" Type="Int32" Nullable="false" />
+          <Property Name="HourId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClassSection" Relationship="ESDBModel.FK_ClassHour_ClassSections" FromRole="ClassSectionHour" ToRole="ClassSection" />
+        </EntityType>
+        <Association Name="FK_ClassHour_ClassSections">
+          <End Type="ESDBModel.ClassSection" Role="ClassSection" Multiplicity="1" />
+          <End Type="ESDBModel.ClassSectionHour" Role="ClassSectionHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassSection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClassSectionHour">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TimeTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassSectionHourId" Type="Int32" Nullable="false" />
+          <Property Name="DayId" Type="Int32" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2302,23 +2420,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Hours">
-            <EntityTypeMapping TypeName="ESDBModel.Hour">
-              <MappingFragment StoreEntitySet="Hour">
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HourlyAttendances">
             <EntityTypeMapping TypeName="ESDBModel.HourlyAttendance">
               <MappingFragment StoreEntitySet="HourlyAttendance">
@@ -2326,19 +2427,6 @@
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="HT_Id" ColumnName="HT_Id" />
                 <ScalarProperty Name="DA_Id" ColumnName="DA_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HourTransactions">
-            <EntityTypeMapping TypeName="ESDBModel.HourTransaction">
-              <MappingFragment StoreEntitySet="HourTransaction">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="HourDate" ColumnName="HourDate" />
-                <ScalarProperty Name="HourDescription" ColumnName="HourDescription" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="HourId" ColumnName="HourId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2580,22 +2668,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ExamMarks">
-            <EntityTypeMapping TypeName="ESDBModel.ExamMark">
-              <MappingFragment StoreEntitySet="ExamMarks">
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Marks" ColumnName="Marks" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="ExamSubjectScheduleId" ColumnName="ExamSubjectScheduleId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExamSchedules">
             <EntityTypeMapping TypeName="ESDBModel.ExamSchedule">
               <MappingFragment StoreEntitySet="ExamSchedule">
@@ -2608,6 +2680,38 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamGrades">
+            <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
+              <MappingFragment StoreEntitySet="ExamGrade">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
+                <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamMarks">
+            <EntityTypeMapping TypeName="ESDBModel.ExamMark">
+              <MappingFragment StoreEntitySet="ExamMarks">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Marks" ColumnName="Marks" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ExamSubjectScheduleId" ColumnName="ExamSubjectScheduleId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2632,18 +2736,66 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ExamGrades">
-            <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
-              <MappingFragment StoreEntitySet="ExamGrade">
+          <EntitySetMapping Name="Hours">
+            <EntityTypeMapping TypeName="ESDBModel.Hour">
+              <MappingFragment StoreEntitySet="Hour">
                 <ScalarProperty Name="Blocked" ColumnName="Blocked" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
-                <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HourTransactions">
+            <EntityTypeMapping TypeName="ESDBModel.HourTransaction">
+              <MappingFragment StoreEntitySet="HourTransaction">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="HourDate" ColumnName="HourDate" />
+                <ScalarProperty Name="HourDescription" ColumnName="HourDescription" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="HourId" ColumnName="HourId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassSectionHours">
+            <EntityTypeMapping TypeName="ESDBModel.ClassSectionHour">
+              <MappingFragment StoreEntitySet="ClassSectionHour">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="HourId" ColumnName="HourId" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeTables">
+            <EntityTypeMapping TypeName="ESDBModel.TimeTable">
+              <MappingFragment StoreEntitySet="TimeTable">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="DayId" ColumnName="DayId" />
+                <ScalarProperty Name="ClassSectionHourId" ColumnName="ClassSectionHourId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

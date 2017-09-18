@@ -14,6 +14,11 @@ namespace ES.MODELS
     
     public partial class ExamSubjectSchedule
     {
+        public ExamSubjectSchedule()
+        {
+            this.ExamMarks = new HashSet<ExamMark>();
+        }
+    
         public int Id { get; set; }
         public int ExamScheduleId { get; set; }
         public int ClassId { get; set; }
@@ -29,7 +34,7 @@ namespace ES.MODELS
         public System.DateTime ModifiedDate { get; set; }
         public bool Blocked { get; set; }
     
-        public virtual ExamMarks ExamMark { get; set; }
+        public virtual ICollection<ExamMark> ExamMarks { get; set; }
         public virtual ExamSchedule ExamSchedule { get; set; }
     }
 }

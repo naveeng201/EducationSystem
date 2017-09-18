@@ -154,6 +154,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Exam\Views\web.config" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -171,7 +172,10 @@
     <Compile Include="Areas\Exam\Controllers\ScheduleExamController.cs" />
     <Compile Include="Areas\Exam\Controllers\ScheduleSubjectExamController.cs" />
     <Compile Include="Areas\Exam\ExamAreaRegistration.cs" />
+    <Compile Include="Areas\TimeTable\Controllers\TimeTableController.cs" />
+    <Compile Include="Areas\TimeTable\TimeTableAreaRegistration.cs" />
     <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\ClassSectionHourController.cs" />
     <Compile Include="Controllers\EmergencyContactDetailsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HourController.cs" />
@@ -192,7 +196,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Areas\Attendance\Views\web.config" />
-    <Content Include="Areas\Exam\Views\web.config" />
+    <Content Include="Areas\TimeTable\Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -206,6 +210,8 @@
     <Folder Include="Areas\Attendance\Views\Shared\" />
     <Folder Include="Areas\Exam\Models\" />
     <Folder Include="Areas\Exam\Views\Shared\" />
+    <Folder Include="Areas\TimeTable\Models\" />
+    <Folder Include="Areas\TimeTable\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

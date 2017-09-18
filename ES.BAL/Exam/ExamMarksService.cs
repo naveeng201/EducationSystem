@@ -10,11 +10,11 @@ namespace ES.SERVICE
 {
     public interface IExamMarksService
     {
-        IEnumerable<ExamMarks> GetAll();
-        int Insert(ExamMarks entity);
-        void Update(ExamMarks entity);
-        ExamMarks SingleOrDefault(int ID);
-        void Delete(ExamMarks entity);
+        IEnumerable<ExamMark> GetAll();
+        int Insert(ExamMark entity);
+        void Update(ExamMark entity);
+        ExamMark SingleOrDefault(int ID);
+        void Delete(ExamMark entity);
         void Delete(int Id);
     }
     public class ExamMarksService : IExamMarksService
@@ -30,27 +30,27 @@ namespace ES.SERVICE
             _repository.Delete(Id);
         }
 
-        public void Delete(ExamMarks entity)
+        public void Delete(ExamMark entity)
         {
             _repository.Delete(entity);
         }
 
-        public IEnumerable<ExamMarks> GetAll()
+        public IEnumerable<ExamMark> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public int Insert(ExamMarks entity)
+        public int Insert(ExamMark entity)
         {
             return _repository.Insert(entity);
         }
 
-        public ExamMarks SingleOrDefault(int ID)
+        public ExamMark SingleOrDefault(int ID)
         {
             return _repository.SingleOrDefault(ID);
         }
 
-        public void Update(ExamMarks entity)
+        public void Update(ExamMark entity)
         {
             _repository.Update(entity);
         }

@@ -34,6 +34,20 @@
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
   </EntityType>
+  <EntityType Name="ClassSectionHour">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="SectionId" Type="int" Nullable="false" />
+    <Property Name="HourId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="ClassSections">
     <Key>
       <PropertyRef Name="Id" />
@@ -216,16 +230,17 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ClassId" Type="int" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="StartTime" Type="time" Precision="7" />
-    <Property Name="EndTime" Type="time" Precision="7" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="HourlyAttendance">
     <Key>
@@ -244,6 +259,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HourId" Type="int" Nullable="false" />
     <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
     <Property Name="HourDescription" Type="nvarchar(max)" />
     <Property Name="HourDate" Type="date" Nullable="false" />
     <Property Name="CreatedBy" Type="int" />
@@ -254,7 +270,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
     <Property Name="ShortName" Type="nvarchar" MaxLength="200" />
     <Property Name="RegName" Type="nvarchar" MaxLength="200" />
     <Property Name="RegNo" Type="nvarchar" MaxLength="50" />
@@ -323,7 +339,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="ModifiedDate" Type="datetime" />
@@ -456,6 +472,22 @@
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="Blocked" Type="bit" />
   </EntityType>
+  <EntityType Name="TimeTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassSectionHourId" Type="int" Nullable="false" />
+    <Property Name="DayId" Type="int" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="400" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Blocked" Type="bit" />
+  </EntityType>
   <Association Name="FK_Address_Countries">
     <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
@@ -489,6 +521,18 @@
       </Principal>
       <Dependent Role="Address">
         <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassHour_ClassSections">
+    <End Role="ClassSections" Type="Self.ClassSections" Multiplicity="1" />
+    <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassSections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSectionHour">
+        <PropertyRef Name="ClassId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -618,6 +662,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ExamMarks_ExamSubjectSchedule">
+    <End Role="ExamSubjectSchedule" Type="Self.ExamSubjectSchedule" Multiplicity="1" />
+    <End Role="ExamMarks" Type="Self.ExamMarks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamSubjectSchedule">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamMarks">
+        <PropertyRef Name="ExamSubjectScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ExamSchedule_Exam">
     <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
     <End Role="ExamSchedule" Type="Self.ExamSchedule" Multiplicity="*" />
@@ -627,18 +683,6 @@
       </Principal>
       <Dependent Role="ExamSchedule">
         <PropertyRef Name="ExamID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ExamSubjectSchedule_ExamMarks">
-    <End Role="ExamMarks" Type="Self.ExamMarks" Multiplicity="1" />
-    <End Role="ExamSubjectSchedule" Type="Self.ExamSubjectSchedule" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="ExamMarks">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ExamSubjectSchedule">
-        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -663,18 +707,6 @@
       </Principal>
       <Dependent Role="Parents">
         <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Hour_Classes">
-    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
-    <End Role="Hour" Type="Self.Hour" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Classes">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Hour">
-        <PropertyRef Name="ClassId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -723,6 +755,18 @@
       </Principal>
       <Dependent Role="HourTransaction">
         <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HourTransaction_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HourTransaction">
+        <PropertyRef Name="TeacherId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -834,6 +878,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Teacher_Employee1">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TeacherSubject_Subjects">
     <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
     <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
@@ -876,6 +932,7 @@
   <EntityContainer Name="ESDBModelStoreContainer">
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassSectionHour" EntityType="Self.ClassSectionHour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
@@ -906,6 +963,7 @@
     <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
       <End Role="Countries" EntitySet="Countries" />
       <End Role="Address" EntitySet="Address" />
@@ -917,6 +975,10 @@
     <AssociationSet Name="FK_Address_States" Association="Self.FK_Address_States">
       <End Role="States" EntitySet="States" />
       <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassHour_ClassSections" Association="Self.FK_ClassHour_ClassSections">
+      <End Role="ClassSections" EntitySet="ClassSections" />
+      <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
     </AssociationSet>
     <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">
       <End Role="Classes" EntitySet="Classes" />
@@ -958,13 +1020,13 @@
       <End Role="Relationships" EntitySet="Relationships" />
       <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_ExamMarks_ExamSubjectSchedule" Association="Self.FK_ExamMarks_ExamSubjectSchedule">
+      <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
+      <End Role="ExamMarks" EntitySet="ExamMarks" />
+    </AssociationSet>
     <AssociationSet Name="FK_ExamSchedule_Exam" Association="Self.FK_ExamSchedule_Exam">
       <End Role="Exam" EntitySet="Exam" />
       <End Role="ExamSchedule" EntitySet="ExamSchedule" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ExamSubjectSchedule_ExamMarks" Association="Self.FK_ExamSubjectSchedule_ExamMarks">
-      <End Role="ExamMarks" EntitySet="ExamMarks" />
-      <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
     </AssociationSet>
     <AssociationSet Name="FK_ExamSubjectSchedule_ExamSchedule" Association="Self.FK_ExamSubjectSchedule_ExamSchedule">
       <End Role="ExamSchedule" EntitySet="ExamSchedule" />
@@ -973,10 +1035,6 @@
     <AssociationSet Name="FK_Guardian_Student" Association="Self.FK_Guardian_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="Parents" EntitySet="Parents" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Hour_Classes" Association="Self.FK_Hour_Classes">
-      <End Role="Classes" EntitySet="Classes" />
-      <End Role="Hour" EntitySet="Hour" />
     </AssociationSet>
     <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="Self.FK_HourlyAttendance_DailyAttendance">
       <End Role="DailyAttendance" EntitySet="DailyAttendance" />
@@ -992,6 +1050,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_HourTransaction_Subjects" Association="Self.FK_HourTransaction_Subjects">
       <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="HourTransaction" EntitySet="HourTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HourTransaction_Teacher" Association="Self.FK_HourTransaction_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
       <End Role="HourTransaction" EntitySet="HourTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentAddress_Address" Association="Self.FK_StudentAddress_Address">
@@ -1027,6 +1089,10 @@
       <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_Teacher_Employee" Association="Self.FK_Teacher_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_Employee1" Association="Self.FK_Teacher_Employee1">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Teacher" EntitySet="Teacher" />
     </AssociationSet>

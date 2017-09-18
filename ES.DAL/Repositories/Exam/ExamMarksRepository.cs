@@ -7,15 +7,15 @@ using ES.MODELS;
 
 namespace ES.DAL 
 {
-    public interface IExamMarksRepository : IRepository<ExamMarks>
+    public interface IExamMarksRepository : IRepository<ExamMark>
     {
 
     }
 
-    public class ExamMarksRepository : BaseRepository<ExamMarks>, IExamMarksRepository
+    public class ExamMarksRepository : BaseRepository<ExamMark>, IExamMarksRepository
     {
         IUnitOfWork _unitofwork;
-        public ExamMarksRepository(BaseRepository<ExamMarks> repository, IUnitOfWork unitofwork) 
+        public ExamMarksRepository(BaseRepository<ExamMark> repository, IUnitOfWork unitofwork) 
             : base(unitofwork)
         {
             _unitofwork = unitofwork;

@@ -11,7 +11,6 @@ using System.Transactions;
 namespace ES.WebApi.Areas.Exam.Controllers
 {
     [RoutePrefix("api/ExamMarks")]
-    [Route("api/ExamMarks")]
     public class ExamMarksController : ApiController
     {
         private readonly IExamMarksService _service;
@@ -35,9 +34,9 @@ namespace ES.WebApi.Areas.Exam.Controllers
         public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response;
-            ExamMarks entity = null;
+            ExamMark entity = null;
             if (Id == 0)
-                entity = new ExamMarks();
+                entity = new ExamMark();
             else
                 entity = _service.SingleOrDefault(Id);
             response = Request.CreateResponse(HttpStatusCode.OK, entity);
@@ -46,7 +45,7 @@ namespace ES.WebApi.Areas.Exam.Controllers
 
         [Route("")]
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] ExamMarks entity)
+        public HttpResponseMessage Post([FromBody] ExamMark entity)
         {
             HttpResponseMessage response;
             using (var t = new TransactionScope())
@@ -73,7 +72,7 @@ namespace ES.WebApi.Areas.Exam.Controllers
 
         [Route("")]
         [HttpPut]
-        public HttpResponseMessage Put([FromBody] ExamMarks entity)
+        public HttpResponseMessage Put([FromBody] ExamMark entity)
         {
             HttpResponseMessage response;
 
@@ -101,7 +100,7 @@ namespace ES.WebApi.Areas.Exam.Controllers
 
         [Route("")]
         [HttpDelete]
-        public HttpResponseMessage Delete([FromBody] ExamMarks entity)
+        public HttpResponseMessage Delete([FromBody] ExamMark entity)
         {
             HttpResponseMessage response;
             _service.Delete(entity);
@@ -109,13 +108,14 @@ namespace ES.WebApi.Areas.Exam.Controllers
             return response;
         }
 
-        [HttpDelete]
-        public HttpResponseMessage Delete(int Id)
-        {
-            HttpResponseMessage response;
-            _service.Delete(Id);
-            response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
-            return response;
-        }
+        //[Route("")]
+        //[HttpDelete]
+        //public HttpResponseMessage Delete(int Id)
+        //{
+        //    HttpResponseMessage response;
+        //    _service.Delete(Id);
+        //    response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
+        //    return response;
+        //}
     }
 }

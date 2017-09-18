@@ -59,6 +59,7 @@
     <Compile Include="Repositories\Attendance\AttendanceRepository.cs" />
     <Compile Include="Repositories\Attendance\DailyAttendanceRepository.cs" />
     <Compile Include="Repositories\Attendance\HourlyAttendanceRepository.cs" />
+    <Compile Include="Repositories\ClassSectionHourRepository.cs" />
     <Compile Include="Repositories\ClassSectionRepository.cs" />
     <Compile Include="Repositories\ClassSubjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Repositories\SubjectRepository.cs" />
     <Compile Include="Repositories\TeacherRepository.cs" />
     <Compile Include="Repositories\TeacherSubjectRepository.cs" />
+    <Compile Include="Repositories\TimeTable\TimeTableRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

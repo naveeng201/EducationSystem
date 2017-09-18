@@ -12,7 +12,7 @@ namespace ES.MODELS
     using System;
     using System.Collections.Generic;
     
-    public partial class ExamMarks
+    public partial class ExamMark
     {
         public int Id { get; set; }
         public int ExamSubjectScheduleId { get; set; }

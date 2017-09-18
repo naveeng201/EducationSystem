@@ -20,18 +20,18 @@ namespace ES.MODELS
         }
     
         public int Id { get; set; }
-        public int ClassId { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
+        public string ShortName { get; set; }
         public string Description { get; set; }
-        public Nullable<System.TimeSpan> StartTime { get; set; }
-        public Nullable<System.TimeSpan> EndTime { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.TimeSpan StartTime { get; set; }
+        public System.TimeSpan EndTime { get; set; }
+        public int Duration { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public bool Blocked { get; set; }
     
-        public virtual Class Class { get; set; }
         public virtual ICollection<HourTransaction> HourTransactions { get; set; }
     }
 }

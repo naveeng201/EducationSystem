@@ -22,97 +22,78 @@ namespace ES.WebApi.Controllers
 
         [Route("")]
         [HttpGet]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage Get()
         {
             HttpResponseMessage response = null;
-            try
-            {
-                var objTeacherSubjectes = _service.GetAll();
-                response = Request.CreateResponse(HttpStatusCode.OK, objTeacherSubjectes);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
+            var objTeacherSubjectes = _service.GetAll();
+            response = Request.CreateResponse(HttpStatusCode.OK, objTeacherSubjectes);
+            return response;
         }
 
-        [Route("{Id")]
+        [Route("{Id}")]
         [HttpGet]
-        public HttpResponseMessage SingleOrDefault(int Id)
+        public HttpResponseMessage Get(int Id)
         {
             HttpResponseMessage response = null;
-            try
+            TeacherSubject objTeacherSubject = null;
+            if (Id == 0)
             {
-                TeacherSubject objTeacherSubject = null;
-                if (Id == 0)
-                {
-                    objTeacherSubject = new TeacherSubject();
-                }
-                else
-                {
-                    objTeacherSubject = _service.SingleOrDefault(Id);
-                }
-                response = Request.CreateResponse(HttpStatusCode.OK, objTeacherSubject);
-                return response;
+                objTeacherSubject = new TeacherSubject();
             }
-            catch (Exception ex)
+            else
             {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
+                objTeacherSubject = _service.SingleOrDefault(Id);
             }
+            response = Request.CreateResponse(HttpStatusCode.OK, objTeacherSubject);
+            return response;
         }
 
         [Route("")]
         [HttpPost]
-        public HttpResponseMessage Insert([FromBody] TeacherSubject objTeacherSubject)
+        public HttpResponseMessage Post([FromBody] TeacherSubject objTeacherSubject)
         {
             HttpResponseMessage response = null;
-            try
+            using (var t = new TransactionScope())
             {
-                using (var t = new TransactionScope())
+                if (objTeacherSubject.Id == 0)
                 {
-                    if (objTeacherSubject.Id == 0)
-                    {
-                        //objTeacherSubject.CreatedDatte = DateTime.Now;
-                        //objTeacherSubject.Blocked = false;
-                        int ID = _service.Insert(objTeacherSubject);
-                        response = Request.CreateResponse(HttpStatusCode.OK, ID);
-                    }
-                    else
-                    {
-                        // objTeacherSubject.ModifiedDate = DateTime.Now;
-                        _service.Update(objTeacherSubject);
-                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
-                    }
-                    t.Complete();
+                    //objTeacherSubject.CreatedDatte = DateTime.Now;
+                    //objTeacherSubject.Blocked = false;
+                    int ID = _service.Insert(objTeacherSubject);
+                    response = Request.CreateResponse(HttpStatusCode.OK, ID);
                 }
-                return response;
+                t.Complete();
             }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
+            return response;
         }
 
         [Route("")]
         [HttpPut]
+        public HttpResponseMessage Put([FromBody] TeacherSubject objTeacherSubject)
+        {
+            HttpResponseMessage response = null;
+            using (var t = new TransactionScope())
+            {
+                if (objTeacherSubject.Id != 0)
+                {
+                    //objTeacherSubject.CreatedDatte = DateTime.Now;
+                    //objTeacherSubject.Blocked = false;
+                    _service.Update(objTeacherSubject);
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
+                }
+                t.Complete();
+            }
+            return response;
+        }
+
+        [Route("")]
+        [HttpDelete]
         public HttpResponseMessage Delete([FromBody] TeacherSubject objTeacherSubject)
         {
             HttpResponseMessage response = null;
-            try
-            {
-                _service.Delete(objTeacherSubject);
-                response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-                return response;
-            }
+            _service.Delete(objTeacherSubject);
+            response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
+            return response;
         }
     }
 }

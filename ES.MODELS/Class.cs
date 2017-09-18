@@ -18,7 +18,6 @@ namespace ES.MODELS
         {
             this.ClassSections = new HashSet<ClassSection>();
             this.ClassSubjects = new HashSet<ClassSubject>();
-            this.Hours = new HashSet<Hour>();
             this.StudentClassSectionInfoes = new HashSet<StudentClassSectionInfo>();
         }
     
@@ -34,7 +33,6 @@ namespace ES.MODELS
     
         public virtual ICollection<ClassSection> ClassSections { get; set; }
         public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
-        public virtual ICollection<Hour> Hours { get; set; }
         public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
     }
 }

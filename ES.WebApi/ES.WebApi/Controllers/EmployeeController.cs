@@ -65,7 +65,7 @@ namespace ES.WebApi.Controllers
 
         [Route("")]
         [HttpPost]
-        public HttpResponseMessage Insert([FromBody] Employee objEmployee)
+        public HttpResponseMessage Post([FromBody] Employee objEmployee)
         {
             HttpResponseMessage response = null;
             try
@@ -82,6 +82,34 @@ namespace ES.WebApi.Controllers
                     else
                     {
                         // objEmployee.ModifiedDate = DateTime.Now;
+                        _service.Update(objEmployee);
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
+                    }
+                    t.Complete();
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return response;
+            }
+        }
+
+
+        [Route("")]
+        [HttpPost]
+        public HttpResponseMessage Put([FromBody] Employee objEmployee)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                using (var t = new TransactionScope())
+                {
+                    if (objEmployee.Id == 0)
+                    {
+                        //objEmployee.CreatedDatte = DateTime.Now;
+                        //objEmployee.Blocked = false;
                         _service.Update(objEmployee);
                         response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Updated.");
                     }

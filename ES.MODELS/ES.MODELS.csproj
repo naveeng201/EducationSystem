@@ -63,6 +63,9 @@
     <Compile Include="ClassSection.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClassSectionHour.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ClassSubject.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -125,6 +128,9 @@
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SubDistrict.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeTable.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AttendanceVM.cs" />

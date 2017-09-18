@@ -89,12 +89,18 @@ namespace ES.WebApi
                 .RegisterType<IRepository<ExamSubjectSchedule>, BaseRepository<ExamSubjectSchedule>>()
                 .RegisterType<IExamSubjectScheduleService, ExamSubjectScheduleService>()
                 .RegisterType<IExamSubjectScheduleRepository, ExamSubjectScheduleRepository>()
-                .RegisterType<IRepository<ExamMarks>, BaseRepository<ExamMarks>>()
+                .RegisterType<IRepository<ExamMark>, BaseRepository<ExamMark>>()
                 .RegisterType<IExamMarksService, ExamMarksService>()
                 .RegisterType<IExamMarksRepository, ExamMarksRepository>()
                 .RegisterType<IRepository<ExamGrade>, BaseRepository<ExamGrade>>()
                 .RegisterType<IExamGradeService, ExamGradeService>()
-                .RegisterType<IExamGradeRepository, ExamGradeRepository>();
+                .RegisterType<IExamGradeRepository, ExamGradeRepository>()
+                .RegisterType<IRepository<ClassSectionHour>, BaseRepository<ClassSectionHour>>()
+                .RegisterType<IClassSectionHourService, ClassSectionHourService>()
+                .RegisterType<IClassSectionHourRepository, ClassSectionHourRepository>()
+                .RegisterType<IRepository<TimeTable>, BaseRepository<TimeTable>>()
+                .RegisterType<ITimeTableService, TimeTableService>()
+                .RegisterType<ITimeTableRepository, TimeTableRepository>();
 
             config.DependencyResolver = new UnityResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

@@ -13,15 +13,22 @@ namespace ES.DAL
     }
     public class HourRepository :BaseRepository<Hour>, IHourRepository
     {
+        IUnitOfWork _unitofwork;
         public HourRepository(IRepository<Hour> repository, IUnitOfWork unitofwork)
             : base(unitofwork)
         {
-             
+            _unitofwork = unitofwork;
         }
 
         public IEnumerable<Hour> GetHoursByClassId(int classId)
         {
-            var listHours = dbSet.Where(x => x.ClassId == classId).ToList();
+
+            var listHours = (from h in _unitofwork.Db.Set<Hour>()
+                     join sch in _unitofwork.Db.Set<ClassSectionHour>() on h.Id equals sch.HourId
+                     where sch.ClassId == classId
+                     select h).ToList();
+
+            //var listHours = dbSet.Where(x => x.ClassId == classId).ToList();
             return listHours;
         }
     }

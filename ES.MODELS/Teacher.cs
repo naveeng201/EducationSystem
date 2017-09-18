@@ -17,6 +17,7 @@ namespace ES.MODELS
         public Teacher()
         {
             this.TeacherSubjects = new HashSet<TeacherSubject>();
+            this.HourTransactions = new HashSet<HourTransaction>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,6 @@ namespace ES.MODELS
     
         public virtual Employee Employee { get; set; }
         public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
+        public virtual ICollection<HourTransaction> HourTransactions { get; set; }
     }
 }

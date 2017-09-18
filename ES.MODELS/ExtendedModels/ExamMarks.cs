@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ES.MODELS 
 {
     [MetadataType(typeof(ExamMarksMetadata))]
-    public partial class ExamMarks
+    public partial class ExamMark
     {
     }
     public class ExamMarksMetadata

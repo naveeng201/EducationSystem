@@ -37,3 +37,4 @@ C:\Naveen\EducationSystem\ES.MODELS\bin\Debug\ES.MODELS.dll
 C:\Naveen\EducationSystem\ES.MODELS\bin\Debug\ES.MODELS.pdb
 C:\Naveen\EducationSystem\ES.MODELS\obj\Debug\ES.MODELS.dll
 C:\Naveen\EducationSystem\ES.MODELS\obj\Debug\ES.MODELS.pdb
+C:\Naveen\EducationSystem\ES.MODELS\obj\Debug\ES.MODELS.csprojResolveAssemblyReference.cache

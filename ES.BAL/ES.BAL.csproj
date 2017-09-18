@@ -57,6 +57,7 @@
     <Compile Include="Exam\ExamSubjectScheduleService.cs" />
     <Compile Include="Masters\AddressService.cs" />
     <Compile Include="Masters\BaseService.cs" />
+    <Compile Include="Masters\ClassSectionHourService.cs" />
     <Compile Include="Masters\ClassSectionService.cs" />
     <Compile Include="Masters\ClassService.cs" />
     <Compile Include="Masters\ClassSubjectService.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Masters\TeacherService.cs" />
     <Compile Include="Masters\TeacherSubjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeTable\TimeTableService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
