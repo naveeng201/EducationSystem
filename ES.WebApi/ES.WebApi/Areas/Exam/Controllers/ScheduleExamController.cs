@@ -109,14 +109,14 @@ namespace ES.WebApi.Areas.Exam.Controllers
             return response;
         }
 
-        //[Route("")]
-        //[HttpDelete]
-        //public HttpResponseMessage Delete(int Id)
-        //{
-        //    HttpResponseMessage response;
-        //    _service.Delete(Id);
-        //    response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
-        //    return response;
-        //}
+        [Route("{Id}")]
+        [HttpDelete]
+        public HttpResponseMessage Delete(int Id)
+        {
+            HttpResponseMessage response;
+            _service.Delete(Id);
+            response = Request.CreateResponse(HttpStatusCode.OK, "Successfully Deleted.");
+            return response;
+        }
     }
 }

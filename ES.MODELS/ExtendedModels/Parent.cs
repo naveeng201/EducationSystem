@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ES.MODELS
 {
     [MetadataType(typeof(ParentMetadata))]
-    public partial class Parent1
+    public partial class Parent : IBaseEntity
     {
     }
     public class ParentMetadata

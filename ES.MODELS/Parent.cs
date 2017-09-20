@@ -15,7 +15,7 @@ namespace ES.MODELS
     public partial class Parent
     {
         public int Id { get; set; }
-        public Nullable<int> StudentID { get; set; }
+        public int StudentID { get; set; }
         public Nullable<int> UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,18 +24,19 @@ namespace ES.MODELS
         public string OfficePhone { get; set; }
         public string MobilePhone { get; set; }
         public string ResidentialPhone { get; set; }
-        public Nullable<int> AddressID1 { get; set; }
+        public int AddressID1 { get; set; }
         public Nullable<int> AddressID2 { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string Occupation { get; set; }
         public string Income { get; set; }
         public string Education { get; set; }
+        public bool IsPrimary { get; set; }
         public string ParentType { get; set; }
-        public Nullable<System.DateTime> CreatedDatte { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual Student Student { get; set; }
     }

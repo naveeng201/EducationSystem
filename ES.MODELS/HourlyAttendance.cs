@@ -20,7 +20,7 @@ namespace ES.MODELS
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
     
-        public virtual DailyAttendance DailyAttendance { get; set; }
         public virtual HourTransaction HourTransaction { get; set; }
+        public virtual DailyAttendance DailyAttendance { get; set; }
     }
 }

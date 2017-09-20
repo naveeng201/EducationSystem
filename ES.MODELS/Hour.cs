@@ -17,6 +17,7 @@ namespace ES.MODELS
         public Hour()
         {
             this.HourTransactions = new HashSet<HourTransaction>();
+            this.ClassSectionHours = new HashSet<ClassSectionHour>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,6 @@ namespace ES.MODELS
         public bool Blocked { get; set; }
     
         public virtual ICollection<HourTransaction> HourTransactions { get; set; }
+        public virtual ICollection<ClassSectionHour> ClassSectionHours { get; set; }
     }
 }

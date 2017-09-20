@@ -9,30 +9,30 @@
     <Property Name="Adress1" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Adress2" Type="nvarchar" MaxLength="100" />
     <Property Name="Location" Type="nvarchar" MaxLength="50" />
-    <Property Name="CityId" Type="int" />
-    <Property Name="StateId" Type="int" />
-    <Property Name="CountryId" Type="int" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
     <Property Name="PinCode" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Classes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" />
-    <Property Name="InstitutionId" Type="int" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="InstitutionId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ClassSectionHour">
     <Key>
@@ -68,11 +68,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="SubjectID" Type="int" Nullable="false" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Countries">
     <Key>
@@ -101,6 +101,11 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ManagerEmployeeId" Type="int" />
     <Property Name="Location" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Districts">
     <Key>
@@ -133,18 +138,19 @@
     <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="MiddleName" Type="nvarchar" MaxLength="200" />
     <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="DOB" Type="date" />
-    <Property Name="AddressID1" Type="int" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="AddressID1" Type="int" Nullable="false" />
     <Property Name="AddressID2" Type="nchar" MaxLength="10" />
-    <Property Name="DepartmentID" Type="int" />
-    <Property Name="JoiningDate" Type="date" />
+    <Property Name="DepartmentID" Type="int" Nullable="false" />
+    <Property Name="JoiningDate" Type="date" Nullable="false" />
     <Property Name="ManagerID" Type="int" />
     <Property Name="Designation" Type="nvarchar" MaxLength="200" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Exam">
     <Key>
@@ -270,23 +276,18 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" />
-    <Property Name="ShortName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="RegName" Type="nvarchar" MaxLength="200" />
     <Property Name="RegNo" Type="nvarchar" MaxLength="50" />
     <Property Name="RegDate" Type="datetime" />
-    <Property Name="City" Type="nvarchar" MaxLength="50" />
-    <Property Name="State" Type="nvarchar" MaxLength="50" />
-    <Property Name="Country" Type="nvarchar" MaxLength="50" />
-    <Property Name="Pin" Type="nchar" MaxLength="10" />
-    <Property Name="Address1" Type="nvarchar" MaxLength="200" />
-    <Property Name="Address2" Type="nvarchar" MaxLength="200" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="AddressId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MasterTables">
     <Key>
@@ -303,27 +304,28 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StudentID" Type="int" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" />
-    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
-    <Property Name="Relation" Type="nvarchar" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Relation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="OfficePhone" Type="nvarchar" MaxLength="50" />
-    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ResidentialPhone" Type="nvarchar" MaxLength="50" />
-    <Property Name="AddressID1" Type="int" />
+    <Property Name="AddressID1" Type="int" Nullable="false" />
     <Property Name="AddressID2" Type="int" />
     <Property Name="DOB" Type="datetime" />
-    <Property Name="Occupation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Occupation" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Income" Type="nvarchar" MaxLength="50" />
     <Property Name="Education" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
     <Property Name="ParentType" Type="nchar" MaxLength="10" />
-    <Property Name="CreatedDatte" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Relationships">
     <Key>
@@ -338,12 +340,13 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -359,15 +362,15 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserID" Type="int" />
-    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="CreatdDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="StudentAddress">
     <Key>
@@ -419,11 +422,11 @@
     <Property Name="RollNo" Type="nvarchar" MaxLength="50" />
     <Property Name="Meadium" Type="nchar" MaxLength="10" />
     <Property Name="InstitutionID" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="SubDistricts">
     <Key>
@@ -438,14 +441,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SubjectName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ShortName" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -453,11 +456,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EmployeeId" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TeacherSubject">
     <Key>
@@ -466,11 +469,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TeacherId" Type="int" Nullable="false" />
     <Property Name="SubjectId" Type="int" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TimeTable">
     <Key>
@@ -489,7 +492,7 @@
     <Property Name="Blocked" Type="bit" />
   </EntityType>
   <Association Name="FK_Address_Countries">
-    <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Countries">
@@ -501,7 +504,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Address_Districts">
-    <End Role="Districts" Type="Self.Districts" Multiplicity="0..1" />
+    <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Districts">
@@ -513,7 +516,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Address_States">
-    <End Role="States" Type="Self.States" Multiplicity="0..1" />
+    <End Role="States" Type="Self.States" Multiplicity="1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="States">
@@ -524,15 +527,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ClassHour_ClassSections">
-    <End Role="ClassSections" Type="Self.ClassSections" Multiplicity="1" />
+  <Association Name="FK_ClassSectionHour_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
     <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ClassSections">
+      <Principal Role="Classes">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ClassSectionHour">
         <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSectionHour_Hour">
+    <End Role="Hour" Type="Self.Hour" Multiplicity="1" />
+    <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSectionHour">
+        <PropertyRef Name="HourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSectionHour_Sections">
+    <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+    <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassSectionHour">
+        <PropertyRef Name="SectionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -699,7 +726,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Guardian_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
     <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -976,8 +1003,16 @@
       <End Role="States" EntitySet="States" />
       <End Role="Address" EntitySet="Address" />
     </AssociationSet>
-    <AssociationSet Name="FK_ClassHour_ClassSections" Association="Self.FK_ClassHour_ClassSections">
-      <End Role="ClassSections" EntitySet="ClassSections" />
+    <AssociationSet Name="FK_ClassSectionHour_Classes" Association="Self.FK_ClassSectionHour_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSectionHour_Hour" Association="Self.FK_ClassSectionHour_Hour">
+      <End Role="Hour" EntitySet="Hour" />
+      <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSectionHour_Sections" Association="Self.FK_ClassSectionHour_Sections">
+      <End Role="Sections" EntitySet="Sections" />
       <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
     </AssociationSet>
     <AssociationSet Name="FK_ClassSections_Classes" Association="Self.FK_ClassSections_Classes">

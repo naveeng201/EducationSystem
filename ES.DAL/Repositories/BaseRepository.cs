@@ -25,12 +25,6 @@ namespace ES.DAL
             this.dbSet = _unitOfWork.Db.Set<T>();
         }
 
-        /// <summary>
-        /// Returns the object with the primary key specifies or throws
-        /// </summary>
-        /// <typeparam name="TU">The type to map the result to</typeparam>
-        /// <param name="primaryKey">The primary key</param>
-        /// <returns>The result mapped to the specified type</returns>
         public T Single(object primaryKey)
         {
             var dbResult = dbSet.Find(primaryKey);
@@ -110,6 +104,10 @@ namespace ES.DAL
         public int Delete(int Id)
         {
             var dbResult = dbSet.Find(Id);
+            if(dbResult == null)
+            {
+                throw new Exception("Entity does not found with given identifier.");
+            }
             if (_unitOfWork.Db.Entry(dbResult).State == EntityState.Detached)
             {
                 dbSet.Attach(dbResult);

@@ -16,20 +16,21 @@ namespace ES.MODELS
     {
         public Teacher()
         {
-            this.TeacherSubjects = new HashSet<TeacherSubject>();
             this.HourTransactions = new HashSet<HourTransaction>();
+            this.TeacherSubjects = new HashSet<TeacherSubject>();
         }
     
         public int Id { get; set; }
         public int EmployeeId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual Employee Employee { get; set; }
-        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
+        public virtual Employee Employee1 { get; set; }
         public virtual ICollection<HourTransaction> HourTransactions { get; set; }
+        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

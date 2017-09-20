@@ -16,14 +16,14 @@ namespace ES.MODELS
     {
         public Country()
         {
-            this.Addresses = new HashSet<Address>();
             this.States = new HashSet<State>();
+            this.Addresses = new HashSet<Address>();
         }
     
         public int CountryId { get; set; }
         public string CountryName { get; set; }
     
-        public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<State> States { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

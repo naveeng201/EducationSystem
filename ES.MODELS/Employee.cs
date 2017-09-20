@@ -18,6 +18,7 @@ namespace ES.MODELS
         {
             this.Departments = new HashSet<Department>();
             this.Teachers = new HashSet<Teacher>();
+            this.Teachers1 = new HashSet<Teacher>();
         }
     
         public int Id { get; set; }
@@ -25,20 +26,22 @@ namespace ES.MODELS
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
-        public Nullable<int> AddressID1 { get; set; }
+        public System.DateTime DOB { get; set; }
+        public string MobilePhone { get; set; }
+        public int AddressID1 { get; set; }
         public string AddressID2 { get; set; }
-        public Nullable<int> DepartmentID { get; set; }
-        public Nullable<System.DateTime> JoiningDate { get; set; }
+        public int DepartmentID { get; set; }
+        public System.DateTime JoiningDate { get; set; }
         public Nullable<int> ManagerID { get; set; }
         public string Designation { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<Teacher> Teachers1 { get; set; }
     }
 }

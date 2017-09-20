@@ -1,0 +1,5 @@
+ALTER TABLE Department  ADD CONSTRAINT Department_Name_UK UNIQUE (Name)
+ALTER TABLE Institution  ADD CONSTRAINT Institution_Name_UK UNIQUE (Name)
+ALTER TABLE Classes  ADD CONSTRAINT Classes_Name_UK UNIQUE (Name)
+ALTER TABLE Sections  ADD CONSTRAINT Sections_Name_UK UNIQUE (Name)
+ALTER TABLE Subjects  ADD CONSTRAINT Subjects_Name_UK UNIQUE (Name)

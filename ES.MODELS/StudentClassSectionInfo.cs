@@ -22,15 +22,15 @@ namespace ES.MODELS
         public string RollNo { get; set; }
         public string Meadium { get; set; }
         public int InstitutionID { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Institution Institution { get; set; }
-        public virtual Section Section { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Section Section { get; set; }
     }
 }

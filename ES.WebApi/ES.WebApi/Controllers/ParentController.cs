@@ -74,7 +74,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (parent.Id == 0)
                     {
-                        parent.CreatedDatte = DateTime.Now;
+                        parent.CreatedDate = DateTime.Now;
                         parent.Blocked = false;
                         int ID = _service.Insert(parent);
                         response = Request.CreateResponse(HttpStatusCode.OK, ID);

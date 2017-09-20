@@ -14,11 +14,6 @@ namespace ES.MODELS
     
     public partial class ClassSection
     {
-        public ClassSection()
-        {
-            this.ClassSectionHours = new HashSet<ClassSectionHour>();
-        }
-    
         public int Id { get; set; }
         public int ClassID { get; set; }
         public int SectionID { get; set; }
@@ -30,6 +25,5 @@ namespace ES.MODELS
     
         public virtual Class Class { get; set; }
         public virtual Section Section { get; set; }
-        public virtual ICollection<ClassSectionHour> ClassSectionHours { get; set; }
     }
 }

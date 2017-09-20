@@ -19,7 +19,7 @@ namespace ES.DAL
     public class UnitOfWork : IUnitOfWork
     {
         private TransactionScope _transaction;
-        private readonly ESDataContext _db;
+        private readonly DbContext _db;
 
         public UnitOfWork()
         {

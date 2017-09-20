@@ -25,18 +25,13 @@ namespace ES.MODELS
         public string RegName { get; set; }
         public string RegNo { get; set; }
         public Nullable<System.DateTime> RegDate { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public string Pin { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
         public string Type { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public Nullable<int> AddressId { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
     }

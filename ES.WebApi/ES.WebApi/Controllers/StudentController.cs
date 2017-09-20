@@ -75,7 +75,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (student.Id == 0)
                     {
-                        student.CreatdDate = DateTime.Now;
+                        student.CreatedDate = DateTime.Now;
                         student.Blocked = false;
                         int ID = _studentService.Insert(student);
                         response = Request.CreateResponse(HttpStatusCode.OK, ID);

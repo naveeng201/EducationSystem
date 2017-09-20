@@ -16,18 +16,21 @@ namespace ES.MODELS
     {
         public Section()
         {
+            this.ClassSectionHours = new HashSet<ClassSectionHour>();
             this.ClassSections = new HashSet<ClassSection>();
             this.StudentClassSectionInfoes = new HashSet<StudentClassSectionInfo>();
         }
     
         public int Id { get; set; }
-        public string SectionName { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
+        public virtual ICollection<ClassSectionHour> ClassSectionHours { get; set; }
         public virtual ICollection<ClassSection> ClassSections { get; set; }
         public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
     }

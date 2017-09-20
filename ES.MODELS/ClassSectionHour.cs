@@ -24,6 +24,8 @@ namespace ES.MODELS
         public System.DateTime ModifiedDate { get; set; }
         public bool Blocked { get; set; }
     
-        public virtual ClassSection ClassSection { get; set; }
+        public virtual Class Class { get; set; }
+        public virtual Hour Hour { get; set; }
+        public virtual Section Section { get; set; }
     }
 }

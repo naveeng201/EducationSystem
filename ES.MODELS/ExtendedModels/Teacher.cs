@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace ES.MODELS.ExtendedModels
+namespace ES.MODELS
 {
     [MetadataType(typeof(TeacherMetadata))]
-    public partial class Teacher
+    public partial class Teacher : IBaseEntity
     {
 
     }

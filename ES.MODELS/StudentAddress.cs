@@ -20,7 +20,7 @@ namespace ES.MODELS
         public int Type { get; set; }
         public Nullable<bool> Blocked { get; set; }
     
-        public virtual Address Address { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

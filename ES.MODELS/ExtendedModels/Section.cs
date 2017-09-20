@@ -8,14 +8,14 @@ using System.ComponentModel.DataAnnotations;
 namespace ES.MODELS
 {
     [MetadataType(typeof(SectionMetadata))]
-    public partial class Section
+    public partial class Section : IBaseEntity
     {
 
     }
    public class SectionMetadata
    {
        [Required]
-       public string SectionName { get; set; }
+       public string Name { get; set; }
        [Required]
        public string Description { get; set; }
    }

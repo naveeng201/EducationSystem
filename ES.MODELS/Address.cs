@@ -24,16 +24,16 @@ namespace ES.MODELS
         public string Adress1 { get; set; }
         public string Adress2 { get; set; }
         public string Location { get; set; }
-        public Nullable<int> CityId { get; set; }
-        public Nullable<int> StateId { get; set; }
-        public Nullable<int> CountryId { get; set; }
+        public int CityId { get; set; }
+        public int StateId { get; set; }
+        public int CountryId { get; set; }
         public string PinCode { get; set; }
         public string MobilePhone { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual Country Country { get; set; }
         public virtual District District { get; set; }

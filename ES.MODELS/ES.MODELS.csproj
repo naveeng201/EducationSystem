@@ -117,7 +117,12 @@
     <Compile Include="ExamSubjectSchedule.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExtendedModels\ClassSubjects.cs" />
+    <Compile Include="ExtendedModels\Department.cs" />
+    <Compile Include="ExtendedModels\IBaseEntity.cs" />
+    <Compile Include="ExtendedModels\ESDataContext.cs" />
     <Compile Include="ExtendedModels\ExamMarks.cs" />
+    <Compile Include="ExtendedModels\Exam\ExamGrade.cs" />
     <Compile Include="Institution.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -138,7 +143,7 @@
     <Compile Include="ExtendedModels\AspNetUser.cs" />
     <Compile Include="ExtendedModels\Class.cs" />
     <Compile Include="ExtendedModels\Employee.cs" />
-    <Compile Include="ExtendedModels\InstitutionInfo.cs" />
+    <Compile Include="ExtendedModels\Institution.cs" />
     <Compile Include="ExtendedModels\Member.cs" />
     <Compile Include="ExtendedModels\Parent.cs" />
     <Compile Include="ExtendedModels\Section.cs" />

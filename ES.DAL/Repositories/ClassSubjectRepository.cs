@@ -34,8 +34,8 @@ namespace ES.DAL
             foreach (var c in result)
             {
                 ClassSubjectViewModel objClassSubjectVM = new ClassSubjectViewModel();
-                objClassSubjectVM.ClassName = dbSetClass.Find(c.ClassID).ClassName;
-                objClassSubjectVM.SubjectName = dbSetSubject.Find(c.SubjectID).SubjectName;
+                objClassSubjectVM.ClassName = dbSetClass.Find(c.ClassID).Name;
+                objClassSubjectVM.SubjectName = dbSetSubject.Find(c.SubjectID).Name;
                 objClassSubjectVM.ClassID = c.ClassID;
                 objClassSubjectVM.SubjectID = c.SubjectID;
                 objClassSubjectVM.Id = i++;

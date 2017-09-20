@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ES.MODELS
 {
     [MetadataType(typeof(SubjectMetadata))]
-    public partial class Subject
+    public partial class Subject : IBaseEntity
     {
 
     }
@@ -16,7 +16,7 @@ namespace ES.MODELS
     public class SubjectMetadata
     {
         [Required]
-        public string SubjectName { get; set; }
+        public string Name { get; set; }
         [Required]
         public string ShortName { get; set; }
         [Required]

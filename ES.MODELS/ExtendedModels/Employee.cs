@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ES.MODELS
 {
     [MetadataType(typeof(EmployeeMetadata))]
-    partial class Employee
+    partial class Employee : IBaseEntity
     {
         
     }

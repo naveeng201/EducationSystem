@@ -16,16 +16,16 @@ namespace ES.MODELS
     {
         public District()
         {
-            this.Addresses = new HashSet<Address>();
             this.SubDistricts = new HashSet<SubDistrict>();
+            this.Addresses = new HashSet<Address>();
         }
     
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
         public int StateId { get; set; }
     
-        public virtual ICollection<Address> Addresses { get; set; }
         public virtual State State { get; set; }
         public virtual ICollection<SubDistrict> SubDistricts { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

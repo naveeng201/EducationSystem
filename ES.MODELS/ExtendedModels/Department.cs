@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 
 namespace ES.MODELS
 {
-
-    [MetadataType(typeof(ClassMetadata))]
-    public partial class Class : IBaseEntity
+    [MetadataType(typeof(DepartmentMetadata))]
+    public partial class Department : IBaseEntity
     {
 
     }
-    public class ClassMetadata
+    public class DepartmentMetadata
     {
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string Description { get; set; }
-        [Required]
-        public int InstitutionId { get; set; }
     }
 }
