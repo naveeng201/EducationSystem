@@ -7,16 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ES.MODELS
 {
+    // IBaseEntity is not required for this class. CreatedDate, ModifiedDate, CreatedBy and ModifiedBy will be covered in Student entity
     [MetadataType(typeof(StudentAditionalInfoMetadata))]
-    public partial class StudentAditionalInfo 
+    public partial class StudentAditionalInfo   
     {
     }
 
     public class StudentAditionalInfoMetadata
     {
         [Required]
-        public string BirthPlace { get; set; }
-        [Required]
-        public string Nationalty { get; set; }
+        public string StudentId { get; set; }
     }
 }

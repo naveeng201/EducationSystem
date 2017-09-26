@@ -16,11 +16,11 @@ namespace ES.MODELS
     {
         public Student()
         {
-            this.DailyAttendances = new HashSet<DailyAttendance>();
             this.StudentAddresses = new HashSet<StudentAddress>();
             this.StudentAditionalInfoes = new HashSet<StudentAditionalInfo>();
             this.StudentClassSectionInfoes = new HashSet<StudentClassSectionInfo>();
             this.Parents = new HashSet<Parent>();
+            this.DailyAttendances = new HashSet<DailyAttendance>();
         }
     
         public int Id { get; set; }
@@ -35,10 +35,10 @@ namespace ES.MODELS
         public System.DateTime ModifiedDate { get; set; }
         public bool Blocked { get; set; }
     
-        public virtual ICollection<DailyAttendance> DailyAttendances { get; set; }
         public virtual ICollection<StudentAddress> StudentAddresses { get; set; }
         public virtual ICollection<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
         public virtual ICollection<StudentClassSectionInfo> StudentClassSectionInfoes { get; set; }
         public virtual ICollection<Parent> Parents { get; set; }
+        public virtual ICollection<DailyAttendance> DailyAttendances { get; set; }
     }
 }

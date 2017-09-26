@@ -15,7 +15,7 @@ namespace ES.MODELS
     public partial class ExamGrade
     {
         public int Id { get; set; }
-        public string GradeName { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int MinMarksPercentage { get; set; }
         public int MaxMarksPercentage { get; set; }

@@ -79,13 +79,6 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Countries">
-          <Key>
-            <PropertyRef Name="CountryId" />
-          </Key>
-          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="DailyAttendance">
           <Key>
             <PropertyRef Name="Id" />
@@ -96,7 +89,6 @@
           <Property Name="StartTime" Type="time" Precision="7" />
           <Property Name="EndTime" Type="time" Precision="7" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="400" />
-          <Property Name="ModifiedBy" Type="int" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -112,14 +104,6 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Districts">
-          <Key>
-            <PropertyRef Name="DistrictId" />
-          </Key>
-          <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DistrictName" Type="nvarchar(max)" />
-          <Property Name="StateId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="EmergencyContactDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -127,12 +111,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContactPersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="200" />
-          <Property Name="Relationship" Type="int" />
-          <Property Name="CreatetDate" Type="date" />
-          <Property Name="ModifiedDate" Type="date" />
-          <Property Name="EndDate" Type="date" />
-          <Property Name="Blocked" Type="bit" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -162,22 +147,22 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ExamName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ExamShotName" Type="nchar" MaxLength="200" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ExamShotName" Type="nchar" MaxLength="50" />
           <Property Name="ExamCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedBy" Type="int" />
-          <Property Name="Blocked" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ExamGrade">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GradeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MinMarksPercentage" Type="int" Nullable="false" />
           <Property Name="MaxMarksPercentage" Type="int" Nullable="false" />
@@ -259,7 +244,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DA_Id" Type="int" Nullable="false" />
-          <Property Name="HT_Id" Type="int" />
+          <Property Name="HT_Id" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" />
           <Property Name="EndTime" Type="time" Precision="7" />
         </EntityType>
@@ -273,8 +258,10 @@
           <Property Name="TeacherId" Type="int" Nullable="false" />
           <Property Name="HourDescription" Type="nvarchar(max)" />
           <Property Name="HourDate" Type="date" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Institution">
           <Key>
@@ -293,16 +280,6 @@
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MasterTables">
-          <Key>
-            <PropertyRef Name="TableID" />
-          </Key>
-          <Property Name="TableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descrription" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="CreateDate" Type="datetime" Nullable="false" />
-          <Property Name="RelationWith" Type="nvarchar" MaxLength="400" />
         </EntityType>
         <EntityType Name="Parents">
           <Key>
@@ -332,14 +309,6 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Relationships">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" />
-        </EntityType>
         <EntityType Name="Sections">
           <Key>
             <PropertyRef Name="Id" />
@@ -352,14 +321,6 @@
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="States">
-          <Key>
-            <PropertyRef Name="StateId" />
-          </Key>
-          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StateName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CountryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -433,14 +394,6 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="SubDistricts">
-          <Key>
-            <PropertyRef Name="SubDistrictsId" />
-          </Key>
-          <Property Name="SubDistrictsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SubDistrictsName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DistrictId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Subjects">
           <Key>
             <PropertyRef Name="Id" />
@@ -467,7 +420,7 @@
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="Blocked" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="TeacherSubject">
+        <EntityType Name="TeacherSubjects">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -496,42 +449,6 @@
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="Blocked" Type="bit" />
         </EntityType>
-        <Association Name="FK_Address_Countries">
-          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_Districts">
-          <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Districts">
-              <PropertyRef Name="DistrictId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_States">
-          <End Role="States" Type="Self.States" Multiplicity="1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="States">
-              <PropertyRef Name="StateId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClassSectionHour_Classes">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
           <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
@@ -628,48 +545,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Districts_dbo_States_StateId">
-          <End Role="States" Type="Self.States" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="States">
-              <PropertyRef Name="StateId" />
-            </Principal>
-            <Dependent Role="Districts">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_States_dbo_Countries_CountryId">
-          <End Role="Countries" Type="Self.Countries" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="States" Type="Self.States" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="States">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId">
-          <End Role="Districts" Type="Self.Districts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="SubDistricts" Type="Self.SubDistricts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Districts">
-              <PropertyRef Name="DistrictId" />
-            </Principal>
-            <Dependent Role="SubDistricts">
-              <PropertyRef Name="DistrictId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Department_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -679,18 +554,6 @@
             </Principal>
             <Dependent Role="Department">
               <PropertyRef Name="ManagerEmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmergencyContactDetails_Relationships">
-          <End Role="Relationships" Type="Self.Relationships" Multiplicity="0..1" />
-          <End Role="EmergencyContactDetails" Type="Self.EmergencyContactDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Relationships">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EmergencyContactDetails">
-              <PropertyRef Name="Relationship" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -755,7 +618,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HourlyAttendance_HourTransaction">
-          <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="0..1" />
+          <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="1" />
           <End Role="HourlyAttendance" Type="Self.HourlyAttendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HourTransaction">
@@ -898,18 +761,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Teacher_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Teacher">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Teacher_Employee1">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
@@ -924,24 +775,24 @@
         </Association>
         <Association Name="FK_TeacherSubject_Subjects">
           <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
-          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <End Role="TeacherSubjects" Type="Self.TeacherSubjects" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TeacherSubject">
+            <Dependent Role="TeacherSubjects">
               <PropertyRef Name="SubjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TeacherSubject_Teacher">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <End Role="TeacherSubjects" Type="Self.TeacherSubjects" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TeacherSubject">
+            <Dependent Role="TeacherSubjects">
               <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
@@ -967,10 +818,8 @@
           <EntitySet Name="ClassSectionHour" EntityType="Self.ClassSectionHour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DailyAttendance" EntityType="Self.DailyAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmergencyContactDetails" EntityType="Self.EmergencyContactDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
@@ -982,32 +831,16 @@
           <EntitySet Name="HourlyAttendance" EntityType="Self.HourlyAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HourTransaction" EntityType="Self.HourTransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MasterTables" EntityType="Self.MasterTables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Relationships" EntityType="Self.Relationships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentClassSectionInfo" EntityType="Self.StudentClassSectionInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SubDistricts" EntityType="Self.SubDistricts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherSubjects" EntityType="Self.TeacherSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_Districts" Association="Self.FK_Address_Districts">
-            <End Role="Districts" EntitySet="Districts" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_States" Association="Self.FK_Address_States">
-            <End Role="States" EntitySet="States" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClassSectionHour_Classes" Association="Self.FK_ClassSectionHour_Classes">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
@@ -1040,25 +873,9 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="DailyAttendance" EntitySet="DailyAttendance" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="Self.FK_dbo_Districts_dbo_States_StateId">
-            <End Role="States" EntitySet="States" />
-            <End Role="Districts" EntitySet="Districts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="Self.FK_dbo_States_dbo_Countries_CountryId">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="States" EntitySet="States" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId" Association="Self.FK_dbo_SubDistricts_dbo_Districts_DistrictId">
-            <End Role="Districts" EntitySet="Districts" />
-            <End Role="SubDistricts" EntitySet="SubDistricts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Department_Employee" Association="Self.FK_Department_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Department" EntitySet="Department" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmergencyContactDetails_Relationships" Association="Self.FK_EmergencyContactDetails_Relationships">
-            <End Role="Relationships" EntitySet="Relationships" />
-            <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamMarks_ExamSubjectSchedule" Association="Self.FK_ExamMarks_ExamSubjectSchedule">
             <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
@@ -1128,21 +945,17 @@
             <End Role="Sections" EntitySet="Sections" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_Teacher_Employee" Association="Self.FK_Teacher_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Teacher" EntitySet="Teacher" />
-          </AssociationSet>
           <AssociationSet Name="FK_Teacher_Employee1" Association="Self.FK_Teacher_Employee1">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
           <AssociationSet Name="FK_TeacherSubject_Subjects" Association="Self.FK_TeacherSubject_Subjects">
             <End Role="Subjects" EntitySet="Subjects" />
-            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+            <End Role="TeacherSubjects" EntitySet="TeacherSubjects" />
           </AssociationSet>
           <AssociationSet Name="FK_TeacherSubject_Teacher" Association="Self.FK_TeacherSubject_Teacher">
             <End Role="Teacher" EntitySet="Teacher" />
-            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+            <End Role="TeacherSubjects" EntitySet="TeacherSubjects" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1165,37 +978,7 @@
             <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
             <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Countries" EntityType="ESDBModel.Country" />
-          <EntitySet Name="Districts" EntityType="ESDBModel.District" />
-          <EntitySet Name="EmergencyContactDetails" EntityType="ESDBModel.EmergencyContactDetail" />
-          <EntitySet Name="HourlyAttendances" EntityType="ESDBModel.HourlyAttendance" />
-          <EntitySet Name="MasterTables" EntityType="ESDBModel.MasterTable" />
-          <EntitySet Name="Relationships" EntityType="ESDBModel.Relationship" />
-          <EntitySet Name="States" EntityType="ESDBModel.State" />
-          <EntitySet Name="SubDistricts" EntityType="ESDBModel.SubDistrict" />
-          <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="ESDBModel.FK_dbo_States_dbo_Countries_CountryId">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="State" EntitySet="States" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="ESDBModel.FK_dbo_Districts_dbo_States_StateId">
-            <End Role="State" EntitySet="States" />
-            <End Role="District" EntitySet="Districts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId" Association="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="SubDistrict" EntitySet="SubDistricts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmergencyContactDetails_Relationships" Association="ESDBModel.FK_EmergencyContactDetails_Relationships">
-            <End Role="Relationship" EntitySet="Relationships" />
-            <End Role="EmergencyContactDetail" EntitySet="EmergencyContactDetails" />
-          </AssociationSet>
-          <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
           <EntitySet Name="ExamSchedules" EntityType="ESDBModel.ExamSchedule" />
-          <AssociationSet Name="FK_ExamSchedule_Exam" Association="ESDBModel.FK_ExamSchedule_Exam">
-            <End Role="Exam" EntitySet="Exams" />
-            <End Role="ExamSchedule" EntitySet="ExamSchedules" />
-          </AssociationSet>
-          <EntitySet Name="ExamGrades" EntityType="ESDBModel.ExamGrade" />
           <EntitySet Name="ExamMarks" EntityType="ESDBModel.ExamMark" />
           <EntitySet Name="ExamSubjectSchedules" EntityType="ESDBModel.ExamSubjectSchedule" />
           <AssociationSet Name="FK_ExamMarks_ExamSubjectSchedule" Association="ESDBModel.FK_ExamMarks_ExamSubjectSchedule">
@@ -1207,20 +990,10 @@
             <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedules" />
           </AssociationSet>
           <EntitySet Name="Hours" EntityType="ESDBModel.Hour" />
-          <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
-          <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
-            <End Role="Hour" EntitySet="Hours" />
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="ESDBModel.FK_HourlyAttendance_HourTransaction">
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
-            <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
-          </AssociationSet>
           <EntitySet Name="TimeTables" EntityType="ESDBModel.TimeTable" />
           <EntitySet Name="Classes" EntityType="ESDBModel.Class" />
           <EntitySet Name="ClassSectionHours" EntityType="ESDBModel.ClassSectionHour" />
           <EntitySet Name="ClassSections" EntityType="ESDBModel.ClassSection" />
-          <EntitySet Name="DailyAttendances" EntityType="ESDBModel.DailyAttendance" />
           <EntitySet Name="Departments" EntityType="ESDBModel.Department" />
           <EntitySet Name="Employees" EntityType="ESDBModel.Employee" />
           <EntitySet Name="Institutions" EntityType="ESDBModel.Institution" />
@@ -1230,7 +1003,6 @@
           <EntitySet Name="StudentClassSectionInfoes" EntityType="ESDBModel.StudentClassSectionInfo" />
           <EntitySet Name="Subjects" EntityType="ESDBModel.Subject" />
           <EntitySet Name="Teachers" EntityType="ESDBModel.Teacher" />
-          <EntitySet Name="TeacherSubjects" EntityType="ESDBModel.TeacherSubject" />
           <AssociationSet Name="FK_ClassSectionHour_Classes" Association="ESDBModel.FK_ClassSectionHour_Classes">
             <End Role="Class" EntitySet="Classes" />
             <End Role="ClassSectionHour" EntitySet="ClassSectionHours" />
@@ -1247,37 +1019,13 @@
             <End Role="Hour" EntitySet="Hours" />
             <End Role="ClassSectionHour" EntitySet="ClassSectionHours" />
           </AssociationSet>
-          <AssociationSet Name="FK_DailyAttendance_Student" Association="ESDBModel.FK_DailyAttendance_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="DailyAttendance" EntitySet="DailyAttendances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="ESDBModel.FK_HourlyAttendance_DailyAttendance">
-            <End Role="DailyAttendance" EntitySet="DailyAttendances" />
-            <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
-          </AssociationSet>
           <AssociationSet Name="FK_Department_Employee" Association="ESDBModel.FK_Department_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentAditionalInfo_EmergencyContactDetails" Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails">
-            <End Role="EmergencyContactDetail" EntitySet="EmergencyContactDetails" />
-            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teacher_Employee" Association="ESDBModel.FK_Teacher_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Teacher" EntitySet="Teachers" />
-          </AssociationSet>
           <AssociationSet Name="FK_Teacher_Employee1" Association="ESDBModel.FK_Teacher_Employee1">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Teacher" EntitySet="Teachers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HourTransaction_Subjects" Association="ESDBModel.FK_HourTransaction_Subjects">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HourTransaction_Teacher" Association="ESDBModel.FK_HourTransaction_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="HourTransaction" EntitySet="HourTransactions" />
           </AssociationSet>
           <AssociationSet Name="FK_StuentClassSectionInfo_InstitutionInfo" Association="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo">
             <End Role="Institution" EntitySet="Institutions" />
@@ -1295,27 +1043,7 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeacherSubject_Subjects" Association="ESDBModel.FK_TeacherSubject_Subjects">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TeacherSubject_Teacher" Association="ESDBModel.FK_TeacherSubject_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
-          </AssociationSet>
           <EntitySet Name="Addresses" EntityType="ESDBModel.Address" />
-          <AssociationSet Name="FK_Address_Countries" Association="ESDBModel.FK_Address_Countries">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_Districts" Association="ESDBModel.FK_Address_Districts">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_States" Association="ESDBModel.FK_Address_States">
-            <End Role="State" EntitySet="States" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentAddress_Address" Association="ESDBModel.FK_StudentAddress_Address">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="StudentAddress" EntitySet="StudentAddresses" />
@@ -1347,164 +1075,54 @@
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="ClassSubject" EntitySet="ClassSubjects" />
           </AssociationSet>
+          <EntitySet Name="DailyAttendances" EntityType="ESDBModel.DailyAttendance" />
+          <AssociationSet Name="FK_DailyAttendance_Student" Association="ESDBModel.FK_DailyAttendance_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="DailyAttendance" EntitySet="DailyAttendances" />
+          </AssociationSet>
+          <EntitySet Name="TeacherSubjects" EntityType="ESDBModel.TeacherSubject" />
+          <AssociationSet Name="FK_TeacherSubject_Subjects" Association="ESDBModel.FK_TeacherSubject_Subjects">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherSubject_Teacher" Association="ESDBModel.FK_TeacherSubject_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubjects" />
+          </AssociationSet>
+          <EntitySet Name="Exams" EntityType="ESDBModel.Exam" />
+          <EntitySet Name="ExamGrades" EntityType="ESDBModel.ExamGrade" />
+          <AssociationSet Name="FK_ExamSchedule_Exam" Association="ESDBModel.FK_ExamSchedule_Exam">
+            <End Role="Exam" EntitySet="Exams" />
+            <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+          </AssociationSet>
+          <EntitySet Name="HourlyAttendances" EntityType="ESDBModel.HourlyAttendance" />
+          <EntitySet Name="HourTransactions" EntityType="ESDBModel.HourTransaction" />
+          <AssociationSet Name="FK_HourlyAttendance_DailyAttendance" Association="ESDBModel.FK_HourlyAttendance_DailyAttendance">
+            <End Role="DailyAttendance" EntitySet="DailyAttendances" />
+            <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourTransaction_Hour" Association="ESDBModel.FK_HourTransaction_Hour">
+            <End Role="Hour" EntitySet="Hours" />
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourlyAttendance_HourTransaction" Association="ESDBModel.FK_HourlyAttendance_HourTransaction">
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+            <End Role="HourlyAttendance" EntitySet="HourlyAttendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourTransaction_Subjects" Association="ESDBModel.FK_HourTransaction_Subjects">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourTransaction_Teacher" Association="ESDBModel.FK_HourTransaction_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="HourTransaction" EntitySet="HourTransactions" />
+          </AssociationSet>
+          <EntitySet Name="EmergencyContactDetails" EntityType="ESDBModel.EmergencyContactDetail" />
+          <AssociationSet Name="FK_StudentAditionalInfo_EmergencyContactDetails" Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails">
+            <End Role="EmergencyContactDetail" EntitySet="EmergencyContactDetails" />
+            <End Role="StudentAditionalInfo" EntitySet="StudentAditionalInfoes" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="CountryId" />
-          </Key>
-          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="States" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="Country" ToRole="State" />
-          <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Countries" FromRole="Country" ToRole="Address" />
-        </EntityType>
-        <EntityType Name="District">
-          <Key>
-            <PropertyRef Name="DistrictId" />
-          </Key>
-          <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StateId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="State" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="District" ToRole="State" />
-          <NavigationProperty Name="SubDistricts" Relationship="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId" FromRole="District" ToRole="SubDistrict" />
-          <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_Districts" FromRole="District" ToRole="Address" />
-        </EntityType>
-        <EntityType Name="EmergencyContactDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContactPersonName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MobilePhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Relationship" Type="Int32" />
-          <Property Name="CreatetDate" Type="DateTime" Precision="0" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="Blocked" Type="Boolean" />
-          <NavigationProperty Name="Relationship1" Relationship="ESDBModel.FK_EmergencyContactDetails_Relationships" FromRole="EmergencyContactDetail" ToRole="Relationship" />
-          <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="EmergencyContactDetail" ToRole="StudentAditionalInfo" />
-        </EntityType>
-        <EntityType Name="HourlyAttendance">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DA_Id" Type="Int32" Nullable="false" />
-          <Property Name="HT_Id" Type="Int32" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <NavigationProperty Name="HourTransaction" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourlyAttendance" ToRole="HourTransaction" />
-          <NavigationProperty Name="DailyAttendance" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="HourlyAttendance" ToRole="DailyAttendance" />
-        </EntityType>
-        <EntityType Name="MasterTable">
-          <Key>
-            <PropertyRef Name="TableID" />
-          </Key>
-          <Property Name="TableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Descrription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RelationWith" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Relationship">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EmergencyContactDetails" Relationship="ESDBModel.FK_EmergencyContactDetails_Relationships" FromRole="Relationship" ToRole="EmergencyContactDetail" />
-        </EntityType>
-        <EntityType Name="State">
-          <Key>
-            <PropertyRef Name="StateId" />
-          </Key>
-          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StateName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CountryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="State" ToRole="Country" />
-          <NavigationProperty Name="Districts" Relationship="ESDBModel.FK_dbo_Districts_dbo_States_StateId" FromRole="State" ToRole="District" />
-          <NavigationProperty Name="Addresses" Relationship="ESDBModel.FK_Address_States" FromRole="State" ToRole="Address" />
-        </EntityType>
-        <EntityType Name="SubDistrict">
-          <Key>
-            <PropertyRef Name="SubDistrictsId" />
-          </Key>
-          <Property Name="SubDistrictsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubDistrictsName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DistrictId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="District" Relationship="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId" FromRole="SubDistrict" ToRole="District" />
-        </EntityType>
-        <Association Name="FK_dbo_States_dbo_Countries_CountryId">
-          <End Type="ESDBModel.Country" Role="Country" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ESDBModel.State" Role="State" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="State">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Districts_dbo_States_StateId">
-          <End Type="ESDBModel.State" Role="State" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ESDBModel.District" Role="District" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="StateId" />
-            </Principal>
-            <Dependent Role="District">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId">
-          <End Type="ESDBModel.District" Role="District" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ESDBModel.SubDistrict" Role="SubDistrict" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="DistrictId" />
-            </Principal>
-            <Dependent Role="SubDistrict">
-              <PropertyRef Name="DistrictId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmergencyContactDetails_Relationships">
-          <End Type="ESDBModel.Relationship" Role="Relationship" Multiplicity="0..1" />
-          <End Type="ESDBModel.EmergencyContactDetail" Role="EmergencyContactDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Relationship">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EmergencyContactDetail">
-              <PropertyRef Name="Relationship" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Exam">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ExamName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ExamShotName" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-          <Property Name="ExamCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="Blocked" Type="Boolean" />
-          <NavigationProperty Name="ExamSchedules" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="Exam" ToRole="ExamSchedule" />
-        </EntityType>
         <EntityType Name="ExamSchedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -1519,35 +1137,8 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Exam" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="ExamSchedule" ToRole="Exam" />
           <NavigationProperty Name="ExamSubjectSchedules" Relationship="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" FromRole="ExamSchedule" ToRole="ExamSubjectSchedule" />
-        </EntityType>
-        <Association Name="FK_ExamSchedule_Exam">
-          <End Type="ESDBModel.Exam" Role="Exam" Multiplicity="1" />
-          <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Exam">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamSchedule">
-              <PropertyRef Name="ExamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ExamGrade">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GradeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MinMarksPercentage" Type="Int32" Nullable="false" />
-          <Property Name="MaxMarksPercentage" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Exam" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="ExamSchedule" ToRole="Exam" />
         </EntityType>
         <EntityType Name="ExamMark">
           <Key>
@@ -1626,50 +1217,9 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
           <NavigationProperty Name="ClassSectionHours" Relationship="ESDBModel.FK_ClassSectionHour_Hour" FromRole="Hour" ToRole="ClassSectionHour" />
+          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="Hour" ToRole="HourTransaction" />
         </EntityType>
-        <EntityType Name="HourTransaction">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HourId" Type="Int32" Nullable="false" />
-          <Property Name="SubjectId" Type="Int32" Nullable="false" />
-          <Property Name="TeacherId" Type="Int32" Nullable="false" />
-          <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HourDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
-          <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
-          <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
-          <NavigationProperty Name="Teacher" Relationship="ESDBModel.FK_HourTransaction_Teacher" FromRole="HourTransaction" ToRole="Teacher" />
-        </EntityType>
-        <Association Name="FK_HourTransaction_Hour">
-          <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hour">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourTransaction">
-              <PropertyRef Name="HourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HourlyAttendance_HourTransaction">
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="0..1" />
-          <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HourTransaction">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourlyAttendance">
-              <PropertyRef Name="HT_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TimeTable">
           <Key>
             <PropertyRef Name="Id" />
@@ -1736,20 +1286,6 @@
           <NavigationProperty Name="Class" Relationship="ESDBModel.FK_ClassSections_Classes" FromRole="ClassSection" ToRole="Class" />
           <NavigationProperty Name="Section" Relationship="ESDBModel.FK_ClassSections_Sections" FromRole="ClassSection" ToRole="Section" />
         </EntityType>
-        <EntityType Name="DailyAttendance">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <Property Name="Remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="DailyAttendance" ToRole="Student" />
-          <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="DailyAttendance" ToRole="HourlyAttendance" />
-        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Id" />
@@ -1788,7 +1324,6 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Departments" Relationship="ESDBModel.FK_Department_Employee" FromRole="Employee" ToRole="Department" />
-          <NavigationProperty Name="Teachers" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Employee" ToRole="Teacher" />
           <NavigationProperty Name="Teachers1" Relationship="ESDBModel.FK_Teacher_Employee1" FromRole="Employee" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Institution">
@@ -1825,11 +1360,11 @@
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DailyAttendances" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="Student" ToRole="DailyAttendance" />
           <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
           <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="Student" ToRole="StudentAditionalInfo" />
           <NavigationProperty Name="StudentClassSectionInfoes" Relationship="ESDBModel.FK_StudentClassSectionInfo_Student" FromRole="Student" ToRole="StudentClassSectionInfo" />
           <NavigationProperty Name="Parents" Relationship="ESDBModel.FK_Guardian_Student" FromRole="Student" ToRole="Parent" />
+          <NavigationProperty Name="DailyAttendances" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="Student" ToRole="DailyAttendance" />
         </EntityType>
         <EntityType Name="StudentAddress">
           <Key>
@@ -1870,8 +1405,8 @@
           <Property Name="StatusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="EmergencyContactDetailsID" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="EmergencyContactDetail" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="StudentAditionalInfo" ToRole="EmergencyContactDetail" />
           <NavigationProperty Name="Student" Relationship="ESDBModel.FK_StudentAditionalInfo_Student" FromRole="StudentAditionalInfo" ToRole="Student" />
+          <NavigationProperty Name="EmergencyContactDetail" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="StudentAditionalInfo" ToRole="EmergencyContactDetail" />
         </EntityType>
         <EntityType Name="StudentClassSectionInfo">
           <Key>
@@ -1908,9 +1443,9 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
-          <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="Subject" ToRole="TeacherSubject" />
           <NavigationProperty Name="ClassSubjects" Relationship="ESDBModel.FK_ClassSubjects_Subjects" FromRole="Subject" ToRole="ClassSubject" />
+          <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="Subject" ToRole="TeacherSubject" />
+          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="Subject" ToRole="HourTransaction" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -1923,25 +1458,9 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="ESDBModel.FK_Teacher_Employee" FromRole="Teacher" ToRole="Employee" />
           <NavigationProperty Name="Employee1" Relationship="ESDBModel.FK_Teacher_Employee1" FromRole="Teacher" ToRole="Employee" />
-          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Teacher" FromRole="Teacher" ToRole="HourTransaction" />
           <NavigationProperty Name="TeacherSubjects" Relationship="ESDBModel.FK_TeacherSubject_Teacher" FromRole="Teacher" ToRole="TeacherSubject" />
-        </EntityType>
-        <EntityType Name="TeacherSubject">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TeacherId" Type="Int32" Nullable="false" />
-          <Property Name="SubjectId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="TeacherSubject" ToRole="Subject" />
-          <NavigationProperty Name="Teacher" Relationship="ESDBModel.FK_TeacherSubject_Teacher" FromRole="TeacherSubject" ToRole="Teacher" />
+          <NavigationProperty Name="HourTransactions" Relationship="ESDBModel.FK_HourTransaction_Teacher" FromRole="Teacher" ToRole="HourTransaction" />
         </EntityType>
         <Association Name="FK_ClassSectionHour_Classes">
           <End Type="ESDBModel.Class" Role="Class" Multiplicity="1" />
@@ -1991,30 +1510,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DailyAttendance_Student">
-          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DailyAttendance">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HourlyAttendance_DailyAttendance">
-          <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="1" />
-          <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DailyAttendance">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourlyAttendance">
-              <PropertyRef Name="DA_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Department_Employee">
           <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="0..1" />
           <End Type="ESDBModel.Department" Role="Department" Multiplicity="*" />
@@ -2027,30 +1522,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentAditionalInfo_EmergencyContactDetails">
-          <End Type="ESDBModel.EmergencyContactDetail" Role="EmergencyContactDetail" Multiplicity="0..1" />
-          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmergencyContactDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentAditionalInfo">
-              <PropertyRef Name="EmergencyContactDetailsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Teacher_Employee">
-          <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Teacher">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Teacher_Employee1">
           <End Type="ESDBModel.Employee" Role="Employee" Multiplicity="1" />
           <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="*" />
@@ -2060,30 +1531,6 @@
             </Principal>
             <Dependent Role="Teacher">
               <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HourTransaction_Subjects">
-          <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourTransaction">
-              <PropertyRef Name="SubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HourTransaction_Teacher">
-          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
-          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HourTransaction">
-              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2135,30 +1582,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeacherSubject_Subjects">
-          <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TeacherSubject">
-              <PropertyRef Name="SubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TeacherSubject_Teacher">
-          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
-          <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TeacherSubject">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -2178,47 +1601,8 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="Blocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="ESDBModel.FK_Address_Countries" FromRole="Address" ToRole="Country" />
-          <NavigationProperty Name="District" Relationship="ESDBModel.FK_Address_Districts" FromRole="Address" ToRole="District" />
-          <NavigationProperty Name="State" Relationship="ESDBModel.FK_Address_States" FromRole="Address" ToRole="State" />
           <NavigationProperty Name="StudentAddresses" Relationship="ESDBModel.FK_StudentAddress_Address" FromRole="Address" ToRole="StudentAddress" />
         </EntityType>
-        <Association Name="FK_Address_Countries">
-          <End Type="ESDBModel.Country" Role="Country" Multiplicity="1" />
-          <End Type="ESDBModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_Districts">
-          <End Type="ESDBModel.District" Role="District" Multiplicity="1" />
-          <End Type="ESDBModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="DistrictId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_States">
-          <End Type="ESDBModel.State" Role="State" Multiplicity="1" />
-          <End Type="ESDBModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="StateId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentAddress_Address">
           <End Type="ESDBModel.Address" Role="Address" Multiplicity="1" />
           <End Type="ESDBModel.StudentAddress" Role="StudentAddress" Multiplicity="*" />
@@ -2363,6 +1747,232 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DailyAttendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="Remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="ESDBModel.FK_DailyAttendance_Student" FromRole="DailyAttendance" ToRole="Student" />
+          <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="DailyAttendance" ToRole="HourlyAttendance" />
+        </EntityType>
+        <Association Name="FK_DailyAttendance_Student">
+          <End Type="ESDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DailyAttendance">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TeacherSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_TeacherSubject_Subjects" FromRole="TeacherSubject" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="ESDBModel.FK_TeacherSubject_Teacher" FromRole="TeacherSubject" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_TeacherSubject_Subjects">
+          <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherSubject_Teacher">
+          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="ESDBModel.TeacherSubject" Role="TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ExamShotName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ExamCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ExamSchedules" Relationship="ESDBModel.FK_ExamSchedule_Exam" FromRole="Exam" ToRole="ExamSchedule" />
+        </EntityType>
+        <EntityType Name="ExamGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="MaxMarksPercentage" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ExamSchedule_Exam">
+          <End Type="ESDBModel.Exam" Role="Exam" Multiplicity="1" />
+          <End Type="ESDBModel.ExamSchedule" Role="ExamSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamSchedule">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HourlyAttendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DA_Id" Type="Int32" Nullable="false" />
+          <Property Name="HT_Id" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="DailyAttendance" Relationship="ESDBModel.FK_HourlyAttendance_DailyAttendance" FromRole="HourlyAttendance" ToRole="DailyAttendance" />
+          <NavigationProperty Name="HourTransaction" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourlyAttendance" ToRole="HourTransaction" />
+        </EntityType>
+        <EntityType Name="HourTransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HourId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <Property Name="HourDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HourDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Hour" Relationship="ESDBModel.FK_HourTransaction_Hour" FromRole="HourTransaction" ToRole="Hour" />
+          <NavigationProperty Name="HourlyAttendances" Relationship="ESDBModel.FK_HourlyAttendance_HourTransaction" FromRole="HourTransaction" ToRole="HourlyAttendance" />
+          <NavigationProperty Name="Subject" Relationship="ESDBModel.FK_HourTransaction_Subjects" FromRole="HourTransaction" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="ESDBModel.FK_HourTransaction_Teacher" FromRole="HourTransaction" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_HourlyAttendance_DailyAttendance">
+          <End Type="ESDBModel.DailyAttendance" Role="DailyAttendance" Multiplicity="1" />
+          <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyAttendance">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourlyAttendance">
+              <PropertyRef Name="DA_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourTransaction_Hour">
+          <End Type="ESDBModel.Hour" Role="Hour" Multiplicity="1" />
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="HourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourlyAttendance_HourTransaction">
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="1" />
+          <End Type="ESDBModel.HourlyAttendance" Role="HourlyAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HourTransaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourlyAttendance">
+              <PropertyRef Name="HT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourTransaction_Subjects">
+          <End Type="ESDBModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourTransaction_Teacher">
+          <End Type="ESDBModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="ESDBModel.HourTransaction" Role="HourTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HourTransaction">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmergencyContactDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactPersonName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="StudentAditionalInfoes" Relationship="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" FromRole="EmergencyContactDetail" ToRole="StudentAditionalInfo" />
+        </EntityType>
+        <Association Name="FK_StudentAditionalInfo_EmergencyContactDetails">
+          <End Type="ESDBModel.EmergencyContactDetail" Role="EmergencyContactDetail" Multiplicity="0..1" />
+          <End Type="ESDBModel.StudentAditionalInfo" Role="StudentAditionalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmergencyContactDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentAditionalInfo">
+              <PropertyRef Name="EmergencyContactDetailsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2370,103 +1980,6 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ESDBModelStoreContainer" CdmEntityContainer="ESDataContext">
           <FunctionImportMapping FunctionImportName="spi_InsertAttendance" FunctionName="ESDBModel.Store.spi_InsertAttendance" />
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="ESDBModel.Country">
-              <MappingFragment StoreEntitySet="Countries">
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Districts">
-            <EntityTypeMapping TypeName="ESDBModel.District">
-              <MappingFragment StoreEntitySet="Districts">
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmergencyContactDetails">
-            <EntityTypeMapping TypeName="ESDBModel.EmergencyContactDetail">
-              <MappingFragment StoreEntitySet="EmergencyContactDetails">
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatetDate" ColumnName="CreatetDate" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HourlyAttendances">
-            <EntityTypeMapping TypeName="ESDBModel.HourlyAttendance">
-              <MappingFragment StoreEntitySet="HourlyAttendance">
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="HT_Id" ColumnName="HT_Id" />
-                <ScalarProperty Name="DA_Id" ColumnName="DA_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MasterTables">
-            <EntityTypeMapping TypeName="ESDBModel.MasterTable">
-              <MappingFragment StoreEntitySet="MasterTables">
-                <ScalarProperty Name="RelationWith" ColumnName="RelationWith" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Descrription" ColumnName="Descrription" />
-                <ScalarProperty Name="TableName" ColumnName="TableName" />
-                <ScalarProperty Name="TableID" ColumnName="TableID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Relationships">
-            <EntityTypeMapping TypeName="ESDBModel.Relationship">
-              <MappingFragment StoreEntitySet="Relationships">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="ESDBModel.State">
-              <MappingFragment StoreEntitySet="States">
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="StateName" ColumnName="StateName" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubDistricts">
-            <EntityTypeMapping TypeName="ESDBModel.SubDistrict">
-              <MappingFragment StoreEntitySet="SubDistricts">
-                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-                <ScalarProperty Name="SubDistrictsName" ColumnName="SubDistrictsName" />
-                <ScalarProperty Name="SubDistrictsId" ColumnName="SubDistrictsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Exams">
-            <EntityTypeMapping TypeName="ESDBModel.Exam">
-              <MappingFragment StoreEntitySet="Exam">
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
-                <ScalarProperty Name="ExamShotName" ColumnName="ExamShotName" />
-                <ScalarProperty Name="ExamName" ColumnName="ExamName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExamSchedules">
             <EntityTypeMapping TypeName="ESDBModel.ExamSchedule">
               <MappingFragment StoreEntitySet="ExamSchedule">
@@ -2479,22 +1992,6 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="ExamID" ColumnName="ExamID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ExamGrades">
-            <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
-              <MappingFragment StoreEntitySet="ExamGrade">
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
-                <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2549,20 +2046,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HourTransactions">
-            <EntityTypeMapping TypeName="ESDBModel.HourTransaction">
-              <MappingFragment StoreEntitySet="HourTransaction">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="HourDate" ColumnName="HourDate" />
-                <ScalarProperty Name="HourDescription" ColumnName="HourDescription" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="HourId" ColumnName="HourId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2624,19 +2107,6 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="SectionID" ColumnName="SectionID" />
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DailyAttendances">
-            <EntityTypeMapping TypeName="ESDBModel.DailyAttendance">
-              <MappingFragment StoreEntitySet="DailyAttendance">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2803,20 +2273,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TeacherSubjects">
-            <EntityTypeMapping TypeName="ESDBModel.TeacherSubject">
-              <MappingFragment StoreEntitySet="TeacherSubject">
-                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="ESDBModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -2891,6 +2347,107 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyAttendances">
+            <EntityTypeMapping TypeName="ESDBModel.DailyAttendance">
+              <MappingFragment StoreEntitySet="DailyAttendance">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherSubjects">
+            <EntityTypeMapping TypeName="ESDBModel.TeacherSubject">
+              <MappingFragment StoreEntitySet="TeacherSubjects">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="ESDBModel.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="ExamShotName" ColumnName="ExamShotName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamGrades">
+            <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
+              <MappingFragment StoreEntitySet="ExamGrade">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
+                <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HourlyAttendances">
+            <EntityTypeMapping TypeName="ESDBModel.HourlyAttendance">
+              <MappingFragment StoreEntitySet="HourlyAttendance">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="HT_Id" ColumnName="HT_Id" />
+                <ScalarProperty Name="DA_Id" ColumnName="DA_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HourTransactions">
+            <EntityTypeMapping TypeName="ESDBModel.HourTransaction">
+              <MappingFragment StoreEntitySet="HourTransaction">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="HourDate" ColumnName="HourDate" />
+                <ScalarProperty Name="HourDescription" ColumnName="HourDescription" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="HourId" ColumnName="HourId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmergencyContactDetails">
+            <EntityTypeMapping TypeName="ESDBModel.EmergencyContactDetail">
+              <MappingFragment StoreEntitySet="EmergencyContactDetails">
+                <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

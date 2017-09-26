@@ -2,103 +2,6 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ESDBModelStoreContainer" CdmEntityContainer="ESDataContext">
     <FunctionImportMapping FunctionImportName="spi_InsertAttendance" FunctionName="ESDBModel.Store.spi_InsertAttendance" />
-    <EntitySetMapping Name="Countries">
-      <EntityTypeMapping TypeName="ESDBModel.Country">
-        <MappingFragment StoreEntitySet="Countries">
-          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Districts">
-      <EntityTypeMapping TypeName="ESDBModel.District">
-        <MappingFragment StoreEntitySet="Districts">
-          <ScalarProperty Name="StateId" ColumnName="StateId" />
-          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EmergencyContactDetails">
-      <EntityTypeMapping TypeName="ESDBModel.EmergencyContactDetail">
-        <MappingFragment StoreEntitySet="EmergencyContactDetails">
-          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="CreatetDate" ColumnName="CreatetDate" />
-          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-          <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HourlyAttendances">
-      <EntityTypeMapping TypeName="ESDBModel.HourlyAttendance">
-        <MappingFragment StoreEntitySet="HourlyAttendance">
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="HT_Id" ColumnName="HT_Id" />
-          <ScalarProperty Name="DA_Id" ColumnName="DA_Id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MasterTables">
-      <EntityTypeMapping TypeName="ESDBModel.MasterTable">
-        <MappingFragment StoreEntitySet="MasterTables">
-          <ScalarProperty Name="RelationWith" ColumnName="RelationWith" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="Descrription" ColumnName="Descrription" />
-          <ScalarProperty Name="TableName" ColumnName="TableName" />
-          <ScalarProperty Name="TableID" ColumnName="TableID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Relationships">
-      <EntityTypeMapping TypeName="ESDBModel.Relationship">
-        <MappingFragment StoreEntitySet="Relationships">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="States">
-      <EntityTypeMapping TypeName="ESDBModel.State">
-        <MappingFragment StoreEntitySet="States">
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-          <ScalarProperty Name="StateName" ColumnName="StateName" />
-          <ScalarProperty Name="StateId" ColumnName="StateId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SubDistricts">
-      <EntityTypeMapping TypeName="ESDBModel.SubDistrict">
-        <MappingFragment StoreEntitySet="SubDistricts">
-          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-          <ScalarProperty Name="SubDistrictsName" ColumnName="SubDistrictsName" />
-          <ScalarProperty Name="SubDistrictsId" ColumnName="SubDistrictsId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Exams">
-      <EntityTypeMapping TypeName="ESDBModel.Exam">
-        <MappingFragment StoreEntitySet="Exam">
-          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
-          <ScalarProperty Name="ExamShotName" ColumnName="ExamShotName" />
-          <ScalarProperty Name="ExamName" ColumnName="ExamName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ExamSchedules">
       <EntityTypeMapping TypeName="ESDBModel.ExamSchedule">
         <MappingFragment StoreEntitySet="ExamSchedule">
@@ -111,22 +14,6 @@
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="ExamID" ColumnName="ExamID" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ExamGrades">
-      <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
-        <MappingFragment StoreEntitySet="ExamGrade">
-          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
-          <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="GradeName" ColumnName="GradeName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -181,20 +68,6 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ShortName" ColumnName="ShortName" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HourTransactions">
-      <EntityTypeMapping TypeName="ESDBModel.HourTransaction">
-        <MappingFragment StoreEntitySet="HourTransaction">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="HourDate" ColumnName="HourDate" />
-          <ScalarProperty Name="HourDescription" ColumnName="HourDescription" />
-          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-          <ScalarProperty Name="HourId" ColumnName="HourId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -256,19 +129,6 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="SectionID" ColumnName="SectionID" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DailyAttendances">
-      <EntityTypeMapping TypeName="ESDBModel.DailyAttendance">
-        <MappingFragment StoreEntitySet="DailyAttendance">
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
-          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -435,20 +295,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TeacherSubjects">
-      <EntityTypeMapping TypeName="ESDBModel.TeacherSubject">
-        <MappingFragment StoreEntitySet="TeacherSubject">
-          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="ESDBModel.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -523,6 +369,107 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyAttendances">
+      <EntityTypeMapping TypeName="ESDBModel.DailyAttendance">
+        <MappingFragment StoreEntitySet="DailyAttendance">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeacherSubjects">
+      <EntityTypeMapping TypeName="ESDBModel.TeacherSubject">
+        <MappingFragment StoreEntitySet="TeacherSubjects">
+          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exams">
+      <EntityTypeMapping TypeName="ESDBModel.Exam">
+        <MappingFragment StoreEntitySet="Exam">
+          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+          <ScalarProperty Name="ExamShotName" ColumnName="ExamShotName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamGrades">
+      <EntityTypeMapping TypeName="ESDBModel.ExamGrade">
+        <MappingFragment StoreEntitySet="ExamGrade">
+          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="MaxMarksPercentage" ColumnName="MaxMarksPercentage" />
+          <ScalarProperty Name="MinMarksPercentage" ColumnName="MinMarksPercentage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HourlyAttendances">
+      <EntityTypeMapping TypeName="ESDBModel.HourlyAttendance">
+        <MappingFragment StoreEntitySet="HourlyAttendance">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="HT_Id" ColumnName="HT_Id" />
+          <ScalarProperty Name="DA_Id" ColumnName="DA_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HourTransactions">
+      <EntityTypeMapping TypeName="ESDBModel.HourTransaction">
+        <MappingFragment StoreEntitySet="HourTransaction">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="HourDate" ColumnName="HourDate" />
+          <ScalarProperty Name="HourDescription" ColumnName="HourDescription" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="HourId" ColumnName="HourId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmergencyContactDetails">
+      <EntityTypeMapping TypeName="ESDBModel.EmergencyContactDetail">
+        <MappingFragment StoreEntitySet="EmergencyContactDetails">
+          <ScalarProperty Name="Blocked" ColumnName="Blocked" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

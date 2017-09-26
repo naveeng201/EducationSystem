@@ -25,7 +25,6 @@ namespace ES.MODELS
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public string Remarks { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
     
         public virtual Student Student { get; set; }
         public virtual ICollection<HourlyAttendance> HourlyAttendances { get; set; }

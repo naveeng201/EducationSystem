@@ -69,16 +69,10 @@
     <Compile Include="ClassSubject.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Country.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DailyAttendance.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Department.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="District.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EmergencyContactDetail.cs">
@@ -117,40 +111,24 @@
     <Compile Include="ExamSubjectSchedule.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExtendedModels\ClassSectionHour.cs" />
     <Compile Include="ExtendedModels\ClassSubjects.cs" />
+    <Compile Include="ExtendedModels\DailyAttendance.cs" />
     <Compile Include="ExtendedModels\Department.cs" />
+    <Compile Include="ExtendedModels\EmergencyContactDetails.cs" />
+    <Compile Include="ExtendedModels\Exam\Exam.cs" />
+    <Compile Include="ExtendedModels\Exam\ExamSchedule.cs" />
+    <Compile Include="ExtendedModels\Exam\ExamSubjectSchedule.cs" />
+    <Compile Include="ExtendedModels\Hour.cs" />
+    <Compile Include="ExtendedModels\HourlyAttendance.cs" />
+    <Compile Include="ExtendedModels\HourTransaction.cs" />
     <Compile Include="ExtendedModels\IBaseEntity.cs" />
     <Compile Include="ExtendedModels\ESDataContext.cs" />
-    <Compile Include="ExtendedModels\ExamMarks.cs" />
+    <Compile Include="ExtendedModels\Exam\ExamMarks.cs" />
     <Compile Include="ExtendedModels\Exam\ExamGrade.cs" />
-    <Compile Include="Institution.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MasterTable.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Relationship.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SubDistrict.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TimeTable.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AttendanceVM.cs" />
-    <Compile Include="ExtendedModels\Address.cs" />
-    <Compile Include="ExtendedModels\AspNetUser.cs" />
-    <Compile Include="ExtendedModels\Class.cs" />
-    <Compile Include="ExtendedModels\Employee.cs" />
-    <Compile Include="ExtendedModels\Institution.cs" />
-    <Compile Include="ExtendedModels\Member.cs" />
-    <Compile Include="ExtendedModels\Parent.cs" />
-    <Compile Include="ExtendedModels\Section.cs" />
-    <Compile Include="ExtendedModels\StudentAditionalInfo.cs" />
-    <Compile Include="ExtendedModels\Subject.cs" />
-    <Compile Include="ExtendedModels\Teacher.cs" />
-    <Compile Include="ExtendedModels\TeacherSubject.cs" />
+    <Compile Include="ExtendedModels\Student.cs" />
+    <Compile Include="ExtendedModels\StudentAddress.cs" />
+    <Compile Include="ExtendedModels\StudentClassSectionInfo.cs" />
     <Compile Include="Hour.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
@@ -160,17 +138,13 @@
     <Compile Include="HourTransaction.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Institution.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Parent.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Section.cs">
-      <DependentUpon>ESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="State.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Student.cs">
@@ -194,6 +168,26 @@
     <Compile Include="TeacherSubject.cs">
       <DependentUpon>ESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TimeTable.cs">
+      <DependentUpon>ESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AttendanceVM.cs" />
+    <Compile Include="ExtendedModels\Address.cs" />
+    <Compile Include="ExtendedModels\AspNetUser.cs" />
+    <Compile Include="ExtendedModels\Class.cs" />
+    <Compile Include="ExtendedModels\Employee.cs" />
+    <Compile Include="ExtendedModels\Institution.cs" />
+    <Compile Include="ExtendedModels\Member.cs" />
+    <Compile Include="ExtendedModels\Parent.cs" />
+    <Compile Include="ExtendedModels\Section.cs" />
+    <Compile Include="ExtendedModels\StudentAditionalInfo.cs" />
+    <Compile Include="ExtendedModels\Subject.cs" />
+    <Compile Include="ExtendedModels\Teacher.cs" />
+    <Compile Include="ExtendedModels\TeacherSubject.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClassSubjectViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

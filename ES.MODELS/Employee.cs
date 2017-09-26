@@ -17,7 +17,6 @@ namespace ES.MODELS
         public Employee()
         {
             this.Departments = new HashSet<Department>();
-            this.Teachers = new HashSet<Teacher>();
             this.Teachers1 = new HashSet<Teacher>();
         }
     
@@ -41,7 +40,6 @@ namespace ES.MODELS
         public bool Blocked { get; set; }
     
         public virtual ICollection<Department> Departments { get; set; }
-        public virtual ICollection<Teacher> Teachers { get; set; }
         public virtual ICollection<Teacher> Teachers1 { get; set; }
     }
 }

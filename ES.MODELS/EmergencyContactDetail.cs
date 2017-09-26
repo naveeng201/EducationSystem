@@ -23,13 +23,13 @@ namespace ES.MODELS
         public string ContactPersonName { get; set; }
         public string MobilePhone { get; set; }
         public string Email { get; set; }
-        public Nullable<int> Relationship { get; set; }
-        public Nullable<System.DateTime> CreatetDate { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public string Relationship { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
-        public virtual Relationship Relationship1 { get; set; }
         public virtual ICollection<StudentAditionalInfo> StudentAditionalInfoes { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace ES.MODELS
         public Nullable<int> EmergencyContactDetailsID { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual EmergencyContactDetail EmergencyContactDetail { get; set; }
         public virtual Student Student { get; set; }
+        public virtual EmergencyContactDetail EmergencyContactDetail { get; set; }
     }
 }

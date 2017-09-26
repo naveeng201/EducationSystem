@@ -459,7 +459,7 @@ namespace ES.WebApi.Controllers
                 {
                     if (objClassSubject.Id == 0)
                     {
-                        objClassSubject.CreateDate = DateTime.Now;
+                        objClassSubject.CreatedDate = DateTime.Now;
                         //objInstitute.isBlocked = false;
                         // This Area Need to Insert in BULK Insert Method                    
                         _classSubjectService.Insert(objClassSubject);
@@ -494,7 +494,7 @@ namespace ES.WebApi.Controllers
                     {
                         if (cs.Id == 0) // write proper logic to insert and delete if mapping is already exist. 
                         {
-                            cs.CreateDate = DateTime.Now;
+                            cs.CreatedDate = DateTime.Now;
                             cs.Blocked = false;
                             // This Area Need to Insert in BULK Insert Method                    
                             _classSubjectService.Insert(cs);

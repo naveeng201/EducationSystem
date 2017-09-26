@@ -74,13 +74,6 @@
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="Countries">
-    <Key>
-      <PropertyRef Name="CountryId" />
-    </Key>
-    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
   <EntityType Name="DailyAttendance">
     <Key>
       <PropertyRef Name="Id" />
@@ -91,7 +84,6 @@
     <Property Name="StartTime" Type="time" Precision="7" />
     <Property Name="EndTime" Type="time" Precision="7" />
     <Property Name="Remarks" Type="nvarchar" MaxLength="400" />
-    <Property Name="ModifiedBy" Type="int" />
   </EntityType>
   <EntityType Name="Department">
     <Key>
@@ -107,14 +99,6 @@
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="Districts">
-    <Key>
-      <PropertyRef Name="DistrictId" />
-    </Key>
-    <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DistrictName" Type="nvarchar(max)" />
-    <Property Name="StateId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="EmergencyContactDetails">
     <Key>
       <PropertyRef Name="Id" />
@@ -122,12 +106,13 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ContactPersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="200" />
-    <Property Name="Relationship" Type="int" />
-    <Property Name="CreatetDate" Type="date" />
-    <Property Name="ModifiedDate" Type="date" />
-    <Property Name="EndDate" Type="date" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Relationship" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -157,22 +142,22 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ExamName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="ExamShotName" Type="nchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ExamShotName" Type="nchar" MaxLength="50" />
     <Property Name="ExamCode" Type="nvarchar" MaxLength="50" />
     <Property Name="Description" Type="nvarchar" MaxLength="500" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="int" />
-    <Property Name="Blocked" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ExamGrade">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GradeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MinMarksPercentage" Type="int" Nullable="false" />
     <Property Name="MaxMarksPercentage" Type="int" Nullable="false" />
@@ -254,7 +239,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DA_Id" Type="int" Nullable="false" />
-    <Property Name="HT_Id" Type="int" />
+    <Property Name="HT_Id" Type="int" Nullable="false" />
     <Property Name="StartTime" Type="time" Precision="7" />
     <Property Name="EndTime" Type="time" Precision="7" />
   </EntityType>
@@ -268,8 +253,10 @@
     <Property Name="TeacherId" Type="int" Nullable="false" />
     <Property Name="HourDescription" Type="nvarchar(max)" />
     <Property Name="HourDate" Type="date" Nullable="false" />
-    <Property Name="CreatedBy" Type="int" />
-    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Institution">
     <Key>
@@ -288,16 +275,6 @@
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MasterTables">
-    <Key>
-      <PropertyRef Name="TableID" />
-    </Key>
-    <Property Name="TableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Descrription" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="CreateDate" Type="datetime" Nullable="false" />
-    <Property Name="RelationWith" Type="nvarchar" MaxLength="400" />
   </EntityType>
   <EntityType Name="Parents">
     <Key>
@@ -327,14 +304,6 @@
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="Relationships">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" />
-  </EntityType>
   <EntityType Name="Sections">
     <Key>
       <PropertyRef Name="Id" />
@@ -347,14 +316,6 @@
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="States">
-    <Key>
-      <PropertyRef Name="StateId" />
-    </Key>
-    <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StateName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CountryId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -428,14 +389,6 @@
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="SubDistricts">
-    <Key>
-      <PropertyRef Name="SubDistrictsId" />
-    </Key>
-    <Property Name="SubDistrictsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SubDistrictsName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DistrictId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="Subjects">
     <Key>
       <PropertyRef Name="Id" />
@@ -462,7 +415,7 @@
     <Property Name="ModifiedBy" Type="int" Nullable="false" />
     <Property Name="Blocked" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="TeacherSubject">
+  <EntityType Name="TeacherSubjects">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -491,42 +444,6 @@
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="Blocked" Type="bit" />
   </EntityType>
-  <Association Name="FK_Address_Countries">
-    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
-    <End Role="Address" Type="Self.Address" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="CountryId" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="CountryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Address_Districts">
-    <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
-    <End Role="Address" Type="Self.Address" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Districts">
-        <PropertyRef Name="DistrictId" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="CityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Address_States">
-    <End Role="States" Type="Self.States" Multiplicity="1" />
-    <End Role="Address" Type="Self.Address" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="States">
-        <PropertyRef Name="StateId" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="StateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ClassSectionHour_Classes">
     <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
     <End Role="ClassSectionHour" Type="Self.ClassSectionHour" Multiplicity="*" />
@@ -623,48 +540,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_Districts_dbo_States_StateId">
-    <End Role="States" Type="Self.States" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="States">
-        <PropertyRef Name="StateId" />
-      </Principal>
-      <Dependent Role="Districts">
-        <PropertyRef Name="StateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_States_dbo_Countries_CountryId">
-    <End Role="Countries" Type="Self.Countries" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="States" Type="Self.States" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Countries">
-        <PropertyRef Name="CountryId" />
-      </Principal>
-      <Dependent Role="States">
-        <PropertyRef Name="CountryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId">
-    <End Role="Districts" Type="Self.Districts" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="SubDistricts" Type="Self.SubDistricts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Districts">
-        <PropertyRef Name="DistrictId" />
-      </Principal>
-      <Dependent Role="SubDistricts">
-        <PropertyRef Name="DistrictId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Department_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
     <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -674,18 +549,6 @@
       </Principal>
       <Dependent Role="Department">
         <PropertyRef Name="ManagerEmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EmergencyContactDetails_Relationships">
-    <End Role="Relationships" Type="Self.Relationships" Multiplicity="0..1" />
-    <End Role="EmergencyContactDetails" Type="Self.EmergencyContactDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Relationships">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EmergencyContactDetails">
-        <PropertyRef Name="Relationship" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -750,7 +613,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_HourlyAttendance_HourTransaction">
-    <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="0..1" />
+    <End Role="HourTransaction" Type="Self.HourTransaction" Multiplicity="1" />
     <End Role="HourlyAttendance" Type="Self.HourlyAttendance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="HourTransaction">
@@ -893,18 +756,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Teacher_Employee">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Teacher">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Teacher_Employee1">
     <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
@@ -919,24 +770,24 @@
   </Association>
   <Association Name="FK_TeacherSubject_Subjects">
     <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
-    <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+    <End Role="TeacherSubjects" Type="Self.TeacherSubjects" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TeacherSubject">
+      <Dependent Role="TeacherSubjects">
         <PropertyRef Name="SubjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TeacherSubject_Teacher">
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-    <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+    <End Role="TeacherSubjects" Type="Self.TeacherSubjects" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Teacher">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="TeacherSubject">
+      <Dependent Role="TeacherSubjects">
         <PropertyRef Name="TeacherId" />
       </Dependent>
     </ReferentialConstraint>
@@ -962,10 +813,8 @@
     <EntitySet Name="ClassSectionHour" EntityType="Self.ClassSectionHour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSections" EntityType="Self.ClassSections" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSubjects" EntityType="Self.ClassSubjects" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DailyAttendance" EntityType="Self.DailyAttendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmergencyContactDetails" EntityType="Self.EmergencyContactDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
@@ -977,32 +826,16 @@
     <EntitySet Name="HourlyAttendance" EntityType="Self.HourlyAttendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HourTransaction" EntityType="Self.HourTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="MasterTables" EntityType="Self.MasterTables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Relationships" EntityType="Self.Relationships" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentAditionalInfo" EntityType="Self.StudentAditionalInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentClassSectionInfo" EntityType="Self.StudentClassSectionInfo" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SubDistricts" EntityType="Self.SubDistricts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TeacherSubjects" EntityType="Self.TeacherSubjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TimeTable" EntityType="Self.TimeTable" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="Address" EntitySet="Address" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Address_Districts" Association="Self.FK_Address_Districts">
-      <End Role="Districts" EntitySet="Districts" />
-      <End Role="Address" EntitySet="Address" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Address_States" Association="Self.FK_Address_States">
-      <End Role="States" EntitySet="States" />
-      <End Role="Address" EntitySet="Address" />
-    </AssociationSet>
     <AssociationSet Name="FK_ClassSectionHour_Classes" Association="Self.FK_ClassSectionHour_Classes">
       <End Role="Classes" EntitySet="Classes" />
       <End Role="ClassSectionHour" EntitySet="ClassSectionHour" />
@@ -1035,25 +868,9 @@
       <End Role="Student" EntitySet="Student" />
       <End Role="DailyAttendance" EntitySet="DailyAttendance" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_Districts_dbo_States_StateId" Association="Self.FK_dbo_Districts_dbo_States_StateId">
-      <End Role="States" EntitySet="States" />
-      <End Role="Districts" EntitySet="Districts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="Self.FK_dbo_States_dbo_Countries_CountryId">
-      <End Role="Countries" EntitySet="Countries" />
-      <End Role="States" EntitySet="States" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SubDistricts_dbo_Districts_DistrictId" Association="Self.FK_dbo_SubDistricts_dbo_Districts_DistrictId">
-      <End Role="Districts" EntitySet="Districts" />
-      <End Role="SubDistricts" EntitySet="SubDistricts" />
-    </AssociationSet>
     <AssociationSet Name="FK_Department_Employee" Association="Self.FK_Department_Employee">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Department" EntitySet="Department" />
-    </AssociationSet>
-    <AssociationSet Name="FK_EmergencyContactDetails_Relationships" Association="Self.FK_EmergencyContactDetails_Relationships">
-      <End Role="Relationships" EntitySet="Relationships" />
-      <End Role="EmergencyContactDetails" EntitySet="EmergencyContactDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_ExamMarks_ExamSubjectSchedule" Association="Self.FK_ExamMarks_ExamSubjectSchedule">
       <End Role="ExamSubjectSchedule" EntitySet="ExamSubjectSchedule" />
@@ -1123,21 +940,17 @@
       <End Role="Sections" EntitySet="Sections" />
       <End Role="StudentClassSectionInfo" EntitySet="StudentClassSectionInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK_Teacher_Employee" Association="Self.FK_Teacher_Employee">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="Teacher" EntitySet="Teacher" />
-    </AssociationSet>
     <AssociationSet Name="FK_Teacher_Employee1" Association="Self.FK_Teacher_Employee1">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Teacher" EntitySet="Teacher" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherSubject_Subjects" Association="Self.FK_TeacherSubject_Subjects">
       <End Role="Subjects" EntitySet="Subjects" />
-      <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+      <End Role="TeacherSubjects" EntitySet="TeacherSubjects" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherSubject_Teacher" Association="Self.FK_TeacherSubject_Teacher">
       <End Role="Teacher" EntitySet="Teacher" />
-      <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+      <End Role="TeacherSubjects" EntitySet="TeacherSubjects" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

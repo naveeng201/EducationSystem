@@ -5,77 +5,65 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="34a02e3607b5485ca70f2a88e41c49c5" Name="Diagram1" ZoomLevel="54">
-        <EntityTypeShape EntityType="ESDBModel.Country" Width="1.5" PointX="1.5" PointY="40.375" />
-        <EntityTypeShape EntityType="ESDBModel.District" Width="1.5" PointX="1.5" PointY="34.5" />
-        <EntityTypeShape EntityType="ESDBModel.EmergencyContactDetail" Width="1.5" PointX="0.75" PointY="7.25" />
-        <EntityTypeShape EntityType="ESDBModel.HourlyAttendance" Width="1.5" PointX="5.25" PointY="24.25" />
-        <EntityTypeShape EntityType="ESDBModel.MasterTable" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ESDBModel.Relationship" Width="1.5" PointX="0.625" PointY="4.5" />
-        <EntityTypeShape EntityType="ESDBModel.State" Width="1.5" PointX="1.5" PointY="37.5" />
-        <EntityTypeShape EntityType="ESDBModel.SubDistrict" Width="1.5" PointX="3.75" PointY="50.625" />
-        <AssociationConnector Association="ESDBModel.FK_dbo_States_dbo_Countries_CountryId" />
-        <AssociationConnector Association="ESDBModel.FK_dbo_Districts_dbo_States_StateId" />
-        <AssociationConnector Association="ESDBModel.FK_dbo_SubDistricts_dbo_Districts_DistrictId" />
-        <AssociationConnector Association="ESDBModel.FK_EmergencyContactDetails_Relationships" />
-        <EntityTypeShape EntityType="ESDBModel.Exam" Width="1.5" PointX="8.375" PointY="1.375" />
-        <EntityTypeShape EntityType="ESDBModel.ExamSchedule" Width="1.5" PointX="10.625" PointY="1.375" />
-        <AssociationConnector Association="ESDBModel.FK_ExamSchedule_Exam" />
-        <EntityTypeShape EntityType="ESDBModel.ExamGrade" Width="1.5" PointX="16.75" PointY="1.375" />
-        <EntityTypeShape EntityType="ESDBModel.ExamMark" Width="1.5" PointX="15" PointY="1.375" />
-        <EntityTypeShape EntityType="ESDBModel.ExamSubjectSchedule" Width="1.5" PointX="12.875" PointY="1.25" />
+        <EntityTypeShape EntityType="ESDBModel.ExamSchedule" Width="1.5" PointX="16.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.ExamMark" Width="1.5" PointX="21.375" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.ExamSubjectSchedule" Width="2" PointX="18.875" PointY="15.625" IsExpanded="true" />
         <AssociationConnector Association="ESDBModel.FK_ExamMarks_ExamSubjectSchedule" />
         <AssociationConnector Association="ESDBModel.FK_ExamSubjectSchedule_ExamSchedule" />
-        <EntityTypeShape EntityType="ESDBModel.Hour" Width="1.5" PointX="6.625" PointY="54.75" />
-        <EntityTypeShape EntityType="ESDBModel.HourTransaction" Width="1.5" PointX="6" PointY="48.625" />
-        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Hour" />
-        <AssociationConnector Association="ESDBModel.FK_HourlyAttendance_HourTransaction" />
-        <EntityTypeShape EntityType="ESDBModel.TimeTable" Width="1.5" PointX="8.375" PointY="9.75" />
-        <EntityTypeShape EntityType="ESDBModel.Class" Width="1.5" PointX="8" PointY="31.75" />
-        <EntityTypeShape EntityType="ESDBModel.ClassSectionHour" Width="1.5" PointX="11.125" PointY="42.625" />
-        <EntityTypeShape EntityType="ESDBModel.ClassSection" Width="1.5" PointX="10.25" PointY="30.25" />
-        <EntityTypeShape EntityType="ESDBModel.DailyAttendance" Width="1.5" PointX="5.25" PointY="24" />
-        <EntityTypeShape EntityType="ESDBModel.Department" Width="1.5" PointX="3" PointY="52.875" />
-        <EntityTypeShape EntityType="ESDBModel.Employee" Width="1.5" PointX="0.75" PointY="47.75" />
-        <EntityTypeShape EntityType="ESDBModel.Institution" Width="1.5" PointX="8" PointY="19.625" />
-        <EntityTypeShape EntityType="ESDBModel.Student" Width="1.5" PointX="3" PointY="23.375" />
-        <EntityTypeShape EntityType="ESDBModel.StudentAddress" Width="1.5" PointX="5.25" PointY="27.75" />
-        <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="1.5" PointX="5.25" PointY="14.5" />
-        <EntityTypeShape EntityType="ESDBModel.StudentClassSectionInfo" Width="1.5" PointX="10.25" PointY="23.25" />
-        <EntityTypeShape EntityType="ESDBModel.Subject" Width="1.5" PointX="6" PointY="45.625" />
-        <EntityTypeShape EntityType="ESDBModel.Teacher" Width="1.5" PointX="3" PointY="48.75" />
-        <EntityTypeShape EntityType="ESDBModel.TeacherSubject" Width="1.5" PointX="8.25" PointY="44.25" />
+        <EntityTypeShape EntityType="ESDBModel.Hour" Width="1.625" PointX="13.625" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.TimeTable" Width="1.75" PointX="10.625" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Class" Width="1.5" PointX="13.625" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.ClassSectionHour" Width="2" PointX="16.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.ClassSection" Width="1.5" PointX="15.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Department" Width="1.5" PointX="0.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Employee" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Institution" Width="2" PointX="10.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Student" Width="1.875" PointX="5.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.StudentAddress" Width="1.75" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.StudentAditionalInfo" Width="2.375" PointX="2.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.StudentClassSectionInfo" Width="2.25" PointX="15.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Subject" Width="1.5" PointX="7.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDBModel.Teacher" Width="1.5" PointX="5.5" PointY="14.125" IsExpanded="true" />
         <AssociationConnector Association="ESDBModel.FK_ClassSectionHour_Classes" />
         <AssociationConnector Association="ESDBModel.FK_ClassSections_Classes" />
         <AssociationConnector Association="ESDBModel.FK_StuentClassSectionInfo_Classes" />
         <AssociationConnector Association="ESDBModel.FK_ClassSectionHour_Hour" />
-        <AssociationConnector Association="ESDBModel.FK_DailyAttendance_Student" />
-        <AssociationConnector Association="ESDBModel.FK_HourlyAttendance_DailyAttendance" />
         <AssociationConnector Association="ESDBModel.FK_Department_Employee" />
-        <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" />
-        <AssociationConnector Association="ESDBModel.FK_Teacher_Employee" />
         <AssociationConnector Association="ESDBModel.FK_Teacher_Employee1" />
-        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Subjects" />
-        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Teacher" />
         <AssociationConnector Association="ESDBModel.FK_StuentClassSectionInfo_InstitutionInfo" />
         <AssociationConnector Association="ESDBModel.FK_StudentAddress_Student" />
         <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_Student" />
         <AssociationConnector Association="ESDBModel.FK_StudentClassSectionInfo_Student" />
-        <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Subjects" />
-        <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Teacher" />
-        <EntityTypeShape EntityType="ESDBModel.Address" Width="1.5" PointX="3.75" PointY="36" />
-        <AssociationConnector Association="ESDBModel.FK_Address_Countries" />
-        <AssociationConnector Association="ESDBModel.FK_Address_Districts" />
-        <AssociationConnector Association="ESDBModel.FK_Address_States" />
+        <EntityTypeShape EntityType="ESDBModel.Address" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="ESDBModel.FK_StudentAddress_Address" />
-        <EntityTypeShape EntityType="ESDBModel.Section" Width="1.5" PointX="3.375" PointY="1" />
+        <EntityTypeShape EntityType="ESDBModel.Section" Width="1.5" PointX="18.375" PointY="5.25" IsExpanded="true" />
         <AssociationConnector Association="ESDBModel.FK_ClassSectionHour_Sections" />
         <AssociationConnector Association="ESDBModel.FK_ClassSections_Sections" />
         <AssociationConnector Association="ESDBModel.FK_StuentClassSectionInfo_Sections" />
-        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="ESDBModel.Parent" Width="1.875" PointX="7.875" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="ESDBModel.FK_Guardian_Student" />
-        <EntityTypeShape EntityType="ESDBModel.ClassSubject" Width="1.5" PointX="10.25" PointY="38.875" />
+        <EntityTypeShape EntityType="ESDBModel.ClassSubject" Width="1.75" PointX="5.375" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="ESDBModel.FK_ClassSubjects_Classes" />
         <AssociationConnector Association="ESDBModel.FK_ClassSubjects_Subjects" />
+        <EntityTypeShape EntityType="ESDBModel.DailyAttendance" Width="2.25" PointX="10.375" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="ESDBModel.FK_DailyAttendance_Student" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="ESDBModel.TeacherSubject" Width="1.5" PointX="5.375" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Subjects" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="ESDBModel.FK_TeacherSubject_Teacher" />
+        <EntityTypeShape EntityType="ESDBModel.Exam" Width="1.5" PointX="14.625" PointY="15.625" />
+        <EntityTypeShape EntityType="ESDBModel.ExamGrade" Width="1.5" PointX="12.75" PointY="15.625" />
+        <AssociationConnector Association="ESDBModel.FK_ExamSchedule_Exam" />
+        <EntityTypeShape EntityType="ESDBModel.HourlyAttendance" Width="2" PointX="10.5" PointY="10.125" />
+        <EntityTypeShape EntityType="ESDBModel.HourTransaction" Width="1.875" PointX="7.875" PointY="14.125" />
+        <AssociationConnector Association="ESDBModel.FK_HourlyAttendance_DailyAttendance" />
+        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Hour" />
+        <AssociationConnector Association="ESDBModel.FK_HourlyAttendance_HourTransaction" />
+        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Subjects" />
+        <AssociationConnector Association="ESDBModel.FK_HourTransaction_Teacher" />
+        <EntityTypeShape EntityType="ESDBModel.EmergencyContactDetail" Width="2.125" PointX="2.5" PointY="10.125" />
+        <AssociationConnector Association="ESDBModel.FK_StudentAditionalInfo_EmergencyContactDetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

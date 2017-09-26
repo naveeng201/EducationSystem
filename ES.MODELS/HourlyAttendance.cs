@@ -16,11 +16,11 @@ namespace ES.MODELS
     {
         public int Id { get; set; }
         public int DA_Id { get; set; }
-        public Nullable<int> HT_Id { get; set; }
+        public int HT_Id { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
     
-        public virtual HourTransaction HourTransaction { get; set; }
         public virtual DailyAttendance DailyAttendance { get; set; }
+        public virtual HourTransaction HourTransaction { get; set; }
     }
 }

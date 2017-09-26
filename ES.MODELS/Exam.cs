@@ -20,15 +20,15 @@ namespace ES.MODELS
         }
     
         public int Id { get; set; }
-        public string ExamName { get; set; }
+        public string Name { get; set; }
         public string ExamShotName { get; set; }
         public string ExamCode { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public bool Blocked { get; set; }
     
         public virtual ICollection<ExamSchedule> ExamSchedules { get; set; }
     }

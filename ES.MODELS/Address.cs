@@ -35,9 +35,6 @@ namespace ES.MODELS
         public int ModifiedBy { get; set; }
         public bool Blocked { get; set; }
     
-        public virtual Country Country { get; set; }
-        public virtual District District { get; set; }
-        public virtual State State { get; set; }
         public virtual ICollection<StudentAddress> StudentAddresses { get; set; }
     }
 }

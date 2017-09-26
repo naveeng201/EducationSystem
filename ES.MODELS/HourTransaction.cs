@@ -25,8 +25,10 @@ namespace ES.MODELS
         public int TeacherId { get; set; }
         public string HourDescription { get; set; }
         public System.DateTime HourDate { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
     
         public virtual Hour Hour { get; set; }
         public virtual ICollection<HourlyAttendance> HourlyAttendances { get; set; }

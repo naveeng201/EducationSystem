@@ -30,7 +30,7 @@ namespace ES.MODELS
         public System.DateTime ModifiedDate { get; set; }
         public bool Blocked { get; set; }
     
-        public virtual Exam Exam { get; set; }
         public virtual ICollection<ExamSubjectSchedule> ExamSubjectSchedules { get; set; }
+        public virtual Exam Exam { get; set; }
     }
 }
